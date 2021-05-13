@@ -7,7 +7,6 @@ function Landing() {
     return (
         <div className='body'>
             <Banner/>
-            <NavCards/>
         </div>
     )
 }
@@ -29,10 +28,6 @@ function Banner() {
             </div>
         </div>
     )
-}
-
-function NavCards() {
-
 }
 
 
