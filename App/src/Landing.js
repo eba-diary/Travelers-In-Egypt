@@ -31,5 +31,4 @@ function Banner() {
 }
 
 
-
 export default Landing;
