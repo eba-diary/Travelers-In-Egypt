@@ -1,20 +1,149 @@
+* {
+    margin: 0;
+    padding: 0;
+}
 
+html {
+    font-size: 100%;
+}
 
-/*  Media queries to make content accessible to
+div .title-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div .container {
+    padding: 10px;
+    width: 100%;
+}
+
+/*  Media queries to make content accessible tog  
     screens of all sizes */
 
-@media (min-width: 0px) and (max-width: 767px) {
+@media (min-width: 0px) and (max-width: 597px) {
 
+    div .title-box {
+        display: flex;
+        justify-content: center;
+    }
+
+    div .image-box {
+        background: linear-gradient(90deg, 
+            rgba(204, 196, 183, 0.8) 0%, 
+            rgba(119, 101, 63, 0.8) 100%),
+            url('./img/banner_img_landing.jpeg');
+        background-size: cover;
+        height: 200px;
+    }
+
+    div .header-box {
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+        text-align: center;
+        padding: 4rem;
+    }
+}
+
+@media (min-width: 598px) {
+
+    div .title-box {
+        display: flex;
+        justify-content: center;
+    }
+
+    div .image-box {
+        background: linear-gradient(90deg, 
+            rgba(204, 196, 183, 0.8) 0%, 
+            rgba(119, 101, 63, 0.8) 100%),
+            url('./img/banner_img_landing.jpeg');
+        background-size: cover;
+        height: 250px;
+    }
+
+    div .header-box {
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+        text-align: center;
+        padding: 6rem;
+    }
 }
 
 @media (min-width: 768px) {
+    div .title-box {
+        display: flex;
+        justify-content: center;
+    }
 
+    div .image-box {
+        background: linear-gradient(90deg, 
+            rgba(204, 196, 183, 0.8) 0%, 
+            rgba(119, 101, 63, 0.8) 100%),
+            url('./img/banner_img_landing.jpeg');
+        background-size: cover;
+        height: 300px;
+    }
+
+    div .header-box {
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: 1rem;
+        text-align: center;
+        padding: 8rem;
+    }
 }
 
 @media (min-width: 992px) {
+    div .title-box {
+        display: flex;
+        justify-content: center;
+    }
 
+    div .image-box {
+        background: linear-gradient(90deg, 
+            rgba(204, 196, 183, 0.8) 0%, 
+            rgba(119, 101, 63, 0.8) 100%),
+            url('./img/banner_img_landing.jpeg');
+        background-size: cover;
+        height: 350px;
+    }
+
+    div .header-box {
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 10rem;
+    }
 }
 
 @media (min-width: 1200px) {
+    div .title-box {
+        display: flex;
+        justify-content: center;
+    }
 
+    div .image-box {
+        background: linear-gradient(90deg, 
+            rgba(204, 196, 183, 0.8) 0%, 
+            rgba(119, 101, 63, 0.8) 100%),
+            url('./img/banner_img_landing.jpeg');
+        background-size: cover;
+        height: 400px;
+    }
+
+    div .header-box {
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+        text-align: center;
+        padding: 10rem;
+    }
 }
