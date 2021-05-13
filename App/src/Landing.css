@@ -7,18 +7,69 @@ html {
     font-size: 100%;
 }
 
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 div .title-banner {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-div .container {
+.container {
     padding: 10px;
     width: 100%;
 }
 
-/*  Media queries to make content accessible tog  
+.card-container {
+    padding: 50px;
+}
+
+.card-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.each-card {
+   padding-left: 10px;
+   padding-bottom: 30px;
+}
+
+.each-card .top-card {
+    margin: 20px;
+    display: flex;
+    position: relative;
+}
+
+.each-card .top-card .bottom-card {
+    position: absolute;
+    text-align: center;
+    width: 150px;
+    height: 90px;
+    top: 70%;
+    left: 17%;
+    background: #FFFFFF;
+    box-shadow: 0px 5px 30px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.each-card .top-card .bottom-card:hover, 
+    .each-card .top-card .bottom-card:active {
+    background-color: #E5D3B3;
+    transform: translateY(-10px);
+    cursor: pointer;
+    transition: .4s ease-in-out;
+
+}
+
+p {
+    padding: 20px;
+    font-weight: 700;
+}
+
+/*  Media queries to make content accessible to  
     screens of all sizes */
 
 @media (min-width: 0px) and (max-width: 597px) {
