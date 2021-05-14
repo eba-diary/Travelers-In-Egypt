@@ -69,6 +69,42 @@ p {
     font-weight: 700;
 }
 
+.footer-links {
+    display: flex;
+    flex-direction: column;
+}
+
+.social-link-container {
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    justify-content: center;
+}
+
+.icon-link {
+    padding:10px;
+}
+
+.cc-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.cc-image {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.cc-link {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+
+a:hover {
+    color: rgba(119, 101, 63, 0.8);
+}
 /*  Media queries to make content accessible to  
     screens of all sizes */
 
@@ -96,6 +132,15 @@ p {
         text-align: center;
         padding: 4rem;
     }
+
+    div.cc-image img {
+        width: 20%;
+    }
+
+    a:link {
+        color: bisque;
+        font-size: 8px;
+    }
 }
 
 @media (min-width: 598px) {
@@ -122,6 +167,15 @@ p {
         text-align: center;
         padding: 6rem;
     }
+
+    div.cc-image img {
+        width: 12%;
+    }
+
+    a:link {
+        color: bisque;
+        font-size: 10px;
+    }
 }
 
 @media (min-width: 768px) {
@@ -146,6 +200,15 @@ p {
         font-size: 1rem;
         text-align: center;
         padding: 8rem;
+    }
+
+    div.cc-image img {
+        width: 10%;
+    }
+
+    a:link {
+        color: bisque;
+        font-size: 15px;
     }
 }
 
@@ -172,6 +235,15 @@ p {
         text-align: center;
         padding: 10rem;
     }
+
+    div.cc-image img {
+        width: 8%;
+    }
+
+    a:link {
+        color: bisque;
+        font-size: 15px;
+    }
 }
 
 @media (min-width: 1200px) {
@@ -197,4 +269,5 @@ p {
         text-align: center;
         padding: 10rem;
     }
+    
 }
