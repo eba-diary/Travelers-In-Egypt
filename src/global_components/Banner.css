@@ -1,0 +1,12 @@
+div .title-banner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    width: 100%;
+}
