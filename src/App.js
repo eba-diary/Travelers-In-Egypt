@@ -1,13 +1,14 @@
 import './App.css';
 import Landing from './Landing';
+import Footer from './global_components/Footer';
 
 function App() {
   return (
     <div>
-      <header>
+      <body>
         <Landing />
-      </header>
-
+        <Footer />
+      </body>
     </div>
   );
 }

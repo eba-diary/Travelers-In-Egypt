@@ -6,12 +6,14 @@ import tourOperators from './img/TourOperators.png';
 import digitalExhibit from './img/DigitalExhibit.png';
 import about from './img/About.png';
 import { Link, Route, Redirect } from 'react-router-dom';
-
 import PersonalArchives from './PersonalArchives';
 import Travelogues from './Travelogues';
 import TourOperators from './TourOperators';
 import DigitalExhibit from './DigitalExhibit';
 import About from './About';
+import { Container, Row, Col, Card} from 'react-bootstrap';
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import backgroundTitleImage from './img/banner_img_landing.jpeg';
 
 function Landing() {
     const IMAGES = {
@@ -24,13 +26,12 @@ function Landing() {
     
     return (
         <div>
-            <div className='title-container'>
-                <div className='image-box'>
-                    <div className='header-box'>
+            <Card className='text-white text-center'>
+                <Card.Img src={backgroundTitleImage} alt='Egyptian ruins'/>
+                <Card.ImgOverlay>
                         <h1>Travelers In Egypt</h1>
-                    </div>
-                </div>
-            </div>
+                </Card.ImgOverlay>
+            </Card>
             <div className='landing-page'>
                 <div className='nav-cards'>
                     <NavCards images={IMAGES}/>
@@ -43,9 +44,9 @@ function Landing() {
 
 function NavCards(props) {
     return (
-        <div className='card-container'>
-                <RenderCards images={props.images}/>
-                <Redirect to='/'/>
+        <div>
+            <RenderCards images={props.images}/>
+            <Redirect to='/'/>
         </div>
     );
 }
@@ -53,7 +54,7 @@ function NavCards(props) {
 function RenderCards(props) {
     let cards = Object.values(props.images).map(([img, desc, path, component]) => {
         let card = 
-            <div className='each-card'>
+            <div className='col col-md-4 col-xl-3 each-card'>
                 <Link to={'/' + path}>
                     <div className='top-card'>
                         <img src={img} alt={desc} />
@@ -68,8 +69,10 @@ function RenderCards(props) {
     });
 
     return (
-        <div className='card-row'>
-            {cards}
+        <div className='container'>
+            <div className='row justify-content-md-center'>
+                {cards}
+            </div>
         </div>
     );
 }
