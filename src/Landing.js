@@ -29,14 +29,14 @@ function Landing() {
             <Card className='text-white text-center'>
                 <Card.Img src={backgroundTitleImage} alt='Egyptian ruins'/>
                 <Card.ImgOverlay>
-                        <h1>Travelers In Egypt</h1>
+                    <div className='title-container'>
+                        <div className='title-row'>
+                            <h1>Travelers In Egypt</h1>
+                        </div>
+                    </div>
                 </Card.ImgOverlay>
             </Card>
-            <div className='landing-page'>
-                <div className='nav-cards'>
-                    <NavCards images={IMAGES}/>
-                </div>
-            </div>
+            <NavCards images={IMAGES}/>
         </div>
     );
 }
@@ -44,7 +44,7 @@ function Landing() {
 
 function NavCards(props) {
     return (
-        <div>
+        <div className='container'>
             <RenderCards images={props.images}/>
             <Redirect to='/'/>
         </div>
@@ -54,7 +54,7 @@ function NavCards(props) {
 function RenderCards(props) {
     let cards = Object.values(props.images).map(([img, desc, path, component]) => {
         let card = 
-            <div className='col col-md-4 col-xl-3 each-card'>
+            <div className='col col-md-4 col-xl-2 each-card'>
                 <Link to={'/' + path}>
                     <div className='top-card'>
                         <img src={img} alt={desc} />
@@ -69,10 +69,8 @@ function RenderCards(props) {
     });
 
     return (
-        <div className='container'>
-            <div className='row justify-content-md-center'>
-                {cards}
-            </div>
+        <div className='row justify-content-around'>
+            {cards}
         </div>
     );
 }
