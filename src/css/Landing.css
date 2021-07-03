@@ -56,3 +56,7 @@ p {
     align-items: center;
     height: 100%;
 }
+
+.body-content {
+    padding-top: 65px;
+}

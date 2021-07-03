@@ -1,4 +1,4 @@
-import './App.css';
+import './css/App.css';
 import Landing from './Landing';
 import Footer from './global_components/Footer';
 import Navbar from 'react-bootstrap/Navbar';
@@ -51,10 +51,6 @@ function RenderNav() {
 }
 
 function NavComponents(props) {
-  // props.links will contain an array with the necessary tabs in each
-  // checks length and maps each to a navdropdown.item
-  // return a navdropdown with title and id='collapsible-nav-dropdown'
-
   let item = props.links[1].map((link) => {
     let navItems = 
       <NavDropdown.Item href={'#' + link.split(" ").join("")}>{link}</NavDropdown.Item>;

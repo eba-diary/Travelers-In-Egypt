@@ -1,5 +1,5 @@
 import React from 'react';
-import './Landing.css';
+import './css/Landing.css';
 import personalArchives from './img/personalArchives.png';
 import travelogues from './img/Travelogues.png';
 import tourOperators from './img/TourOperators.png';
@@ -11,7 +11,7 @@ import Travelogues from './Travelogues';
 import TourOperators from './TourOperators';
 import DigitalExhibit from './DigitalExhibit';
 import About from './About';
-import { Container, Row, Col, Card} from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import backgroundTitleImage from './img/banner_img_landing.jpeg';
 
@@ -25,7 +25,7 @@ function Landing() {
     };
     
     return (
-        <div>
+        <div className='body-content'>
             <Card className='text-white text-center'>
                 <Card.Img src={backgroundTitleImage} alt='Egyptian ruins'/>
                 <Card.ImgOverlay>
