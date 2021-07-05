@@ -26,7 +26,7 @@ function App() {
 
 function RenderNav() {
   let navigation =
-    <Navbar fixed='top' collapseOnSelect expand='md' bg='light' variant='light'>
+    <Navbar fixed='top' collapseOnSelect expand='md'>
       <Navbar.Brand href='#'>
         <div className='mx-4'>
           EBA Diaries
@@ -53,14 +53,14 @@ function RenderNav() {
 function NavComponents(props) {
   let item = props.links[1].map((link) => {
     let navItems = 
-      <NavDropdown.Item href={'#' + link.split(" ").join("")}>{link}</NavDropdown.Item>;
+      <NavDropdown.Item href={'#' + link.split(" ").join("")}>
+          {link}
+      </NavDropdown.Item>;
     return navItems;
   });
 
   return (
-    <NavDropdown title={props.links[0]}>
-      {item}
-    </NavDropdown>
+    <NavDropdown title={props.links[0]}>{item}</NavDropdown>
   );
 }
 
