@@ -1,6 +1,7 @@
 import './css/App.css';
 import Landing from './Landing';
 import Footer from './global_components/Footer';
+import {Route, Link, Switch, Redirect } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { Nav, NavDropdown} from 'react-bootstrap';
 
@@ -15,11 +16,22 @@ const NAVLINKS = [
 function App() {
   return (
     <div>
-      <body>
-        <RenderNav />
-        <Landing />
-        <Footer />
-      </body>
+      <main>
+        <header>
+          <RenderNav />
+        </header>
+        <body>
+          <div className='container'>
+            <Switch>
+              <Route exact path='/' render={Landing} />
+              <Redirect to='/' />
+            </Switch>
+          </div>
+        </body>
+        <footer>
+          <Footer />
+        </footer>
+      </main>
     </div>
   );
 }
@@ -27,9 +39,9 @@ function App() {
 function RenderNav() {
   let navigation =
     <Navbar fixed='top' collapseOnSelect expand='md'>
-      <Navbar.Brand href='#'>
+      <Navbar.Brand>
         <div className='mx-4'>
-          EBA Diaries
+        <Link to='/landing'>EBA Diaries</Link>
         </div>
       </Navbar.Brand>
       <Navbar.Toggle className='mx-4' aria-controls='responsive-navbar-nav'/>

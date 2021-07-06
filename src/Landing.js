@@ -10,19 +10,17 @@ function Landing() {
     <div className='container'>
         <div className='row'>
             <Card className='text-dark text-center' border='white'>
-                <Card.Img src={pyramidBackground} alt='Egyptian pyramids'/>
-                <Card.ImgOverlay>
-                    <Card.Title>
-                        <div className='title-container'>
-                            <Typewriter 
-                            onInit={(typewriter) => {
-                                typewriter
-                                .typeString("Travelers In Egypt")
-                                .start()
-                            }}/>
-                        </div>
-                    </Card.Title>
-               </Card.ImgOverlay>
+                <Card.Title>
+                    <div className='title-container'>
+                        <Typewriter 
+                        onInit={(typewriter) => {
+                            typewriter
+                            .typeString("Travelers In Egypt")
+                            .start()
+                        }}/>
+                    </div>
+                </Card.Title>
+                <Card.Img variant='' src={pyramidBackground} alt='Egyptian pyramids'/>
             </Card>
         </div>
     </div>
