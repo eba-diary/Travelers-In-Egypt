@@ -25,6 +25,7 @@ const NAVLINKS = [
 ];
 
 function App() {
+
   return (
     <div>
       <main>
@@ -60,10 +61,10 @@ function App() {
 
 function RenderNav() {
   let navigation =
-    <Navbar fixed='top' collapseOnSelect expand='md'>
+    <Navbar className='bg-white' fixed='top' collapseOnSelect expand='md'>
       <Navbar.Brand>
         <div className='mx-4'>
-          <Link exact to='/'>EBA Diaries</Link>
+          <Link exact to='/' className='link'>EBA Diaries</Link>
         </div>
       </Navbar.Brand>
       <Navbar.Toggle className='mx-4' aria-controls='responsive-navbar-nav'/>
@@ -77,6 +78,7 @@ function RenderNav() {
         </Nav>
       </Navbar.Collapse>
     </Navbar>
+
   return (
     <div>
       {navigation}
@@ -97,5 +99,20 @@ function NavComponents(props) {
     <NavDropdown title={props.links[0]}>{item}</NavDropdown>
   );
 }
+
+// can be used to toggle different footers for later
+// function useWindowSize() {
+//   const [size, setSize] = useState(window.innerWidth);
+//   useEffect(() => {
+//     const handleResize = () => {
+//       setSize(window.innerWidth);
+//     }
+//     window.addEventListener('resize', handleResize);
+//     return () => {
+//       window.removeEventListener('resize', handleResize);
+//     }
+//   }, []);
+//   return size;
+// }
 
 export default App;
