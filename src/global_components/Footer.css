@@ -5,6 +5,10 @@
     padding: 15px;
 }
 
+.container {
+    padding: 10px;
+}
+
 @media (min-width: 0px) and (max-width: 597px) {
 
     div.cc-image img {

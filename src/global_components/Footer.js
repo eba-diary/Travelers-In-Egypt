@@ -2,7 +2,6 @@ import cc from './img/cc.png';
 import { SocialIcon } from 'react-social-icons';
 import './Footer.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import { Card } from 'react-bootstrap';
 
 function FooterLinks() {
     const EBALINKS = ['www.facebook.com/ebadiary', 'github.com/orgs/eba-diary/dashboard', 'twitter.com/ebadiary?lang=en'];

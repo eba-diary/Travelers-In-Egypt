@@ -1,0 +1,14 @@
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+}
+
+.link {
+    color: gray;
+}
+
+.link:hover {
+    color: rgba(119, 101, 63, 0.8);
+}
