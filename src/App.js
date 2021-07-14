@@ -25,7 +25,6 @@ const NAVLINKS = [
 ];
 
 function App() {
-
   return (
     <div>
       <main>
@@ -60,6 +59,7 @@ function App() {
 }
 
 function RenderNav() {
+
   let navigation =
     <Navbar className='bg-white' fixed='top' collapseOnSelect expand='md'>
       <Navbar.Brand>
