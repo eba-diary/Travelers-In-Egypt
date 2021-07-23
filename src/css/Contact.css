@@ -1,0 +1,16 @@
+label {
+    padding: 10px;
+}
+
+button {
+    margin: 15px;
+}
+
+.alert {
+    text-align: center;
+    padding: 5px;
+    background: #79C879;
+    color: white;
+    margin-bottom: 10px;
+    display: none;
+}

@@ -27,33 +27,31 @@ const NAVLINKS = [
 function App() {
   return (
     <div>
+      <header>
+        <RenderNav />
+      </header>
       <main>
-        <header>
-          <RenderNav />
-        </header>
-        <body>
-          <div className='container'>
-            <Switch>
-              <Route exact path='/' render={Landing} />
-              <Route path='/OurTeam' render={OurTeam} />
-              <Route path='/GetInvolved' render={GetInvolved}/>
-              <Route path='/OtherProjects' render={OtherProjects}/>
-              <Route path='/EmmaBAndrewsDatabase' render={EmmaBAndrewsDatabase} />
-              <Route path='/NileTraveloguesDatbase' render={NileDB} />
-              <Route path='/BoatPassengerDatabase' render={BoatDB} />
-              <Route path='/ConnectingInformation' render={ConnectingInfo} />
-              <Route path='/HistoricalMarkupTool' render={MarkupTool} />
-              <Route path='/SiteInstructions' render={SiteInstructions} />
-              <Route path='/FAQ' render={FAQ} />
-              <Route path='/Contact' render={Contact} />
-              <Redirect to='/' />
-            </Switch>
-          </div>
-        </body>
-        <footer className='footer'>
-          <Footer />
-        </footer>
+        <div className='container'>
+          <Switch>
+            <Route exact path='/' render={Landing} />
+            <Route path='/OurTeam' render={OurTeam} />
+            <Route path='/GetInvolved' render={GetInvolved}/>
+            <Route path='/OtherProjects' render={OtherProjects}/>
+            <Route path='/EmmaBAndrewsDatabase' render={EmmaBAndrewsDatabase} />
+            <Route path='/NileTraveloguesDatbase' render={NileDB} />
+            <Route path='/BoatPassengerDatabase' render={BoatDB} />
+            <Route path='/ConnectingInformation' render={ConnectingInfo} />
+            <Route path='/HistoricalMarkupTool' render={MarkupTool} />
+            <Route path='/SiteInstructions' render={SiteInstructions} />
+            <Route path='/FAQ' render={FAQ} />
+            <Route path='/Contact' render={Contact} />
+            <Redirect to='/' />
+          </Switch>
+        </div>
       </main>
+      <footer className='footer'>
+        <Footer />
+      </footer>
     </div>
   );
 }
@@ -64,7 +62,11 @@ function RenderNav() {
     <Navbar className='bg-white' fixed='top' collapseOnSelect expand='md'>
       <Navbar.Brand>
         <div className='mx-4'>
-          <Link exact to='/' className='link'>EBA Diaries</Link>
+          <Link to='/' className='link'> 
+            <div>
+              EBA Diaries
+            </div>
+          </Link>
         </div>
       </Navbar.Brand>
       <Navbar.Toggle className='mx-4' aria-controls='responsive-navbar-nav'/>
@@ -89,7 +91,7 @@ function RenderNav() {
 function NavComponents(props) {
   let item = props.links[1].map((link) => {
     let navItems = 
-      <NavDropdown.Item href={'/' + link.split(" ").join("")}>
+      <NavDropdown.Item href={'/' + link.split(" ").join("")} key={link}>
           {link}
       </NavDropdown.Item>;
     return navItems;

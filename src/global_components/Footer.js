@@ -25,8 +25,8 @@ function FooterLinks() {
 function RenderIcons(props) {
     let linksIcons = props.links.map((ebaLink) => {
         let iconWithLink = 
-            <div className='col-4'>
-                <SocialIcon url={'https://' + ebaLink} bgColor='rgba(119, 101, 63, 0.8)'/>
+            <div className='col-4' key={ebaLink}>
+                <SocialIcon url={'https://' + ebaLink} key={ebaLink} bgColor='rgba(119, 101, 63, 0.8)'/>
             </div>
         return iconWithLink;
     });
