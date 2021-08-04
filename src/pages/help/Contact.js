@@ -79,11 +79,10 @@ function Form() {
                 </div>
                 <div>
                     <div className='col-12'>
-                        <label htmlFor='password'>Send us a message</label>
+                        <label htmlFor='text'>Send us a message</label>
                     </div>
-                    <input id='text' name='text' type='text' required/>
+                    <textarea id='text' name='text' type='text' rows='4'required />
                 </div>
-                {/* <MessageBox /> */}
                 <button type='submit' onClick={handleSubmit}>Submit</button>
             </form>
         </div>
