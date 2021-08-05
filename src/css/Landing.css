@@ -7,57 +7,10 @@ html {
     font-size: 100%;
 }
 
-.title-box {
-    justify-content: center;
-    text-align: center;
-}
-
-.each-card {
-   padding-left: 10px;
-   padding-bottom: 30px;
-}
-
-.each-card .top-card {
-    margin: 20px;
-    display: flex;
-    position: relative;
-}
-
-.each-card .top-card .bottom-card {
-    position: absolute;
-    text-align: center;
-    width: 150px;
-    height: 90px;
-    top: 70%;
-    left: 17%;
-    background: #FFFFFF;
-    box-shadow: 0px 5px 30px rgba(0,0,0,0.1);
-    border-radius: 8px;
-}
-
-.each-card .top-card .bottom-card:hover, 
-    .each-card .top-card .bottom-card:active {
-    background-color: #E5D3B3;
-    transform: translateY(-10px);
-    cursor: pointer;
-    transition: .4s ease-in-out;
-
-}
-
-p {
-    padding: 20px;
-    font-weight: 700;
-    color: black;
-}
-
-.title-container {
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    height: 50%;
-    font-size: 35px;
-}
-
 body { 
     padding-top: 65px; 
+}
+
+.row {
+    height: 100%;
 }

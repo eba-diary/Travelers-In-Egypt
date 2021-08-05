@@ -1,20 +1,15 @@
 import './css/App.css';
-import Landing from './Landing';
-import Footer from './global_components/Footer';
 import {Route, Link, Switch, Redirect } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import { Nav, NavDropdown} from 'react-bootstrap';
-import OurTeam from './pages/about/OurTeam';
-import GetInvolved from './pages/about/GetInvolved';
-import OtherProjects from './pages/about/OtherProjects';
-import EmmaBAndrewsDatabase from './pages/explore_databases/EBADB';
-import NileDB from './pages/explore_databases/NileDB';
-import BoatDB from './pages/explore_databases/BoatDB';
-import ConnectingInfo from './pages/connecting_info/ConnectingInfo';
-import MarkupTool from './pages/tools/MarkupTool';
-import Contact from './pages/help/Contact';
-import FAQ from './pages/help/FAQ';
-import SiteInstructions from './pages/help/SiteInstructions';
+import { OurTeam, GetInvolved, OtherProjects,
+         EmmaBAndrewsDatabase, NileDB, BoatDB,
+         ConnectingInfo,
+         MarkupTool,
+         Contact, FAQ, SiteInstructions,
+         Landing, Footer} from './export';
+
+
 
 
 const NAVLINKS = [
@@ -31,23 +26,21 @@ function App() {
         <RenderNav />
       </header>
       <main>
-        <div className='container'>
-          <Switch>
-            <Route exact path='/' render={Landing} />
-            <Route path='/OurTeam' render={OurTeam} />
-            <Route path='/GetInvolved' render={GetInvolved}/>
-            <Route path='/OtherProjects' render={OtherProjects}/>
-            <Route path='/EmmaBAndrewsDatabase' render={EmmaBAndrewsDatabase} />
-            <Route path='/NileTraveloguesDatbase' render={NileDB} />
-            <Route path='/BoatPassengerDatabase' render={BoatDB} />
-            <Route path='/ConnectingInformation' render={ConnectingInfo} />
-            <Route path='/HistoricalMarkupTool' render={MarkupTool} />
-            <Route path='/SiteInstructions' render={SiteInstructions} />
-            <Route path='/FAQ' render={FAQ} />
-            <Route path='/Contact' render={Contact} />
-            <Redirect to='/' />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path='/' render={Landing} />
+          <Route path='/OurTeam' render={OurTeam} />
+          <Route path='/GetInvolved' render={GetInvolved}/>
+          <Route path='/OtherProjects' render={OtherProjects}/>
+          <Route path='/EmmaBAndrewsDatabase' render={EmmaBAndrewsDatabase} />
+          <Route path='/NileTraveloguesDatbase' render={NileDB} />
+          <Route path='/BoatPassengerDatabase' render={BoatDB} />
+          <Route path='/ConnectingInformation' render={ConnectingInfo} />
+          <Route path='/HistoricalMarkupTool' render={MarkupTool} />
+          <Route path='/SiteInstructions' render={SiteInstructions} />
+          <Route path='/FAQ' render={FAQ} />
+          <Route path='/Contact' render={Contact} />
+          <Redirect to='/' />
+        </Switch>
       </main>
       <footer className='footer'>
         <Footer />
