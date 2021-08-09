@@ -1,7 +1,19 @@
 import './css/App.css';
 import {Route, Link, Switch, Redirect } from 'react-router-dom';
-import Navbar from 'react-bootstrap/Navbar';
-import { Nav, NavDropdown} from 'react-bootstrap';
+import React, { useState } from 'react';
+import NavBar from './global_components/NavBar';
+import {   Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from 'reactstrap';
+
 import { OurTeam, GetInvolved, OtherProjects,
          EmmaBAndrewsDatabase, NileDB, BoatDB,
          ConnectingInfo,
@@ -23,24 +35,29 @@ function App() {
   return (
     <div>
       <header>
-        <RenderNav />
+        <div className='nav-bar'>
+          {/* <RenderNav /> */}
+          <NavBar />
+        </div>
       </header>
       <main>
-        <Switch>
-          <Route exact path='/' render={Landing} />
-          <Route path='/OurTeam' render={OurTeam} />
-          <Route path='/GetInvolved' render={GetInvolved}/>
-          <Route path='/OtherProjects' render={OtherProjects}/>
-          <Route path='/EmmaBAndrewsDatabase' render={EmmaBAndrewsDatabase} />
-          <Route path='/NileTraveloguesDatbase' render={NileDB} />
-          <Route path='/BoatPassengerDatabase' render={BoatDB} />
-          <Route path='/ConnectingInformation' render={ConnectingInfo} />
-          <Route path='/HistoricalMarkupTool' render={MarkupTool} />
-          <Route path='/SiteInstructions' render={SiteInstructions} />
-          <Route path='/FAQ' render={FAQ} />
-          <Route path='/Contact' render={Contact} />
-          <Redirect to='/' />
-        </Switch>
+          <Switch>
+            <Route exact path='/' render={Landing} />
+            <div className='container'>
+              <Route path='/OurTeam' render={OurTeam} />
+              <Route path='/GetInvolved' render={GetInvolved} />
+              <Route path='/OtherProjects' render={OtherProjects} />
+              <Route path='/EmmaBAndrewsDatabase' render={EmmaBAndrewsDatabase} />
+              <Route path='/NileTraveloguesDatbase' render={NileDB} />
+              <Route path='/BoatPassengerDatabase' render={BoatDB} />
+              <Route path='/ConnectingInformation' render={ConnectingInfo} />
+              <Route path='/HistoricalMarkupTool' render={MarkupTool} />
+              <Route path='/SiteInstructions' render={SiteInstructions} />
+              <Route path='/FAQ' render={FAQ} />
+              <Route path='/Contact' render={Contact} />
+            </div>
+            <Redirect to='/' />
+          </Switch>
       </main>
       <footer className='footer'>
         <Footer />
@@ -50,48 +67,58 @@ function App() {
 }
 
 function RenderNav() {
-
-  let navigation =
-    <Navbar className='bg-white' fixed='top' collapseOnSelect expand='md'>
-      <Navbar.Brand>
-        <div className='mx-4'>
-          <Link to='/' className='link'> 
-            <div>
-              EBA Diaries
-            </div>
-          </Link>
-        </div>
-      </Navbar.Brand>
-      <Navbar.Toggle className='mx-4' aria-controls='responsive-navbar-nav'/>
-      <Navbar.Collapse id="responsive-navbar-nav">
-        <Nav className='mr-auto'>
-          <NavComponents links={NAVLINKS[0]}/>
-          <NavComponents links={NAVLINKS[1]}/>
-          <Nav.Link href='/ConnectingInformation'>Connecting Information</Nav.Link>
-          <NavComponents links={NAVLINKS[2]}/>
-          <NavComponents links={NAVLINKS[3]}/>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
-      {navigation}
-    </div>
+    <div className='navbar'>
+      <Navbar expand='md' bg='alert' variant='dark' light>
+        <NavbarBrand>
+          <NavLink href='/'>
+            <div className='title-link'>
+              <p className='eba-font'>Travelers In Egypt</p>
+            </div>
+          </NavLink>
+        </NavbarBrand>
+        <NavbarToggler onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+          <Nav className='mr-auto' navbar>
+            <NavComponents links={NAVLINKS[0]} />
+            <NavComponents links={NAVLINKS[1]}/>
+            <NavItem>
+              <NavLink href='/ConnectingInformation'>
+                Connecting Information
+              </NavLink>
+            </NavItem>
+            <NavComponents links={NAVLINKS[2]}/>
+            <NavComponents links={NAVLINKS[3]}/>
+          </Nav>
+        </Collapse>
+      </Navbar>
+      </div>
   );
 }
 
 function NavComponents(props) {
   let item = props.links[1].map((link) => {
-    let navItems = 
-      <NavDropdown.Item href={'/' + link.split(" ").join("")} key={link}>
-          {link}
-      </NavDropdown.Item>;
+    let navItems =
+        <DropdownItem href={'/' + link.split(" ").join("")} key={link}>
+            {link}
+        </DropdownItem>
     return navItems;
   });
 
   return (
-    <NavDropdown title={props.links[0]}>{item}</NavDropdown>
+    <div>
+    <UncontrolledDropdown nav inNavbar> 
+      <DropdownToggle nav caret>
+        {props.links[0]}
+      </DropdownToggle>
+      <DropdownMenu right>
+        {item}
+      </DropdownMenu>
+    </UncontrolledDropdown>
+  </div>
   );
 }
 

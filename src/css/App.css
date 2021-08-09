@@ -5,10 +5,19 @@
     width: 100%;
 }
 
-.link {
+.title-link {
     color: gray;
 }
 
-.link:hover {
+.title-link:hover {
     color: rgba(119, 101, 63, 0.8);
+}
+
+p {
+    font-size: 31.5px;
+    font-family: 'Special Elite', sans-serif, serif;
+}
+
+.navbar {
+    margin-bottom: -9px;
 }
