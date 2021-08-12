@@ -1,22 +1,59 @@
-import cc from './img/cc.png';
 import { SocialIcon } from 'react-social-icons';
+import React, { useState }from 'react';
 import './Footer.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
+// npm uninstall react-social-icons
+// use react-icons library instead
+
+
 function FooterLinks() {
-    const EBALINKS = ['www.facebook.com/ebadiary', 'github.com/orgs/eba-diary/dashboard', 'twitter.com/ebadiary?lang=en'];
-    return (
-        <div className='container justify-content-center'>
-            <RenderIcons links={EBALINKS}/>
+    const [width, setWidth] = useState(window.innerWidth);
+
+    const EBALINKS = ['www.facebook.com/ebadiary', 
+        'www.instagram.com/emmabandrewsdiaryproject/', 
+        'twitter.com/ebadiary?lang=en', 
+        'github.com/orgs/eba-diary/dashboard'
+    ];
+
+    const handleResize = (e) => {
+        e.preventDefault();
+        setWidth(window.innerWidth);
+        let div = document.getElementById('social-icons');
+        div.className = '';
+        width >= 458 ? div.classList.add('page') : div.classList.add('mobile-page');
+        // if (width >= 458) {
+        //     div.classList.add('page')
+        // } else {
+        //     div.classList.add('mobile-page');
+        // }
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    return(
+        <div className='container-fluid'>
             <div className='row'>
-                <div className='col-12 cc-image'>
-                    <img src={cc} alt='creative commons logo'/>
+                <div className='col-6 text'>
+                    <ul className='inline-block'>
+                        <div className='row'>
+                            <li>Credits</li>
+                            <li>Donate</li>
+                            <li>License</li>
+                            <li>Sitemap</li>
+                        </div>
+                    </ul>
                 </div>
-                    <div className='d-flex justify-content-center'>
-                        <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' className='bottom-link'>
-                            Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
-                        </a>
+                <div className='col-6'>
+                    <div className='page' id='social-icons'>
+                        <RenderIcons links={EBALINKS} /> 
                     </div>
+                </div>
+                {/* <div className='col-4'>
+                    <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' className='text'>
+                    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
+                    </a>
+                </div> */}
             </div>
         </div>
     );
@@ -25,17 +62,15 @@ function FooterLinks() {
 function RenderIcons(props) {
     let linksIcons = props.links.map((ebaLink) => {
         let iconWithLink = 
-            <div className='col-4' key={ebaLink}>
-                <SocialIcon url={'https://' + ebaLink} key={ebaLink} bgColor='rgba(119, 101, 63, 0.8)'/>
+            <div className='col-6 icons' key={ebaLink}>
+                <SocialIcon url={'https://' + ebaLink} key={ebaLink} bgColor='#EADDCA'/>
             </div>
         return iconWithLink;
     });
     
     return (
-        <div className='container d-inline-flex justify-content-center'>
-            <div className='row'>
-                {linksIcons}
-            </div>
+        <div className='row'>
+            {linksIcons}
         </div>
     );
 }

@@ -1,38 +1,19 @@
-
-.cc-image {
-    display: flex;
-    justify-content: center;
-    padding: 15px;
+.text {
+    color: #DED7B9;
+    padding-top: 5px;
 }
 
-.container {
+.container-fluid {
     padding: 10px;
+    background-color: black;
 }
 
-@media (min-width: 0px) and (max-width: 597px) {
-
-    div.cc-image img {
-        width: 20%;
-    }
+.footer {
+    background: #333333;
+    height: 175px;
+    bottom: 0px;
 }
 
-@media (min-width: 598px) {
-
-    div.cc-image img {
-        width: 16%;
-    }
-}
-
-@media (min-width: 768px) {
-
-    div.cc-image img {
-        width: 14%;
-    }
-}
-
-@media (min-width: 992px) {
-
-    div.cc-image img {
-        width: 8%;
-    }
+.icons {
+    padding-bottom: 10px;
 }

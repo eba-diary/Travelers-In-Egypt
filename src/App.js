@@ -52,6 +52,9 @@ function App() {
       </main>
       <footer className='footer'>
         <Footer />
+        <div className='copyright'>
+          &copy; Copyright Text
+        </div>
       </footer>
     </div>
   );

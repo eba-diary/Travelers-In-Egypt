@@ -1,7 +1,7 @@
 import React from 'react';
 import './css/Landing.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import background from './img/banner_img_landing.jpeg';
+import background from './img/eba_bg.png';
 
 function Landing() {
 
