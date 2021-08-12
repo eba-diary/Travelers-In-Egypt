@@ -1,6 +1,9 @@
 .text {
     color: #DED7B9;
-    padding-top: 5px;
+}
+
+li.footer-links {
+    margin-left: 40px;
 }
 
 .container-fluid {
@@ -10,10 +13,38 @@
 
 .footer {
     background: #333333;
-    height: 175px;
+    height: 200px;
     bottom: 0px;
 }
 
 .icons {
-    padding-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #DED7B9;
+    font-weight: 800;
+}
+
+.follow-title {
+    justify-content: center;
+}
+
+a {
+    text-decoration: none;
+    color: #DED7B9;
+}
+
+.social-titles {
+    display: inline;
+    margin: 10px;
+}
+
+.copyright {
+    text-align: center;
+}
+
+.mobile-page .mobile-untoggle {
+    display: none;
 }

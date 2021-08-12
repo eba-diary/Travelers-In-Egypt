@@ -3,8 +3,8 @@ import React, { useState }from 'react';
 import './Footer.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
-// npm uninstall react-social-icons
-// use react-icons library instead
+// fix hamburger menu on wrong side
+// make navbar rotate on open
 
 
 function FooterLinks() {
@@ -12,48 +12,61 @@ function FooterLinks() {
 
     const EBALINKS = ['www.facebook.com/ebadiary', 
         'www.instagram.com/emmabandrewsdiaryproject/', 
-        'twitter.com/ebadiary?lang=en', 
-        'github.com/orgs/eba-diary/dashboard'
+        'www.twitter.com/ebadiary?lang=en', 
+        'www.github.com/orgs/eba-diary/dashboard'
     ];
 
-    const handleResize = (e) => {
-        e.preventDefault();
-        setWidth(window.innerWidth);
+    const handleResize = () => {
         let div = document.getElementById('social-icons');
+        setWidth(window.innerWidth);
         div.className = '';
-        width >= 458 ? div.classList.add('page') : div.classList.add('mobile-page');
-        // if (width >= 458) {
-        //     div.classList.add('page')
-        // } else {
-        //     div.classList.add('mobile-page');
-        // }
+
+        if (width >= 658) {
+            div.classList.add('page');
+
+        } else {
+            div.classList.add('mobile-page');
+        }
     }
 
     window.addEventListener('resize', handleResize);
 
     return(
-        <div className='container-fluid'>
-            <div className='row'>
-                <div className='col-6 text'>
-                    <ul className='inline-block'>
-                        <div className='row'>
-                            <li>Credits</li>
-                            <li>Donate</li>
-                            <li>License</li>
-                            <li>Sitemap</li>
+        <div className='page' id='social-icons'>
+            <div className='container-fluid'>
+                <div className='row justify-content-lg-between'>
+                    <div className='col-6 text'>
+                        <ul>
+                            <div className='row'>
+                                <p>Learn More</p>
+                                <li className='footer-links'><a href='/'>Credits</a></li>
+                                <li className='footer-links'><a href='/'>Donate</a></li>
+                                <li className='footer-links'><a href='/'>License</a></li>
+                                <li className='footer-links'><a href='/'>Sitemap</a></li>
+                            </div>
+                        </ul>
+                    </div>
+                    <div className='col col-sm-6 col-lg-4'>
+                        <div>
+                            <RenderIcons links={EBALINKS} /> 
                         </div>
-                    </ul>
-                </div>
-                <div className='col-6'>
-                    <div className='page' id='social-icons'>
-                        <RenderIcons links={EBALINKS} /> 
                     </div>
                 </div>
-                {/* <div className='col-4'>
-                    <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' className='text'>
-                    Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
-                    </a>
-                </div> */}
+            </div>
+            <div className='copyright'>
+                <a className='text' 
+                    href=
+                    'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+                >
+                    <div className='cc-page'>
+                        &copy; Creative Commons 
+                        <span className='mobile-untoggle'>
+                            Attribution-NonCommercial-ShareAlike 4.0 
+                            International License 
+                        </span>
+                    </div>
+
+                </a>
             </div>
         </div>
     );
@@ -61,15 +74,25 @@ function FooterLinks() {
 
 function RenderIcons(props) {
     let linksIcons = props.links.map((ebaLink) => {
+        let str = '' + ebaLink;
+        str = str.substring(
+            str.indexOf('.') + 1, 
+            str.lastIndexOf('.'));
+        str = str.charAt(0).toUpperCase() + str.substring(1);
         let iconWithLink = 
-            <div className='col-6 icons' key={ebaLink}>
-                <SocialIcon url={'https://' + ebaLink} key={ebaLink} bgColor='#EADDCA'/>
+            <div className='col-6 col-xl-5 icons' key={ebaLink}>
+                <SocialIcon url={'https://' + ebaLink} 
+                    style={{height: 35, width: 35}} 
+                    bgColor='#EADDCA' 
+                    key={ebaLink}/>
+                <p className='social-titles mobile-untoggle'>{str}</p>
             </div>
         return iconWithLink;
     });
     
     return (
-        <div className='row'>
+        <div className='row justify-content-xl-around'>
+            <p className='follow-title'>Follow Us</p>
             {linksIcons}
         </div>
     );

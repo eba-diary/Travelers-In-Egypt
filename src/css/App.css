@@ -1,6 +1,4 @@
-.title-link {
-    margin-left: 10px;
-}
+
 
 .eba-font {
     color: black;
@@ -16,11 +14,12 @@
 .nav-bar {
     margin-bottom: -10px;
     background-color: #DED7B9;
+    padding: 15px;
 }
 
 .fa-caret {
-    display: inline-block;
-    margin: 5px;
+    display: inline;
+    margin-left: 3px;
 }
 
 .dd-toggle {
@@ -28,10 +27,5 @@
 }
 
 footer {
-    margin-top: 140%;
-}
-
-.copyright {
-    color: #DED7B9;
-    text-align: center;
+    margin-top: 100%;
 }

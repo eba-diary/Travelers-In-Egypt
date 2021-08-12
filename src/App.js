@@ -28,7 +28,6 @@ function App() {
       <header>
         <div className='nav-bar'>
           <RenderNav />
-          {/* <NavBar /> */}
         </div>
       </header>
       <main>
@@ -52,9 +51,6 @@ function App() {
       </main>
       <footer className='footer'>
         <Footer />
-        <div className='copyright'>
-          &copy; Copyright Text
-        </div>
       </footer>
     </div>
   );
@@ -65,7 +61,7 @@ function RenderNav() {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div className='navbar'>
+    <div>
       <Navbar expand='md' light>
         <NavbarBrand>
           <div className='title-link'>
@@ -74,22 +70,24 @@ function RenderNav() {
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
+          <div className='nav-collapse'>
           <Nav className='mr-auto' navbar>
             {NavBarList.map((link) => {
               let nav = <NavComponents links={link}/>
               return nav;
             })}
           </Nav>
+          </div>
         </Collapse>
       </Navbar>
-      </div>
+    </div>
   );
 }
 
 function NavComponents(props) {
   let item = props.links.pages.map((link) => {
     let navItems =
-        <DropdownItem href={link} key={link}>
+        <DropdownItem href={link.split(' ').join('')} key={link}>
             {link}
         </DropdownItem>
     return navItems;
@@ -107,7 +105,7 @@ function NavComponents(props) {
         </div>
       </DropdownToggle>
       <DropdownMenu right>
-        {item}
+          {item}
       </DropdownMenu>
     </UncontrolledDropdown>
   </div>
