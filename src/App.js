@@ -1,14 +1,14 @@
 import './css/App.css';
-import {Route, Link, Switch, Redirect } from 'react-router-dom';
+import {Route, Switch, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
-import NavBar from './global_components/NavBar';
+import NavBarList from './global_components/navbar.json';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import {   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
@@ -22,22 +22,13 @@ import { OurTeam, GetInvolved, OtherProjects,
          Landing, Footer} from './export';
 
 
-
-
-const NAVLINKS = [
-  ['About', ['Our Team', 'Get Involved', 'Other Projects']],
-  ['Explore Databases', ['Emma B Andrews Database', 'Nile Travelogues Datbase', 'Boat Passenger Database']],
-  ['Tools', ['Historical Markup Tool']],
-  ['Help', ['Site Instructions', 'FAQ', 'Contact']]
-];
-
 function App() {
   return (
     <div>
       <header>
         <div className='nav-bar'>
-          {/* <RenderNav /> */}
-          <NavBar />
+          <RenderNav />
+          {/* <NavBar /> */}
         </div>
       </header>
       <main>
@@ -72,26 +63,19 @@ function RenderNav() {
 
   return (
     <div className='navbar'>
-      <Navbar expand='md' bg='alert' variant='dark' light>
+      <Navbar expand='md' light>
         <NavbarBrand>
-          <NavLink href='/'>
-            <div className='title-link'>
-              <p className='eba-font'>Travelers In Egypt</p>
-            </div>
-          </NavLink>
+          <div className='title-link'>
+            <a className='eba-font' href='/'>Travelers <br/> In Egypt</a>
+          </div>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className='mr-auto' navbar>
-            <NavComponents links={NAVLINKS[0]} />
-            <NavComponents links={NAVLINKS[1]}/>
-            <NavItem>
-              <NavLink href='/ConnectingInformation'>
-                Connecting Information
-              </NavLink>
-            </NavItem>
-            <NavComponents links={NAVLINKS[2]}/>
-            <NavComponents links={NAVLINKS[3]}/>
+            {NavBarList.map((link) => {
+              let nav = <NavComponents links={link}/>
+              return nav;
+            })}
           </Nav>
         </Collapse>
       </Navbar>
@@ -100,9 +84,9 @@ function RenderNav() {
 }
 
 function NavComponents(props) {
-  let item = props.links[1].map((link) => {
+  let item = props.links.pages.map((link) => {
     let navItems =
-        <DropdownItem href={'/' + link.split(" ").join("")} key={link}>
+        <DropdownItem href={link} key={link}>
             {link}
         </DropdownItem>
     return navItems;
@@ -111,8 +95,13 @@ function NavComponents(props) {
   return (
     <div>
     <UncontrolledDropdown nav inNavbar> 
-      <DropdownToggle nav caret>
-        {props.links[0]}
+      <DropdownToggle nav>
+        <div className='dd-toggle'>
+          {props.links.header}
+          <div className='fa-caret'>
+            <FontAwesomeIcon icon={faCaretDown} className='fa-icon'/>
+          </div>
+        </div>
       </DropdownToggle>
       <DropdownMenu right>
         {item}

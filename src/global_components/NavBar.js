@@ -5,21 +5,9 @@ import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 
 function NavBar() {
-    // props have "header" field and "pages" field DONE
-    // map header and pages to divs. DONE
-
-    // headers will be mapped into their own columns DONE
-    // pages will be mapped into their own list DONE
 
     const [open, setOpen] = useState(false);
     const toggle = () => setOpen(!open);
-
-    const toggleDropdown = () => {
-        let dropdown = document.querySelector('.dropdown');
-
-        toggle();
-        open ? dropdown.style.display = 'none' : dropdown.style.display = 'block';
-    }
 
     let nav = NavBarList.map((links) => {
         let header = 
@@ -28,57 +16,57 @@ function NavBar() {
                 <FontAwesomeIcon icon={faCaretDown} className='fa-icon'/>
             </div>
         let pages = 
-            <div className='container'>
-                <div className='row'>
-                    {links.pages.map((page)=> {
-                        let list = 
-                            <div className='col-12'>
-                                <ul key={page}>{page}</ul>
-                            </div>
-                        return <li key={page}>{list}</li>;
-                    })
-                    }
-                </div>
+            <div className='dropdown' style=
+            {{display: 'none'}} key={links.pages}>
+                <ul>
+                    <div className='container'>
+                        <div className='row'>
+                            {links.pages.map((page)=> {
+                                let list = 
+                                    <li key={page}>{page}</li>
+                                return <div className='col-12' key={page}>{list}</div>;
+                            })
+                            } 
+                        </div>
+                    </div>
+                </ul>
             </div>;
-        
         return (
-            <div className='inline-block' key={header}>
-                <button onClick={toggleDropdown}>
+            <div className='inline-block' key={links.header}>
+                <button className='dropdown-button'>
                     {header}
                 </button>
-                <div className='dropdown' style={{display: 'none'}} key={pages}>
-                    {pages}
-                </div>
-            </div>
+                {pages}
+            </div> 
         );
     });
 
-    // each page in a list will be put in a stacked bootstrap column DONE
-    // each header will be put in a bootstrap column DONE
+    // make header a link (try button later)
+    // header and div dropdown will have same key
+    // header has onclick function that takes in the key as param
+    // the cb function will get the 
 
-    // each header will have a down arrow on the right  DONE
-    // each header will have an onclick event listener that toggles the corresponding bootstrap column
-    // the render for the corresponding bootstrap column will be ripple effect
-    // the onclick toggle will rotate the arrow 180 degrees
+    let dropdown = document.querySelectorAll('.dropdown');
+    let button = document.querySelectorAll('.dropdown-button');
 
-    // the headers will be put in an inline row
-
-    // the headers, for medium and smaller screen, will turn into hamburger
-    // hamburger will have onclick event listener that will display stacked headers
-    // headers will have onclick function that toggles a fluid list of pages
-
-    // each page will have an href for the <Route> component to know which page to render
-
-
-    // TODO debug checks:
-    // "headers" may need to be anchor tags
+    for (let i = 0; i < dropdown.length; i++) {
+        button[i].addEventListener('click', ()=> {
+            console.log('clicked button and dropdown at index ' + i);
+            toggle();
+            if (open) {
+                dropdown[i].style.display = 'block';
+            } else {
+                dropdown[i].style.display = 'none';
+            }
+        })
+    }
 
     return (
         <div className='container-fluid'>
             <div className='row'>
                 <div className='col-10'>
                     <div className='title'>
-                        Traveler <br/> In Egypt
+                        Travelers <br/> In Egypt
                     </div>
                     <div className='nav'>
                         {nav}
@@ -88,5 +76,61 @@ function NavBar() {
         </div>
     );
 }
+
+
+
+
+// last straw code
+
+// function NavBarPartTwo() {
+//     return (
+//         <div className='wrapper'>
+//             <div className='navbar'>
+//                 <ul>
+//                     <li>
+//                         <a href='#' className='a_parent'>
+//                             <div className='wrap'>
+//                                 <span className='text'>About</span>
+//                                 <FontAwesomeIcon icon={faCaretDown} className='fa-icon'/>
+//                             </div>
+//                         </a>
+//                     </li>
+//                     <li>
+//                         <a href='#' className='a_parent'>
+//                             <div className='wrap'>
+//                                 <span className='text'>Explore Databases</span>
+//                                 <FontAwesomeIcon icon={faCaretDown} className='fa-icon'/>
+//                             </div>
+//                         </a>
+//                     </li>
+//                     <li>
+//                         <a href='#' className='a_parent'>
+//                             <div className='wrap'>
+//                                 <span className='text'>Connecting Information</span>
+//                                 <FontAwesomeIcon icon={faCaretDown} className='fa-icon'/>
+//                             </div>
+//                         </a>
+//                     </li>
+//                     <li>
+//                         <a href='#' className='a_parent'>
+//                             <div className='wrap'>
+//                                 <span className='text'>Historical Markup Tool</span>
+//                                 <FontAwesomeIcon icon={faCaretDown} className='fa-icon'/>
+//                             </div>
+//                         </a>
+//                     </li>
+//                     <li>
+//                         <a href='#' className='a_parent'>
+//                             <div className='wrap'>
+//                                 <span className='text'>Help</span>
+//                                 <FontAwesomeIcon icon={faCaretDown} className='fa-icon'/>  
+//                             </div>
+//                         </a>
+//                     </li>
+//                 </ul>
+//             </div>
+//         </div>
+//     )   
+// }
 
 export default NavBar;
