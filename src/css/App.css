@@ -1,4 +1,6 @@
-
+main {
+    padding: 10px;
+}
 
 .eba-font {
     color: black;
@@ -19,7 +21,7 @@
 
 .fa-caret {
     display: inline;
-    margin-left: 3px;
+    padding-left: 4px;
 }
 
 .dd-toggle {
@@ -29,3 +31,4 @@
 footer {
     margin-top: 100%;
 }
+

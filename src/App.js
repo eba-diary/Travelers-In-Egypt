@@ -2,27 +2,42 @@ import './css/App.css';
 import {Route, Switch, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
 import NavBarList from './global_components/navbar.json';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons';
-import {   Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+import { FaCaretDown } from 'react-icons/fa';
+import { Collapse,Navbar, NavbarToggler, NavbarBrand, Nav, 
+  UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } 
+from 'reactstrap';
 
 import { OurTeam, GetInvolved, OtherProjects,
-         EmmaBAndrewsDatabase, NileDB, BoatDB,
-         ConnectingInfo,
-         MarkupTool,
-         Contact, FAQ, SiteInstructions,
-         Landing, Footer} from './export';
+  EmmaBAndrewsDatabase, NileDB, BoatDB,
+  ConnectingInfo, MarkupTool, Contact, FAQ, 
+  SiteInstructions, Landing, Footer } 
+from './export';
 
+const PAGES = [OurTeam, GetInvolved, OtherProjects,
+  EmmaBAndrewsDatabase, NileDB, BoatDB,
+  ConnectingInfo, MarkupTool, SiteInstructions, 
+  FAQ, Contact, SiteInstructions
+];
 
 function App() {
+  
+  let pageJSON = NavBarList.map((pages) => {
+    let pageArr = pages.pages;
+    return pageArr;
+  }).reduce((acc, page) => {
+    let values = page.toString();
+    acc += values + ','
+    return acc;
+  }, '').split(',');
+
+  pageJSON.pop();
+
+  let routes = pageJSON.map((value, index) => {
+    return (
+      <Route path={value.split(' ').join('')} render={PAGES[index]} />
+    );
+  })
+
   return (
     <div>
       <header>
@@ -33,19 +48,12 @@ function App() {
       <main>
           <Switch>
             <Route exact path='/' render={Landing} />
-            <div className='container'>
-              <Route path='/OurTeam' render={OurTeam} />
-              <Route path='/GetInvolved' render={GetInvolved} />
-              <Route path='/OtherProjects' render={OtherProjects} />
-              <Route path='/EmmaBAndrewsDatabase' render={EmmaBAndrewsDatabase} />
-              <Route path='/NileTraveloguesDatbase' render={NileDB} />
-              <Route path='/BoatPassengerDatabase' render={BoatDB} />
-              <Route path='/ConnectingInformation' render={ConnectingInfo} />
-              <Route path='/HistoricalMarkupTool' render={MarkupTool} />
-              <Route path='/SiteInstructions' render={SiteInstructions} />
-              <Route path='/FAQ' render={FAQ} />
-              <Route path='/Contact' render={Contact} />
-            </div>
+              { pageJSON.map((value, index) => {
+                  let path = value.split(' ').join('');
+                  console.log(path);
+                  return <Route path={'/' + path} render={PAGES[index]} />;
+                })
+              }
             <Redirect to='/' />
           </Switch>
       </main>
@@ -85,6 +93,7 @@ function RenderNav() {
 }
 
 function NavComponents(props) {
+
   let item = props.links.pages.map((link) => {
     let navItems =
         <DropdownItem href={link.split(' ').join('')} key={link}>
@@ -100,7 +109,7 @@ function NavComponents(props) {
         <div className='dd-toggle'>
           {props.links.header}
           <div className='fa-caret'>
-            <FontAwesomeIcon icon={faCaretDown} className='fa-icon'/>
+            <FaCaretDown className='fa-icon'/>
           </div>
         </div>
       </DropdownToggle>
@@ -111,20 +120,5 @@ function NavComponents(props) {
   </div>
   );
 }
-
-// can be used to toggle different footers for later
-// function useWindowSize() {
-//   const [size, setSize] = useState(window.innerWidth);
-//   useEffect(() => {
-//     const handleResize = () => {
-//       setSize(window.innerWidth);
-//     }
-//     window.addEventListener('resize', handleResize);
-//     return () => {
-//       window.removeEventListener('resize', handleResize);
-//     }
-//   }, []);
-//   return size;
-// }
 
 export default App;

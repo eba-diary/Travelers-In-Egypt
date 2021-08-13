@@ -1,10 +1,8 @@
 import { SocialIcon } from 'react-social-icons';
 import React, { useState }from 'react';
+import { IconContext } from 'react-icons';
 import './Footer.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
-// fix hamburger menu on wrong side
-// make navbar rotate on open
 
 
 function FooterLinks() {
@@ -15,7 +13,7 @@ function FooterLinks() {
         'www.twitter.com/ebadiary?lang=en', 
         'www.github.com/orgs/eba-diary/dashboard'
     ];
-
+    
     const handleResize = () => {
         let div = document.getElementById('social-icons');
         setWidth(window.innerWidth);
@@ -28,46 +26,48 @@ function FooterLinks() {
             div.classList.add('mobile-page');
         }
     }
-
+    window.addEventListener('load', handleResize);
     window.addEventListener('resize', handleResize);
 
     return(
         <div className='page' id='social-icons'>
-            <div className='container-fluid'>
-                <div className='row justify-content-lg-between'>
-                    <div className='col-6 text'>
-                        <ul>
-                            <div className='row'>
-                                <p>Learn More</p>
-                                <li className='footer-links'><a href='/'>Credits</a></li>
-                                <li className='footer-links'><a href='/'>Donate</a></li>
-                                <li className='footer-links'><a href='/'>License</a></li>
-                                <li className='footer-links'><a href='/'>Sitemap</a></li>
+            <IconContext.Provider value={{color: '#DED7B9', size: '1em'}}>
+                <div className='container-fluid'>
+                    <div className='row justify-content-lg-between'>
+                        <div className='col-6 text'>
+                            <ul>
+                                <div className='row'>
+                                    <p>Learn More</p>
+                                    <li className='footer-links'><a href='/'>Credits</a></li>
+                                    <li className='footer-links'><a href='/'>Donate</a></li>
+                                    <li className='footer-links'><a href='/'>License</a></li>
+                                    <li className='footer-links'><a href='/'>Sitemap</a></li>
+                                </div>
+                            </ul>
+                        </div>
+                        <div className='col col-sm-6 col-lg-4'>
+                            <div>
+                                <RenderIcons links={EBALINKS} /> 
                             </div>
-                        </ul>
-                    </div>
-                    <div className='col col-sm-6 col-lg-4'>
-                        <div>
-                            <RenderIcons links={EBALINKS} /> 
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className='copyright'>
-                <a className='text' 
-                    href=
-                    'https://creativecommons.org/licenses/by-nc-sa/4.0/'
-                >
-                    <div className='cc-page'>
-                        &copy; Creative Commons 
-                        <span className='mobile-untoggle'>
-                            Attribution-NonCommercial-ShareAlike 4.0 
-                            International License 
-                        </span>
-                    </div>
+                <div className='copyright'>
+                    <a className='text' 
+                        href=
+                        'https://creativecommons.org/licenses/by-nc-sa/4.0/'
+                    >
+                        <div className='cc-page'>
+                            &copy; Creative Commons 
+                            <span className='mobile-untoggle'>
+                                Attribution-NonCommercial-ShareAlike 4.0 
+                                International License 
+                            </span>
+                        </div>
 
-                </a>
-            </div>
+                    </a>
+                </div>
+            </IconContext.Provider>
         </div>
     );
 }

@@ -5,7 +5,7 @@
     },
     {
         "header" : "Explore Databases",
-        "pages" : ["Emma B Andrews Database", "Nile Travelogues Datbase", "Boat Passenger Database"]
+        "pages" : ["Emma B Andrews Database", "Nile Travelogues Database", "Boat Passenger Database"]
     },
     {
         "header" : "Connecting Information",
@@ -18,6 +18,5 @@
     {
         "header" : "Help",
         "pages" : ["Site Instructions", "FAQ", "Contact"]
-        }
-    
+    }
 ]
