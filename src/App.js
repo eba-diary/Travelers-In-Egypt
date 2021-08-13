@@ -1,8 +1,8 @@
 import './css/App.css';
 import {Route, Switch, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
-import NavBarList from './global_components/navbar.json';
-import { FaCaretDown } from 'react-icons/fa';
+import navBarList from './navbar.json';
+// import { FaCaretDown } from 'react-icons/fa';
 import { Collapse,Navbar, NavbarToggler, NavbarBrand, Nav, 
   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } 
 from 'reactstrap';
@@ -20,8 +20,9 @@ const PAGES = [OurTeam, GetInvolved, OtherProjects,
 ];
 
 function App() {
-  
-  let pageJSON = NavBarList.map((pages) => {
+
+  // Get pages from JSON map into array.
+  let pageJSON = navBarList.map((pages) => {
     let pageArr = pages.pages;
     return pageArr;
   }).reduce((acc, page) => {
@@ -32,26 +33,21 @@ function App() {
 
   pageJSON.pop();
 
-  let routes = pageJSON.map((value, index) => {
-    return (
-      <Route path={value.split(' ').join('')} render={PAGES[index]} />
-    );
-  })
+  // Reads URL and renders corresponding page.
 
   return (
     <div>
       <header>
         <div className='nav-bar'>
-          <RenderNav />
+          <TopLevelNav />
         </div>
       </header>
       <main>
           <Switch>
-            <Route exact path='/' render={Landing} />
+            <Route exact path='/' render={Landing}/>
               { pageJSON.map((value, index) => {
                   let path = value.split(' ').join('');
-                  console.log(path);
-                  return <Route path={'/' + path} render={PAGES[index]} />;
+                  return <Route path={'/' + path} render={PAGES[index]} key={path} />;
                 })
               }
             <Redirect to='/' />
@@ -64,57 +60,62 @@ function App() {
   );
 }
 
-function RenderNav() {
+function TopLevelNav() {
+  // Manage state of collapsed navigation menu.
+
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
   return (
     <div>
-      <Navbar expand='md' light>
-        <NavbarBrand>
-          <div className='title-link'>
-            <a className='eba-font' href='/'>Travelers <br/> In Egypt</a>
+      <Navbar style={{backgroundColor: '#DED7B9', 
+          marginTop: '-10px', 
+          padding: '5px'}} light expand='md'>
+        <NavbarBrand href='/'>
+          <div className='eba-font'>
+            Travelers <br/> In Egypt
           </div>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
-          <div className='nav-collapse'>
           <Nav className='mr-auto' navbar>
-            {NavBarList.map((link) => {
-              let nav = <NavComponents links={link}/>
+            {navBarList.map((link, index) => {
+              let nav = <DropdownPage links={link} key={index}/>
               return nav;
             })}
           </Nav>
-          </div>
         </Collapse>
       </Navbar>
     </div>
   );
 }
 
-function NavComponents(props) {
+function DropdownPage(props) {
 
-  let item = props.links.pages.map((link) => {
-    let navItems =
-        <DropdownItem href={link.split(' ').join('')} key={link}>
+  // Gets header and corresponding page names 
+  // from JSON file and creates one dropdown item.
+
+  let dropdownItem = props.links.pages.map((link, index) => {
+    let pageNames =
+        <DropdownItem href={link.split(' ').join('')} key={index}>
             {link}
         </DropdownItem>
-    return navItems;
+    return pageNames;
   });
 
   return (
     <div>
     <UncontrolledDropdown nav inNavbar> 
-      <DropdownToggle nav>
-        <div className='dd-toggle'>
+      <DropdownToggle nav caret>
+        {/* <div className='dd-toggle'> */}
           {props.links.header}
-          <div className='fa-caret'>
+          {/* <div className='fa-caret'>
             <FaCaretDown className='fa-icon'/>
-          </div>
-        </div>
+          </div> */}
+        {/* </div> */}
       </DropdownToggle>
       <DropdownMenu right>
-          {item}
+          {dropdownItem}
       </DropdownMenu>
     </UncontrolledDropdown>
   </div>

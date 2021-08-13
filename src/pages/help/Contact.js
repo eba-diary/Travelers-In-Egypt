@@ -1,4 +1,4 @@
-import '../../css/Contact.css';
+import './css/Contact.css';
 import firebase from 'firebase/app';
 import 'firebase/database';
 
@@ -7,7 +7,7 @@ import 'firebase/database';
 // 2. Need to create resizable message box
 
 function Contact() {
-
+    // Contact form
     let form = 
         <div className='container'>
             <div className='col-12'>
@@ -24,28 +24,28 @@ function Form() {
     const handleSubmit = (e) => {
         e.preventDefault();
         
-        // Get values
+        // Get values of the inputs.
         let name = getInputVal('name');
         let email = getInputVal('email');
         let text = getInputVal('text');
 
-        // save message
+        // Saves message.
         saveMessage(name, email, text);
 
-        // toggle succesful message sent
+        // Toggle succesful message sent.
         document.querySelector('.alert').style.display = 'block';
 
-        // Hide alert after 3 seconds
+        // Hide alert after 3 seconds.
         setTimeout(() => {
             document.querySelector('.alert').style.display = 'none';
         }, 3000);
 
-        // Clear form
+        // Clear the form.
         document.getElementById('contactForm').reset();
 
     }
 
-    // Function to get form values
+    // Function to get form values.
     const getInputVal = (id) => {
         return document.getElementById(id).value; 
     }
