@@ -38,7 +38,7 @@ function Form() {
         // Hide alert after 3 seconds.
         setTimeout(() => {
             document.querySelector('.alert').style.display = 'none';
-        }, 3000);
+        }, 3500);
 
         // Clear the form.
         document.getElementById('contactForm').reset();
