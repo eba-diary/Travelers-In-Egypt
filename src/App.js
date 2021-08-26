@@ -10,13 +10,14 @@ from 'reactstrap';
 import { OurTeam, GetInvolved, OtherProjects,
   EmmaBAndrewsDatabase, NileDB, BoatDB,
   ConnectingInfo, MarkupTool, Contact, FAQ, 
-  SiteInstructions, Landing, Footer } 
-from './export';
+  SiteInstructions } 
+from './pages';
+import { Landing, Footer } from './stand_alone_pages';
 
 const PAGES = [OurTeam, GetInvolved, OtherProjects,
   EmmaBAndrewsDatabase, NileDB, BoatDB,
   ConnectingInfo, MarkupTool, SiteInstructions, 
-  FAQ, Contact, SiteInstructions
+  FAQ, Contact
 ];
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
   return (
     <div>
       <header>
-        <div className='nav-bar'>
+        <div>
           <TopLevelNav />
         </div>
       </header>
@@ -68,9 +69,8 @@ function TopLevelNav() {
 
   return (
     <div>
-      <Navbar style={{backgroundColor: '#DED7B9', 
-          marginTop: '-10px', 
-          padding: '5px'}} light expand='md'>
+      <Navbar style={{backgroundColor: '#DED7B9',   
+          padding: '10px'}} light expand='md'>
         <NavbarBrand href='/'>
           <div className='eba-font'>
             Travelers <br/> In Egypt
@@ -105,14 +105,9 @@ function DropdownPage(props) {
 
   return (
     <div>
-    <UncontrolledDropdown nav inNavbar> 
-      <DropdownToggle nav caret>
-        {/* <div className='dd-toggle'> */}
+    <UncontrolledDropdown style={{borderRadius: '20px'}} nav inNavbar> 
+      <DropdownToggle style={{color: '#000000'}} nav caret>
           {props.links.header}
-          {/* <div className='fa-caret'>
-            <FaCaretDown className='fa-icon'/>
-          </div> */}
-        {/* </div> */}
       </DropdownToggle>
       <DropdownMenu right>
           {dropdownItem}

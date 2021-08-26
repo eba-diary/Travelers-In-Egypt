@@ -1,50 +1,23 @@
 .text {
     color: #DED7B9;
-}
-
-li.footer-links {
-    margin-left: 40px;
+    padding: 22px 20px;
 }
 
 .container-fluid {
     padding: 10px;
     background-color: black;
-}
-
-.footer {
-    background: #333333;
-    height: 215px;
     bottom: 0px;
-}
-
-.icons {
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-
-p {
-    color: #DED7B9;
-    font-weight: 800;
 }
 
 .follow-title {
     justify-content: center;
 }
 
+.icons {
+    padding: 8px 10px;
+}
+
 a {
     text-decoration: none;
     color: #DED7B9;
-}
-
-.social-titles {
-    display: inline;
-    margin: 10px;
-}
-
-.copyright {
-    text-align: center;
-}
-
-.mobile-page .mobile-untoggle {
-    display: none;
 }
