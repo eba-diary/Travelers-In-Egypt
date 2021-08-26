@@ -14,3 +14,16 @@ button {
     margin-bottom: 10px;
     display: none;
 }
+
+.header {
+    font-family: 'Special Elite', sans-serif, serif;
+}
+
+.mail {
+    color: #B1A994;
+}
+
+.mail:hover {
+    color: #45200a;
+    cursor: pointer;
+}

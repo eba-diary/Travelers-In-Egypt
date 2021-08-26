@@ -13,7 +13,7 @@ function Footer() {
 
     return (
         <div className='page' id='social-icons'>
-            <div className='container-fluid'>
+            <div className='container-fluid footer'>
                 <div className='row justify-content-between'>
                     <div className='col-6 col-sm-6 col-lg-4 text'>
                         <ul>

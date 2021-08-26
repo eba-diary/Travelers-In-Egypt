@@ -3,7 +3,7 @@
     padding: 22px 20px;
 }
 
-.container-fluid {
+.container-fluid.footer {
     padding: 10px;
     background-color: black;
     bottom: 0px;
