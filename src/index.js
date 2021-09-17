@@ -6,9 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import firebase from 'firebase/app';
 import 'firebase/analytics';
 import { BrowserRouter } from 'react-router-dom';
+import dotenv from "dotenv";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+dotenv.config();
+
 const firebaseConfig = {
   apiKey: "AIzaSyDCt4Q0r7EVr0wTJ2YJD8hhIGvFwAfafPs",
   authDomain: "travelers-in-egypt.firebaseapp.com",

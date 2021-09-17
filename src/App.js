@@ -13,6 +13,7 @@ import { OurTeam, GetInvolved, OtherProjects,
   SiteInstructions } 
 from './pages';
 import { Landing, Footer } from './stand_alone_pages';
+import dotenv from "dotenv";
 
 const PAGES = [OurTeam, GetInvolved, OtherProjects,
   EmmaBAndrewsDatabase, NileDB, BoatDB,
@@ -21,6 +22,7 @@ const PAGES = [OurTeam, GetInvolved, OtherProjects,
 ];
 
 function App() {
+  dotenv.config();
 
   // Get pages from JSON map into array.
   let pageJSON = navBarList.map((pages) => {
@@ -43,7 +45,7 @@ function App() {
           <TopLevelNav />
         </div>
       </header>
-      <main>
+      <main className='content'>
           <Switch>
             <Route exact path='/' render={Landing}/>
               { pageJSON.map((value, index) => {

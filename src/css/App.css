@@ -18,6 +18,10 @@
     color: black;
 }
 
+main.content {
+    padding: 10px
+}
+
 footer {
     margin-top: 100%;
 }
