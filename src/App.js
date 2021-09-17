@@ -2,7 +2,6 @@ import './css/App.css';
 import {Route, Switch, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
 import navBarList from './navbar.json';
-// import { FaCaretDown } from 'react-icons/fa';
 import { Collapse,Navbar, NavbarToggler, NavbarBrand, Nav, 
   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } 
 from 'reactstrap';
@@ -13,7 +12,6 @@ import { OurTeam, GetInvolved, OtherProjects,
   SiteInstructions } 
 from './pages';
 import { Landing, Footer } from './stand_alone_pages';
-import dotenv from "dotenv";
 
 const PAGES = [OurTeam, GetInvolved, OtherProjects,
   EmmaBAndrewsDatabase, NileDB, BoatDB,
@@ -22,8 +20,6 @@ const PAGES = [OurTeam, GetInvolved, OtherProjects,
 ];
 
 function App() {
-  dotenv.config();
-
   // Get pages from JSON map into array.
   let pageJSON = navBarList.map((pages) => {
     let pageArr = pages.pages;
