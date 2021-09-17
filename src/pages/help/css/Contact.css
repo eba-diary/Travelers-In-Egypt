@@ -1,29 +1,42 @@
-label {
+.form-label {
     padding: 10px;
 }
 
-button {
-    margin: 15px;
+.input, .input-txt {
+    width: 100%;
 }
 
-.alert {
-    text-align: center;
-    padding: 5px;
-    background: #79C879;
+.input-txt {
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+.input-btn {
+    background-color: #DED7B9;
+    color: black;
+    border: none;
+    border-radius: 5px;
+    height: 150%;
+    transition: 0.3s;
+}
+
+.input-btn:hover {
+    background-color: #555555;
     color: white;
-    margin-bottom: 10px;
+}
+
+.sent-successful, .sent-error {
     display: none;
+    color: white;
+    justify-content: center;
+    text-align: center;
+    border-radius: 5px;
 }
 
-.header {
-    font-family: 'Special Elite', sans-serif, serif;
+.sent-successful {
+    background-color: #50C878;
 }
 
-.mail {
-    color: #B1A994;
-}
-
-.mail:hover {
-    color: #45200a;
-    cursor: pointer;
+.sent-error {
+    background-color: #CF142B;
 }
