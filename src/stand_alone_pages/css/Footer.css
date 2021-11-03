@@ -6,7 +6,6 @@
 .container-fluid.footer {
     padding: 10px;
     background-color: black;
-    bottom: 0px;
 }
 
 .follow-title {
@@ -17,7 +16,7 @@
     padding: 8px 10px;
 }
 
-a {
+div > a.footer-link {
     text-decoration: none;
     color: #DED7B9;
 }

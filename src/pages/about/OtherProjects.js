@@ -1,10 +1,35 @@
+import React, { useEffect, useState } from 'react';
+import Markdown from 'markdown-to-jsx';
+import otherProjectsMarkdown from './md/OtherProjects.md';
+
 function OtherProjects() {
-    let test = 
+    let content = 
         <div>
-            Our Other Projects page is currently under construction!
+            <MarkdownRender />
         </div>;
 
-    return(test);
+    return(content);
+}
+
+function MarkdownRender() {
+    const [content, setContent] = useState({md: ""});
+
+    useEffect(() => {
+        fetch(otherProjectsMarkdown)
+            .then((res) => res.text())
+            .then((md) => {
+                setContent({md});
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    }, []);
+
+    return (
+        <div>
+            <Markdown children={content.md} />
+        </div>
+    );
 }
 
 export default OtherProjects;

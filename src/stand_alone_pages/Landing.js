@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './css/Landing.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import background from '../img/eba_bg.png';
+import Markdown from 'markdown-to-jsx';
+import aboutMarkdown from './md/About.md';
+
 
 function Landing() {
 
@@ -26,8 +29,34 @@ function Landing() {
     window.addEventListener('load', handleResize);
 
     return (
-        <div className='row' id='row'>
-            <img src={background} alt={img.alt}/>
+        <div>
+            <div className='row' id='row'>
+                <img src={background} alt={img.alt}/>
+            </div>
+            <div>
+                <MarkdownRender />
+            </div>
+        </div>
+    );
+}
+
+function MarkdownRender () {
+    const [content, setContent] = useState({md: ""});
+
+    useEffect(() =>{
+        fetch(aboutMarkdown)
+            .then((res) => res.text())
+            .then((md) => {
+                setContent({md})
+            })
+            .catch((err) => {
+                console.log(err)
+            });
+    });
+
+    return (
+        <div>
+            <Markdown children={content.md}/>
         </div>
     );
 }

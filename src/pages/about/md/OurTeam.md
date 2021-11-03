@@ -51,4 +51,6 @@ Our projects, faculty and students have received funding awards and stipends fro
 - [The American Philosophical Society](https://www.amphilsoc.org/)
 - [University of Washington Undergraduate Research Program](http://www.washington.edu/undergradresearch/students/funding/)
 - [Mary Gates Research Scholarships](http://expd.uw.edu/mge/apply/research/)
-- [University of Washington McNair Program](http://depts.washington.edu/uwmcnair/)Thanks also to individual UW Departments who have given several departmental awards to our interns.
+  - [University of Washington McNair Program](http://depts.washington.edu/uwmcnair/)
+
+Thanks also to individual UW Departments who have given several departmental awards to our interns.

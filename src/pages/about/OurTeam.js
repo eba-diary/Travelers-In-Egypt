@@ -5,14 +5,14 @@ import ourTeamMarkdown from './md/OurTeam.md';
 function OurTeam() {
     let pageContent = 
         <div>
-            <PageText />
+            <MarkdownRender />
         </div>;
 
     return(pageContent);
 }
 
-function PageText() {
-    let [content, setContent] = useState({md: ""});
+function MarkdownRender() {
+    const [content, setContent] = useState({md: ""});
 
     useEffect(() => {
         fetch(ourTeamMarkdown)
@@ -22,13 +22,13 @@ function PageText() {
             })
             .catch((err) => {
                 console.log(err)
-            })
+            });
     }, []);
     return (
         <div>
-            <Markdown children={content.md}/>
+            <Markdown children={content.md} />
         </div>
-    )
+    );
 }
 
 export default OurTeam;

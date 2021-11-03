@@ -2,7 +2,7 @@ import './css/App.css';
 import {Route, Switch, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
 import navBarList from './navbar.json';
-import { Collapse,Navbar, NavbarToggler, NavbarBrand, Nav, 
+import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, 
   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } 
 from 'reactstrap';
 

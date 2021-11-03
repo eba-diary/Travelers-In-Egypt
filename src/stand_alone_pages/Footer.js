@@ -19,17 +19,16 @@ function Footer() {
                         <ul>
                             <div className='row'>
                                 <div className='col-12 col-sm-3'>
-                                    <a href='/'>Credits</a>
+                                    <a href='/' className='footer-link'>Credits</a>
                                 </div>
                                 <div className='col-12 col-sm-3'>
-                                    <a href='/'>Donate</a>
+                                    <a href='/' className='footer-link'>Donate</a>
                                 </div>
                                 <div className='col-12 col-sm-3'>
-                                <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/'>License</a>
-
+                                    <a href='https://creativecommons.org/licenses/by-nc-sa/4.0/' className='footer-link'>License</a>
                                 </div>
                                 <div className='col-12 col-sm-3'>
-                                    <a href='/'>Sitemap</a>
+                                    <a href='/' className='footer-link'>Sitemap</a>
                                 </div>                            
                             </div>
                         </ul>

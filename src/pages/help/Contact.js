@@ -3,6 +3,19 @@ import './css/Contact.css';
 import 'firebase/database';
 import emailjs from 'emailjs-com';
 
+const form = [
+    { 
+        title: "Name",
+        type: "text",
+        name: "name"
+    }, 
+    {
+        title: "Email",
+        type: "email",
+        name: "email"
+    }, 
+];
+
 function Contact() {
 
     return (
@@ -55,28 +68,23 @@ function Form() {
                 <div className="sent-error">Error occured. Try again later.</div>
 
                 <div className="row">
-                    <div className="col-12">
-                        <div className="row">
-                            <div className="col-12">
-                                <label className="form-label">Name</label>
-                            </div>
-                            <div className="col-12">
-                                <input className="input" type="text" name="name" />
-                            </div>
-                        </div>
-                    </div>
 
-                    <div className="col-12">
-                        <div className="row">
-                            <div className="col-12">
-                                <label className="form-label">Email</label>
-                            </div>
-                            <div className="col-12">
-                                <input className="input" type="email" name="email" />
-                            </div>
-                        </div>
-                    </div>
-                    
+                    {
+                        form.map((input) => {
+                            let fields = 
+                                <div className="col-12">
+                                    <div className="row">
+                                        <div className="col-12">
+                                            <label className="form-label">{input.title}</label>
+                                        </div>
+                                        <div className="col-12">
+                                            <input className="input" type={input.type} name={input.name}/>
+                                        </div>
+                                    </div>
+                                </div>;
+                            return fields;
+                        })
+                    }
                     <div className="col-12">
                         <div className="row">
                             <div className="col-12">
