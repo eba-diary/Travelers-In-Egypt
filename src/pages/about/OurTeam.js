@@ -87,14 +87,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler1"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2020-2021
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler1">
                                 <Card>
                                 <CardBody>
                                 <p><b>Reader development &amp; tagging management</b>: Emma Fritzberg</p>
@@ -120,14 +120,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler2"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2019-2020
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler2">
                                 <Card>
                                 <CardBody>
                                 <p><b>Marketing/Social Media</b>: Jasmine Jones, Padma Gundapaneni, Bingyan Wang, Xiru Jian, Shannon Chung, Claire Gui, Ye Ram Lee, Amanda Fung. Thanks to Gabrielle Wilson for leading this group.
@@ -147,14 +147,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler3"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2018-2019
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler3">
                                 <Card>
                                 <CardBody>
                                 <p>Connor Raftery, Aly Brady, Kanishka Reddy, Calvin Scott Paulson, Rebecca Vance, David Darnall, Steve Thatcher</p>
@@ -177,14 +177,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler4"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2017-2018
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler4">
                                 <Card>
                                 <CardBody>
                                 <p>Rebecca Vance, Sesha Machiraju, Vanessa Lin, Connor Raftery, Aly Brady</p>
@@ -199,14 +199,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler5"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2016-2017
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler5">
                                 <Card>
                                 <CardBody>
                                 <p>Rebecca Vance, Janice Garr</p>
@@ -224,14 +224,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler6"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2015-2016
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler6">
                                 <Card>
                                 <CardBody>
                                 <p>Jiafei Li, Chelsea Cooper, Janice Garr, Nitya Sampath, Jennifer Charoni, Karena Vongampai, Christina Seang, Claire Summa, Shirley Chen. IT Support: Brad Holland, Chris Sumption</p>
@@ -250,14 +250,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler7"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2014-2015
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler7">
                                 <Card>
                                 <CardBody>
                                 <p>Allison Skinner, Sarah Johnson, Chelsea Cooper, Georgia Gilbert, Janice Garr, Chris Sumption, Gabby Wilson.</p>
@@ -272,14 +272,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler8"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2013-2014
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler8">
                                 <Card>
                                 <CardBody>
                                 <p>Megan Rowland (Project Manager), Janice Garr, Chelsea Cooper, Allison Skinner, Sarah Faigin, Ema Grey, Tessa Carter, Sarah Johnson, Gabby Wilson.</p>
@@ -294,14 +294,14 @@ function OurTeam() {
                             <div>
                             <Button
                                 color="primary" outline
-                                id="toggler"
+                                id="toggler9"
                                 style={{
                                 marginBottom: '1rem'
                                 }}
                             >
                                 2012-2013
                             </Button>
-                            <UncontrolledCollapse toggler="#toggler">
+                            <UncontrolledCollapse toggler="#toggler9">
                                 <Card>
                                 <CardBody>
                                 <p>Megan Rowland, Tessa Carter, Janice Garr, Ariella Fish, Rachel Schlotfeldt.</p>
