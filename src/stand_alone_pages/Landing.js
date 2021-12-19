@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './css/Landing.css';
 import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import placeholder from '../img/placeholder.png';
 import background from '../img/eba_bg.png';
-import Markdown from 'markdown-to-jsx';
-import aboutMarkdown from './md/About.md';
 import { CardImg, Col, Row, Card, CardTitle, CardText, CardBody, CardSubtitle, Button } from 'reactstrap';
+import projGoalsJSON from './ProjGoals.json';
 
 
 function Landing() {
@@ -16,8 +15,9 @@ function Landing() {
 
     // This element is for mobile demo and will be changed later.
     let mobile = document.createElement('p');
-    let textNode = document.createTextNode('mobile test');
-    mobile.appendChild(textNode);
+    let textNode = document.createTextNode('Travelers In Egypt');
+    mobile.appendChild(textNode);   
+
 
     // Changes elements depending on screen size.
     const handleResize = () => {
@@ -69,50 +69,8 @@ function Landing() {
                     </Col>
                 </Row>
             </div>
-            <div className="container our-goals">
-                <div className="row">
-                    <div className="col">
-                        <h2 className='text-center'>Our Goals</h2>
-                    </div>
-                </div>
-                <Row>
-                    <Col sm='4'>
-                        <Card body>
-                            <CardTitle>
-                                <h3>Preserve</h3>
-                            </CardTitle>
-                            <CardText>
-                                To preserve and make freely available lesser known or 
-                                understudied literary and historical texts from the Near 
-                                East.
-                            </CardText>
-                        </Card>
-                    </Col>
-                    <Col sm='4'>
-                        <Card body>
-                            <CardTitle>
-                                <h3>Research</h3>
-                            </CardTitle>
-                            <CardText>
-                                To develop a new hybrid model of rigorous training in the core 
-                                skills associated with historical and literary research, coupled
-                                with essential competencies in computer literacy.
-                            </CardText>
-                        </Card>
-                    </Col>
-                    <Col sm='4'>
-                        <Card body>
-                            <CardTitle>
-                                <h3>Develop</h3>
-                            </CardTitle>
-                            <CardText>
-                                To further the advancement of digital humanities as a field in order 
-                                to foster much needed technical skills in graduate and undergraduate 
-                                humanities students.
-                            </CardText>
-                        </Card>
-                    </Col>
-                </Row>
+            <div>
+                <GoalCards />
             </div>
             <div className="container card-3">
                 <Row>
@@ -151,6 +109,37 @@ function Landing() {
                     </Col>
                 </Row>
             </div>
+        </div>
+    );
+}
+
+function GoalCards() {
+
+    let cards = projGoalsJSON.map((content) => {
+        let goalCard = 
+            <Col sm='4'>
+                <Card body style={{border: "none"}}>
+                    <CardTitle>
+                        <h3>{content.title}</h3>
+                    </CardTitle>
+                    <CardText>
+                        {content.text}
+                    </CardText>
+                </Card>
+            </Col>;
+        return goalCard;
+    })
+
+    return (
+        <div className="container our-goals">
+            <div className="row">
+                <div className="col">
+                    <h2 className='text-center'>Our Goals</h2>
+                </div>
+            </div>
+            <Row>
+                {cards}
+            </Row>
         </div>
     );
 }

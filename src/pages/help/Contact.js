@@ -1,5 +1,5 @@
 import './css/Contact.css';
-// import firebase from 'firebase/app';
+import React from 'react';
 import 'firebase/database';
 import emailjs from 'emailjs-com';
 
