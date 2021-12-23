@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/Landing.css';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import placeholder from '../img/placeholder.png';
 import background from '../img/eba_bg.png';
 import { CardImg, Col, Row, Card, CardTitle, CardText, CardBody, CardSubtitle, Button } from 'reactstrap';

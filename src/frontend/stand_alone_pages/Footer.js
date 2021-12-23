@@ -1,7 +1,7 @@
 import React from 'react';
 import { SocialIcon } from 'react-social-icons';
 import './css/Footer.css';
-import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 function Footer() {
 

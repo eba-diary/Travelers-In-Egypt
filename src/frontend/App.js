@@ -2,6 +2,7 @@ import './css/App.css';
 import {Route, Switch, Redirect } from 'react-router-dom';
 import React, { useState } from 'react';
 import navBarList from './navbar.json';
+import logo from './img/WebLogo.png';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, 
   UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } 
 from 'reactstrap';
@@ -70,9 +71,7 @@ function TopLevelNav() {
 	  <Navbar style={{backgroundColor: '#DED7B9',   
 		  padding: '10px'}} light expand='md'>
 		<NavbarBrand href='/'>
-		  <div className='eba-font'>
-			Travelers <br/> In Egypt
-		  </div>
+			<img className="web-logo" src={logo} alt="Travelers in Egypt logo"/>
 		</NavbarBrand>
 		<NavbarToggler onClick={toggle} />
 		<Collapse isOpen={isOpen} navbar>
