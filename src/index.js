@@ -13,14 +13,22 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDCt4Q0r7EVr0wTJ2YJD8hhIGvFwAfafPs",
-  authDomain: "travelers-in-egypt.firebaseapp.com",
-  projectId: "travelers-in-egypt",
-  storageBucket: "travelers-in-egypt.appspot.com",
-  messagingSenderId: "412715531296",
-  appId: "1:412715531296:web:4f178d380b1d2756739045",
-  databaseURL: 'https://travelers-in-egypt-default-rtdb.firebaseio.com/',
-  measurementId: "G-K79SY9X8T3"
+  // apiKey: "AIzaSyDCt4Q0r7EVr0wTJ2YJD8hhIGvFwAfafPs",
+  // authDomain: "travelers-in-egypt.firebaseapp.com",
+  // projectId: "travelers-in-egypt",
+  // storageBucket: "travelers-in-egypt.appspot.com",
+  // messagingSenderId: "412715531296",
+  // appId: "1:412715531296:web:4f178d380b1d2756739045",
+  // databaseURL: 'https://travelers-in-egypt-default-rtdb.firebaseio.com/',
+  // measurementId: "G-K79SY9X8T3"
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJ_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_MSID,
+  appId: process.env.REACT_APP_AID,
+  databaseURL: process.env.REACT_APP_DB_URL,
+  measurementId: process.env.REACT_APP_MEASURE_ID
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);

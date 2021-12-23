@@ -101,7 +101,7 @@ function Landing() {
                                 of discipline formation, gendered labor, and social and 
                                 intellectual networks in Egypt during this period.
                             </CardText>
-                            <Button>
+                            <Button onClick={() =>  window.location.href="/OurTeam"}>
                                 View Team
                             </Button>
                             </CardBody>
