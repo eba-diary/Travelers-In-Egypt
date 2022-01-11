@@ -1,3 +1,5 @@
+import React from 'react';
+
 function BoatDB() {
     let test = 
         <div>

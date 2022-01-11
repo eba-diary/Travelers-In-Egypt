@@ -1,3 +1,5 @@
+import React from 'react';
+
 function ConnectingInfo() {
     let test = 
         <div>
