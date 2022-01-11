@@ -1,19 +1,12 @@
 // import Markdown from 'markdown-to-jsx';
 import React, { useEffect, useState } from 'react';
 import './css/OurTeam.css';
-// import placeholder from '../img/placeholder.png';
+import placeholder from '../../img/placeholder.png';
 // import ourTeamMarkdown from './md/OurTeam.md';
 
 import { CardImg, Col, Row, Card, CardTitle, CardText, CardBody, CardSubtitle, Button, UncontrolledCollapse } from 'reactstrap';
 
 function OurTeam() {
-    // let pageContent =
-    //     <div>
-    //         <MarkdownRender />
-    //     </div>;
-
-    // return(pageContent);
-    // Changes elements depending on screen size.
     return (
         <div>
             <div className="container">
@@ -24,6 +17,7 @@ function OurTeam() {
                             Our Team
                         </CardTitle>
                         <CardText>
+                            <p></p>
                             <p className='team-paragraph'>
                             Undergraduate student interns have played an integral role in the process of transcription, encoding, historical research and data visualization, leading to the establishment of <a href="http://www.newbookdigitaltexts.org/">Newbook Digital Texts</a>, an online publishing house offering a flourishing student internship program in digital humanities. Graduate students have completed capstone projects on various aspects of this project, including web design, metadata, mapping and visualization, and the development of text markup and analysis tools. All contributors and supporters are <a href="http://www.emmabandrews.org/project/about">credited here</a>.
                         </p>
@@ -42,9 +36,11 @@ function OurTeam() {
                             Project Director
                         </CardTitle>
                         <CardSubtitle className="mb-2 text-muted" tag="h5">
+                            <p></p>
                         Sarah L. Ketchley, Ph.D : Emma B. Andrews Project Director/Newbook Digital Texts Co-Director
                         </CardSubtitle>
                         <CardText>
+                            <p></p>
                             <p className='director-paragraph'>
                             Sarah is an Affiliate Instructor in Near Eastern Languages and Civilization at the University of Washington, an Adjunct Associate Professor at University of Maryland University College, and a Digital Humanities Specialist at Gale. She trained as an Egyptologist, specializing in art history in the first millennium. She has taught courses Egyptian history and archeology at the University of Birmingham, UK, and <a href="http://www.newbookdigitaltexts.org/education/">teaches digital humanities</a> at the University of Washington.</p>
                             <p className="director-paragraph">
@@ -71,7 +67,7 @@ function OurTeam() {
                                 Overview
                             </CardTitle>
                             <CardText>
-                            Each year we have been fortunate to have a dedicated group of student interns working with us, who are valued and equal partners in our research endeavors. The scope of the tasks they have worked on includes transcribing, editing, conducting historical research and managing technical aspects of the project.
+                            <p className="student-paragraph">Each year we have been fortunate to have a dedicated group of student interns working with us, who are valued and equal partners in our research endeavors. The scope of the tasks they have worked on includes transcribing, editing, conducting historical research and managing technical aspects of the project.</p>
                             </CardText>
                             </CardBody>
                         </Card>
@@ -322,7 +318,7 @@ function OurTeam() {
                         </CardTitle>
                         <CardText>
                             <p className='funding-paragraph'>
-                            Our projects, faculty and students have received funding awards and stipends from the following organizations for project expenses, training and travel:</p>
+                            Our projects, faculty and students have received funding awards and stipends from the following organizations for project expenses, training and travel:
                             <p><a href="https://www.neh.gov/">The National Endowment for the Humanities</a></p>
                             <p><a href="https://simpsoncenter.org/">The Simpson Center for the Humanities</a></p>
                             <p><a href="http://dhsi.org/">Digital Humanities Summer Institute</a></p>
@@ -332,6 +328,7 @@ function OurTeam() {
                             <p><a href="http://expd.uw.edu/mge/apply/research/">Mary Gates Research Scholarships</a></p>
                             <p><a href="http://depts.washington.edu/uwmcnair/">University of Washington McNair Program</a></p>
                             <p>Thanks also to individual UW Departments who have given several departmental awards to our interns.</p>
+                            </p>
                         </CardText>
                     </Card>
                 </Col>
@@ -340,25 +337,5 @@ function OurTeam() {
     </div>
     );
 }
-
-// function MarkdownRender() {
-//     const [content, setContent] = useState({md: ""});
-
-//     useEffect(() => {
-//         fetch(ourTeamMarkdown)
-//             .then((res) => res.text())
-//             .then((md) => {
-//                 setContent({md})
-//             })
-//             .catch((err) => {
-//                 console.log(err)
-//             });
-//     }, []);
-//     return (
-//         <div>
-//             <Markdown children={content.md} />
-//         </div>
-//     );
-// }
 
 export default OurTeam;
