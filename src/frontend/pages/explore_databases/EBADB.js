@@ -1,9 +1,10 @@
 import React from 'react';
 
 function EBADB() {
+    window.location.replace("http://www.emmabandrews.org/project/");
     let test = 
         <div>
-            Our Emma B. Andrews Database page is currently under construction!
+            Loading...
         </div>;
 
     return(test);
