@@ -1,0 +1,4 @@
+{
+  "port": 3000,
+  "db_filename": "./Travelogues-db-conversion/travelogues.sqlite3"
+}
