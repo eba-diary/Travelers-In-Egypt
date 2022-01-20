@@ -1,7 +1,9 @@
 import React from 'react';
 
 function NileDB() {
-    let test = 
+    // window.open("http://www.emmabandrews.org/project/");
+    window.location.replace("http://www.emmabandrews.org/project/");
+    let test =
         <div>
             Our Nile Travelogues Database page is currently under construction!
         </div>;
