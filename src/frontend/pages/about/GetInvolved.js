@@ -1,14 +1,17 @@
 import React from 'react';
 import donationBackdrop from '../../img/imagePlaceholderRect.png';
+import "./css/GetInvolved.css"
 import { Button, CardImgOverlay, CardSubtitle, Col, Card, CardImg, CardTitle } from 'reactstrap';
 
 function GetInvolved() {
     let pageContent = 
-        <div className="row justify-content-center">
-            Our ongoing work relies on the generosity of our supporters. 
-            If you are interested in making a donation, 
-            <a href="https://nelc.washington.edu/nelc-digital-support-our-work">you can do so here</a>. 
-            Your investment in our work goes a long way! Thank you.
+        <div className="row justify-content-left">
+            <div className="col-6">
+                Our ongoing work relies on the generosity of our supporters. 
+                If you are interested in making a donation, 
+                you can do so <a href="https://nelc.washington.edu/nelc-digital-support-our-work">here</a>.
+                Your investment in our work goes a long way! Thank you.
+            </div>
         </div>;
 
     return(
@@ -29,15 +32,20 @@ function DonationBackdrop() {
                         src={donationBackdrop}
                     />
                     <CardImgOverlay>
-                        <CardTitle>
-
+                        <CardTitle style={{color: "black", fontWeight: "750"}}>
                             Get Invovled with the Department of
                             Near Eastern Languages and Civilizations
                             <CardSubtitle>
                                 Supporting Text
                             </CardSubtitle>
                         </CardTitle>
-                    <Button>Donate Now</Button>
+                    <Button>
+                        <a href="https://nelc.washington.edu/nelc-digital-support-our-work"
+                           className="get-involved-button"
+                        >
+                            Donate Now
+                        </a>
+                    </Button>
                     </CardImgOverlay>
                 </Card>
             </Col>
