@@ -63,4 +63,4 @@ def submit_text():
 
 
 if __name__ == '__main__':
-    WSGIServer(('0.0.0.0', 3000), app).serve_forever()
+    WSGIServer(('0.0.0.0', 8080), app).serve_forever()
