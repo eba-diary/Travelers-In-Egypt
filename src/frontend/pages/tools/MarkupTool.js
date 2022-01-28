@@ -1,6 +1,12 @@
 import React from 'react';
 
 function MarkupTool() {
+
+    // let markupFields = ["Title", "Author", "Editor", "Publisher", 
+    //     "Publisher Address", "Publication Date", "License",
+    //     "Source Description", "Project Description", "Your Text"
+    // ];
+
     let test = 
         <div>
             <div class="container">

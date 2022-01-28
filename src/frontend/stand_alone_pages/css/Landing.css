@@ -40,3 +40,45 @@ main {
     width: 100%;
     display: block;
 }
+
+.dark-title-button {
+    background: black;
+    height: 120px;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+    transition: 100ms linear all;
+}
+
+.dark-title-button > p {
+    display: none;
+}
+
+.dark-title-button-open {
+    height: 250px;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+    transition: 100ms linear all;
+}
+
+.dark-title-button-open > p {
+    display: block;
+    margin: 0px 5px;
+}
+
+.dark-title-button:hover {
+    cursor: pointer;
+}
+
+.arrow-white {
+    height: 35px;
+    transform: rotate(360deg);
+    transition: 175ms linear all;
+}
+
+.rotated {
+    transform: rotate(180deg);
+    transition: 175ms linear all;
+    margin-bottom: -70px;
+}

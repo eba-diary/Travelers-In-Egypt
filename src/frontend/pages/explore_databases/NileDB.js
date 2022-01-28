@@ -2,10 +2,10 @@ import React from 'react';
 
 function NileDB() {
     // window.open("http://www.emmabandrews.org/project/");
-    window.location.replace("http://www.emmabandrews.org/project/");
+    window.location.replace("https://travelogues.travelersinegypt.com/");
     let test =
         <div>
-            Our Nile Travelogues Database page is currently under construction!
+            Loading...
         </div>;
 
     return(test);

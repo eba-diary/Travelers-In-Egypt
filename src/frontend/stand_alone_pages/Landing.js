@@ -2,9 +2,12 @@ import React from 'react';
 import './css/Landing.css';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import placeholder from '../img/placeholder.png';
+import placeholder250 from '../img/placeholder-image-250.png';
+import arrows from '../img/goal_arrow_down.png';
 import background from '../img/eba_bg.png';
 import { CardImg, Col, Row, Card, CardTitle, CardText, CardBody, CardSubtitle, Button } from 'reactstrap';
 import projGoalsJSON from './ProjGoals.json';
+import { Collapse } from 'bootstrap';
 
 
 function Landing() {
@@ -23,8 +26,10 @@ function Landing() {
     const handleResize = () => {
         let length = window.innerWidth;
         let row = document.getElementById('row');
-        row.innerHTML = '';
-        length >= 458 ? row.appendChild(img) : row.appendChild(mobile);
+        if (row) {
+            row.innerHTML = "";
+            length >= 458 ? row.appendChild(img) : row.appendChild(mobile);
+        }
     }
 
     window.addEventListener('resize', handleResize);
@@ -80,12 +85,6 @@ function Landing() {
                             <CardTitle tag="h5">
                                 Purpose
                             </CardTitle>
-                            <CardSubtitle
-                                className="mb-2 text-muted"
-                                tag="h6"
-                            >
-                                More text
-                            </CardSubtitle>
                             <CardText>
                                 The scope of our archival material has expanded beyond the 
                                 Andrews Diaries to include diaries and letters written by 
@@ -114,21 +113,37 @@ function Landing() {
 }
 
 function GoalCards() {
-
+    
     let cards = projGoalsJSON.map((content) => {
         let goalCard = 
             <Col sm='4'>
                 <Card body style={{border: "none"}}>
-                    <CardTitle>
-                        <h3>{content.title}</h3>
-                    </CardTitle>
-                    <CardText>
-                        {content.text}
-                    </CardText>
+                    <CardBody>
+                        <CardImg alt="temporary placeholder" src={placeholder250} top width="100%"/>
+                        <div className="dark-title-button" id={content.id} key={content.id} onClick={() => { 
+                            let currentGoalBox = document.getElementById(content.id);
+                            let coressArrow = document.getElementById(content.children);
+                            if (currentGoalBox) {
+                                currentGoalBox.classList.toggle("dark-title-button-open");
+                            }
+                            if (coressArrow) {
+                                coressArrow.classList.toggle("rotated");
+                            }
+                        }}>
+                            <h3 className="goal-title-text">
+                                {content.title}
+                            </h3>
+                            <p className="goal-card-text">
+                               {content.text}
+                            </p>
+                            <img src={arrows} alt="arrow dropdown indicator" className="arrow-white" id={content.children}/>
+                        </div>
+                    </CardBody>
                 </Card>
             </Col>;
         return goalCard;
-    })
+    });
+
 
     return (
         <div className="container our-goals">
