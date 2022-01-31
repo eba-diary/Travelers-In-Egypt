@@ -10,7 +10,7 @@ from 'reactstrap';
 import { OurTeam, GetInvolved, OtherProjects,
   EmmaBAndrewsDatabase, NileDB, BoatDB,
   ConnectingInfo, MarkupTool, Contact, FAQ, 
-  SiteInstructions } 
+  SiteInstructions} 
 from './pages';
 import { Landing, Footer } from './stand_alone_pages';
 

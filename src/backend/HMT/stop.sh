@@ -1,1 +1,1 @@
-kill -9 $(lsof -i tcp:8080 -t)
+kill -9 $(lsof -i tcp:5000 -t)

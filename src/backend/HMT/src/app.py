@@ -1,11 +1,12 @@
 import re
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, Response
+from flask_cors import CORS
 from gevent.pywsgi import WSGIServer
 from ner.flair_ner import tag_entities
 from assemble_tei import create_header, create_xml, create_body
 
-app = Flask(__name__)
-
+app = Flask(__name__, static_folder='../../../build')
+cors = CORS(app, resources={'/*':{'origins': 'http://localhost:3000'}})
 
 @app.route('/')
 def index():
@@ -22,17 +23,18 @@ def output():
     return render_template('output.html')
 
 
-@app.route('/', methods=['POST'])
+@app.route('/HistoricalMarkupTool/output', methods=['POST'])
 def submit_text():
-    title = request.form['teiHeaderTitle']
-    author = request.form['teiHeaderAuthor']
-    editor = request.form['teiHeaderEditor']
-    publisher = request.form['teiHeaderPublisher']
-    publisher_address = request.form['teiHeaderPublisherAddress']
-    publication_date = request.form['teiHeaderPublicationDate']
-    license_desc = request.form['teiHeaderLicense']
-    project_description = request.form['teiHeaderProjectDescription']
-    source_description = request.form['teiHeaderSourceDescription']
+    data = request.json
+    title = data['teiHeaderTitle']
+    author = data['teiHeaderAuthor']
+    editor = data['teiHeaderEditor']
+    publisher = data['teiHeaderPublisher']
+    publisher_address = data['teiHeaderPublisherAddress']
+    publication_date = data['teiHeaderPublicationDate']
+    license_desc = data['teiHeaderLicense']
+    project_description = data['teiHeaderProjectDescription']
+    source_description = data['teiHeaderSourceDescription']
 
     project_description = re.sub('\n|\t\r|\r\n', ' ', project_description)
     project_description = re.sub(' +', ' ', project_description)
@@ -49,7 +51,7 @@ def submit_text():
                                publication_date, license_desc, project_description, source_description)
 
     # Create body
-    text = request.form['rawText']
+    text = data['rawText']
     text = re.sub('\n|\t\r|\r\n', ' ', text)
     text = re.sub(' +', ' ', text)
 
@@ -58,9 +60,11 @@ def submit_text():
 
     # Assemble document
     tei_document = create_xml(tei_header, tei_body).decode('unicode-escape')
-    return render_template('output.html',
-                           tei=tei_document)
+    return Response(tei_document, mimetype='text/plain')
+    # return render_template('output.html',
+                        #    tei=tei_document)
 
 
 if __name__ == '__main__':
-    WSGIServer(('0.0.0.0', 8080), app).serve_forever()
+    # WSGIServer(('0.0.0.0', 8080), app).serve_forever()
+    app.run(debug=True)

@@ -5,9 +5,8 @@ import placeholder from '../img/placeholder.png';
 import placeholder250 from '../img/placeholder-image-250.png';
 import arrows from '../img/goal_arrow_down.png';
 import background from '../img/eba_bg.png';
-import { CardImg, Col, Row, Card, CardTitle, CardText, CardBody, CardSubtitle, Button } from 'reactstrap';
+import { CardImg, Col, Row, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
 import projGoalsJSON from './ProjGoals.json';
-import { Collapse } from 'bootstrap';
 
 
 function Landing() {

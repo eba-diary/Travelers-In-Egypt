@@ -19,6 +19,7 @@ def create_header(title='', author='', editor='', publisher='', publisher_addres
     soup.find('fileDesc').append(soup.new_tag('titleStmt'))
     if title != '':
         soup.find('titleStmt').append(soup.new_tag('title'))
+        print(title)
         soup.title.string = title
     if author != '':
         soup.find('titleStmt').append(soup.new_tag('author'))
