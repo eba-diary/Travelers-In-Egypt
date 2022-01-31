@@ -1,8 +1,10 @@
 import React from 'react';
 import './css/Landing.css';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import placeholder from '../img/placeholder.png';
-import placeholder250 from '../img/placeholder-image-250.png';
+import aboutImage from '../img/aboutImage.jpeg';
+import goalCard1 from '../img/goalCard1.png';
+import goalCard2 from '../img/goalCard2.png';
+import goalCard3 from '../img/goalCard3.jpg';
 import arrows from '../img/goal_arrow_down.png';
 import background from '../img/eba_bg.png';
 import { CardImg, Col, Row, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
@@ -66,8 +68,8 @@ function Landing() {
                             <CardText></CardText>
                             <CardImg 
                                 alt='placeholder'
-                                src={placeholder}
-                                width='50%'
+                                src={aboutImage}
+                                
                             />
                         </Card>
                     </Col>
@@ -112,13 +114,15 @@ function Landing() {
 }
 
 function GoalCards() {
+    const imgArr = [goalCard1, goalCard2, goalCard3];
+    let index = 0;
     
     let cards = projGoalsJSON.map((content) => {
         let goalCard = 
             <Col sm='4'>
                 <Card body style={{border: "none"}}>
                     <CardBody>
-                        <CardImg alt="temporary placeholder" src={placeholder250} top width="100%"/>
+                        <CardImg alt="canva design" src={imgArr[index]} top width="100%"/>
                         <div className="dark-title-button" id={content.id} key={content.id} onClick={() => { 
                             let currentGoalBox = document.getElementById(content.id);
                             let coressArrow = document.getElementById(content.children);
@@ -140,6 +144,7 @@ function GoalCards() {
                     </CardBody>
                 </Card>
             </Col>;
+            index++;
         return goalCard;
     });
 
