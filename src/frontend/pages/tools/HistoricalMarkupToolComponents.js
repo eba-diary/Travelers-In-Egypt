@@ -65,7 +65,7 @@ class HistoricalMarkupToolForm extends React.Component {
                     <div className="row justify-content-center markup-tool-title">
                         Historical Markup Tool
                     </div>
-                    <form action='/HistoricalMarkupTool/output' onSubmit={this.handleSubmit}>
+                    <form action='/HistoricalMarkupTool' onSubmit={this.handleSubmit}>
                         <div className="form-group row">
                             <label className="col-sm-2">Title</label>
                             <div className="col-sm-5">
@@ -116,7 +116,7 @@ class HistoricalMarkupToolForm extends React.Component {
                         <div className="form-group row">
                             <label className="col-sm-2">Source Description <span className="badge badge-info">New</span></label>
                             <div className="col-sm-10">
-                                <textarea type="text" rows="2" cols="5" className="form-control"  name="teiHeaderSourceDescription"></textarea>
+                                <textarea type="text" rows="2" cols="5" className="form-control" name="teiHeaderSourceDescription"></textarea>
                             </div>
                         </div>
                         <div className="form-group row">
@@ -146,7 +146,6 @@ class HistoricalMarkupToolForm extends React.Component {
 
 class XmlOutputEditor extends React.Component {
     data = "";
-
     constructor(props) {
         super(props);
         this.data = props.data;
@@ -163,8 +162,13 @@ class XmlOutputEditor extends React.Component {
                 <p className="markup-output-title">
                     <em className='success'>Success!</em> Make any edits below and click download when you are satisfied with the output
                 </p>
-                <textarea classname="xml-output" name="output" id="output" cols="100" rows="20">
-                    {this.data}
+                <textarea className="xml-output" 
+                    defaultValue={this.data}
+                    name="output" 
+                    id="output" 
+                    cols="100" 
+                    rows="20" 
+                >
                 </textarea>
                 <div className="button-controls">
                     <div className="back-button">
@@ -241,10 +245,9 @@ class HistoricalMarkupToolComponents extends React.Component {
         }
 
         if (text) {
-            axios.post("/HistoricalMarkupTool/output", dataJson)
+            axios.post("/HistoricalMarkupTool", dataJson)
             .then((res) => {
                 this.setState({xmlData: res.data, displayXmlData: true});
-                console.log("state: " + this.state);
             }).catch((err) => {
                 console.log(err);
             });

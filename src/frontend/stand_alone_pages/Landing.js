@@ -101,8 +101,15 @@ function Landing() {
                                 of discipline formation, gendered labor, and social and 
                                 intellectual networks in Egypt during this period.
                             </CardText>
-                            <Button onClick={() =>  window.location.href="/OurTeam"}>
-                                View Team
+                            <Button 
+                                style={{
+                                    backgroundColor: "#DED7B9",
+                                }}
+                                onClick={() =>  window.location.href="/OurTeam"}
+                            >
+                                <div className="view-team-button">
+                                    View Team
+                                </div>
                             </Button>
                             </CardBody>
                         </Card>
@@ -119,7 +126,7 @@ function GoalCards() {
     
     let cards = projGoalsJSON.map((content) => {
         let goalCard = 
-            <Col sm='4'>
+            <Col sm='12' md='6' lg='4'>
                 <Card body style={{border: "none"}}>
                     <CardBody>
                         <CardImg alt="canva design" src={imgArr[index]} top width="100%"/>
@@ -139,7 +146,12 @@ function GoalCards() {
                             <p className="goal-card-text">
                                {content.text}
                             </p>
-                            <img src={arrows} alt="arrow dropdown indicator" className="arrow-white" id={content.children}/>
+                            <img 
+                                src={arrows} 
+                                alt="arrow dropdown indicator" 
+                                className="arrow-white" 
+                                id={content.children}
+                            />
                         </div>
                     </CardBody>
                 </Card>
@@ -156,9 +168,9 @@ function GoalCards() {
                     <h2 className='text-center'>Our Goals</h2>
                 </div>
             </div>
-            <Row>
+            <div className="row justify-content-center">
                 {cards}
-            </Row>
+            </div>
         </div>
     );
 }

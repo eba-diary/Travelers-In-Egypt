@@ -55,7 +55,7 @@ main {
 }
 
 .dark-title-button-open {
-    height: 250px;
+    height: 300px;
     text-align: center;
     color: white;
     padding-top: 20px;
@@ -64,7 +64,7 @@ main {
 
 .dark-title-button-open > p {
     display: block;
-    margin: 0px 5px;
+    margin: 0px 15px;
 }
 
 .dark-title-button:hover {
@@ -81,4 +81,12 @@ main {
     transform: rotate(180deg);
     transition: 175ms linear all;
     margin-bottom: -70px;
+}
+
+.view-team-button {
+    color: black;
+}
+
+.view-team-button:hover {
+    font-weight: 750;
 }

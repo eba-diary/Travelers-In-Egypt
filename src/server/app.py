@@ -8,22 +8,12 @@ from assemble_tei import create_header, create_xml, create_body
 app = Flask(__name__, static_folder='../../../build')
 cors = CORS(app, resources={'/*':{'origins': 'http://localhost:3000'}})
 
-@app.route('/')
-def index():
-    return render_template('markup.html')
-
-
 @app.route('/about')
 def about():
     return render_template('about.html')
 
 
-@app.route('/output')
-def output():
-    return render_template('output.html')
-
-
-@app.route('/HistoricalMarkupTool/output', methods=['POST'])
+@app.route('/HistoricalMarkupTool', methods=['POST'])
 def submit_text():
     data = request.json
     title = data['teiHeaderTitle']
