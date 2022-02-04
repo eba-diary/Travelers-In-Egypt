@@ -1,19 +1,16 @@
 import re
 from flask import Flask, request, render_template, Response
-from flask_cors import CORS
+from flask_cors import CORS, 
 from gevent.pywsgi import WSGIServer
 from ner.flair_ner import tag_entities
 from assemble_tei import create_header, create_xml, create_body
 
-app = Flask(__name__, static_folder='../../../build')
-cors = CORS(app, resources={'/*':{'origins': 'http://localhost:3000'}})
-
-@app.route('/about')
-def about():
-    return render_template('about.html')
+app = Flask(__name__, static_folder='../../build')
+CORS(app)
 
 
 @app.route('/HistoricalMarkupTool', methods=['POST'])
+@cross_origin
 def submit_text():
     data = request.json
     title = data['teiHeaderTitle']
@@ -57,4 +54,4 @@ def submit_text():
 
 if __name__ == '__main__':
     # WSGIServer(('0.0.0.0', 8080), app).serve_forever()
-    app.run(debug=True)
+    app.run()
