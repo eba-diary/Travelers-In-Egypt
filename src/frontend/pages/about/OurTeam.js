@@ -15,21 +15,19 @@ function OurTeam() {
                             </CardTitle>
                             <CardText>
                                 <p className='team-paragraph'>
-                                    Undergraduate student interns have played an 
-                                    integral role in the process of transcription, 
-                                    encoding, historical research and data 
-                                    visualization, leading to the establishment of 
-                                    <a href="http://www.newbookdigitaltexts.org/">
-                                        Newbook Digital Texts 
-                                    </a>, 
+                                    Undergraduate student interns have played an
+                                    integral role in the process of transcription,
+                                    encoding, historical research and data
+                                    visualization, leading to the establishment of <a href="http://www.newbookdigitaltexts.org/">
+                                        Newbook Digital Texts
+                                    </a>,
                                     an online publishing house offering a flourishing
-                                    student internship program in digital humanities. 
-                                    Graduate students have completed capstone projects 
-                                    on various aspects of this project, including web design, 
-                                    metadata, mapping and visualization, and the development 
-                                    of text markup and analysis tools. All contributors 
-                                    and supporters are 
-                                    <a href="http://www.emmabandrews.org/project/about">
+                                    student internship program in digital humanities.
+                                    Graduate students have completed capstone projects
+                                    on various aspects of this project, including web design,
+                                    metadata, mapping and visualization, and the development
+                                    of text markup and analysis tools. All contributors
+                                    and supporters are <a href="http://www.emmabandrews.org/project/about">
                                         credited here
                                     </a>.
                                 </p>
