@@ -1,6 +1,6 @@
 import React from 'react';
 import './css/Landing.css';
-import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import aboutImage from '../img/aboutImage.jpeg';
 import goalCard1 from '../img/goalCard1.png';
 import goalCard2 from '../img/goalCard2.png';
