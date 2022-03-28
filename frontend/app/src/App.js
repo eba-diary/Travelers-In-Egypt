@@ -33,8 +33,6 @@ function App() {
 
   pageJSON.pop();
 
-  // Reads URL and renders corresponding page.
-
   return (
 	<div>
 	  <header>
