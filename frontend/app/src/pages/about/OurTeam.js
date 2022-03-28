@@ -1,4 +1,5 @@
 import React from 'react';
+import OurTeamJson from './OurTeam.json'
 import './css/OurTeam.css';
 
 import { Col, Row, Card, CardTitle, CardText, CardBody, CardSubtitle, Button, UncontrolledCollapse } from 'reactstrap';
@@ -62,6 +63,37 @@ function OurTeam() {
                     </Col>
                 </Row>
             </div>
+
+
+            <div className="container">
+                <div className="row">
+                    <div className="col">
+                        <h2 className="text-center">
+                            Sutdent Contributors
+                        </h2>
+                    </div>
+                </div>
+                <div>
+                    <Row>
+                        <Col>
+                            <Card>
+                                <CardBody>
+                                    <CardTitle tag="h4">
+                                        Overview
+                                    </CardTitle>
+                                    <CardText>
+                                        Each year we have been fortunate to have a dedicated group of student interns working with us, who are valued and equal partners in our research endeavors. The scope of the tasks they have worked on includes transcribing, editing, conducting historical research and managing technical aspects of the project.
+                                    </CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>
+                    </Row>
+                </div>
+            </div>
+
+            {/* StudentContributors */}
+
+
             <div className="container student-team">
                 <div className="row">
                     <div className="col">
@@ -167,7 +199,7 @@ function OurTeam() {
                             </Card>
                         </Col>
                     </Row>
-                </div>
+            </div>
             <div className="container student-team">
                 <Row>
                     <Col sm='4'>
@@ -308,6 +340,13 @@ function OurTeam() {
                     </Col>
                 </Row>
             </div>
+
+
+
+
+
+
+
             <div className="container">
                 <Row >
                     <Col>
@@ -334,6 +373,22 @@ function OurTeam() {
             </div>
         </div>
     );
+}
+
+function StudentContributors() {
+    let container = <div className="container"></div>;
+    let studentCards = OurTeamJson.map((eachCard) => {
+        let eachAnnualCard = renderAnnualCard(eachCard, size=0, index=0, container)
+    })
+}
+
+function renderAnnualCard(props) {
+    if (props.size >= Object.keys(props.size).length) {
+        return props.container
+    } else {
+        let position = Object.keys(props.eachCard)[props.index]
+        props.container.innerHTML += props.eachCard(position)
+    }
 }
 
 export default OurTeam;
