@@ -1,5 +1,5 @@
 import React from 'react';
-import donationBackdrop from '../../img/imagePlaceholderRect.png';
+import donationBackdrop from '../../img/UndrawDonation.svg';
 import "./css/GetInvolved.css"
 import { Button, CardImgOverlay, CardSubtitle, Col, Card, CardImg, CardTitle } from 'reactstrap';
 
@@ -28,12 +28,12 @@ function DonationBackdrop() {
             <Col>
                 <Card inverse>
                     <CardImg
-                        alt="donation image placeholder"
+                        alt="donation image"
                         src={donationBackdrop}
                     />
                     <CardImgOverlay>
                         <CardTitle style={{color: "black", fontWeight: "750"}}>
-                            Get Invovled with the Department of
+                            Get Involved with the Department of
                             Near Eastern Languages and Civilizations
                             <CardSubtitle>
                                 Supporting Text
