@@ -63,8 +63,6 @@ function OurTeam() {
                     </Col>
                 </Row>
             </div>
-
-
             <div className="container">
                 <div className="row">
                     <div className="col">
@@ -90,263 +88,9 @@ function OurTeam() {
                     </Row>
                 </div>
             </div>
-
-            {/* StudentContributors */}
-
-
-            <div className="container student-team">
-                <div className="row">
-                    <div className="col">
-                        <h2 className='text-center'>
-                            Student Contributors
-                        </h2>
-                    </div>
-                </div>
-                <div>
-                    <Row>
-                        <Col>
-                            <Card>
-                                <CardBody>
-                                    <CardTitle tag="h4">
-                                        Overview
-                                    </CardTitle>
-                                    <CardText>
-                                        Each year we have been fortunate to have a dedicated group of student interns working with us, who are valued and equal partners in our research endeavors. The scope of the tasks they have worked on includes transcribing, editing, conducting historical research and managing technical aspects of the project.
-                                    </CardText>
-                                </CardBody>
-                            </Card>
-                        </Col>
-                    </Row>
-                </div>
-                    <Row>
-                        <Col sm='4'>
-                            <Card body>
-                                <div>
-                                    <Button
-                                        color="primary" outline
-                                        id="toggler1"
-                                        style={{
-                                        marginBottom: '1rem'
-                                        }}
-                                    >
-                                        2020-2021
-                                    </Button>
-                                    <UncontrolledCollapse toggler="#toggler1">
-                                        <Card>
-                                            <CardBody>
-                                                <p><b>Reader development &amp; tagging management</b>: Emma Fritzberg</p>
-                                                <p><b>Tagging</b>: Selma El-Badawi, Marshall Bender, Molly Taylor, Marianne Bautista, Hannah Burrows, Izzy Wiebe, Isabelle Schlegel, Thurston Duong, Olivia Hyre, Dhreeti Rathore, Benjamin Lewis</p>
-                                                <p><b>Biographies</b>: Jasmine Jones, Jasmine Choi, Samuel Roller, Iona Hillman, Avneet Dhaliwal, Anton Reicherter, Priya Hariharan, Avery Dahl</p>
-                                                <p><b>Social Media</b>: Priya Hariharan, Gabrielle Wilson</p>
-                                                <p><b>Travelers in Egypt travelogues</b>: Frederick Chan</p>
-                                                <p><b>Thomas Cook &amp; Son Passenger Cards</b>: Yanni Zhou</p>
-                                                <p><b>Web development</b>: Margaret Hsaio, Patrick Liu</p>
-                                                <p><b>Helen Winlock proofreading &amp; editing</b>: Laura Van Arsdel</p>
-                                            </CardBody>
-                                        </Card>
-                                    </UncontrolledCollapse>
-                                </div>
-                            </Card>
-                        </Col>
-                        <Col sm='4'>
-                            <Card body>
-                                <div>
-                                    <Button
-                                        color="primary" outline
-                                        id="toggler2"
-                                        style={{
-                                        marginBottom: '1rem'
-                                        }}
-                                    >
-                                        2019-2020
-                                    </Button>
-                                    <UncontrolledCollapse toggler="#toggler2">
-                                        <Card>
-                                            <CardBody>
-                                                <p><b>Marketing/Social Media</b>: Jasmine Jones, Padma Gundapaneni, Bingyan Wang, Xiru Jian, Shannon Chung, Claire Gui, Ye Ram Lee, Amanda Fung. Thanks to Gabrielle Wilson for leading this group.
-                                                </p>
-                                                <p><b>Helen Winlock transcriptions</b>: Calvin Scott Paulson</p>
-                                            </CardBody>
-                                        </Card>
-                                    </UncontrolledCollapse>
-                                </div>
-                            </Card>
-                        </Col>
-                        <Col sm='4'>
-                            <Card body>
-                                <div>
-                                    <Button
-                                        color="primary" outline
-                                        id="toggler3"
-                                        style={{
-                                        marginBottom: '1rem'
-                                        }}
-                                    >
-                                        2018-2019
-                                    </Button>
-                                    <UncontrolledCollapse toggler="#toggler3">
-                                        <Card>
-                                            <CardBody>
-                                                <p>Connor Raftery, Aly Brady, Kanishka Reddy, Calvin Scott Paulson, Rebecca Vance, David Darnall, Steve Thatcher</p>
-                                                <p><b>MLIS Capstone</b>: Riko Fluchel (metadata), Erika Bailey (website)</p>
-                                                <p><b>CSE 512 Data Visualization Capstone</b>: Hannah Twigg-Smith, Benjamin Ferleger, Katina Papadakis, Yu-Tang Peng</p>
-                                                <p><b>Historical Markup Tool</b>: Audrey Holmes</p>
-                                                <p><b>Theodore Davis's Will &amp; Database</b>: Rebecca Vance</p>
-                                            </CardBody>
-                                        </Card>
-                                    </UncontrolledCollapse>
-                                </div>
-                            </Card>
-                        </Col>
-                    </Row>
+            <div>
+                <StudentContributors/>
             </div>
-            <div className="container student-team">
-                <Row>
-                    <Col sm='4'>
-                        <Card body>
-                                <div>
-                                    <Button
-                                        color="primary" outline
-                                        id="toggler4"
-                                        style={{
-                                        marginBottom: '1rem'
-                                        }}
-                                    >
-                                        2017-2018
-                                    </Button>
-                                    <UncontrolledCollapse toggler="#toggler4">
-                                        <Card>
-                                            <CardBody>
-                                                <p>Rebecca Vance, Sesha Machiraju, Vanessa Lin, Connor Raftery, Aly Brady</p>
-                                            </CardBody>
-                                        </Card>
-                                    </UncontrolledCollapse>
-                                </div>
-                        </Card>
-                    </Col>
-                    <Col sm='4'>
-                        <Card body>
-                            <div>
-                                <Button
-                                    color="primary" outline
-                                    id="toggler5"
-                                    style={{
-                                    marginBottom: '1rem'
-                                    }}
-                                >
-                                    2016-2017
-                                </Button>
-                                <UncontrolledCollapse toggler="#toggler5">
-                                    <Card>
-                                        <CardBody>
-                                            <p>Rebecca Vance, Janice Garr</p>
-                                        </CardBody>
-                                    </Card>
-                                </UncontrolledCollapse>
-                            </div>
-                        </Card>
-                    </Col>
-                    <Col sm='4'>
-                        <Card body>
-                            <div>
-                                <Button
-                                    color="primary" outline
-                                    id="toggler6"
-                                    style={{
-                                    marginBottom: '1rem'
-                                    }}
-                                >
-                                    2015-2016
-                                </Button>
-                                <UncontrolledCollapse toggler="#toggler6">
-                                    <Card>
-                                    <CardBody>
-                                    <p>Jiafei Li, Chelsea Cooper, Janice Garr, Nitya Sampath, Jennifer Charoni, Karena Vongampai, Christina Seang, Claire Summa, Shirley Chen. IT Support: Brad Holland, Chris Sumption</p>
-                                    </CardBody>
-                                    </Card>
-                                </UncontrolledCollapse>
-                            </div>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-            <div className="container student-team">
-                <Row>
-                    <Col sm='4'>
-                        <Card body>
-                            <div>
-                                <Button
-                                    color="primary" outline
-                                    id="toggler7"
-                                    style={{
-                                    marginBottom: '1rem'
-                                    }}
-                                >
-                                    2014-2015
-                                </Button>
-                                <UncontrolledCollapse toggler="#toggler7">
-                                    <Card>
-                                        <CardBody>
-                                            <p>Allison Skinner, Sarah Johnson, Chelsea Cooper, Georgia Gilbert, Janice Garr, Chris Sumption, Gabby Wilson.</p>
-                                        </CardBody>
-                                    </Card>
-                                </UncontrolledCollapse>
-                            </div>
-                        </Card>
-                    </Col>
-                    <Col sm='4'>
-                        <Card body>
-                            <div>
-                                <Button
-                                    color="primary" outline
-                                    id="toggler8"
-                                    style={{
-                                    marginBottom: '1rem'
-                                    }}
-                                >
-                                    2013-2014
-                                </Button>
-                                <UncontrolledCollapse toggler="#toggler8">
-                                    <Card>
-                                        <CardBody>
-                                            <p>Megan Rowland (Project Manager), Janice Garr, Chelsea Cooper, Allison Skinner, Sarah Faigin, Ema Grey, Tessa Carter, Sarah Johnson, Gabby Wilson.</p>
-                                        </CardBody>
-                                    </Card>
-                                </UncontrolledCollapse>
-                            </div>
-                        </Card>
-                    </Col>
-                    <Col sm='4'>
-                        <Card body>
-                            <div>
-                                <Button
-                                    color="primary" outline
-                                    id="toggler9"
-                                    style={{
-                                    marginBottom: '1rem'
-                                    }}
-                                >
-                                    2012-2013
-                                </Button>
-                                <UncontrolledCollapse toggler="#toggler9">
-                                    <Card>
-                                        <CardBody>
-                                            <p>Megan Rowland, Tessa Carter, Janice Garr, Ariella Fish, Rachel Schlotfeldt.</p>
-                                        </CardBody>
-                                    </Card>
-                                </UncontrolledCollapse>
-                            </div>
-                        </Card>
-                    </Col>
-                </Row>
-            </div>
-
-
-
-
-
-
-
             <div className="container">
                 <Row >
                     <Col>
@@ -376,19 +120,47 @@ function OurTeam() {
 }
 
 function StudentContributors() {
-    let container = <div className="container"></div>;
+    let toggler = "toggler";
+    let togglerIndex = -1;
     let studentCards = OurTeamJson.map((eachCard) => {
-        let eachAnnualCard = renderAnnualCard(eachCard, size=0, index=0, container)
-    })
-}
-
-function renderAnnualCard(props) {
-    if (props.size >= Object.keys(props.size).length) {
-        return props.container
-    } else {
-        let position = Object.keys(props.eachCard)[props.index]
-        props.container.innerHTML += props.eachCard(position)
-    }
+        let eachAnnualCard = Object.keys(eachCard).map((details) => {
+            let eachDetail = <p>{eachCard[details]}</p>
+            return(eachDetail);
+                
+        });
+        togglerIndex++;
+        return(
+            <div className="col-4">
+                <Card body> 
+                    <div>
+                        <Button
+                                color="primary" outline
+                                id={toggler + togglerIndex}
+                                style={{
+                                marginBottom: '1rem'
+                                }}
+                            >
+                                {eachCard.year}
+                            </Button>
+                            <UncontrolledCollapse toggler={toggler + togglerIndex}>
+                                <Card>
+                                    <CardBody>
+                                        {eachAnnualCard}
+                                    </CardBody>
+                                </Card>
+                            </UncontrolledCollapse>
+                    </div>
+                </Card>
+            </div>
+        );
+    });
+    return(
+        <div className="container">
+            <div className="row">
+                {studentCards}
+            </div>
+        </div>
+    );
 }
 
 export default OurTeam;
