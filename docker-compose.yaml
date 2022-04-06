@@ -3,8 +3,8 @@ version: "3.8"
 services:
   frontend:
     build: "./frontend"
-    container_name: tei_frontend_c
+    container_name: tei_frontend_ca
     ports:
       - "3000:3000"
     volumes:
-      - ./frontend/app:/app
+      - ./frontend/app:/app_docker
