@@ -8,16 +8,16 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav,
 from 'reactstrap';
 
 import { OurTeam, GetInvolved, OtherProjects,
-  EmmaBAndrewsDatabase, NileDB, BoatDB,
-  ConnectingInfo, MarkupTool, Contact, FAQ, 
-  SiteInstructions} 
+  EmmaBAndrewsDatabase, NileDB, BoatDB, 
+  LMLExhibit, TMDExcavations, SocialNetwork, 
+  MarkupTool, Contact, FAQ, SiteInstructions} 
 from './pages';
 import { Landing, Footer } from './stand_alone_pages';
 
 const PAGES = [OurTeam, GetInvolved, OtherProjects,
   EmmaBAndrewsDatabase, NileDB, BoatDB,
-  ConnectingInfo, MarkupTool, SiteInstructions, 
-  FAQ, Contact
+  LMLExhibit, TMDExcavations, SocialNetwork, 
+  MarkupTool, SiteInstructions, FAQ, Contact
 ];
 
 function App() {
