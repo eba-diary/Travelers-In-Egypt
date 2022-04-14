@@ -1,6 +1,6 @@
 import React, {Component } from 'react';
-import { CardTitle, CardBody, Row, Col, Card } from 'reactstrap';
-import { Dropdown } from 'semantic-ui-react'
+// import { CardTitle, CardBody, Row, Col, Card } from 'reactstrap';
+import { Dropdown, Container, Header } from 'semantic-ui-react'
 import './css/FAQ.css';
 
  const options = [
@@ -17,6 +17,7 @@ const updatePage = (value) => {
             div.style.display = "none";
         }
     });
+    console.log("value:" + value);
     let curr = document.querySelector(".val_" + value + "_div");
     curr.style.display = "block";
 }
@@ -33,48 +34,26 @@ class FAQHelper extends Component {
     render() {
         const { value } = this.state;
         let test =
-            <div>
-                <div className="container">
-                    <Row>
-                        <Col>
-                            <Card>
-                                <CardTitle tag="h2" className="text-center">How can we help?</CardTitle>
-                                <Dropdown
-                                    onChange={this.handleChange}
-                                    options={options}
-                                    placeholder='Search a category'
-                                    selection
-                                    value={value}
-                                />
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <div className='val_1_div'>
-                            <Card>
-                                <CardTitle>Question 1</CardTitle>
-                                <CardBody>This is some text within a card body.</CardBody>
-                            </Card>
-                        </div>
-                    </Row>
-                    <Row>
-                        <div className='val_2_div'>
-                            <Card>
-                                <CardTitle>Question 2</CardTitle>
-                                <CardBody>This is some text within a card body.</CardBody>
-                            </Card>
-                        </div>
-                    </Row>
-                    <Row>
-                        <div className='val_3_div'>
-                            <Card>
-                                <CardTitle>Question 3</CardTitle>
-                                <CardBody>This is some text within a card body.</CardBody>
-                            </Card>
-                        </div>
-                    </Row>
-                </div>
-            </div>;
+                <Container className="container">
+                    <Header tag="h2" className="text-center">How can we help?</Header>
+                    <Dropdown
+                        onChange={this.handleChange}
+                        options={options}
+                        fluid
+                        placeholder='Search a category'
+                        selection
+                        value={value}
+                    />
+                    <Container className='val_1_div'>
+                            Question 1
+                    </Container>
+                    <Container className='val_2_div'>
+                            Question 2
+                    </Container>
+                    <Container className='val_3_div'>
+                        Question 3
+                    </Container>
+            </Container>;
 
     return(test);
     }
