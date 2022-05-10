@@ -1,4 +1,5 @@
 import LMLExhibit from './connecting_info/LMLExhibit';
+import 'semantic-ui-css/semantic.min.css'
 
 export { default as OurTeam } from './about/OurTeam';
 export { default as GetInvolved} from './about/GetInvolved';
