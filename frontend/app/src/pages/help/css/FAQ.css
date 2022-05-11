@@ -1,3 +1,17 @@
-.val_1_div, .val_2_div, .val_3_div {
+.faq-text {
   display: none;
+  margin-top: 30px;
+}
+
+.dropdown {
+  height: 50px;
+}
+
+.dropdown .text {
+  padding: initial;
+  color: black;
+}
+
+.ui.header:first-child {
+  margin: 20px;
 }
