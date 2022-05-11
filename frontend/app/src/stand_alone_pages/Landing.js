@@ -8,38 +8,16 @@ import goalCard3 from '../img/goalCard3.jpg';
 import arrows from '../img/goal_arrow_down.png';
 import background from '../img/eba_bg.png';
 import { CardImg, Col, Row, Card, CardTitle, CardText, CardBody, Button } from 'reactstrap';
+import { UncontrolledCarousel } from 'reactstrap';
 import projGoalsJSON from './ProjGoals.json';
 
 
 function Landing() {
 
-    let img = document.createElement('img');
-    img.src = background;
-    img.alt = 'historical Egyptian site';
-
-    // This element is for mobile demo and will be changed later.
-    let mobile = document.createElement('p');
-    let textNode = document.createTextNode('Travelers In Egypt');
-    mobile.appendChild(textNode);   
-
-
-    // Changes elements depending on screen size.
-    const handleResize = () => {
-        let length = window.innerWidth;
-        let row = document.getElementById('row');
-        if (row) {
-            row.innerHTML = "";
-            length >= 458 ? row.appendChild(img) : row.appendChild(mobile);
-        }
-    }
-
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('load', handleResize);
-
     return (
         <div>
             <div className='row' id='row'>
-                <img src={background} alt={img.alt}/>
+                <CardCarousel />
             </div>
             <div className='container'>
                 <Row className='about-row'>
@@ -118,6 +96,35 @@ function Landing() {
             </div>
         </div>
     );
+}
+
+function CardCarousel() {
+  
+    const items = [
+        {
+          src: background,
+          altText: 'Slide 1',
+          caption: 'Slide 1',
+          header: 'Slide 1 Header'
+        },
+        {
+          src: background,
+          altText: 'Slide 2',
+          caption: 'Slide 2',
+          header: 'Slide 2 Header'
+        },
+        {
+          src: background,
+          altText: 'Slide 3',
+          caption: 'Slide 3',
+          header: 'Slide 3 Header'
+        }
+      ];
+
+      return (
+          <UncontrolledCarousel items={items}/>
+      )
+  
 }
 
 function GoalCards() {
