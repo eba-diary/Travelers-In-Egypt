@@ -1,5 +1,5 @@
 import React from 'react';
-import donationBackdrop from '../../img/UndrawDonation.svg';
+import donationBackdrop from '../../img/Donation.svg';
 import "./css/GetInvolved.css"
 import { Button, CardImgOverlay, CardSubtitle, Col, Card, CardImg, CardTitle } from 'reactstrap';
 

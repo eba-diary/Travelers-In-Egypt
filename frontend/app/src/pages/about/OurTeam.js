@@ -67,7 +67,7 @@ function OurTeam() {
                 <div className="row">
                     <div className="col">
                         <h2 className="text-center">
-                            Sutdent Contributors
+                            Student Contributors
                         </h2>
                     </div>
                 </div>
