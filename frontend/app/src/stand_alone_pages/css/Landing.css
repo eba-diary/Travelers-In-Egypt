@@ -1,0 +1,92 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 100%;
+}
+
+.row {
+    height: 100%;
+    padding-bottom: 35px;
+}
+
+main {
+    padding: 10px 0px;
+}
+
+.about-paragraph {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.about-row {
+    flex-direction: row-reverse;
+}
+
+.bold {
+    font-style: normal;
+    font-weight: 800;
+}
+
+.our-goals {
+    padding-top: 100px;
+}
+
+.text-center {
+    text-align: center;
+    border-bottom: 1px solid gray;
+    width: 100%;
+    display: block;
+}
+
+.dark-title-button {
+    background: black;
+    height: 120px;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+    transition: 100ms linear all;
+}
+
+.dark-title-button > p {
+    display: none;
+}
+
+.dark-title-button-open {
+    height: 300px;
+    text-align: center;
+    color: white;
+    padding-top: 20px;
+    transition: 100ms linear all;
+}
+
+.dark-title-button-open > p {
+    display: block;
+    margin: 0px 15px;
+}
+
+.dark-title-button:hover {
+    cursor: pointer;
+}
+
+.arrow-white {
+    height: 35px;
+    transform: rotate(360deg);
+    transition: 175ms linear all;
+}
+
+.rotated {
+    transform: rotate(180deg);
+    transition: 175ms linear all;
+    margin-bottom: -70px;
+}
+
+.view-team-button {
+    color: black;
+}
+
+.view-team-button:hover {
+    font-weight: 750;
+}
