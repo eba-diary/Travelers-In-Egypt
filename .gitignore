@@ -1,4 +1,4 @@
 node_modules/
 .env
 .flasknote
-backend/server/venv/
+venv/
