@@ -56,7 +56,7 @@ class FAQHelper extends Component {
         const activeIndex = this.state.activeIndex;
         let test =
                 <Container className="container">
-                    <Header tag="h2" className="text-center help-header">How can we help?</Header>
+                    <Header as="h2" className="text-center help-header">How can we help?</Header>
                     <Dropdown className='dropdown'
                         onChange={this.handleChange}
                         options={options}
@@ -67,6 +67,7 @@ class FAQHelper extends Component {
                     />
                     <div className='faq-text'>
                         <Container className='val_1_div'>
+                        <Header as="h3" className="text-left help-header">Frequently Asked Questions</Header>
                         <Accordion fluid styled>
                             <Accordion.Title
                             active={activeIndex === 0}
@@ -111,6 +112,7 @@ class FAQHelper extends Component {
                             </Accordion.Content>
                         </Accordion>
                         </Container>
+                        <div className='dropdown_text'>
                         <Container className='val_2_div'>
                                 Question 1
                         </Container>
@@ -135,6 +137,7 @@ class FAQHelper extends Component {
                         <Container className='val_9_div'>
                                 Question 8
                         </Container>
+                        </div>
                     </div>
             </Container>;
 

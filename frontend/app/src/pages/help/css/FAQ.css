@@ -1,7 +1,12 @@
 .faq-text {
-  display: none;
+  /* display: none; */
   margin-top: 30px;
 }
+
+.dropdown_text {
+  display: none;
+}
+
 
 .dropdown {
   height: 50px;
