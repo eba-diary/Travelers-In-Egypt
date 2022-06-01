@@ -1,5 +1,5 @@
 import React, {Component } from 'react';
-import { Dropdown, Container, Header, Card, Accordion, Icon} from 'semantic-ui-react'
+import { Dropdown, Container, Header, Accordion, Icon} from 'semantic-ui-react'
 import './css/FAQ.css';
 
  const options = [
