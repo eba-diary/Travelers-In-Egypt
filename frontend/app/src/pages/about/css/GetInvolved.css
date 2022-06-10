@@ -2,3 +2,7 @@
     text-decoration: none;
     color: white;
 }
+
+.cardimg__donation{
+    max-width: 800px;
+}
