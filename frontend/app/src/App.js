@@ -19,7 +19,6 @@ import {
 	from './pages';
 import { Landing, Footer } from './stand_alone_pages';
 
-import { useContentfulLanding } from './useContentful'
 
 const PAGES = [OurTeam, GetInvolved, OtherProjects,
 	EmmaBAndrewsDatabase, NileDB, BoatDB,
@@ -30,19 +29,6 @@ const PAGES = [OurTeam, GetInvolved, OtherProjects,
 
 function App() {
 	// Get pages from JSON map into array.
-	const [homeData, setHomeData] = useState([{
-		'featured_articles': ''
-	}])
-
-	const { getFeaturedArticles } = useContentfulLanding()
-	
-	useEffect(() => {
-		getFeaturedArticles().then((response) => {
-			setHomeData({
-				'featured_articles': response
-			})
-		})
-	}, [])
 
 	let pageJSON = navBarList.map((pages) => {
 		let pageArr = pages.pages;
@@ -64,7 +50,7 @@ function App() {
 			</header>
 			<main className='content'>
 				<Routes>
-					<Route exact path='/' element={<Landing data={homeData}/>} />
+					<Route exact path='/' element={<Landing />} />
 					<Route path='/OurTeam' element={<OurTeam />} />
 					<Route path='/error-page' element={<Error />} />
 					<Route path='/redirect' element={<Navigate to='/error-page' />} />
