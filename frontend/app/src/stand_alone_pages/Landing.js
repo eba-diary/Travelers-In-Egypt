@@ -15,25 +15,27 @@ export default function Landing(props) {
     }, [])
 
     return (
-        <Container>
+        <Container fluid>
             { featuredArticles.articles.map((entries, index) => {
                 const sliderCard = entries.fields.sliderCards.map((entries, index) => {
                     return (
-                        <Card>
-                            <CardText>
-                                { entries.fields.title }
-                            </CardText>
-                            <CardBody>
-                                { entries.fields.description }
-                            </CardBody>
-                        </Card>
+                        <Col>
+                            <Card>
+                                <CardBody>
+                                    <CardTitle>
+                                        { entries.fields.title }
+                                    </CardTitle>
+                                    <CardText>
+                                        { entries.fields.description }
+                                    </CardText>
+                                </CardBody>
+                            </Card>
+                        </Col>
                     )
                 })
                 return (
-                    <Row key={index}>
-                        <Col sm='3' md='1'>
-                            { sliderCard }
-                        </Col>
+                    <Row key={index} xs='2' sm='3' md='4'>
+                        { sliderCard }
                     </Row>
                 )})
             }
