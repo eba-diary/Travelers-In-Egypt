@@ -3,14 +3,12 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import firebase from 'firebase/app';
+import { initializeApp } from 'firebase/app';
 import 'firebase/analytics';
 import { BrowserRouter } from 'react-router-dom';
-import dotenv from "dotenv";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-dotenv.config();
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -23,7 +21,7 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_MEASURE_ID
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 ReactDOM.render(
     <BrowserRouter>
