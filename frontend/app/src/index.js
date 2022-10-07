@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { initializeApp } from 'firebase/app';
 import 'firebase/analytics';
 import { BrowserRouter } from 'react-router-dom';
+import { ChakraProvider } from '@chakra-ui/react';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -24,9 +25,11 @@ const firebaseConfig = {
 initializeApp(firebaseConfig);
 
 ReactDOM.render(
+  <ChakraProvider>
     <BrowserRouter>
       <App />
-    </BrowserRouter>,
+    </BrowserRouter>
+  </ChakraProvider>,
   document.getElementById('root')
 );
 
