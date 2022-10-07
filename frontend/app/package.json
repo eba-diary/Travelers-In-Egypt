@@ -4,6 +4,9 @@
   "private": true,
   "proxy": "http://127.0.0.1:5000",
   "dependencies": {
+    "@chakra-ui/react": "^2.3.5",
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
@@ -14,6 +17,7 @@
     "dotenv": "^16.0.2",
     "emailjs-com": "^3.2.0",
     "firebase": "^9.9.4",
+    "framer-motion": "^7.5.2",
     "mime": "^3.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
