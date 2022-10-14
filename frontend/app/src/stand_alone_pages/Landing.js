@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useContentfulLanding } from '../useContentful'
 import { Container, Col, Row, Card, CardBody, CardTitle, CardText} from 'reactstrap'
+import "./css/Landing.css";
 
 export default function Landing(props) {
 
@@ -20,6 +21,7 @@ export default function Landing(props) {
                 const sliderCard = entries.fields.sliderCards.map((entries, index) => {
                     return (
                         <Col>
+                        <link rel="stylesheet" type="text/css" href="./css/Landing.css"/>
                             <Card>
                                 <CardBody>
                                     <CardTitle>
