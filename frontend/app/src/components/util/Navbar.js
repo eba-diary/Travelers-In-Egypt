@@ -1,9 +1,13 @@
 import { HStack, Stack, Text, Hide, Show, Menu, MenuButton, IconButton, MenuList, Image } from '@chakra-ui/react'
 import { FaHamburger } from 'react-icons/fa'
 import { Link } from 'react-router-dom';
+import { useState } from 'react'
 import logo from '../../img/WebLogo.png';
+
 export default function Navbar() {
     const navigationItems = ['Home', 'Artifacts Exhibition', ' Culture & Tradition', 'History', 'Contact', 'Support']
+
+    const [pageIndex, setPageIndex] = useState(0)
     const navContent = navigationItems.map((entry, index) => {
         return (
             <Link to={`/${entry}`} key={index}>
@@ -11,6 +15,7 @@ export default function Navbar() {
                     padding={{ md: '0px 12px', lg: '0px 15px' }}
                     textAlign={{ base: 'left', md: 'center' }}
                     paddingLeft={{ base: '15px', md: '2px', lg: '10px', xl: '15px' }}
+                    borderBottom={index === pageIndex ? '1px solid #000' : ''}
                 >
                     <Text
                         fontWeight={700}
@@ -22,6 +27,9 @@ export default function Navbar() {
                         }}
                         onMouseLeave={(event) => {
                             handleEvent(event, '2')
+                        }}
+                        onClick={() => {
+                            setPageIndex(index)
                         }}
                     >
                         {entry.toUpperCase()}
@@ -65,16 +73,16 @@ export default function Navbar() {
                             as={IconButton}
                             arial-label='Options'
                             icon={<FaHamburger />}
-                            backgroundColor='#EDEAB5'
+                            backgroundColor='#FFF'
                             color='#8B0000'
                             _hover={{ backgroundColor: '#8B0000', color: '#FFF' }}
                             variant='outline'
                         />
                         <MenuList
                             padding='20px'
-                            backgroundColor='#8B0000'
+                            backgroundColor='#FFF'
                         >
-                            {navigationItems}
+                            {navContent}
                         </MenuList>
                     </Menu>
                 </HStack>

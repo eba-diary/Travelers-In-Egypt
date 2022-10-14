@@ -1,7 +1,7 @@
 import './css/App.css';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
-// import navBarList from './navbar.json';
+import navBarList from './navbar.json';
 import logo from './img/WebLogo.png';
 import Error from './components/util/Error'
 
