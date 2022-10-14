@@ -14,6 +14,7 @@ import {
 	from './pages';
 import { Landing, Footer } from './stand_alone_pages';
 import Navbar from './components/util/Navbar';
+import Layout from './components/util/Layout';
 
 
 const PAGES = [OurTeam, GetInvolved, OtherProjects,
@@ -22,96 +23,16 @@ const PAGES = [OurTeam, GetInvolved, OtherProjects,
 	MarkupTool, SiteInstructions, FAQ, Contact
 ];
 
-function App() {
-	// Get pages from JSON map into array.
-
-	// let pageJSON = navBarList.map((pages) => {
-	// 	let pageArr = pages.pages;
-	// 	return pageArr;
-	// }).reduce((acc, page) => {
-	// 	let values = page.toString();
-	// 	acc += values + ','
-	// 	return acc;
-	// }, '').split(',');
-
-	// pageJSON.pop();
+export default function App() {
 
 	return (
 		<div>
-			<header>
-				<div>
-					<Navbar />
-				</div>
-			</header>
-			<main className='content'>
-				<Routes>
-					<Route exact path='/' element={<Landing />} />
-					<Route path='/OurTeam' element={<OurTeam />} />
-					<Route path='/error-page' element={<Error />} />
-					<Route path='/redirect' element={<Navigate to='/error-page' />} />
-				</Routes>
-			</main>
-			<footer className='footer'>
-				<Footer />
-			</footer>
+			<Routes>
+				<Route exact path='/' element={<Layout index={0}><Landing /></Layout>} />
+				<Route path='/OurTeam' element={<Layout index={1}><OurTeam /></Layout>} />
+				<Route path='/error-page' element={<Layout index={-1}><Error /></Layout>} />
+				<Route path='/redirect' element={<Layout index={-1}><Navigate to='/error-page' /></Layout>} />
+			</Routes>
 		</div>
 	);
 }
-
-// function TopLevelNav() {
-// 	// Manage state of collapsed navigation menu.
-
-// 	const [isOpen, setIsOpen] = useState(false);
-// 	const toggle = () => setIsOpen(!isOpen);
-
-// 	return (
-// 		<div>
-// 			<Navbar style={{
-// 				backgroundColor: '#DED7B9',
-// 				padding: '10px'
-// 			}} light expand='md'>
-// 				<NavbarBrand href='/'>
-// 					<img className="web-logo" src={logo} alt="Travelers in Egypt logo" />
-// 				</NavbarBrand>
-// 				<NavbarToggler onClick={toggle} />
-// 				<Collapse isOpen={isOpen} navbar>
-// 					<Nav className='mr-auto' navbar>
-// 						{navBarList.map((link, index) => {
-// 							let nav = <DropdownPage links={link} key={index} />
-// 							return nav;
-// 						})}
-// 					</Nav>
-// 				</Collapse>
-// 			</Navbar>
-// 		</div>
-// 	);
-// }
-
-// function DropdownPage(props) {
-
-// 	// Gets header and corresponding page names 
-// 	// from JSON file and creates one dropdown item.
-
-// 	let dropdownItem = props.links.pages.map((link, index) => {
-// 		let pageNames =
-// 			<DropdownItem href={link.split(' ').join('')} key={index}>
-// 				{link}
-// 			</DropdownItem>
-// 		return pageNames;
-// 	});
-
-// 	return (
-// 		<div>
-// 			<UncontrolledDropdown style={{ borderRadius: '20px' }} nav inNavbar>
-// 				<DropdownToggle style={{ color: '#000000' }} nav caret>
-// 					{props.links.header}
-// 				</DropdownToggle>
-// 				<DropdownMenu right>
-// 					{dropdownItem}
-// 				</DropdownMenu>
-// 			</UncontrolledDropdown>
-// 		</div>
-// 	);
-// }
-
-export default App;
