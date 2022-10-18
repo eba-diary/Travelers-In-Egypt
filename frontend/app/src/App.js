@@ -52,6 +52,7 @@ function App() {
 				<Routes>
 					<Route exact path='/' element={<Landing />} />
 					<Route path='/OurTeam' element={<OurTeam />} />
+					<Route path='/Contact' element={<Contact />} />
 					<Route path='/error-page' element={<Error />} />
 					<Route path='/redirect' element={<Navigate to='/error-page' />} />
 				</Routes>

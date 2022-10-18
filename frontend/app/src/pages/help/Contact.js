@@ -2,6 +2,45 @@ import './css/Contact.css';
 import React from 'react';
 import 'firebase/database';
 import emailjs from 'emailjs-com';
+import { Col, Row, Card} from 'reactstrap';
+
+
+function Contact() {
+    return (
+        <div>
+            <div className="container">
+                <Row>
+                    <Col>
+                        <p className='title-block'>General Contact Information:</p>
+                        <div className='info-block'>
+                            <p><b>Email:</b> lorem@ipsum.com</p>
+                            <p><em>Send any applications, inquiries, or concerns to this email.</em></p>
+                        </div>
+                        <p className='title-block'>Contact Request Form:</p>
+                        <div className='info-block'>
+                            <p><b>Your Name:</b>
+                                <input type="text" id="user-name"></input>
+                            </p>
+                            <p><b>Your Email:</b>
+                                <input type="text" id="user-email"></input></p>
+                            <p><b>Who would you like to contact?</b></p>
+                            <select id="contact-dropdown">
+                                <option value="patrick">Patrick Liu</option>
+                                <option value="nathaniel">Nathaniel Backus</option>
+                            </select>
+                            <p><b>Reason for requesting: </b></p>
+                            <input type="text" id="user-request"></input>
+                            <p className='short'><em>The individual will be informed of your contact request once submitted. 
+                                Your message will be forwarded to them, and you can expect a response 
+                                within 2-3 business days.</em></p>
+                            <button className='form-submit'>Submit</button>
+                        </div>
+                    </Col>
+                </Row>
+            </div>
+        </div>
+    )
+}
 
 const form = [
     { 
@@ -16,18 +55,18 @@ const form = [
     }, 
 ];
 
-function Contact() {
+// function Contact() {
 
-    return (
-        <div>
-            <div className="container">
-                <div className="row justify-content-center">
-                    <Form />
-                </div>
-            </div>
-        </div>
-    )
-}
+//     return (
+//         <div>
+//             <div className="container">
+//                 <div className="row justify-content-center">
+//                     <Form />
+//                 </div>
+//             </div>
+//         </div>
+//     )
+// }
 
 function Form() {
 
