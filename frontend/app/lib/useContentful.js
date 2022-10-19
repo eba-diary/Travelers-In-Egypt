@@ -1,17 +1,13 @@
 import { createClient } from 'contentful'
 
 
-const client = createClient({
-    space: `${process.env.REACT_APP_CONTENTFUL_SPACE_KEY}`,
-    accessToken: `${process.env.REACT_APP_CONTENTFUL_API_KEY_DEV}`,
+export const client = createClient({
+    space: `${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_KEY}`,
+    accessToken: `${process.env.NEXT_PUBLIC_CONTENTFUL_API_KEY_DEV}`,
     host: 'preview.contentful.com'
 })
 
-const useContentful = () => {
-
-}
-
-const useContentfulLanding = () => {
+export const useContentfulLanding = () => {
     const getFeaturedArticles = async () => {
         try {
             const entries = await client.getEntries({
@@ -26,5 +22,3 @@ const useContentfulLanding = () => {
 
     return { getFeaturedArticles }
 }
-
-export { useContentful, useContentfulLanding }

@@ -10,7 +10,7 @@ export default function Navbar({ pageIndex }) {
 
     const navContent = navItems.map((entry, index) => {
         return (
-            <Link href={`/${entry.url}`} key={index}>
+            <Link href={`${entry.url}`} key={index}>
                 <Stack
                     padding={{ md: '0px 12px', lg: '0px 15px' }}
                     textAlign={{ base: 'left', md: 'center' }}
@@ -46,20 +46,20 @@ export default function Navbar({ pageIndex }) {
     return (
         <MarginStack>
             <HStack backgroundColor='#FFF' alignItems='center' height='120px'>
-                <Stack
-                    width={{ base: '300px', md: '150px' }}
-                    height='80px'
-                    justifyContent='flex-start'
-                    marginLeft={{ base: '5px', md: '1px', lg: '20px' }}
-                    marginRight={{ base: '10px', md: '18px', lg: '35px' }}
-                    onMouseEnter={(event) => {
-                        handleEvent(event, '-2')
-                    }}
-                    onMouseLeave={(event) => {
-                        handleEvent(event, '2')
-                    }}
-                >
-                    <Link href='/'>
+                <Link href='/'>
+                    <Stack
+                        width={{ base: '300px', md: '150px' }}
+                        height='80px'
+                        justifyContent='flex-start'
+                        marginLeft={{ base: '5px', md: '1px', lg: '20px' }}
+                        marginRight={{ base: '10px', md: '18px', lg: '35px' }}
+                        onMouseEnter={(event) => {
+                            handleEvent(event, '-2')
+                        }}
+                        onMouseLeave={(event) => {
+                            handleEvent(event, '2')
+                        }}
+                    >
                         <Image
                             alt='logo'
                             src={logo}
@@ -68,8 +68,8 @@ export default function Navbar({ pageIndex }) {
                             layout='responsive'
                             objectFit='contain'
                         />
-                    </Link>
-                </Stack>
+                    </Stack>
+                </Link>
                 <Hide below='md'>
                     <HStack height='70px' alignItems='center'>
                         {navContent}

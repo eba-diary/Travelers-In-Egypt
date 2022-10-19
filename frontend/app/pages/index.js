@@ -2,8 +2,11 @@ import { useState, useEffect } from 'react';
 import { useContentfulLanding } from '../lib/useContentful'
 import { Flex, Text, useColorModeValue, Circle, HStack } from "@chakra-ui/react";
 import Layout from '../components/utils/Layout';
+import { getHomePage } from '../lib/getHomePage';
 
-export default function Landing({ articles }) {
+export default function Landing({ articles, components }) {
+	console.log(articles)
+	console.log(components)
 
 	const [featuredArticles, setFeaturedArticles] = useState({
 		articles: []
@@ -22,6 +25,7 @@ export default function Landing({ articles }) {
 
 	return (
 		<Layout index={0}>
+			{/* <pre>{JSON.stringify(homeComponents)}</pre> */}
 			<HStack justifyContent='center'>
 				{featuredArticles.articles.map((entries, index) => {
 					const sliderCard = entries.fields.sliderCards.map((entries, index) => {
@@ -68,13 +72,17 @@ export default function Landing({ articles }) {
 
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
 	const { getFeaturedArticles } = useContentfulLanding()
+	const { getBanner } = getHomePage()
+
 	const articles = await getFeaturedArticles()
+	const homeComponents = await getBanner()
 
 	return {
 		props: {
-			articles: articles
+			articles: articles,
+			components: homeComponents
 		}
 	}
 }
