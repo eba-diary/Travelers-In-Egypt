@@ -2,7 +2,7 @@ import './css/Contact.css';
 import React from 'react';
 import 'firebase/database';
 import emailjs from 'emailjs-com';
-import { Col, Row, Card} from 'reactstrap';
+import { Col, Row} from 'reactstrap';
 
 
 function Contact() {
