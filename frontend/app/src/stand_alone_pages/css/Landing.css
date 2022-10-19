@@ -90,3 +90,9 @@ main {
 .view-team-button:hover {
     font-weight: 750;
 }
+
+.card {
+    border: 5px solid rgb(222, 215, 185); 
+    border-bottom: 20px solid rgb(222, 215, 185); 
+    border-radius:unset;
+} 
