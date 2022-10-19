@@ -1,14 +1,16 @@
-import { HStack, Stack, Text, Hide, Show, Menu, MenuButton, IconButton, MenuList, Image, Link } from '@chakra-ui/react'
+import { HStack, Stack, Text, Hide, Show, Menu, MenuButton, IconButton, MenuList } from '@chakra-ui/react'
 import { FaHamburger } from 'react-icons/fa'
 import navItems from '../tempData/navItems.json'
-import logo from '../../img/WebLogo.png';
+import logo from '../../public/WebLogo.png';
 import MarginStack from './MarginStack';
+import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Navbar({ pageIndex }) {
 
     const navContent = navItems.map((entry, index) => {
         return (
-            <Link to={`${entry.url}`} key={index}>
+            <Link href={`/${entry.url}`} key={index}>
                 <Stack
                     padding={{ md: '0px 12px', lg: '0px 15px' }}
                     textAlign={{ base: 'left', md: 'center' }}
@@ -43,9 +45,11 @@ export default function Navbar({ pageIndex }) {
     })
     return (
         <MarginStack>
-            <HStack backgroundColor='#FFF'>
+            <HStack backgroundColor='#FFF' alignItems='center' height='120px'>
                 <Stack
                     width={{ base: '300px', md: '150px' }}
+                    height='80px'
+                    justifyContent='flex-start'
                     marginLeft={{ base: '5px', md: '1px', lg: '20px' }}
                     marginRight={{ base: '10px', md: '18px', lg: '35px' }}
                     onMouseEnter={(event) => {
@@ -55,13 +59,14 @@ export default function Navbar({ pageIndex }) {
                         handleEvent(event, '2')
                     }}
                 >
-                    <Link to='/'>
+                    <Link href='/'>
                         <Image
                             alt='logo'
                             src={logo}
-                            width='150px'
-                            height='100px'
-                            objectFit={{ base: 'contain', md: 'contain' }}
+                            width={1}
+                            height={1}
+                            layout='responsive'
+                            objectFit='contain'
                         />
                     </Link>
                 </Stack>
