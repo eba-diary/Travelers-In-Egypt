@@ -4,9 +4,15 @@ import { Flex, Text, useColorModeValue, Circle, HStack } from "@chakra-ui/react"
 import Layout from '../components/utils/Layout';
 import { getHomePage } from '../lib/getHomePage';
 
-export default function Landing({ articles, components }) {
-	console.log(articles)
-	console.log(components)
+export default function Landing({ articles, banner }) {
+	// const bannerItems = banner.items.map((entry) => {
+	// 	let test = entry.fields.bannerItems.map((entry) => {
+	// 		console.log(entry.fields.title)
+	// 	})
+	// 	return test
+	// })
+
+	console.log(banner)
 
 	const [featuredArticles, setFeaturedArticles] = useState({
 		articles: []
@@ -74,15 +80,15 @@ export default function Landing({ articles, components }) {
 
 export async function getServerSideProps() {
 	const { getFeaturedArticles } = useContentfulLanding()
-	const { getBanner } = getHomePage()
+	const { getFullScreenBanner } = getHomePage()
 
 	const articles = await getFeaturedArticles()
-	const homeComponents = await getBanner()
+	const banner = await getFullScreenBanner()
 
 	return {
 		props: {
 			articles: articles,
-			components: homeComponents
+			banner: banner
 		}
 	}
 }
