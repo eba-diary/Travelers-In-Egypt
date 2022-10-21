@@ -3,15 +3,9 @@ import { useContentfulLanding } from '../lib/useContentful'
 import { Flex, Text, useColorModeValue, Circle, HStack } from "@chakra-ui/react";
 import Layout from '../components/utils/Layout';
 import { getHomePage } from '../lib/getHomePage';
+import FullScreenBanner from '../components/content/full-screen-banner';
 
 export default function Landing({ articles, banner }) {
-	// const bannerItems = banner.items.map((entry) => {
-	// 	let test = entry.fields.bannerItems.map((entry) => {
-	// 		console.log(entry.fields.title)
-	// 	})
-	// 	return test
-	// })
-
 	console.log(banner)
 
 	const [featuredArticles, setFeaturedArticles] = useState({
@@ -31,7 +25,7 @@ export default function Landing({ articles, banner }) {
 
 	return (
 		<Layout index={0}>
-			{/* <pre>{JSON.stringify(homeComponents)}</pre> */}
+			<FullScreenBanner bannerItems={banner} />
 			<HStack justifyContent='center'>
 				{featuredArticles.articles.map((entries, index) => {
 					const sliderCard = entries.fields.sliderCards.map((entries, index) => {
@@ -88,7 +82,7 @@ export async function getServerSideProps() {
 	return {
 		props: {
 			articles: articles,
-			banner: banner
+			banner: banner,
 		}
 	}
 }

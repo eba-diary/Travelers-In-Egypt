@@ -4,38 +4,51 @@ import { API_BASE_URI } from "./globals";
 
 export function getHomePage() {
 
-    const getFullScreenBanner = async () => {
+    const getAll = async () => {
         try {
-            const banner = await client.getEntries({
-                content_type: 'fullScreenBannerCarousel',
+            const home = await client.getEntries({
+                content_type: 'home',
                 select: 'fields',
-                include: 10
+
             })
 
-            // const bannerItems = banner.items.map((entry) => {
-            //     return entry.fields.bannerItems.map((entry) => {
-            //         let button = getButton(entry.fields.button.sys.id)
-            //         return {
-            //             title: entry.fields.title,
-            //             description: entry.fields.description,
-            //             button: button
-            //             // image: https://images.ctfassets.net
-            //         }
-            //     })
-            // })
-            return banner
+
+
+
         } catch (error) {
             console.log(error)
         }
     }
 
+    const getFullScreenBanner = async () => {
+        try {
+            const rawData = await client.getEntries({
+                content_type: 'fullScreenBannerCarousel',
+                select: 'fields',
+                include: 10,
+                "fields.entryTitle": "Home Page Carousel"
+            })
+            const banner = rawData.items.map((entry) => {
+                const bannerItem = entry.fields.bannerItems.map((entry) => {
+                    const title = entry.fields.title
+                    const button = { title: entry.fields.button.fields.title, url: entry.fields.button.fields.url }
+                    const description = { description: entry.fields.description }
+                    const image = { src: `https:${entry.fields.image.fields.image.fields.file.url}`, alt: entry.fields.image.fields.alt }
 
-
-    const getButton = async (buttonId) => {
-        const buttonData = await axios.get(
-            `${API_BASE_URI}/spaces/${process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_KEY}/environments/master/entries/${buttonId}?access_token=${process.env.process.env.NEXT_PUBLIC_CONTENTFUL_API_KEY_DEV}`
-        )
-        return buttonData
+                    return {
+                        title: title,
+                        button: button,
+                        description: description,
+                        image: image
+                    }
+                })
+                return bannerItem
+                // return entry
+            })
+            return banner
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     return { getFullScreenBanner }
