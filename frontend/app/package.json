@@ -11,6 +11,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.11",
     "@chakra-ui/react": "^2.3.6",
+    "@contentful/rich-text-html-renderer": "^15.13.1",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@types/node": "^18.11.2",
