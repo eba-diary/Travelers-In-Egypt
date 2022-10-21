@@ -19,17 +19,18 @@ export default function Navbar({ pageIndex }) {
                         base: index === pageIndex ? '2px solid #000' : '',
                         md: '0px'
                     }}
+                    borderBottom={{
+                        base: '',
+                        md: index === pageIndex ? '3px solid #000' : ''
+                    }}
                 >
                     <Text
                         fontWeight={700}
                         fontSize={{
                             sm: '16px', md: '11px', lg: '14px', xl: '18px'
                         }}
-                        borderBottom={{
-                            base: '',
-                            md: index === pageIndex ? '3px solid #000' : ''
-                        }}
-                        padding={{ base: '10px 0px', md: '' }}
+                        // padding={{ base: '10px 0px', md: '' }}
+                        paddingBottom={index === pageIndex ? '5px' : '15px'}
                         onMouseEnter={(event) => {
                             handleEvent(event, '-2')
                         }}

@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function FullScreenBanner({ bannerItems }) {
     return (
-        <Stack>
+        <Stack borderBottom='15px solid #F8C66C'>
             {/* <pre>{JSON.stringify(banner)}</pre> */}
             <Stack height='300px'>
                 <Image
