@@ -16,12 +16,12 @@ export default function Navbar({ pageIndex }) {
                     textAlign={{ base: 'left', md: 'center' }}
                     paddingLeft={{ base: '15px', md: '2px', lg: '10px', xl: '15px' }}
                     border={{
-                        base: index === pageIndex ? '2px solid #000' : '',
+                        base: index === pageIndex ? '2px solid #C58A22' : '',
                         md: '0px'
                     }}
                     borderBottom={{
                         base: '',
-                        md: index === pageIndex ? '3px solid #000' : ''
+                        md: index === pageIndex ? '3px solid #C58A22' : '0px'
                     }}
                 >
                     <Text
@@ -29,14 +29,13 @@ export default function Navbar({ pageIndex }) {
                         fontSize={{
                             sm: '16px', md: '11px', lg: '14px', xl: '18px'
                         }}
-                        // padding={{ base: '10px 0px', md: '' }}
-                        paddingBottom={index === pageIndex ? '5px' : '15px'}
                         onMouseEnter={(event) => {
                             handleEvent(event, '-2')
                         }}
                         onMouseLeave={(event) => {
                             handleEvent(event, '2')
                         }}
+                        paddingBottom={index === pageIndex ? '5px' : '8px'}
                     >
                         {entry.title.toUpperCase()}
                     </Text>

@@ -4,10 +4,11 @@ import { Flex, Text, useColorModeValue, Circle, HStack } from "@chakra-ui/react"
 import Layout from '../components/utils/Layout';
 import { getHomePage } from '../lib/getHomePage';
 import FullScreenBanner from '../components/content/full-screen-banner';
+import GeneralSearchBar from '../components/content/general-search-bar';
 
-export default function Landing({ articles, banner }) {
-	console.log(banner)
-
+export default function Landing(
+	{ articles, searchBar, banner }
+) {
 	const [featuredArticles, setFeaturedArticles] = useState({
 		articles: []
 	})
@@ -26,6 +27,7 @@ export default function Landing({ articles, banner }) {
 	return (
 		<Layout index={0}>
 			<FullScreenBanner bannerItems={banner} />
+			<GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
 				{featuredArticles.articles.map((entries, index) => {
 					const sliderCard = entries.fields.sliderCards.map((entries, index) => {
@@ -73,15 +75,17 @@ export default function Landing({ articles, banner }) {
 }
 
 export async function getServerSideProps() {
-	const { getFeaturedArticles } = useContentfulLanding()
-	const { getFullScreenBanner } = getHomePage()
+	// const { getFeaturedArticles } = useContentfulLanding()
+	const { getFullScreenBanner, getHomeSearchBar, getFeaturedArticles } = getHomePage()
 
 	const articles = await getFeaturedArticles()
+	const searchBar = await getHomeSearchBar()
 	const banner = await getFullScreenBanner()
 
 	return {
 		props: {
 			articles: articles,
+			searchBar: searchBar,
 			banner: banner,
 		}
 	}

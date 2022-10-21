@@ -4,22 +4,6 @@ import { API_BASE_URI } from "./globals";
 
 export function getHomePage() {
 
-    const getAll = async () => {
-        try {
-            const home = await client.getEntries({
-                content_type: 'home',
-                select: 'fields',
-
-            })
-
-
-
-
-        } catch (error) {
-            console.log(error)
-        }
-    }
-
     const getFullScreenBanner = async () => {
         try {
             const rawData = await client.getEntries({
@@ -43,13 +27,51 @@ export function getHomePage() {
                     }
                 })
                 return bannerItem
-                // return entry
             })
             return banner
         } catch (error) {
-            console.log(error)
+            throw new Error(`Fullscreen banner failed to load: ${error}`)
         }
     }
 
-    return { getFullScreenBanner }
+    const getHomeSearchBar = async () => {
+        try {
+            const entries = await client.getEntries({
+                content_type: 'generalSearchBar',
+                select: 'fields',
+                include: 10,
+                "fields.slug": "Home Search Bar"
+            })
+            let searchBar;
+
+            entries.items.forEach((entry) => {
+
+                searchBar = {
+                    ...searchBar,
+                    description: entry.fields.description,
+                    searchBarPlaceHolder: entry.fields.searchBarPlaceholder,
+                    title: entry.fields.title
+                }
+            })
+            return searchBar ?? { error: 'does not exist' }
+        } catch (error) {
+            throw new Error(`Home search bar failed to load ${error} `)
+        }
+    }
+
+    const getFeaturedArticles = async () => {
+        try {
+            const entries = await client.getEntries({
+                content_type: 'contentSlider',
+                select: 'fields',
+                include: 10,
+                "fields.title": "Featured Articles"
+            })
+            return entries
+        } catch (error) {
+            throw new Error(`Articles failed to load: ${error}`)
+        }
+    }
+
+    return { getFullScreenBanner, getHomeSearchBar, getFeaturedArticles }
 }
