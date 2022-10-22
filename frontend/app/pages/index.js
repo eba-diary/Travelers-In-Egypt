@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
-import { useContentfulLanding } from '../lib/useContentful'
-import { Flex, Text, useColorModeValue, Circle, HStack } from "@chakra-ui/react";
+import { Flex, Text, useColorModeValue, Circle, HStack, Stack, Accordion } from "@chakra-ui/react";
 import Layout from '../components/utils/Layout';
 import { getHomePage } from '../lib/getHomePage';
 import FullScreenBanner from '../components/content/full-screen-banner';
 import GeneralSearchBar from '../components/content/general-search-bar';
+import AboutUs from '../components/content/about-us';
+import AccordionTable from '../components/content/accordion-table';
+import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+import CmsTester from '../components/utils/CmsTester';
+import StudentSection from '../components/content/student-section';
 
-export default function Landing(
-	{ articles, searchBar, banner }
+export default function Home(
+	{ articles, searchBar, banner, projectInfo, students }
 ) {
 	const [featuredArticles, setFeaturedArticles] = useState({
 		articles: []
@@ -17,6 +21,8 @@ export default function Landing(
 		setFeaturedArticles({ articles: articles?.items })
 	}, [])
 
+	const DEFAULT_INDEX = 0
+
 	let boxBg = useColorModeValue("white", "white");
 	const paddingBg = useColorModeValue("#C58A22", "white");
 	const outerBoxStyles = {
@@ -24,8 +30,11 @@ export default function Landing(
 		borderTop: '40px solid white'
 	}
 
+	console.log(students)
+
 	return (
 		<Layout index={0}>
+			{/* <CmsTester props={projectInfo} /> */}
 			<FullScreenBanner bannerItems={banner} />
 			<GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
@@ -69,6 +78,46 @@ export default function Landing(
 				})
 				}
 			</HStack>
+			<AboutUs />
+			<HStack width='100%' justifyContent='flex-start' paddingTop='50px' paddingLeft='75px'>
+				<Accordion
+					width='800px'
+					allowMultiple
+					defaultIndex={[DEFAULT_INDEX]}
+				>
+					{projectInfo.projectInfo.data.map((entry, index) => {
+						return (
+							<AccordionTable
+								key={index}
+								title={entry.title}
+								defaultIndex={index === DEFAULT_INDEX}
+							>
+								<Text dangerouslySetInnerHTML={{ __html: documentToHtmlString(entry.description) }} />
+							</AccordionTable>
+						)
+					})}
+				</Accordion>
+				<Stack width='350px' height='320px' backgroundColor='#C58A22' />
+			</HStack>
+			<Stack width='100%' justifyContent='flex-start' paddingTop='50px' pl='75px' pr='75px'>
+				<Accordion
+					width='100%'
+					allowMultiple
+					defaultIndex={[DEFAULT_INDEX]}
+				>
+					{students.data.map((entry, index) => {
+						return (
+							<AccordionTable
+								key={index}
+								title={`Student Contributors of ${entry.title}`}
+								defaultIndex={index === DEFAULT_INDEX}
+							>
+								<StudentSection students={entry.students} />
+							</AccordionTable>
+						)
+					})}
+				</Accordion>
+			</Stack>
 		</Layout>
 	)
 
@@ -76,17 +125,27 @@ export default function Landing(
 
 export async function getServerSideProps() {
 	// const { getFeaturedArticles } = useContentfulLanding()
-	const { getFullScreenBanner, getHomeSearchBar, getFeaturedArticles } = getHomePage()
+	const {
+		getFullScreenBanner,
+		getHomeSearchBar,
+		getFeaturedArticles,
+		getGeneralProjectInformation,
+		getStudentContributors
+	} = getHomePage()
 
 	const articles = await getFeaturedArticles()
 	const searchBar = await getHomeSearchBar()
 	const banner = await getFullScreenBanner()
+	const projectInfo = await getGeneralProjectInformation()
+	const students = await getStudentContributors()
 
 	return {
 		props: {
 			articles: articles,
 			searchBar: searchBar,
 			banner: banner,
+			projectInfo: projectInfo,
+			students: students
 		}
 	}
 }

@@ -1,10 +1,15 @@
 import { Stack } from "@chakra-ui/react"
 
-export default function MarginStack({ children }) {
+export default function MarginStack(
+    { children, padding, p }
+) {
+
+    const everything = padding ? padding : (p ? p : '0px 20px')
+
     return (
         <Stack
-            paddingLeft='20px'
-            paddingRight='20px'
+
+            padding={everything}
         >
             {children}
         </Stack>

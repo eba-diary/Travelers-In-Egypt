@@ -16,15 +16,15 @@ export default function GeneralSearchBar({ searchBar }) {
 
     return (
         <MarginStack>
-            <CmsTester props={inputValue} />
-            <HStack width='100%' height='400px'>
+            {/* <CmsTester props={inputValue} /> */}
+            <HStack width='100%' height='400px' p='0px 25px' justifyContent='space-around'>
                 <Stack flex={1}>
-                    <Text fontSize='60px'>
-                        {searchBar.title}
+                    <Text fontSize='72px' color='#C58A22' textShadow='5px 5px #E3CAA9' fontWeight={700}>
+                        {searchBar.title.toUpperCase()}
                     </Text>
                 </Stack>
-                <Stack flex={1} bgColor='#C58A22' width='100%' height='75%' >
-                    <Stack bgColor='#C58A22' height='100%' p='20px'>
+                <Stack flex={1} bgColor='#C58A22' width='100%' height='75%' borderRadius='12px' boxShadow='20px 20px #E3CAA9'>
+                    <Stack height='100%' p='20px'>
                         <InputGroup
                             onMouseLeave={() => {
                                 setValidInput(true)

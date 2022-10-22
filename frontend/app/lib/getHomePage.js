@@ -73,5 +73,69 @@ export function getHomePage() {
         }
     }
 
-    return { getFullScreenBanner, getHomeSearchBar, getFeaturedArticles }
+    const getGeneralProjectInformation = async () => {
+        try {
+            const entries = await client.getEntries({
+                content_type: 'accordion',
+                select: 'fields',
+                include: 10,
+                "fields.slug": "Home Informational Accordion"
+            })
+            let projectInfo;
+
+            entries.items.forEach((entry) => {
+                projectInfo = {
+                    ...projectInfo,
+                    data: entry.fields.fields.map((entry) => {
+                        return {
+                            title: entry.fields.title,
+                            description: entry.fields.description,
+
+                        }
+                    })
+                }
+            })
+            return {
+                projectInfo: projectInfo,
+                title: entries.items[0].fields.title ?? ''
+            }
+        } catch (error) {
+            throw new Error(`General Project Information Accordion failed to load: ${error}`)
+        }
+    }
+
+    const getStudentContributors = async () => {
+        try {
+            const entries = await client.getEntries({
+                content_type: 'accordion',
+                select: 'fields',
+                include: 10,
+                "fields.slug": "Home Student Contributors Accordion"
+            })
+            let studentInfo;
+
+            entries.items.forEach((entry) => {
+                studentInfo = {
+                    ...studentInfo,
+                    data: entry.fields.fields.map((entry) => {
+                        return {
+                            title: entry.fields.title,
+                            students: entry.fields.student.map((entry) => {
+                                return {
+                                    name: entry.fields.fullName,
+                                    src: `https:${entry.fields.headshot.fields.file.url}`,
+                                    alt: entry.fields.headshot.fields.description
+                                }
+                            })
+                        }
+                    })
+                }
+            })
+            return studentInfo
+        } catch (error) {
+            throw new Error(`Student Contributors failed to load: ${error}`)
+        }
+    }
+
+    return { getFullScreenBanner, getHomeSearchBar, getFeaturedArticles, getGeneralProjectInformation, getStudentContributors }
 }
