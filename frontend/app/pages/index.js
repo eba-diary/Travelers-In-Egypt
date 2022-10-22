@@ -100,6 +100,7 @@ export default function Home(
 				<Stack width='350px' height='320px' backgroundColor='#C58A22' />
 			</HStack>
 			<Stack width='100%' justifyContent='flex-start' paddingTop='50px' pl='75px' pr='75px'>
+				<Text fontSize='28px'>Student Contributors</Text>
 				<Accordion
 					width='100%'
 					allowMultiple
@@ -123,8 +124,7 @@ export default function Home(
 
 }
 
-export async function getServerSideProps() {
-	// const { getFeaturedArticles } = useContentfulLanding()
+export async function getStaticProps() {
 	const {
 		getFullScreenBanner,
 		getHomeSearchBar,

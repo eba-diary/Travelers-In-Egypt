@@ -63,7 +63,7 @@ export default function GeneralSearchBar({ searchBar }) {
                                     width='90%'
                                     isDisabled={inputValue.length > 0 ? false : true}
                                     onClick={() => {
-                                        router.push('/support')
+                                        router.push(`/support/${inputValue}`)
                                     }}
                                 >
                                     Search
