@@ -14,7 +14,16 @@ export default function Footer() {
             justifyContent='flex-end'
         >
             <MarginStack>
-                <Stack width='190px' height='40px'>
+                <Stack
+                    width='190px'
+                    height='40px'
+                    _hover={{ cursor: 'pointer' }}
+                    onClick={() => {
+                        window.open(
+                            'https://vercel.com/dashboard?utm_source=travelers-in-egypt&utm_campaign=oss'
+                        )
+                    }}
+                >
                     <Image
                         src={vercelBanner}
                         alt='vercel banner'
