@@ -138,18 +138,18 @@ Notes:
 4. Avoid nesting content more than 10 levels deep. The free plan only allows us to resolve up to 10 levels deep, and deeper levels will have to be resolved manually. Example of a 5-level nested component:
 
    ```javascript
-   items: { // level 1
-   	names: [ // level 2
-       firstName: "Something" // level 3
-       lastName: "Something" // level 3
-       contactInfo: { // level 3
-       	phone: { // level 4
-       			mobile: "1231231234" // level 5
-       			home: "2342342345" // level 5
-       	}
+   items: { // 									level 1
+     names: [ //									level 2
+       firstName: "Something" //	level 3
+       lastName: "Something" //	level 3
+       contactInfo: { //					level 3
+       phone: { // 							level 4
+       mobile: "1231231234" // 	level 5
+       home: "1231231234" // 		level 5
+       }
        }
      ]
-   	otherInfo: "Something" // back to level 2
+     otherInfo: "Something" // 	back to level 2
    }
    
    ```
