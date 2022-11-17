@@ -135,25 +135,24 @@ Notes:
 
 3. Building off of that, use `references` to refer to any other content models. This is extremely helpful for complex models such as the `Accordion` content model.
 
-4. Avoid nesting content more than 10 levels deep. The free plan only allows us to resolve up to 10 levels deep, and deeper levels will have to be resolved manually. Example of a 4-level nested component:
+4. Avoid nesting content more than 10 levels deep. The free plan only allows us to resolve up to 10 levels deep, and deeper levels will have to be resolved manually. Example of a 6-level nested component:
 
-   - items: {								level 1
-
-     	names: [						  level 2
-	
-     			firstName: ""		  level 3
-	
-     	        lastName: ""           level 3
-	
-     			address: { 			  level 3
-	
-     					... 					level 4
-	
-     			}
-	
-     	]
-
-     }
+   ```json
+   items: {													// level 1
+     names: [												// level 2
+       firstName: "Something"				// level 3
+       lastName: "Something"					// level 3
+       contactInfo: {								// level 4
+       		phone: {									// level 5
+       			mobile: "1231231234"		// level 6
+       			home: "2342342345"			// level 6
+       		}
+       }
+     ]
+   	otherInfo: "Something"					// back to level 2
+   }
+   
+   ```
 
 5. For rich text fields, use a WYSIWYG field.
 
