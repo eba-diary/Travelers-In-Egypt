@@ -27,9 +27,9 @@ Hosting services
 
 ### Starting Frontend and Backend Dev Server
 
-To start the frontend development server, `cd` into `frontend/app` and run `npm run dev` to start
+To start the frontend development server, `cd` into `frontend/app`. Then run `npm install` to install dependencies and then `npm run dev` to start the frontend.
 
-To start the backend development server, `cd` into `backend` and run `flask run` to start
+To start the backend development server, `cd` into `backend` and run `/venv/bin/activate` to active the virutal environment. Then run `pip3 install -r requirements.txt` to install dependencies and then `flask run` to start the backend development server. 
 
 
 
