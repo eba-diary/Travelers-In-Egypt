@@ -42,18 +42,40 @@ def hello_world():
 # select all data from ships table
 
 
-@app.route("/all")
+@app.route('/database_browser')
+def getStaticPathsForDatabases():
+    return json.dumps(['emma-b-andrews', 'nile-travelogues', 'boat-passengers'])
+
+
+@app.route("/database_browser/nile-travelogues")
 def ShipInfo2():
-    #text = shipsID
-    #ship = {"content": jsonify(Ships.query.all())}
     data = Ships.query.all()
     result = [d.__dict__ for d in data]
     for r in result:
         r.pop('_sa_instance_state', None)
-    #json_dump = simplejson.dumps(Ships.query.all())
-    # return json_dump
-    # return jsonify(result = result)
-    return json.dumps(result)
+
+    if request.args:
+        page = int(request.args['page'])
+        display = int(request.args['display'])
+        page_start = (page - 1) * display
+        return json.dumps(result[page_start: min(page_start + display, len(result))])
+    else:
+        return json.dumps(result[0: 10])
+
+
+@app.route('/test/api')
+def test():
+    data = Ships.query.all()
+    result = [d.__dict__ for d in data]
+    for r in result:
+        r.pop('_sa_instance_state', None)
+
+    if request.args:
+        display = int(request.args['display'])
+        page = int(request.args['page'])
+        return "<p>Result: {}</p>".format(json.dumps(result[page - 1: display]))
+    else:
+        return json.dumps(result)
 
 
 # Get the information of a ship by its id.

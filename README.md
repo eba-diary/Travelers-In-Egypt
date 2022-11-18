@@ -33,6 +33,16 @@ To start the backend development server, `cd` into `backend` and run `/venv/bin/
 
 
 
+### Common Errors
+
+#### Frontend
+
+If you do not have a file that begins with `.env`  in the `frontend/app` directory, you can request it from the frontend team. This file is necessary to access the CMS.
+
+#### Backend
+
+If you are on VSCode and the error `Import <package> could not be resolved`, use `Ctrl` (or `Cmd`) + `Shift` + `P` to open the Command Palette. Then type **Python: Select Interpreter** and select **Python 3.7.6** to resolve the errors.
+
 ## Frontend Structure
 
 
