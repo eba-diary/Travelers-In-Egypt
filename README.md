@@ -122,7 +122,7 @@ We are currently looking into pythonanywhere CLI's where we can deploy from our 
 
 #### Content Model
 
-Data fields are defined in the content model. Each content model **is required** the following fields. Read the next section to see how to properly write a slug and a title.
+Data fields are defined in the content model. Each content model **is required** to have the following fields. Read the next section to see how to properly write a slug and a title.
 
 - `slug`
 - `title`
@@ -131,9 +131,9 @@ Notes:
 
 1. Make sure to mark required fields as required when modeling content.
 
-2. When a content model needs an image, use a `reference` field and mark `Image` as the only accepted reference. 
+2. When a content model needs an image, use a `reference` field and mark `Image` as the only accepted reference. You will add the images to the `Image` content model later and refer to it through the current content model you are creating.
 
-3. Building off of that, use `references` to refer to any other content models. This is extremely helpful for complex models such as the `Accordion` content model.
+3. In addition to the above, you can and should use `references` to refer to any other content models. This is extremely helpful for complex models such as the `Accordion` content model.
 
 4. Avoid nesting content more than 10 levels deep. The free plan only allows us to resolve up to 10 levels deep, and deeper levels will have to be resolved manually. Example of a 5-level nested component:
 

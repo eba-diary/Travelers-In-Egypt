@@ -52,7 +52,7 @@ export default function GeneralSearchBar({ searchBar }) {
                                 }}
                                 onKeyDown={(event) => {
                                     if (event.key === 'Enter') {
-                                        router.push('/support')
+                                        router.push('/test')
                                     }
                                 }}
                             />
@@ -63,7 +63,7 @@ export default function GeneralSearchBar({ searchBar }) {
                                     width='90%'
                                     isDisabled={inputValue.length > 0 ? false : true}
                                     onClick={() => {
-                                        router.push(`/support/${inputValue}`)
+                                        router.push(`/test/${inputValue}`)
                                     }}
                                 >
                                     Search

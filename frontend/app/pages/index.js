@@ -3,12 +3,11 @@ import { Flex, Text, useColorModeValue, Circle, HStack, Stack, Accordion } from 
 import Layout from '../components/utils/Layout';
 import { getHomePage } from '../lib/getHomePage';
 import FullScreenBanner from '../components/content/full-screen-banner';
-import GeneralSearchBar from '../components/content/general-search-bar';
 import AboutUs from '../components/content/about-us';
-import AccordionTable from '../components/content/accordion-table';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import CmsTester from '../components/utils/CmsTester';
 import StudentSection from '../components/content/student-section';
+import dynamic from 'next/dynamic';
 
 export default function Home(
 	{ articles, searchBar, banner, projectInfo, students }
@@ -16,6 +15,9 @@ export default function Home(
 	const [featuredArticles, setFeaturedArticles] = useState({
 		articles: []
 	})
+
+	const GeneralSearchBar = dynamic(() => import('../components/content/general-search-bar'))
+	const AccordionTable = dynamic(() => import('../components/content/accordion-table'))
 
 	useEffect(() => {
 		setFeaturedArticles({ articles: articles?.items })
@@ -98,7 +100,7 @@ export default function Home(
 					})}
 				</Accordion>
 				<Stack width='350px' height='320px' backgroundColor='#C58A22' />
-			</HStack>
+			</HStack> {'problem'}
 			<Stack width='100%' justifyContent='flex-start' paddingTop='50px' pl='75px' pr='75px'>
 				<Text fontSize='28px'>Student Contributors</Text>
 				<Accordion
