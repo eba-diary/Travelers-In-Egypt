@@ -4,7 +4,7 @@
 import React from 'react';
 // import 'firebase/database';
 // import emailjs from 'emailjs-com';
-import { VStack, HStack, Stack, Text, Button } from '@chakra-ui/react';
+import { VStack, HStack, Stack, Text, Button, Box } from '@chakra-ui/react';
 
 
 export default function ContactForm() {
@@ -12,21 +12,31 @@ export default function ContactForm() {
         <VStack>
             <VStack>
                 <Stack>
-                    <Text
-                        background-color='#ffc55b'
-                        padding-left='5px'
-                        font-weight='700'
-                        margin='10px'
+                    <Box
+                        h='flex'
+                        w='flex'
+                        direction='column'
+                        alignItems='center'
+                        justifyContent='center'
+                        paddingLeft='5px'
+                        paddingRight='10px'
+                        marginBottom='15px'
+                        bg='#ffc55b'
                     >
                         General Contact Information:
-                    </Text>
+                    </Box>
                 </Stack>
-                <Stack
-                    border-left-width='3px'
-                    border-color='#d08800'
-                    background-color='#ffe2ae'
-                    padding-left='10px'
-                    margin-bottom='40px'
+                <Box
+                    h='flex'
+                    w='95%'
+                    direction='column'
+                    alignItems='center'
+                    justifyContent='center'
+                    paddingLeft='5px'
+                    marginBottom='15px'
+                    // border='5px'
+                    // border-color='#d08800'
+                    bg='#ffe2ae'
                 >
                     <Text>
                         Email: lorem@ipsum.com
@@ -34,7 +44,7 @@ export default function ContactForm() {
                     <Text>
                         Send any applications, inquiries, or concerns to this email.
                     </Text>
-                </Stack>
+                </Box>
             </VStack>
             <VStack>
                 <Stack>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useContentfulLanding } from '../useContentful'
-import { Container, Col, Row, Card, CardBody, CardTitle, CardText} from 'reactstrap'
-import { Box, Flex, Text, useColorModeValue, Circle} from "@chakra-ui/react";
+import { Stack, Flex, Text, useColorModeValue, Circle} from "@chakra-ui/react";
+import {IoTriangleSharp} from "react-icons/io5"
 
 export default function Landing(props) {
 
@@ -24,9 +24,9 @@ export default function Landing(props) {
 
 
     return (
-        <Container fluid>
+        <Stack fluid>
         { featuredArticles.articles.map((entries, index) => {
-                const sliderCard = entries.fields.sliderCards.map((entries, index) => {
+                const sliderCards = entries.fields.sliderCards.map((entries, index) => {
                     return (
                         <Flex borderRadius='unset'
                         h='140px'
@@ -56,13 +56,21 @@ export default function Landing(props) {
                     sx={outerBoxStyles} 
                     justifyContent='center'
                     >
-                        <Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}></Circle>
-                        { sliderCard }
-                        <Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}></Circle>
+                        <Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}>
+                            <Stack transform='rotate(270deg)' size='20px'>
+                                <IoTriangleSharp color={paddingBg} transform='rotate(270deg)'></IoTriangleSharp>
+                            </Stack>
+                        </Circle>
+                        { sliderCards }
+                        <Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}>
+                            <Stack transform='rotate(90deg)' size='20px'>
+                                <IoTriangleSharp color={paddingBg}></IoTriangleSharp>
+                            </Stack>
+                        </Circle>
                         </Flex>
                     )})
             }
-        </Container>
+        </Stack>
     )
 
 }

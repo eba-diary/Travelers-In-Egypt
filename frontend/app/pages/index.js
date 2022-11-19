@@ -3,12 +3,12 @@ import { Flex, Text, useColorModeValue, Circle, HStack, Stack, Accordion } from 
 import Layout from '../components/utils/Layout';
 import { getHomePage } from '../lib/getHomePage';
 import FullScreenBanner from '../components/content/full-screen-banner';
-import GeneralSearchBar from '../components/content/general-search-bar';
 import AboutUs from '../components/content/about-us';
-import AccordionTable from '../components/content/accordion-table';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import CmsTester from '../components/utils/CmsTester';
 import StudentSection from '../components/content/student-section';
+import dynamic from 'next/dynamic';
+import { IoTriangleSharp } from "react-icons/io5"
 
 export default function Home(
 	{ articles, searchBar, banner, projectInfo, students }
@@ -16,6 +16,9 @@ export default function Home(
 	const [featuredArticles, setFeaturedArticles] = useState({
 		articles: []
 	})
+
+	const GeneralSearchBar = dynamic(() => import('../components/content/general-search-bar'))
+	const AccordionTable = dynamic(() => import('../components/content/accordion-table'))
 
 	useEffect(() => {
 		setFeaturedArticles({ articles: articles?.items })
@@ -39,7 +42,7 @@ export default function Home(
 			<GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
 				{featuredArticles.articles.map((entries, index) => {
-					const sliderCard = entries.fields.sliderCards.map((entries, index) => {
+					const sliderCards = entries.fields.sliderCards.map((entries, index) => {
 						return (
 							<Flex borderRadius='unset'
 								h='140px'
@@ -51,8 +54,7 @@ export default function Home(
 								border='5px solid'
 								borderBottom='20px solid'
 								borderColor={paddingBg}
-								key={index}
-								rowGap='20px'
+								key={index} rowGap='20px'
 								columnGap='20px'
 								marginTop='-25px'
 								marginBottom='15px'
@@ -70,9 +72,17 @@ export default function Home(
 							sx={outerBoxStyles}
 							justifyContent='center'
 						>
-							<Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}></Circle>
-							{sliderCard}
-							<Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}></Circle>
+							<Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}>
+								<Stack transform='rotate(270deg)' size='20px'>
+									<IoTriangleSharp color={paddingBg} transform='rotate(270deg)'></IoTriangleSharp>
+								</Stack>
+							</Circle>
+							{sliderCards}
+							<Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}>
+								<Stack transform='rotate(90deg)' size='20px'>
+									<IoTriangleSharp color={paddingBg}></IoTriangleSharp>
+								</Stack>
+							</Circle>
 						</Flex>
 					)
 				})
@@ -98,7 +108,7 @@ export default function Home(
 					})}
 				</Accordion>
 				<Stack width='350px' height='320px' backgroundColor='#C58A22' />
-			</HStack>
+			</HStack> {'problem'}
 			<Stack width='100%' justifyContent='flex-start' paddingTop='50px' pl='75px' pr='75px'>
 				<Text fontSize='28px'>Student Contributors</Text>
 				<Accordion
