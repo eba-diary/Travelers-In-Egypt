@@ -1,23 +1,38 @@
 import { Grid, GridItem, Stack, Text, VStack } from "@chakra-ui/react";
 import Layout from "../../components/utils/Layout";
 import MarginStack from "../../components/utils/MarginStack";
+import Paginator from "../../components/utils/Paginator";
+import { useEffect, useState } from "react";
+import { useRouter } from 'next/router'
 
 export default function DatabaseBrowserID({ data }) {
-    console.log(data)
+    const router = useRouter()
+    const { page, display } = router.query
+    const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
+
+    useEffect(() => {
+        setResults({
+            page: page ? page : 1,
+            display: display ? display : 10,
+            pageStart: (page - 1) * display
+        })
+    }, [page, display])
+
     return (
         <Layout index={-1}>
             <MarginStack>
-                <Stack>
-                    <Text fontSize='32px' fontWeight={900} pb='50px'>
+                <Stack pb='50px'>
+                    <Text fontSize='32px' fontWeight={900} pb='15px'>
                         Nile Travelogues Database
                     </Text>
+                    <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} />
                 </Stack>
                 <Stack>
-                    {data.map((entry, index) => {
+                    {data.slice(results.pageStart, Math.min(parseInt(results.pageStart) + parseInt(display), data.length)).map((entry, index) => {
                         return (
                             <Stack key={index} pb='50px' borderRadius={5} border='1px solid #EEE' padding='10px'>
                                 <VStack alignItems='flex-start'>
-                                    <Text fontSize='25px' fontWeight={900}>Ship</Text>
+                                    <Text fontSize='25px' fontWeight={900}>Ship {index}</Text>
                                     <Text fontSize='25px' fontWeight={600} >{entry.name}: {entry.shipdate}</Text>
                                 </VStack>
                                 <VStack alignItems='flex-start'>
@@ -40,6 +55,7 @@ export default function DatabaseBrowserID({ data }) {
                         )
                     })}
                 </Stack>
+                <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} />
             </MarginStack>
         </Layout>
     )
