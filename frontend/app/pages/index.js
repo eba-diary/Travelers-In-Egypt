@@ -37,7 +37,6 @@ export default function Home(
 
 	return (
 		<Layout index={0}>
-			{/* <CmsTester props={projectInfo} /> */}
 			<FullScreenBanner bannerItems={banner} />
 			<GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
