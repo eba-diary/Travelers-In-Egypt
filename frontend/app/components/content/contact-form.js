@@ -11,40 +11,112 @@ export default function ContactForm() {
     return (
         <VStack>
             <VStack
-                w='100%'>
-                <Stack
-                    w='flex'
-                    alignItems='flex-start'>
+            w='100%'
+            alignItems='left'
+            >
+                <Stack>
                     <Box
-                        
-                        h='flex'
-                        justifyContent='left'
+                    paddingLeft='7%'
+                    >
+                        <Text
+                        bg='#ffc55b'
+                        display='inline-flex'
                         paddingLeft='5px'
                         paddingRight='10px'
-                        bg='#ffc55b'
-                    >
+                        fontWeight='600'
+                        >
                         General Contact Information:
+                        </Text>
                     </Box>
                 </Stack>
-                <Box
+                <Stack
+                paddingLeft='8%'
+                >
+                    <Box
                     h='flex'
                     w='90%'
                     paddingLeft='5px'
                     marginBottom='15px'
-                    // border='5px'
-                    // border-color='#d08800'
+                    borderLeft='3px solid #D08800'
                     bg='#ffe2ae'
-                >
-                    <Text>
-                        Email: lorem@ipsum.com
-                    </Text>
-                    <Text>
-                        Send any applications, inquiries, or concerns to this email.
-                    </Text>
-                </Box>
+                    >
+                        <Text
+                        paddingTop='5px'
+                        paddingLeft='5px'
+                        >
+                            <Text>
+                                <em style={{fontWeight: 600, fontStyle: 'initial'}}>Email: </em>
+                                lorem@ipsum.com
+                            </Text>
+                        </Text>
+                        <Text
+                        fontStyle='italic'
+                        paddingBottom='5px'
+                        paddingLeft='5px'
+                        >
+                            Send any applications, inquiries, or concerns to this email.
+                        </Text>
+                    </Box>
+                </Stack>
             </VStack>
-            <VStack>
+
+
+            <VStack
+            w='100%'
+            alignItems='left'
+            >
                 <Stack>
+                    <Box
+                    paddingLeft='7%'
+                    >
+                        <Text
+                        bg='#ffc55b'
+                        display='inline-flex'
+                        paddingLeft='5px'
+                        paddingRight='10px'
+                        fontWeight='600'
+                        >
+                        Contact Request Form:
+                        </Text>
+                    </Box>
+                </Stack>
+                <Stack
+                paddingLeft='8%'
+                >
+                    <Box
+                    h='flex'
+                    w='90%'
+                    paddingLeft='5px'
+                    marginBottom='15px'
+                    borderLeft='3px solid #D08800'
+                    bg='#ffe2ae'
+                    >
+                        <Text
+                        paddingTop='5px'
+                        paddingLeft='5px'
+                        >
+                            Email: lorem@ipsum.com
+                        </Text>
+                        <Text
+                        fontStyle='italic'
+                        paddingBottom='5px'
+                        paddingLeft='5px'
+                        >
+                            Send any applications, inquiries, or concerns to this email.
+                        </Text>
+                    </Box>
+                </Stack>
+            </VStack>
+            {/* <VStack
+                w='100%'
+                alignItems='left'
+            >
+                <Stack
+                h='flex'
+                justifyContent='left'
+                paddingLeft='5px'
+                paddingRight='10px'
+                bg='#ffc55b'>
                     <Text
                         background-color='#ffc55b'
                         padding-left='5px'
@@ -55,11 +127,12 @@ export default function ContactForm() {
                     </Text>
                 </Stack>
                 <VStack
-                    border-left-width='3px'
-                    border-color='#d08800'
-                    background-color='#ffe2ae'
-                    padding-left='10px'
-                    margin-bottom='40px'
+                    h='flex'
+                    w='90%'
+                    paddingLeft='5px'
+                    marginBottom='15px'
+                    borderLeft='3px solid #D08800'
+                    bg='#ffe2ae'
                 >
                     <HStack>
                         <Stack>
@@ -102,7 +175,7 @@ export default function ContactForm() {
                         </Stack>
                     </HStack>
                 </VStack>
-            </VStack>
+            </VStack> */}
         </VStack>
     )
 }
