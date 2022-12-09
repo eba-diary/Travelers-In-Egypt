@@ -1,0 +1,54 @@
+.markup-tool-instructions {
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    margin-bottom: 20px;
+    margin-top: -20px;
+    background-color: #C8C8C8;
+}
+
+.instruction-text {
+    padding-top: 20px;
+    color: black;
+}
+
+.markup-tool-title {
+    font-size: 35px;
+    font-weight: 600;
+    padding-bottom: 30px
+}
+
+button.clear-form-button {
+    background-color: #D3D3D3;
+}
+
+button.submit-form-button {
+    background-color: #DED7B9;
+}
+
+button.clear-form-button, button.submit-form-button, button.back-button {
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    width: 15%;
+    border: none;
+    transition: 0.3s;
+}
+
+button.clear-form-button:hover, button.submit-form-button:hover, button.back-button {
+    background-color: #555555;
+    color: white;
+}
+
+.required-field {
+    color: #5A5E61;
+}
+
+.success {
+    text-decoration: none;
+    font-weight: 300;
+    color: #2E8B57;
+}
+
+.xml-output {
+    padding-top: 10px;
+    margin: 10px;
+}

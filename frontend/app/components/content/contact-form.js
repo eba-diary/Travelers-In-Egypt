@@ -10,17 +10,17 @@ import { VStack, HStack, Stack, Text, Button, Box } from '@chakra-ui/react';
 export default function ContactForm() {
     return (
         <VStack>
-            <VStack>
-                <Stack>
+            <VStack
+                w='100%'>
+                <Stack
+                    w='flex'
+                    alignItems='flex-start'>
                     <Box
+                        
                         h='flex'
-                        w='flex'
-                        direction='column'
-                        alignItems='center'
-                        justifyContent='center'
+                        justifyContent='left'
                         paddingLeft='5px'
                         paddingRight='10px'
-                        marginBottom='15px'
                         bg='#ffc55b'
                     >
                         General Contact Information:
@@ -28,10 +28,7 @@ export default function ContactForm() {
                 </Stack>
                 <Box
                     h='flex'
-                    w='95%'
-                    direction='column'
-                    alignItems='center'
-                    justifyContent='center'
+                    w='90%'
                     paddingLeft='5px'
                     marginBottom='15px'
                     // border='5px'
