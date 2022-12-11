@@ -33,8 +33,6 @@ export default function Home(
 		borderTop: '40px solid white'
 	}
 
-	console.log(students)
-
 	return (
 		<Layout index={0}>
 			<FullScreenBanner bannerItems={banner} />
