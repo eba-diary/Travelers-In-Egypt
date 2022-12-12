@@ -1,4 +1,4 @@
-import { Stack, HStack, Text, Input, InputGroup, InputRightElement, Button, Badge, UnorderedList, ListItem, filter, list } from "@chakra-ui/react";
+import { Stack, HStack, Text, Input, InputGroup, InputRightElement, Button, Badge, UnorderedList, ListItem, filter, list, Select, Code } from "@chakra-ui/react";
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer'
 import { useRouter } from 'next/router'
 import { useEffect } from "react";
@@ -13,27 +13,31 @@ export default function GeneralSearchBar({ searchBar }) {
     const [validInput, setValidInput] = useState(true)
     const [filteredValues, setFilteredValues] = useState([])
     const [show, setShow] = useState(false)
+    const [cursor, setCursor] = useState(-1)
+
 
     useEffect(() => {
-        // TODO: 
-        // fetch data from backend in this use effect hook
-        const changeStringArrayToActualArray = (json) => {
-            // For now, return json
-            return json
-        }
-        const item = localStorage.getItem('autocompleteSuggestions')
+        const item = localStorage.getItem(`${inputValue}Suggestion`)
         if (!item) {
-            axios.get(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URI}/api/data`).then((res) => {
+            axios.post(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URI}/api/data/${inputValue}`).then((res) => {
                 return res.data
             }).then((json) => {
-                localStorage.setItem('autocompleteSuggestions', json)
-                const result = changeStringArrayToActualArray(json)
-                setFilteredValues(result)
+                if (json.length > 0) {
+                    localStorage.setItem(`${inputValue}Suggestion`, json)
+                    setFilteredValues(json.slice(0, 5))
+                }
             })
+        } else if (localStorage.getItem(`${inputValue}Suggestion`) !== null) {
+            setFilteredValues(item.split(',').slice(0, 5))
         }
-    }, [])
-
-    const option = localStorage.getItem('autocompleteSuggestions').split(',')
+        setTimeout(() => {
+            const keys = Object.keys(localStorage)
+            for (let i = 0; i < keys.length; i++) {
+                const key = keys[i];
+                localStorage.removeItem(key);
+            }
+        }, 1000 * 60 * 5)
+    }, [inputValue])
 
     const autocompleteRef = useRef()
     useOnClickOutside(autocompleteRef, () => setShow(false))
@@ -47,11 +51,15 @@ export default function GeneralSearchBar({ searchBar }) {
     const handleFocus = () => { setShow(true) }
 
     const handleChange = (event) => {
-
-        const filteredOptions = option.filter((option) =>
-            option.toLowerCase().startsWith(event.target.value.toLowerCase())
-        );
-        setFilteredValues(filteredOptions.slice(0, 5));
+        if (localStorage.getItem(`${inputValue}Suggestion`) !== null) {
+            const option = localStorage.getItem(`${inputValue}Suggestion`).split(',')
+            const filteredOptions = option.filter((option) =>
+                option.toLowerCase().startsWith(event.target.value.toLowerCase())
+            )
+            setFilteredValues(filteredOptions.slice(0, 5));
+        } else {
+            setFilteredValues([])
+        }
     };
 
     return (
@@ -93,11 +101,30 @@ export default function GeneralSearchBar({ searchBar }) {
                                         setValidInput(true)
                                     }
                                     handleChange(event)
+                                    setCursor(-1)
                                 }}
                                 onKeyDown={(event) => {
                                     if (event.key === 'Enter' && validInput) {
-                                        router.push(`/database_browser/search?query=${inputValue}&page=1&display=10`)
+                                        if (cursor < 0) {
+                                            router.push(`/database_browser/search?query=${inputValue}&page=1&display=10`)
+                                        } else {
+                                            router.push(`/database_browser/search?query=${filteredValues[cursor]}&page=1&display=10`)
+                                            setInputValue(filteredValues[cursor])
+                                        }
                                         localStorage.clear()
+                                    }
+                                    if (event.key === 'ArrowDown') {
+                                        if (cursor < filteredValues.length - 1) {
+                                            setCursor(cursor + 1)
+                                        } else {
+                                            setCursor(0)
+                                        }
+                                    } else if (event.key === 'ArrowUp') {
+                                        if (cursor <= 0) {
+                                            setCursor(filteredValues.length - 1)
+                                        } else {
+                                            setCursor(cursor - 1)
+                                        }
                                     }
                                 }}
                                 value={inputValue}
@@ -139,6 +166,7 @@ export default function GeneralSearchBar({ searchBar }) {
                                                 key={index}
                                                 style={{ listStyle: 'none' }}
                                                 _hover={{ bgColor: '#EEE', cursor: 'pointer' }}
+                                                bgColor={cursor === index ? '#EEE' : '#FFF'}
                                                 padding='2px'
                                                 onClick={() => {
                                                     setInputValue(filteredValues[index] + "")
