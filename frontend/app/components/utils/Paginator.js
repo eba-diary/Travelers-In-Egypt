@@ -28,7 +28,7 @@ export default function Paginator({ dataLength, page, display, setResults }) {
                     </ListItem>
                     {Array.apply(null, Array(Math.round(dataLength / display) + 1)).map((_, i) => { return i }).map((entry, index) => {
                         return (
-                            <ListItem listStyleType='none'>
+                            <ListItem key={index} listStyleType='none'>
                                 <Link href={`nile-travelogues?page=${entry + 1}&display=${display}`}>
                                     <Stack
                                         key={index}
