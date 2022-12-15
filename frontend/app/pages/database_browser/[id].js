@@ -5,12 +5,21 @@ import Paginator from "../../components/utils/Paginator";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 
-export default function DatabaseBrowserID({ data }) {
+export default function DatabaseBrowserID({ data, id }) {
     const router = useRouter()
     const { page, display } = router.query
+
     const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
 
     useEffect(() => {
+        if (!page && !display) {
+            router.push(`/database_browser/${id}?page=1&display=10`)
+        } else if (!display) {
+            router.push(`/database_browser/${id}?page=${page}&display=10`)
+        } else if (!page) {
+            router.push(`/database_browser/${id}?page=1&display=${display}`)
+        }
+
         setResults({
             page: page ? page : 1,
             display: display ? display : 10,
@@ -66,7 +75,10 @@ export async function getStaticProps(context) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URI}/database_browser/${id}`)
     const data = await res.json()
     return {
-        props: { data: data }
+        props: {
+            data: data,
+            id: id
+        }
     }
 }
 
