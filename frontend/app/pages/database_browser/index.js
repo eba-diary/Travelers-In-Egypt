@@ -20,7 +20,7 @@ export default function DatabaseBrowser({ data }) {
                             return (
                                 <ListItem pl='25px'>
                                     <Stack key={index} pb='25px'>
-                                        <Link href={`database_browser/${entry}`}>
+                                        <Link href={`database_browser/${entry}?page=1&display=10`}>
                                             <Text
                                                 fontSize='18px'
                                                 _hover={{
