@@ -4,7 +4,7 @@
 import React from 'react';
 // import 'firebase/database';
 // import emailjs from 'emailjs-com';
-import { VStack, HStack, Stack, Text, Button, Box } from '@chakra-ui/react';
+import { VStack, HStack, Stack, Text, Button, Box, Textarea, Select } from '@chakra-ui/react';
 
 
 export default function ContactForm() {
@@ -91,91 +91,78 @@ export default function ContactForm() {
                     borderLeft='3px solid #D08800'
                     bg='#ffe2ae'
                     >
-                        <Text
-                        paddingTop='5px'
-                        paddingLeft='5px'
-                        >
-                            Email: lorem@ipsum.com
+                        <Stack direction='row'>
+                            <Text
+                            paddingTop='5px'
+                            paddingLeft='5px'
+                            >
+                                Your Name:
+                            </Text>
+                            <Textarea 
+                            border='3px solid'
+                            bg='#FFFFFF'
+                            borderColor='#ffc55b'>
+                                NAME FIELD
+                            </Textarea>
+                        </Stack>
+                        <Stack direction='row'>
+                            <Text
+                            fontStyle='italic'
+                            paddingBottom='5px'
+                            paddingLeft='5px'
+                            >
+                                Your Email:
+                            </Text>
+                            <Textarea
+                            border='3px solid'
+                            borderColor='#ffc55b'
+                            bg='#FFFFFF'>
+                                EMAIL FIELD
+                            </Textarea>
+                        </Stack>
+                        <Text>
+                            Who are you trying to contact?
                         </Text>
-                        <Text
-                        fontStyle='italic'
-                        paddingBottom='5px'
-                        paddingLeft='5px'
-                        >
-                            Send any applications, inquiries, or concerns to this email.
+                        <Select placeholder='Select option'
+                        bg='#FFFFFF'
+                        border='3px solid'
+                        borderColor='#ffc55b'>
+                            <option value='option1'>Option1</option>
+                            <option value='option2'>Option2</option>
+                            <option value='option3'>Option3</option>
+                            <option value='option4'>Option4</option>
+                        </Select>
+
+                        <Text>
+                            Reason for Requesting:
                         </Text>
-                    </Box>
-                </Stack>
-            </VStack>
-            {/* <VStack
-                w='100%'
-                alignItems='left'
-            >
-                <Stack
-                h='flex'
-                justifyContent='left'
-                paddingLeft='5px'
-                paddingRight='10px'
-                bg='#ffc55b'>
-                    <Text
-                        background-color='#ffc55b'
-                        padding-left='5px'
-                        font-weight='700'
-                        margin='10px'
-                    >
-                        Contact Request Form:
-                    </Text>
-                </Stack>
-                <VStack
-                    h='flex'
-                    w='90%'
-                    paddingLeft='5px'
-                    marginBottom='15px'
-                    borderLeft='3px solid #D08800'
-                    bg='#ffe2ae'
-                >
-                    <HStack>
-                        <Stack>
-                            <Text>Your Name:</Text>
-                        </Stack>
-                        <Stack>
-                            <Form> XXXX </Form>
-                        </Stack>
-                    </HStack>
-                    <HStack>
-                        <Stack>
-                            <Text>Your Email:</Text>
-                        </Stack>
-                        <Stack>
-                            <Form> XXXX </Form>
-                        </Stack>
-                    </HStack>
-                    <HStack>
-                        <Stack>
-                            <Text>Who would you like to contact?</Text>
-                        </Stack>
-                        <Stack>
-                            <Form> XXXX </Form>
-                        </Stack>
-                    </HStack>
-                    <VStack>
-                        <Stack>
-                            <Text>Reason for requesting:</Text>
-                        </Stack>
-                        <Form> XXXX </Form>
-                    </VStack>
-                    <HStack> text and button
-                        <Stack>
-                            the individual etc
-                        </Stack>
-                        <Stack>
-                            <Button>
+                        <Textarea
+                        bg='#FFFFFF'
+                        border='3px solid'
+                        borderColor='#ffc55b'>
+                            CONTACT INFO
+                        </Textarea>
+                        <Stack direction='row'>
+                            <Text fontStyle='italic'
+                            padding='10px 50px 40px 5px'>
+                                The individual will be informed of your 
+                                contact request once submitted. Your message 
+                                will be forwarded to them, and you can expect 
+                                a response within 2 - 3 business days.
+                            </Text>
+                            <Button
+                            border='20px 20px 20px 20px'
+                            borderColor='#000000'
+                            height='20px'
+                            width='200px'
+                            bgColor='#ffc55b'
+                            padding='8px 50px 8px 40px'>
                                 Submit
                             </Button>
                         </Stack>
-                    </HStack>
-                </VStack>
-            </VStack> */}
+                    </Box>
+                </Stack>
+            </VStack>
         </VStack>
     )
 }
