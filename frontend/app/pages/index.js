@@ -17,6 +17,8 @@ export default function Home(
 		articles: []
 	})
 
+	const [currArticleIndex, setCurrArticleIndex] = useState({currArticleIndex: 0})
+
 	const GeneralSearchBar = dynamic(() => import('../components/content/general-search-bar'))
 	const AccordionTable = dynamic(() => import('../components/content/accordion-table'))
 
@@ -33,59 +35,88 @@ export default function Home(
 		borderTop: '40px solid white'
 	}
 
-	console.log(students)
+	let sliderCards = [];
+	for (let i = currArticleIndex; i < featuredArticles.articles.length; i++) {
+		const entry = featuredArticles.articles[i].fields.sliderCards;
+		sliderCards.push(
+			<Flex borderRadius='unset'
+					h='140px'
+					w='170px'
+					direction='column'
+					bg={boxBg}
+					alignItems='center'
+					justifyContent='center'
+					border='5px solid'
+					borderBottom='20px solid'
+					borderColor={paddingBg}
+					key={index} rowGap='20px'
+					columnGap='20px'
+					marginTop='-25px'
+					marginBottom='15px'
+				>
+					<Text> {entry.fields.title} </Text>
+					<Text> {entry.fields.description} </Text>
+			</Flex>
+		)
+	}
 
 	return (
 		<Layout index={0}>
 			<FullScreenBanner bannerItems={banner} />
 			<GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
-				{featuredArticles.articles.map((entries, index) => {
-					const sliderCards = entries.fields.sliderCards.map((entries, index) => {
-						return (
-							<Flex borderRadius='unset'
-								h='140px'
-								w='170px'
-								direction='column'
-								bg={boxBg}
-								alignItems='center'
-								justifyContent='center'
-								border='5px solid'
-								borderBottom='20px solid'
-								borderColor={paddingBg}
-								key={index} rowGap='20px'
-								columnGap='20px'
-								marginTop='-25px'
-								marginBottom='15px'
-							>
-								<Text> {entries.fields.title} </Text>
-								<Text> {entries.fields.description} </Text>
-							</Flex>
-						)
-					})
-					return (
+				{/* { */}
+				 {/* featuredArticles.articles.map((entries, index) => { */}
+				 	{/* const sliderCards = entries.fields.sliderCards.map((entries, index) => { */}
+				 		{/* return (
+				 			<Flex borderRadius='unset'
+				 				h='140px'
+				 				w='170px'
+				 				direction='column'
+				 				bg={boxBg}
+				 				alignItems='center'
+				 				justifyContent='center'
+				 				border='5px solid'
+				 				borderBottom='20px solid'
+				 				borderColor={paddingBg}
+				 				key={index} rowGap='20px'
+				 				columnGap='20px'
+				 				marginTop='-25px'
+				 				marginBottom='15px'
+				 			>
+				 				<Text> {entries.fields.title} </Text>
+				 				<Text> {entries.fields.description} </Text>
+				 			</Flex>
+				 		) */}
+				 	{/* })  */}
+					{/* return ( */} 
 						<Flex key={index}
 							rowGap='20px'
 							columnGap='20px'
 							direction='row'
+							width='100%'
 							sx={outerBoxStyles}
 							justifyContent='center'
 						>
-							<Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}>
+							<Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg} 
+								onClick={() => setCurrArticleIndex((currArticleIndex - 2 + featuredArticles.articles.length) % featuredArticles.articles.length)}
+							>
 								<Stack transform='rotate(270deg)' size='20px'>
 									<IoTriangleSharp color={paddingBg} transform='rotate(270deg)'></IoTriangleSharp>
 								</Stack>
 							</Circle>
 							{sliderCards}
-							<Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}>
+							<Circle size='40px' bg='white' color='white' marginTop='45px' border='5px solid' borderColor={paddingBg}
+								onClick={() => setCurrArticleIndex((currArticleIndex + 2) % featuredArticles.articles.length)}
+							>
 								<Stack transform='rotate(90deg)' size='20px'>
 									<IoTriangleSharp color={paddingBg}></IoTriangleSharp>
 								</Stack>
 							</Circle>
 						</Flex>
-					)
-				})
-				}
+					 {/* ) */}
+				{/* }) */}
+				{/* } */}
 			</HStack>
 			<AboutUs />
 			<HStack width='100%' justifyContent='flex-start' paddingTop='50px' paddingLeft='75px'>
