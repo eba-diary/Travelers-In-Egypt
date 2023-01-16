@@ -1,10 +1,7 @@
 
-
-// import './css/Contact.css';
 import React, { useState } from 'react';
-// import 'firebase/database';
-import { useForm, FormProvider, Controller, FieldError } from 'react-hook-form';
-import { useToast, VStack, HStack, Stack, Text, Button, Box, Textarea, Select, Input, FormLabel, FormControl, FormErrorMessage } from '@chakra-ui/react';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
+import { useToast, VStack, HStack, Stack, Text, Button, Textarea, Select, Input, FormLabel, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
 
