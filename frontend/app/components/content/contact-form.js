@@ -1,112 +1,303 @@
 
-
-// import './css/Contact.css';
-import React from 'react';
-// import 'firebase/database';
-// import emailjs from 'emailjs-com';
-import { VStack, HStack, Stack, Text, Button, Box } from '@chakra-ui/react';
+import React, { useState } from 'react';
+import { useForm, FormProvider, Controller } from 'react-hook-form';
+import { useToast, VStack, HStack, Stack, Text, Button, Textarea, Select, Input, FormLabel, FormControl, FormErrorMessage } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
 
 export default function ContactForm() {
+    const [displaySubmitShortcut, setDisplaySubmitShortcut] = useState(false)
+
+    const methods = useForm({
+        mode: 'onBlur',
+        defaultValues: {
+            name: '',
+            email: '',
+            select: '',
+            response: ''
+        }
+    })
+
+    const { control, watch, handleSubmit, reset, formState: { isSubmitSuccessful } } = methods
+
+    useEffect(() => {
+        reset({
+            name: '',
+            email: '',
+            select: '',
+            response: ''
+        }, {
+            keepIsValid: true
+        })
+    }, [isSubmitSuccessful, reset])
+
+    const toast = useToast()
+    const onSubmit = (data) => {
+        toast({
+            title: JSON.stringify(data),
+            status: 'success',
+            duration: 3000
+        })
+    }
+
+    const watchTextArea = watch('response')
+
     return (
-        <VStack>
-            <VStack>
-                <Stack>
-                    <Box
-                        h='flex'
-                        w='flex'
-                        direction='column'
-                        alignItems='center'
-                        justifyContent='center'
-                        paddingLeft='5px'
-                        paddingRight='10px'
-                        marginBottom='15px'
-                        bg='#ffc55b'
-                    >
-                        General Contact Information:
-                    </Box>
+        <VStack gap='50px'>
+            <Stack width='100%' alignItems='center'>
+                <Stack width='85%'>
+                    <Text fontSize='45px' fontWeight={800}>
+                        Contact Us
+                    </Text>
                 </Stack>
-                <Box
-                    h='flex'
-                    w='95%'
-                    direction='column'
-                    alignItems='center'
-                    justifyContent='center'
-                    paddingLeft='5px'
-                    marginBottom='15px'
-                    // border='5px'
-                    // border-color='#d08800'
-                    bg='#ffe2ae'
-                >
-                    <Text>
-                        Email: lorem@ipsum.com
-                    </Text>
-                    <Text>
-                        Send any applications, inquiries, or concerns to this email.
-                    </Text>
-                </Box>
-            </VStack>
-            <VStack>
-                <Stack>
+            </Stack>
+            <Stack
+                w='100%'
+                alignItems='center'
+            >
+                <Stack width='85%'>
+                    <Stack width='85%'>
+                        <Text
+                            width='fit-content'
+                            bg='#ffc55b'
+                            paddingLeft='5px'
+                            paddingRight='5px'
+                            fontWeight='600'
+                        >
+                            General Contact Information:
+                        </Text>
+                    </Stack>
+                    <Stack width='100%' alignItems='center'>
+                        <Stack
+                            width='100%'
+                            padding='10px'
+                            borderLeft='3px solid #D08800'
+                            bg='#ffe2ae'
+                        >
+                            <Text
+                                paddingTop='5px'
+                                paddingLeft='5px'
+                            >
+                                <Text>
+                                    <em style={{ fontWeight: 600, fontStyle: 'initial' }}>Email: </em>
+                                    lorem@ipsum.com
+                                </Text>
+                            </Text>
+                            <Text
+                                fontStyle='italic'
+                                paddingBottom='5px'
+                                paddingLeft='5px'>
+                                Send any applications, inquiries, or concerns to this email.
+                            </Text>
+                        </Stack>
+                    </Stack>
+                </Stack>
+            </Stack>
+            <Stack width='100%' alignItems='center'>
+                <Stack width='85%'>
                     <Text
-                        background-color='#ffc55b'
-                        padding-left='5px'
-                        font-weight='700'
-                        margin='10px'
+                        width='fit-content'
+                        bg='#ffc55b'
+                        paddingLeft='5px'
+                        paddingRight='5px'
+                        fontWeight='600'
                     >
                         Contact Request Form:
                     </Text>
                 </Stack>
-                <VStack
-                    border-left-width='3px'
-                    border-color='#d08800'
-                    background-color='#ffe2ae'
-                    padding-left='10px'
-                    margin-bottom='40px'
-                >
-                    <HStack>
-                        <Stack>
-                            <Text>Your Name:</Text>
-                        </Stack>
-                        <Stack>
-                            <Form> XXXX </Form>
-                        </Stack>
-                    </HStack>
-                    <HStack>
-                        <Stack>
-                            <Text>Your Email:</Text>
-                        </Stack>
-                        <Stack>
-                            <Form> XXXX </Form>
-                        </Stack>
-                    </HStack>
-                    <HStack>
-                        <Stack>
-                            <Text>Who would you like to contact?</Text>
-                        </Stack>
-                        <Stack>
-                            <Form> XXXX </Form>
-                        </Stack>
-                    </HStack>
-                    <VStack>
-                        <Stack>
-                            <Text>Reason for requesting:</Text>
-                        </Stack>
-                        <Form> XXXX </Form>
-                    </VStack>
-                    <HStack> text and button
-                        <Stack>
-                            the individual etc
-                        </Stack>
-                        <Stack>
-                            <Button>
-                                Submit
-                            </Button>
-                        </Stack>
-                    </HStack>
-                </VStack>
-            </VStack>
-        </VStack>
+                <Stack width='100%' alignItems='center'>
+                    <Stack
+                        width='85%'
+                        padding='10px'
+                        borderLeft='3px solid #D08800'
+                        bg='#ffe2ae'
+                    >
+                        <FormProvider {...methods}>
+                            <form
+                                onSubmit={(event) => {
+                                    handleSubmit(onSubmit)(event)
+                                }}
+                                onKeyDown={(event) => {
+                                    if (event.shiftKey && event.key === 'Enter') {
+                                        (handleSubmit(onSubmit))(event)
+                                    }
+                                }}
+                            >
+                                <Stack gap='15px' padding='10px 0px'>
+                                    <Controller
+                                        name='name'
+                                        control={control}
+                                        rules={{
+                                            validate: (data) => {
+                                                if (data.length === 0) return 'Please enter a name'
+                                                return true
+                                            }
+                                        }}
+                                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                            <FormControl isInvalid={!!error}>
+                                                <Stack width={{ base: '100%', md: '60%' }} height='75px'>
+                                                    <HStack>
+                                                        <FormLabel>Name:</FormLabel>
+                                                        <Input
+                                                            backgroundColor='#FFF'
+                                                            borderColor='#FFC55B'
+                                                            border={error ? '1px solid' : '2px solid'}
+                                                            onChange={onChange}
+                                                            value={value}
+                                                        />
+                                                    </HStack>
+                                                    <Stack width='100%' alignItems='flex-end'>
+                                                        <FormErrorMessage>
+                                                            <Text>{error ? error.message : ''}</Text>
+                                                        </FormErrorMessage>
+                                                    </Stack>
+                                                </Stack>
+                                            </FormControl>
+                                        )}
+                                    />
+                                    <Controller
+                                        name='email'
+                                        control={control}
+                                        rules={{
+                                            validate: (data) => {
+                                                if (data.length === 0) return 'Please enter an email'
+                                                return true
+                                            }
+                                        }}
+                                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                            <FormControl isInvalid={!!error}>
+                                                <Stack width={{ base: '100%', md: '60%' }} height='75px'>
+                                                    <HStack>
+                                                        <FormLabel>Email:</FormLabel>
+                                                        <Input
+                                                            backgroundColor='#FFF'
+                                                            borderColor='#FFC55B'
+                                                            border={error ? '1px solid' : '2px solid'}
+                                                            onChange={onChange}
+                                                            type='email'
+                                                            value={value}
+                                                        />
+                                                    </HStack>
+                                                    <Stack width='100%' alignItems='flex-end'>
+                                                        <FormErrorMessage>
+                                                            <Text>{error ? error.message : ''}</Text>
+                                                        </FormErrorMessage>
+                                                    </Stack>
+                                                </Stack>
+                                            </FormControl>
+                                        )}
+                                    />
+                                </Stack>
+                                <Controller
+                                    name='select'
+                                    control={control}
+                                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                        <FormControl isInvalid={!!error}>
+                                            <HStack paddingBottom='25px'>
+                                                <FormLabel>What department are you contacting?</FormLabel>
+                                                <Select
+                                                    placeholder='Select option'
+                                                    bg='#FFFFFF'
+                                                    borderColor='#FFC55B'
+                                                    border={error ? '1px solid' : '2px solid'}
+                                                    borderRadius='1px'
+                                                    width='60%'
+                                                    value={value}
+                                                    onChange={onChange}
+                                                >
+                                                    <option value='option1'>Option1</option>
+                                                    <option value='option2'>Option2</option>
+                                                    <option value='option3'>Option3</option>
+                                                    <option value='option4'>Option4</option>
+                                                </Select>
+                                            </HStack>
+                                            <FormErrorMessage>
+                                                <Text>{error ? error.message : ''}</Text>
+                                            </FormErrorMessage>
+                                        </FormControl>
+                                    )}
+                                />
+                                <Controller
+                                    name='response'
+                                    rules={{
+                                        validate: (data) => {
+                                            if (data.length == 0) return 'Message cannot be empty'
+                                            if (data.length > 1024) return 'Exceeded max character length'
+                                            return true
+                                        }
+                                    }}
+                                    render={({ field: { onChange, value }, fieldState: { error } }) => (
+                                        <FormControl isInvalid={!!error}>
+                                            <FormLabel>Questions, Comments, Concerns:</FormLabel>
+                                            <Textarea
+                                                onChange={onChange}
+                                                value={value}
+                                                onFocus={() => setDisplaySubmitShortcut(true)}
+                                                onBlur={() => setDisplaySubmitShortcut(false)}
+                                                borderColor='#FFC55B'
+                                                border={error ? '1px solid' : '2px solid'}
+                                                backgroundColor='#FFF'
+                                                placeholder='Enter your message'
+                                            />
+                                            <HStack
+                                                display='flex'
+                                                alignItems='center'
+                                                justifyContent={error || displaySubmitShortcut ? 'space-between' : 'flex-end'}
+                                            >
+                                                <FormErrorMessage>
+                                                    <Text fontSize='15px'>{error ? error.message : ''}</Text>
+                                                </FormErrorMessage>
+                                                {!error && displaySubmitShortcut && (
+                                                    <Stack paddingTop='10px'>
+                                                        <Text fontSize='13px' fontWeight={500} fontStyle='italic'>
+                                                            Shift + Enter to submit
+                                                        </Text>
+                                                    </Stack>
+                                                )}
+                                                <Stack paddingTop='10px'>
+                                                    <Text
+                                                        textAlign='right'
+                                                        color={error ? 'tomato' : '#000'}
+                                                        fontSize='15px'
+                                                    >
+                                                        {watchTextArea.length}/1024 characters
+                                                    </Text>
+                                                </Stack>
+                                            </HStack>
+                                        </FormControl>
+                                    )}
+                                />
+                                <HStack
+                                    gap='20px'
+                                    alignItems='space-between'
+                                    padding='25px'
+                                >
+                                    <Text
+                                        fontStyle='italic'
+                                        height='fit-content'
+                                        flex={5}
+                                        fontWeight={500}
+                                    >
+                                        The individual will be informed of your
+                                        contact request once submitted. Your message
+                                        will be forwarded to them, and you can expect
+                                        a response within 2 - 3 business days.
+                                    </Text>
+                                    <Button
+                                        width='fit-content'
+                                        bgColor='#FFC55B'
+                                        borderRadius='4px'
+                                        type='submit'
+                                    >
+                                        Submit
+                                    </Button>
+                                </HStack>
+                            </form>
+                        </FormProvider>
+                    </Stack>
+                </Stack>
+            </Stack>
+        </VStack >
     )
 }
 
@@ -122,92 +313,3 @@ const form = [
         name: "email"
     },
 ];
-
-// function Contact() {
-
-//     return (
-//         <div>
-//             <div className="container">
-//                 <div className="row justify-content-center">
-//                     <Form />
-//                 </div>
-//             </div>
-//         </div>
-//     )
-// }
-
-function Form() {
-
-    const sendEmail = (e) => {
-        e.preventDefault();
-        emailjs.sendForm(process.env.REACT_APP_SERVICE_ID,
-            process.env.REACT_APP_TEMPLATE_ID,
-            e.target,
-            process.env.REACT_APP_USER_ID)
-            .then((result) => {
-                console.log(result.text);
-                // toggle successful message
-                document.querySelector('.sent-successful').style.display = 'block';
-
-                setTimeout(() => {
-                    document.querySelector('.sent-successful').style.display = 'none';
-                }, 3500);
-
-                e.target.reset();
-            }, (error) => {
-                console.log(error.text);
-                document.querySelector('.sent-error').style.display = 'block';
-                setTimeout(() => {
-                    document.querySelector('.sent-error').style.display = 'none';
-                }, 3500);
-                // toggle unsuccesfful message sent
-                // do not reset form
-            });
-        // e.target.reset()
-    }
-
-    return (
-        <div className="col-6">
-            <h1>Contact Us</h1>
-            <form className="contact-form" onSubmit={sendEmail}>
-
-                <div className="sent-successful">Message has been sent!</div>
-                <div className="sent-error">Error occured. Try again later.</div>
-
-                <div className="row">
-
-                    {
-                        form.map((input) => {
-                            let fields =
-                                <div className="col-12">
-                                    <div className="row">
-                                        <div className="col-12">
-                                            <label className="form-label">{input.title}</label>
-                                        </div>
-                                        <div className="col-12">
-                                            <input className="input" type={input.type} name={input.name} />
-                                        </div>
-                                    </div>
-                                </div>;
-                            return fields;
-                        })
-                    }
-                    <div className="col-12">
-                        <div className="row">
-                            <div className="col-12">
-                                <label className="form-label">Message</label>
-                            </div>
-                            <div className="col-12">
-                                <textarea className="input-txt" type="text" name="message" />
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="col-12">
-                        <input className='input input-btn' type="submit" value="Send" />
-                    </div>
-                </div>
-            </form>
-        </div>
-    );
-}

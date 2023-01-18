@@ -1,0 +1,22 @@
+.text {
+    color: #DED7B9;
+    padding: 22px 20px;
+}
+
+.container-fluid.footer {
+    padding: 10px;
+    background-color: black;
+}
+
+.follow-title {
+    justify-content: center;
+}
+
+.icons {
+    padding: 8px 10px;
+}
+
+div > a.footer-link {
+    text-decoration: none;
+    color: #DED7B9;
+}
