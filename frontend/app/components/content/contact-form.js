@@ -174,6 +174,7 @@ export default function ContactForm() {
                                                             borderColor='#FFC55B'
                                                             border={error ? '1px solid' : '2px solid'}
                                                             onChange={onChange}
+                                                            type='email'
                                                             value={value}
                                                         />
                                                     </HStack>
