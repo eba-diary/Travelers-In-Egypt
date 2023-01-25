@@ -1,6 +1,5 @@
 import { HStack, Stack, Text, Hide, Show, Menu, MenuButton, IconButton, MenuList } from '@chakra-ui/react'
 import { FaHamburger } from 'react-icons/fa'
-import {GiHamburgerMenu} from 'react-icons/gi'
 import navItems from '../tempData/navItems.json'
 import logo from '../../public/WebLogo.png';
 import MarginStack from './MarginStack';
@@ -82,10 +81,10 @@ export default function Navbar({ pageIndex }) {
                             <MenuButton
                                 as={IconButton}
                                 arial-label='Options'
-                                icon={<GiHamburgerMenu />}
+                                icon={<FaHamburger />}
                                 backgroundColor='#FFF'
-                                color='#D08800'
-                                _hover={{ backgroundColor: '#D08800', color: '#FFF' }}
+                                color='#8B0000'
+                                _hover={{ backgroundColor: '#8B0000', color: '#FFF' }}
                                 variant='outline'
                             />
                             <MenuList

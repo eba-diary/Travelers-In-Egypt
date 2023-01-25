@@ -1,0 +1,22 @@
+[
+    {
+        "header" : "About",
+        "pages" : ["Our Team", "Get Involved", "Other Projects"]
+    },
+    {
+        "header" : "Explore Databases",
+        "pages" : ["Emma B Andrews Database", "Nile Travelogues Database", "Boat Passenger Database"]
+    },
+    {
+        "header" : "Connecting Information",
+        "pages" : ["Laura Minghetti Leonardo Exhibit", "TMD Excavations in the Valley of the Kings"]
+    },
+    {
+        "header" : "Tools",
+        "pages" : ["Social Network Analysis", "Historical Markup Tool"]
+    },
+    {
+        "header" : "Help",
+        "pages" : ["Site Instructions", "FAQ", "Contact"]
+    }
+]
