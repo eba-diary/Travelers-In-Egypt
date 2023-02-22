@@ -422,6 +422,7 @@ const Item = ({
                 mr: `${gap}px`
             }}
             py="4px"
+            justifyContent='center'
         >
             {children}
         </Flex>
