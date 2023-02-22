@@ -5,8 +5,8 @@ import {
     Box,
     VStack,
     useMediaQuery,
-    useColorModeValue,
-    Circle,
+    // useColorModeValue,
+    IconButton
 } from "@chakra-ui/react";
 import { IoTriangleSharp } from "react-icons/io5"
 import {
@@ -188,19 +188,17 @@ const Slider = ({
             marginBottom='-25px'
             mx="auto"
         >
-            <Circle size='40px' 
-                    bg='white' 
-                    color='white' 
-                    marginTop='95px' 
-                    border='5px solid' 
-                    borderColor='#C58A22'
-					onClick={handleDecrementClick}
-                    onFocus={handleFocus}
-            >
-                <Stack transform='rotate(270deg)' size='20px'>
-                    <IoTriangleSharp color='#C58A22' transform='rotate(270deg)'></IoTriangleSharp>
-                </Stack>
-            </Circle>
+            <IconButton 
+                aria-label='test'
+                marginTop='95px' 
+                transform='rotate(270deg)'
+                icon={<IoTriangleSharp color="#C58A22"/>}
+                borderRadius='full'
+                border='5px solid' 
+                borderColor='#C58A22'
+                onClick={handleDecrementClick}
+                onFocus={handleFocus}
+            />
             <Box
                 ref={ref}
                 w={{ base: "100%", md: `calc(100% + ${gap}px)` }}
@@ -233,19 +231,17 @@ const Slider = ({
                 {children}
                 
             </Box>
-            <Circle size='40px' 
-                bg='white' 
-                color='white' 
+            <IconButton 
+                aria-label='test'
                 marginTop='95px' 
+                transform='rotate(90deg)'
+                icon={<IoTriangleSharp color="#C58A22"/>}
+                borderRadius='full'
                 border='5px solid' 
                 borderColor='#C58A22'
-                onClick={handleIncrementClick}
+                onClick={handleDecrementClick}
                 onFocus={handleFocus}
-            >
-                <Stack transform='rotate(90deg)' size='20px'>
-                    <IoTriangleSharp color='#C58A22'></IoTriangleSharp>
-                </Stack>
-			</Circle>
+            />
         </Flex>
         </>
     );
