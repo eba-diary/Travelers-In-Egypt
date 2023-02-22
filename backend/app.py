@@ -7,7 +7,6 @@ load_dotenv()
 
 app = Flask(__name__)
 
-
 connection = MySQLdb.connect(
     host=os.getenv("HOST"),
     user=os.getenv("USERNAME"),
@@ -19,9 +18,10 @@ connection = MySQLdb.connect(
     }
 )
 
+
 cursor = connection.cursor()
 
-
+'''
 @app.route('/')
 def hello_world():
     return '<h1>Hello World</h1>'
@@ -47,3 +47,16 @@ def test():
     # else:
     #     return f'<h2>Not connected.</h2>'
     return f'<h1>Running version: {version}</h1>'
+'''
+
+
+# Welcome page
+@app.route('/database_browser')
+def getStaticPathsForDatabases():
+    return f"emma-b-andrews', 'nile-travelogues', 'boat-passengers"
+
+# querying boat passengers data
+@app.route("/database_browser/boat-passengers")
+def getBoatPassengers():
+    cursor = connection.cursor()
+    #result = cursor.execute('''Select * From )
