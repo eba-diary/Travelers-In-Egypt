@@ -1,7 +1,9 @@
 import MySQLdb
 import os
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, jsonify
+import pymysql 
+pymysql.install_as_MySQLdb()
 
 load_dotenv()
 
@@ -59,4 +61,41 @@ def getStaticPathsForDatabases():
 @app.route("/database_browser/boat-passengers")
 def getBoatPassengers():
     cursor = connection.cursor()
+
     #result = cursor.execute('''Select * From )
+    cursor.execute("SELECT name, shipdate, lists FROM Ships")
+    version = cursor.fetchall()
+    # Close the connection and return the result as JSON
+    cursor.close()
+    
+    if len(version):
+        return jsonify(version)                    
+    else:
+        return "No related information"     
+
+# querying nile travelogues data
+@app.route("/database_browser/nile-travelogues")          
+def getNileTravelogues():
+    cursor = connection.cursor()
+
+    #result = cursor.execute('''Select * From )
+    cursor.execute("SELECT * FROM Publications")
+    version = cursor.fetchall()
+    # Close the connection and return the result as JSON
+    cursor.close()
+    
+    if len(version):
+        return jsonify(version)                    
+    else:
+        return "No related information"     
+
+
+# querying emma b andrews data
+@app.route("/database_browser/emma-b-andrews")          
+def getEmmaBAndrews():
+    return {
+        'data': 'Database is under construction! Coming soon~'
+    }
+
+
+connection.close()
