@@ -36,14 +36,12 @@ def db_test():
 
 @app.route('/version')
 def test():
-    # cursor = connection.cursor()
-    # result = cursor.execute('SELECT * FROM Publications')
+    cursor = connection.cursor()
 
     cursor.execute("select @@version")
     version = cursor.fetchone()
-
-    # if version:
-    #     return f'<h2>Running version: {version}</h2>',
-    # else:
-    #     return f'<h2>Not connected.</h2>'
     return f'<h1>Running version: {version}</h1>'
+
+
+if __name__ == '__main__':
+    app.run()
