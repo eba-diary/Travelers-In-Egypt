@@ -2,8 +2,6 @@ import MySQLdb
 import os
 from dotenv import load_dotenv
 from flask import Flask, jsonify
-import pymysql 
-pymysql.install_as_MySQLdb()
 
 load_dotenv()
 
@@ -23,7 +21,30 @@ connection = MySQLdb.connect(
 
 cursor = connection.cursor()
 
-'''
+import MySQLdb
+import os
+from dotenv import load_dotenv
+from flask import Flask
+
+load_dotenv()
+
+app = Flask(__name__)
+
+
+connection = MySQLdb.connect(
+    host=os.getenv("HOST"),
+    user=os.getenv("USERNAME"),
+    passwd=os.getenv("PASSWORD"),
+    db=os.getenv("DATABASE"),
+    ssl_mode="VERIFY_IDENTITY",
+    ssl={
+        "ca": "/etc/ssl/cert.pem"
+    }
+)
+
+cursor = connection.cursor()
+
+
 @app.route('/')
 def hello_world():
     return '<h1>Hello World</h1>'
@@ -33,69 +54,63 @@ def hello_world():
 def db_test():
     cursor.execute("Select * From Ships")
     result = cursor.fetchall()
-    return f'{result}'
+
+    columns = [desc[0] for desc in cursor.description]
+    results = [dict(zip(columns, row)) for row in result]
+
+    return jsonify(results)
 
 
 @app.route('/version')
 def test():
-    # cursor = connection.cursor()
-    # result = cursor.execute('SELECT * FROM Publications')
+    cursor = connection.cursor()
 
     cursor.execute("select @@version")
     version = cursor.fetchone()
-
-    # if version:
-    #     return f'<h2>Running version: {version}</h2>',
-    # else:
-    #     return f'<h2>Not connected.</h2>'
     return f'<h1>Running version: {version}</h1>'
-'''
 
 
 # Welcome page
-@app.route('/database_browser')
+@app.route('/database-browser')
 def getStaticPathsForDatabases():
-    return f"emma-b-andrews', 'nile-travelogues', 'boat-passengers"
+    return f"emma-b-andrews, nile-travelogues, boat-passengers"
+
 
 # querying boat passengers data
-@app.route("/database_browser/boat-passengers")
+@app.route("/database-browser/boat-passengers")
 def getBoatPassengers():
-    cursor = connection.cursor()
-
-    #result = cursor.execute('''Select * From )
     cursor.execute("SELECT name, shipdate, lists FROM Ships")
     version = cursor.fetchall()
-    # Close the connection and return the result as JSON
-    cursor.close()
     
     if len(version):
-        return jsonify(version)                    
+        columns = [desc[0] for desc in cursor.description]
+        version = [dict(zip(columns, row)) for row in version]
+        return jsonify(version)
     else:
-        return "No related information"     
+        return "No related information"
 
 # querying nile travelogues data
-@app.route("/database_browser/nile-travelogues")          
+@app.route("/database-browser/nile-travelogues")          
 def getNileTravelogues():
-    cursor = connection.cursor()
-
-    #result = cursor.execute('''Select * From )
     cursor.execute("SELECT * FROM Publications")
     version = cursor.fetchall()
-    # Close the connection and return the result as JSON
-    cursor.close()
     
     if len(version):
-        return jsonify(version)                    
+        columns = [desc[0] for desc in cursor.description]
+        data = [dict(zip(columns, row)) for row in version]
+        return jsonify(data)
     else:
-        return "No related information"     
+        return "No related information"
 
 
 # querying emma b andrews data
-@app.route("/database_browser/emma-b-andrews")          
+@app.route("/database-browser/emma-b-andrews")          
 def getEmmaBAndrews():
     return {
         'data': 'Database is under construction! Coming soon~'
     }
 
 
-connection.close()
+
+if __name__ == '__main__':
+    app.run()
