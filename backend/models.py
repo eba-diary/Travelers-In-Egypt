@@ -11,8 +11,7 @@ connection = mysql.connector.connect(
     user=os.getenv("USERNAME"),
     passwd=os.getenv("PASSWORD"),
     db=os.getenv("DATABASE"),
-    ssl_ca=os.getenv("MYSQL_ATTR_SSL_CA"), #MYSQL_ATTR_SSL_CA=/etc/ssl/cert.pem in .env, try that
-    # ssl_verify_cert=True
+    ssl_ca=os.getenv("MYSQL_ATTR_SSL_CA"),
 )
 
 cursor = connection.cursor()
