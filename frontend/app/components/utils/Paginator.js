@@ -2,7 +2,7 @@ import { Stack, HStack, Text, UnorderedList, ListItem, IconButton } from "@chakr
 import Link from "next/link"
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa"
 
-export default function Paginator({ dataLength, page, display, setResults }) {
+export default function Paginator({ dataLength, page, display, setResults, id }) {
     const goBackFormula = parseInt(page) - 1 > 0 ? parseInt(page) - 1 : Math.floor(dataLength / display) + 1
     const goForwardFormula = parseInt(page) + 1 < dataLength / display + 1 ? parseInt(page) + 1 : 1
 
@@ -11,7 +11,7 @@ export default function Paginator({ dataLength, page, display, setResults }) {
             <UnorderedList display='inline-block'>
                 <HStack>
                     <ListItem listStyleType='none'>
-                        <Link href={`nile-travelogues?page=${goBackFormula}&display=${display}`}>
+                        <Link href={`${id}?page=${goBackFormula}&display=${display}`}>
                             <IconButton
                                 icon={<FaArrowLeft />}
                                 aria-label={`go from page ${page} to ${goBackFormula}`}
@@ -29,7 +29,7 @@ export default function Paginator({ dataLength, page, display, setResults }) {
                     {Array.apply(null, Array(Math.round(dataLength / display) + 1)).map((_, i) => { return i }).map((entry, index) => {
                         return (
                             <ListItem key={index} listStyleType='none'>
-                                <Link href={`nile-travelogues?page=${entry + 1}&display=${display}`}>
+                                <Link href={`${id}?page=${entry + 1}&display=${display}`}>
                                     <Stack
                                         key={index}
                                         h='25px'
@@ -63,7 +63,7 @@ export default function Paginator({ dataLength, page, display, setResults }) {
                         )
                     })}
                     <ListItem listStyleType='none'>
-                        <Link href={`nile-travelogues?page=${goForwardFormula}&display=${display}`}>
+                        <Link href={`${id}?page=${goForwardFormula}&display=${display}`}>
                             <IconButton
                                 icon={<FaArrowRight />}
                                 aria-label={`go from page ${page} to ${goForwardFormula}`}

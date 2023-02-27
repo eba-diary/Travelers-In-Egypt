@@ -32,6 +32,7 @@ def test():
     return f'<h1>Running version: {version}</h1>'
 
 
+
 # Welcome page DONE
 # @app.route('/database-browser')
 # def getStaticPathsForDatabases():

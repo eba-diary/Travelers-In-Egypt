@@ -8,7 +8,6 @@ import { useRouter } from 'next/router'
 export default function DatabaseBrowserID({ data, id }) {
     const router = useRouter()
     const { page, display } = router.query
-
     const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
 
     const entry = id.split('-').map((word) => {
@@ -19,18 +18,10 @@ export default function DatabaseBrowserID({ data, id }) {
     })
 
     useEffect(() => {
-        if (!page && !display) {
-            router.push(`/database_browser/${id}?page=1&display=10`)
-        } else if (!display) {
-            router.push(`/database_browser/${id}?page=${page}&display=10`)
-        } else if (!page) {
-            router.push(`/database_browser/${id}?page=1&display=${display}`)
-        }
-
         setResults({
             page: page ? page : 1,
-            display: display ? display : 10,
-            pageStart: (page - 1) * display
+            display: display ? display : 1,
+            pageStart: ((page ? page : 1) - 1) * (display ? display : 10)
         })
     }, [page, display])
 
@@ -45,7 +36,7 @@ export default function DatabaseBrowserID({ data, id }) {
                 <Stack>
                     {Array.isArray(data) ?
                         <Stack>
-                            <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} />
+                            <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} id={id} />
                             {data.slice(results.pageStart, Math.min(parseInt(results.pageStart) + parseInt(display), data.length)).map((entry, index) => {
                                 return (
                                     <Stack key={index} pb='50px' borderRadius={5} border='1px solid #EEE' padding='10px'>
@@ -72,7 +63,7 @@ export default function DatabaseBrowserID({ data, id }) {
                                     </Stack>
                                 )
                             })}
-                            <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} />
+                            <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} id={id} />
                         </Stack>
                         :
                         <Text>{data.data}</Text>
