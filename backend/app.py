@@ -2,8 +2,10 @@ from dotenv import load_dotenv
 from flask import Flask, jsonify
 from api.routes.v1 import db_blueprint
 from models import cursor
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 app.register_blueprint(db_blueprint, url_prefix='/database-browser')
 
@@ -76,4 +78,4 @@ def getEmmaBAndrews():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)

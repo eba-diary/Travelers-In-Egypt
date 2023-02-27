@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, jsonify
 from models import cursor
 from .controllers.boat_passengers import boat_passengers_blueprint
 
@@ -9,7 +9,7 @@ db_blueprint.register_blueprint(boat_passengers_blueprint)
 
 @db_blueprint.route("/")
 def getStaticPathsForDatabase():
-    return f"emma-b-andrews, nile-travelogues, boat-passengers"
+    return jsonify(['emma-b-andrews', 'nile-travelogues', 'boat-passengers'])
 
 
 @db_blueprint.route("/version")
