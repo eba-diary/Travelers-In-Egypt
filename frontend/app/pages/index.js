@@ -8,6 +8,7 @@ import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import StudentSection from '../components/content/student-section';
 import dynamic from 'next/dynamic';
 import CardSlider from '../components/content/content-slider';
+import { API_BASE_URI } from '../lib/globals';
 
 export default function Home(
 	{ articles, searchBar, banner, projectInfo, students }
@@ -40,45 +41,45 @@ export default function Home(
 			<FullScreenBanner bannerItems={banner} />
 			<GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
-				 {
-				 featuredArticles.articles.map((entries, index) => { 
-				 	 const sliderCards = entries.fields.sliderCards.map((entries, index) => { 
-				 		return (
-				 			<Flex borderRadius='unset'
-				 				h='180px'
-				 				w='210px'
-				 				direction='column'
-				 				bg={boxBg}
-				 				alignItems='center'
-				 				justifyContent='center'
-				 				border='6px solid'
-				 				borderBottom='26px solid'
-				 				borderColor={paddingBg}
-				 				key={index} 
+				{
+					featuredArticles.articles.map((entries, index) => {
+						const sliderCards = entries.fields.sliderCards.map((entries, index) => {
+							return (
+								<Flex borderRadius='unset'
+									h='180px'
+									w='210px'
+									direction='column'
+									bg={boxBg}
+									alignItems='center'
+									justifyContent='center'
+									border='6px solid'
+									borderBottom='26px solid'
+									borderColor={paddingBg}
+									key={index}
+									rowGap='20px'
+									columnGap='20px'
+								>
+									<Text> {entries.fields.title} </Text>
+									<Text> {entries.fields.description} </Text>
+								</Flex>
+							)
+						})
+						return (
+							<Flex
 								rowGap='20px'
-				 				columnGap='20px'
-				 			>
-				 				<Text> {entries.fields.title} </Text>
-				 				<Text> {entries.fields.description} </Text>
-				 			</Flex>
-				 		) 
-					 })
-					return ( 
-						<Flex
-							rowGap='20px'
-							columnGap='20px'
-							direction='row'
-							width='100%'
-							sx={outerBoxStyles}
-							justifyContent='center'
-						>
-							<CardSlider gap={20}>
-                				{sliderCards}
-							</CardSlider>
-						</Flex>
-					 ) 
-				 }) 
-				 } 
+								columnGap='20px'
+								direction='row'
+								width='100%'
+								sx={outerBoxStyles}
+								justifyContent='center'
+							>
+								<CardSlider gap={20}>
+									{sliderCards}
+								</CardSlider>
+							</Flex>
+						)
+					})
+				}
 			</HStack>
 			<AboutUs />
 			<HStack width='100%' justifyContent='flex-start' paddingTop='50px' paddingLeft='75px'>
