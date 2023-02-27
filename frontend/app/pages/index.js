@@ -32,8 +32,11 @@ export default function Home(
 		borderTop: '40px solid white'
 	}
 
+	console.log(students)
+
 	return (
 		<Layout index={0}>
+			{/* <CmsTester props={projectInfo} /> */}
 			<FullScreenBanner bannerItems={banner} />
 			<GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>

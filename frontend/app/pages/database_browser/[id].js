@@ -5,17 +5,10 @@ import Paginator from "../../components/utils/Paginator";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 
-export default function DatabaseBrowserID({ data, id }) {
+export default function DatabaseBrowserID({ data }) {
     const router = useRouter()
     const { page, display } = router.query
     const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
-
-    const entry = id.split('-').map((word) => {
-        if (word.length === 1) {
-            word = word + '.'
-        }
-        return word[0].toUpperCase() + word.substring(1,) + ' '
-    })
 
     useEffect(() => {
         setResults({
@@ -30,8 +23,9 @@ export default function DatabaseBrowserID({ data, id }) {
             <MarginStack>
                 <Stack pb='50px'>
                     <Text fontSize='32px' fontWeight={900} pb='15px'>
-                        {entry.toString().replaceAll(',', '') + " Database"}
+                        Nile Travelogues Database
                     </Text>
+                    <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} />
                 </Stack>
                 <Stack>
                     {Array.isArray(data) ?
@@ -69,6 +63,7 @@ export default function DatabaseBrowserID({ data, id }) {
                         <Text>{data.data}</Text>
                     }
                 </Stack>
+                <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} />
             </MarginStack>
         </Layout>
     )
@@ -79,10 +74,7 @@ export async function getStaticProps(context) {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URI}/database_browser/${id}`)
     const data = await res.json()
     return {
-        props: {
-            data: data,
-            id: id
-        }
+        props: { data: data }
     }
 }
 
