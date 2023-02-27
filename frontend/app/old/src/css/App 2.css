@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.web-logo {
+    width: 200px;
+    transition: 0.3s;
+}
+
+.web-logo:hover {
+    background-color: #32230F;
+}
+
+.eba-font:hover {
+    color: #555555;
+}
+
+.fa-caret {
+    display: inline;
+    margin-left: -3px;
+}
+
+.dd-toggle {
+    color: black;
+}
+
+main.content {
+    flex: 1 0 auto;
+    padding: 10px;
+    min-height: 100vh;
+}
+
+.footer {
+    min-height: 100%;
+}

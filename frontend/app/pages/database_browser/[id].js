@@ -13,8 +13,8 @@ export default function DatabaseBrowserID({ data }) {
     useEffect(() => {
         setResults({
             page: page ? page : 1,
-            display: display ? display : 10,
-            pageStart: (page - 1) * display
+            display: display ? display : 1,
+            pageStart: ((page ? page : 1) - 1) * (display ? display : 10)
         })
     }, [page, display])
 
@@ -28,32 +28,40 @@ export default function DatabaseBrowserID({ data }) {
                     <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} />
                 </Stack>
                 <Stack>
-                    {data.slice(results.pageStart, Math.min(parseInt(results.pageStart) + parseInt(display), data.length)).map((entry, index) => {
-                        return (
-                            <Stack key={index} pb='50px' borderRadius={5} border='1px solid #EEE' padding='10px'>
-                                <VStack alignItems='flex-start'>
-                                    <Text fontSize='25px' fontWeight={900}>Ship {index}</Text>
-                                    <Text fontSize='25px' fontWeight={600} >{entry.name}: {entry.shipdate}</Text>
-                                </VStack>
-                                <VStack alignItems='flex-start'>
-                                    <Text fontSize='25px' fontWeight={900}>People</Text>
-                                    <Grid templateColumns='repeat(5, 1fr)'>
-                                        {entry.lists.split(',').map((people, index) => {
-                                            return (
-                                                <ul>
-                                                    <GridItem p='10px'>
-                                                        <li>
-                                                            <Text key={index}>{people}</Text>
-                                                        </li>
-                                                    </GridItem>
-                                                </ul>
-                                            )
-                                        })}
-                                    </Grid>
-                                </VStack>
-                            </Stack>
-                        )
-                    })}
+                    {Array.isArray(data) ?
+                        <Stack>
+                            <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} id={id} />
+                            {data.slice(results.pageStart, Math.min(parseInt(results.pageStart) + parseInt(display), data.length)).map((entry, index) => {
+                                return (
+                                    <Stack key={index} pb='50px' borderRadius={5} border='1px solid #EEE' padding='10px'>
+                                        <VStack alignItems='flex-start'>
+                                            <Text fontSize='25px' fontWeight={900}>Ship {index}</Text>
+                                            <Text fontSize='25px' fontWeight={600} >{entry.name}: {entry.shipdate}</Text>
+                                        </VStack>
+                                        <VStack alignItems='flex-start'>
+                                            <Text fontSize='25px' fontWeight={900}>People</Text>
+                                            <Grid templateColumns='repeat(5, 1fr)'>
+                                                {entry.lists.split(',').map((people, index) => {
+                                                    return (
+                                                        <ul key={index}>
+                                                            <GridItem p='10px'>
+                                                                <li>
+                                                                    <Text>{people}</Text>
+                                                                </li>
+                                                            </GridItem>
+                                                        </ul>
+                                                    )
+                                                })}
+                                            </Grid>
+                                        </VStack>
+                                    </Stack>
+                                )
+                            })}
+                            <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} id={id} />
+                        </Stack>
+                        :
+                        <Text>{data.data}</Text>
+                    }
                 </Stack>
                 <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} />
             </MarginStack>

@@ -1,0 +1,26 @@
+[
+    {
+        "title": "Home",
+        "url": "/"
+    },
+    {
+        "title": "Artifacts Exhibition",
+        "url": "/artifacts-exhibition"
+    },
+    {
+        "title": "Culture & Tradition",
+        "url": "/culture-tradition"
+    },
+    {
+        "title": "History",
+        "url": "/history"
+    },
+    {
+        "title": "Contact",
+        "url": "/contact"
+    },
+    {
+        "title": "Support",
+        "url": "/support"
+    }
+]

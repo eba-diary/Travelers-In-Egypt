@@ -18,7 +18,7 @@ export default function DatabaseBrowser({ data }) {
                     <UnorderedList pl='5px'>
                         {data.map((entry, index) => {
                             return (
-                                <ListItem pl='25px'>
+                                <ListItem key={index} pl='25px'>
                                     <Stack key={index} pb='25px'>
                                         <Link href={`database_browser/${entry}`}>
                                             <Text

@@ -1,6 +1,5 @@
 import { client } from "./useContentful";
 import axios from 'axios'
-import { API_BASE_URI } from "./globals";
 
 export function getHomePage() {
 
