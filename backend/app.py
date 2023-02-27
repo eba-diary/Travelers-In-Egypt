@@ -1,28 +1,11 @@
-import MySQLdb
-import os
 from dotenv import load_dotenv
 from flask import Flask, jsonify
-from routes.api.v1 import db_blueprint
-
-load_dotenv()
+from api.routes.v1 import db_blueprint
+from models import cursor
 
 app = Flask(__name__)
 
 app.register_blueprint(db_blueprint, url_prefix='/database-browser')
-
-
-connection = MySQLdb.connect(
-    host=os.getenv("HOST"),
-    user=os.getenv("USERNAME"),
-    passwd=os.getenv("PASSWORD"),
-    db=os.getenv("DATABASE"),
-    ssl_mode="VERIFY_IDENTITY",
-    ssl={
-        "ca": "/etc/ssl/cert.pem"
-    }
-)
-
-cursor = connection.cursor()
 
 
 @app.route('/')
@@ -43,7 +26,6 @@ def db_test():
 
 @app.route('/version')
 def test():
-    cursor = connection.cursor()
 
     cursor.execute("select @@version")
     version = cursor.fetchone()
