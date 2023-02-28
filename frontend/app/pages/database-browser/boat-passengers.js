@@ -5,6 +5,10 @@ import Paginator from "../../components/utils/Paginator";
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/router'
 import { API_BASE_URI } from "../../lib/globals";
+import BoatPassengersTable from "../../components/tables/boat-passengers-table";
+import { BsFillGrid3X2GapFill, BsListUl } from 'react-icons/bs'
+import TabUtility from "../../components/utils/TabUtility";
+import BoatPassengersGrid from "../../components/tables/boat-passengers-grid";
 
 export default function DatabaseBrowserID({ data }) {
     const router = useRouter()
@@ -23,46 +27,30 @@ export default function DatabaseBrowserID({ data }) {
         <Layout index={-1}>
             <MarginStack>
                 <Stack pb='50px'>
-                    <Text fontSize='32px' fontWeight={900} pb='15px'>
+                    <Text fontSize='32px' fontWeight={700} pb='15px'>
                         Boat Passengers Database
                     </Text>
+                    <Stack>
+                        <TabUtility buttons={[
+                            {
+                                ariaLabel: 'Show boat passengers in a grid',
+                                icon: <BsFillGrid3X2GapFill />
+                            },
+                            {
+                                ariaLabel: 'Show boat passengers in table',
+                                icon: <BsListUl />
+                            }
+                        ]} />
+                    </Stack>
                 </Stack>
-                <Stack>
-                    {Array.isArray(data) ?
-                        <Stack>
-                            <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} id={'boat-passengers'} />
-                            {data.slice(results.pageStart, Math.min(parseInt(results.pageStart) + parseInt(display), data.length)).map((entry, index) => {
-                                return (
-                                    <Stack key={index} pb='50px' borderRadius={5} border='1px solid #EEE' padding='10px'>
-                                        <VStack alignItems='flex-start'>
-                                            <Text fontSize='25px' fontWeight={900}>Ship {index}</Text>
-                                            <Text fontSize='25px' fontWeight={600} >{entry.name}: {entry.shipdate}</Text>
-                                        </VStack>
-                                        <VStack alignItems='flex-start'>
-                                            <Text fontSize='25px' fontWeight={900}>People</Text>
-                                            <Grid templateColumns='repeat(5, 1fr)'>
-                                                {entry.lists.split(',').map((people, index) => {
-                                                    return (
-                                                        <ul key={index}>
-                                                            <GridItem p='10px'>
-                                                                <li>
-                                                                    <Text>{people}</Text>
-                                                                </li>
-                                                            </GridItem>
-                                                        </ul>
-                                                    )
-                                                })}
-                                            </Grid>
-                                        </VStack>
-                                    </Stack>
-                                )
-                            })}
-                            <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} id={'boat-passengers'} />
-                        </Stack>
-                        :
-                        <Text>{data.data}</Text>
-                    }
-                </Stack>
+                <BoatPassengersTable bpData={data} />
+                <BoatPassengersGrid
+                    data={data}
+                    page={page}
+                    display={display}
+                    results={results}
+                    setResults={setResults}
+                />
             </MarginStack>
         </Layout>
     )

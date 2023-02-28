@@ -4,14 +4,13 @@ import { useEffect } from "react";
 import MarginStack from "../../components/utils/MarginStack";
 import Link from "next/link";
 import { API_BASE_URI } from "../../lib/globals";
-import axios from "axios";
 
 
 export default function DatabaseBrowser({ data }) {
-    console.log(data)
     const links = data.map((entry) => {
         return entry.split('-').map(word => { return word[0].toUpperCase() + word.substring(1,) + ' ' })
     })
+
     return (
         <Layout index={-1}>
             <MarginStack>
