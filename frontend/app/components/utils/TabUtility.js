@@ -1,14 +1,14 @@
-import { Tabs, TabList, Tab, IconButton } from '@chakra-ui/react'
+import { Tabs, TabList, Tab, Icon } from '@chakra-ui/react'
 
-export default function TabUtility({ buttons }) {
+export default function TabUtility({ buttons, handleTabChange, view }) {
     return (
-        <Tabs>
+        <Tabs index={parseInt(localStorage.getItem('tab_index')) ?? view} onChange={handleTabChange}>
             <TabList>
                 {buttons.map((entry, index) => (
                     <Tab key={index}>
-                        <IconButton
+                        <Icon
                             aria-label={entry.ariaLabel}
-                            icon={entry.icon}
+                            as={entry.icon}
                         />
                     </Tab>
                 ))}

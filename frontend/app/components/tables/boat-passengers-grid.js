@@ -6,7 +6,7 @@ export default function BoatPassengersGrid({ data, page, results, setResults, di
         <Stack>
             {Array.isArray(data) ?
                 <Stack>
-                    <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} id={'boat-passengers'} />
+                    <Paginator dataLength={data.length} page={page} display={parseInt(display)} setResults={setResults} id={'boat-passengers'} />
                     {data.slice(results.pageStart, Math.min(parseInt(results.pageStart) + parseInt(display), data.length)).map((entry, index) => {
                         return (
                             <Stack key={index} pb='50px' borderRadius={5} border='1px solid #EEE' padding='10px'>

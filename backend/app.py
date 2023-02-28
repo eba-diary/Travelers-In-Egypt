@@ -30,7 +30,7 @@ def test():
 
     cursor.execute("select @@version")
     version = cursor.fetchone()
-    return f'<h1>Running version: {version}</h1>'
+    return f'Running version: {version}'
 
 
 
