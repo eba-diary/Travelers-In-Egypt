@@ -5,14 +5,13 @@ from models import cursor
 from flask_cors import CORS
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
-
 app.register_blueprint(db_blueprint, url_prefix='/database-browser')
+CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 
 @app.route('/')
 def hello_world():
-    return '<h1>Travelers In Egypt Database Browser</h1>'
+    return jsonify('Travelers In Egypt Database Browser')
 
 
 @app.route('/test')

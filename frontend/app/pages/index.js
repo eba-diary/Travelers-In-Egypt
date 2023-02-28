@@ -17,6 +17,20 @@ export default function Home(
 		articles: []
 	})
 
+	useEffect(() => {
+		const ROUTE = 'database-browser'
+		const testFn = async () => {
+			const data = await fetch(`${API_BASE_URI}/${ROUTE}/`, {
+				method: 'GET',
+				headers: {
+					'Access-Control-Allow-Origin': '*'
+				},
+			}).then(res => res.json())
+			console.log(data)
+		}
+		testFn()
+	})
+
 	const GeneralSearchBar = dynamic(() => import('../components/content/general-search-bar'))
 	const AccordionTable = dynamic(() => import('../components/content/accordion-table'))
 
@@ -46,6 +60,7 @@ export default function Home(
 						const sliderCards = entries.fields.sliderCards.map((entries, index) => {
 							return (
 								<Flex borderRadius='unset'
+									key={index}
 									h='180px'
 									w='210px'
 									direction='column'
@@ -55,7 +70,6 @@ export default function Home(
 									border='6px solid'
 									borderBottom='26px solid'
 									borderColor={paddingBg}
-									key={index}
 									rowGap='20px'
 									columnGap='20px'
 								>
