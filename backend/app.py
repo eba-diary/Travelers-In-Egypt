@@ -6,7 +6,9 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 app.register_blueprint(db_blueprint, url_prefix='/database-browser')
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, 
+    #  resources={r"/*": {"origins": "http://localhost:3000"}}
+)
 
 
 @app.route('/')
@@ -30,7 +32,7 @@ def test():
 
     cursor.execute("select @@version")
     version = cursor.fetchone()
-    return f'<h1>Running version: {version}</h1>'
+    return f'Running version: {version}'
 
 
 
