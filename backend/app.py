@@ -6,7 +6,9 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 app.register_blueprint(db_blueprint, url_prefix='/database-browser')
-CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+CORS(app, 
+    #  resources={r"/*": {"origins": "http://localhost:3000"}}
+)
 
 
 @app.route('/')

@@ -20,13 +20,10 @@ export default function Home(
 	useEffect(() => {
 		const ROUTE = 'database-browser'
 		const testFn = async () => {
-			const data = await fetch(`${API_BASE_URI}/${ROUTE}/`, {
-				method: 'GET',
-				headers: {
-					'Access-Control-Allow-Origin': '*'
-				},
+			const data = await fetch(`/api/v1/database-browser`, {
+				method: 'GET'
 			}).then(res => res.json())
-			console.log(data)
+			console.log('data: ', data)
 		}
 		testFn()
 	})

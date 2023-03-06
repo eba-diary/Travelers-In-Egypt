@@ -80,6 +80,7 @@ export default function DatabaseBrowserID({ data }) {
 
 export async function getServerSideProps() {
     const res = await fetch(`${API_BASE_URI}/database-browser/boat-passengers`)
+    console.log(res)
     const data = await res.json()
     return {
         props: { data: data }

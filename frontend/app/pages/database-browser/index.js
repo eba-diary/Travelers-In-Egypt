@@ -7,7 +7,7 @@ import { API_BASE_URI } from "../../lib/globals";
 
 
 export default function DatabaseBrowser({ data }) {
-    const links = data.map((entry) => {
+    const links = data.routes.map((entry) => {
         return entry.split('-').map(word => { return word[0].toUpperCase() + word.substring(1,) + ' ' })
     })
 
@@ -19,7 +19,7 @@ export default function DatabaseBrowser({ data }) {
                 </Text>
                 <Stack pt='25px'>
                     <UnorderedList pl='5px'>
-                        {data.map((entry, index) => {
+                        {data.routes.map((entry, index) => {
                             return (
                                 <ListItem key={index} pl='25px'>
                                     <Stack key={index} pb='25px'>
@@ -51,9 +51,6 @@ export default function DatabaseBrowser({ data }) {
 export async function getStaticProps() {
     const data = await fetch(`${API_BASE_URI}/database-browser/`, {
         method: 'GET',
-        headers: {
-            'Access-Control-Allow-Origin': '*'
-        },
     }).then(res => res.json())
     return {
         props: { data: data }
