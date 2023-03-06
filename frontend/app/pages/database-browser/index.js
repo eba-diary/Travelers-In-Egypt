@@ -1,13 +1,16 @@
 import { ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react";
 import Layout from "../../components/utils/Layout";
+import { useEffect } from "react";
 import MarginStack from "../../components/utils/MarginStack";
 import Link from "next/link";
+import { API_BASE_URI } from "../../lib/globals";
 
 
 export default function DatabaseBrowser({ data }) {
-    const links = data.map((entry) => {
+    const links = data.routes.map((entry) => {
         return entry.split('-').map(word => { return word[0].toUpperCase() + word.substring(1,) + ' ' })
     })
+
     return (
         <Layout index={-1}>
             <MarginStack>
@@ -16,11 +19,11 @@ export default function DatabaseBrowser({ data }) {
                 </Text>
                 <Stack pt='25px'>
                     <UnorderedList pl='5px'>
-                        {data.map((entry, index) => {
+                        {data.routes.map((entry, index) => {
                             return (
                                 <ListItem key={index} pl='25px'>
                                     <Stack key={index} pb='25px'>
-                                        <Link href={`database_browser/${entry}`}>
+                                        <Link href={`database-browser/${entry}?page=1&display=10`}>
                                             <Text
                                                 fontSize='18px'
                                                 _hover={{
@@ -46,8 +49,9 @@ export default function DatabaseBrowser({ data }) {
 
 
 export async function getStaticProps() {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_BASE_URI}/database_browser`)
-    const data = await (res.json())
+    const data = await fetch(`${API_BASE_URI}/database-browser/`, {
+        method: 'GET',
+    }).then(res => res.json())
     return {
         props: { data: data }
     }

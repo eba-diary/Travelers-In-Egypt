@@ -2,15 +2,18 @@ from dotenv import load_dotenv
 from flask import Flask, jsonify
 from api.routes.v1 import db_blueprint
 from models import cursor
+from flask_cors import CORS
 
 app = Flask(__name__)
-
 app.register_blueprint(db_blueprint, url_prefix='/database-browser')
+CORS(app, 
+    #  resources={r"/*": {"origins": "http://localhost:3000"}}
+)
 
 
 @app.route('/')
 def hello_world():
-    return '<h1>Travelers In Egypt Database Browser</h1>'
+    return jsonify('Travelers In Egypt Database Browser')
 
 
 @app.route('/test')
@@ -29,7 +32,7 @@ def test():
 
     cursor.execute("select @@version")
     version = cursor.fetchone()
-    return f'<h1>Running version: {version}</h1>'
+    return f'Running version: {version}'
 
 
 
@@ -76,4 +79,4 @@ def getEmmaBAndrews():
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
