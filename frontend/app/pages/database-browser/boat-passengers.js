@@ -61,18 +61,18 @@ export default function DatabaseBrowserID({ data }) {
                     </Stack>
                 </Stack>
 
-                {view === 0 && (
-                    <BoatPassengersTable bpData={dbData} />
-                )}
-                {view === 1 && (
-                    <BoatPassengersGrid
-                        data={dbData}
-                        page={page}
-                        display={display}
-                        results={results}
-                        setResults={setResults}
-                    />
-                )}
+                {/* {view === 0 && ( */}
+                <BoatPassengersTable bpData={dbData} />
+                {/* )} */}
+                {/* {view === 1 && ( */}
+                {/* <BoatPassengersGrid
+                    data={dbData}
+                    page={page}
+                    display={display}
+                    results={results}
+                    setResults={setResults}
+                /> */}
+                {/* )} */}
             </MarginStack>
         </Layout>
     )
