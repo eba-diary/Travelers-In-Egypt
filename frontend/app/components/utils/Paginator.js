@@ -6,10 +6,6 @@ export default function Paginator({ dataLength, page, display, setResults, id })
     const goBackFormula = parseInt(page) - 1 > 0 ? parseInt(page) - 1 : Math.floor(dataLength / display) + 1
     const goForwardFormula = parseInt(page) + 1 < dataLength / display + 1 ? parseInt(page) + 1 : 1
 
-    console.log('back: ', goBackFormula)
-    console.log('forward: ', goForwardFormula)
-
-
     return (
         <nav role='navigation' aria-label='Pagination Navigation'>
             <UnorderedList display='inline-block'>

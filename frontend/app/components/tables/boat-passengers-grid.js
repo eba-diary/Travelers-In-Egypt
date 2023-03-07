@@ -1,13 +1,16 @@
 import { Stack, VStack, Text, Grid, GridItem } from "@chakra-ui/react"
 import Paginator from "../utils/Paginator"
 
-export default function BoatPassengersGrid({ data, page, results, setResults, display }) {
+export default function BoatPassengersGrid({ data, results, setResults }) {
+
+    const dataCopy = data
     return (
         <Stack>
             {Array.isArray(data) ?
                 <Stack>
-                    <Paginator dataLength={data.length} page={page} display={parseInt(display)} setResults={setResults} id={'boat-passengers'} />
-                    {data.slice(results.pageStart, Math.min(parseInt(results.pageStart) + parseInt(display), data.length)).map((entry, index) => {
+                    <Paginator
+                        dataLength={data.length} page={results.page} display={parseInt(results.display)} setResults={setResults} id={'boat-passengers'} />
+                    {dataCopy.slice(results.pageStart, Math.min(parseInt(results.pageStart) + parseInt(results.display), data.length)).map((entry, index) => {
                         return (
                             <Stack key={index} pb='50px' borderRadius={5} border='1px solid #EEE' padding='10px'>
                                 <VStack alignItems='flex-start'>
@@ -33,7 +36,7 @@ export default function BoatPassengersGrid({ data, page, results, setResults, di
                             </Stack>
                         )
                     })}
-                    <Paginator dataLength={data.length} page={page} display={results.display} setResults={setResults} id={'boat-passengers'} />
+                    <Paginator dataLength={data.length} page={results.page} display={parseInt(results.display)} setResults={setResults} id={'boat-passengers'} />
                 </Stack>
                 :
                 <Text>{data.data}</Text>
