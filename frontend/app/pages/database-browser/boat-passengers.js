@@ -15,8 +15,6 @@ export default function DatabaseBrowserID({ data }) {
     const { page, display } = router.query
     const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
 
-    const [view, setView] = useState(0);
-
     const dbData = useMemo(() => {
         return data
     })
@@ -27,11 +25,13 @@ export default function DatabaseBrowserID({ data }) {
             display: display ? display : 1,
             pageStart: ((page ? page : 1) - 1) * (display ? display : 10)
         })
+        if (!router.asPath.includes('?')) {
+            router.push('?page=1&display=10')
+        }
     }, [page, display])
 
     const handleTabChange = (index) => {
         localStorage.setItem('tab_index', index)
-        setView(index)
     }
 
     return (
@@ -51,14 +51,16 @@ export default function DatabaseBrowserID({ data }) {
                                 ariaLabel: 'Show boat passengers in table',
                                 icon: BsListUl
                             }
-                        ]} handleTabChange={handleTabChange} view={view}
+                        ]} handleTabChange={handleTabChange}
                         >
-                            <BoatPassengersTable bpData={dbData} />
                             <BoatPassengersGrid
                                 data={dbData}
                                 results={results}
+                                page={page}
+                                display={display}
                                 setResults={setResults}
                             />
+                            <BoatPassengersTable bpData={dbData} />
                         </TabUtility>
                     </Stack>
                 </Stack>

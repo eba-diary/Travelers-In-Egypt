@@ -12,7 +12,7 @@ export default function TabUtility({ buttons, handleTabChange, children }) {
     })
 
     return (
-        <Tabs onChange={handleTabChange}>
+        <Tabs onChange={handleTabChange} defaultIndex={0}>
             <TabList>
                 {buttons.map((entry, index) => (
                     <Tab key={index}>

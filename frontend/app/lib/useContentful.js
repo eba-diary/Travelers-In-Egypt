@@ -16,7 +16,7 @@ export const useContentfulLanding = () => {
             })
             return entries
         } catch (error) {
-            console.log(`error fetching articles: ${error}`)
+            throw new Error(`error fetching articles: ${error}`)
         }
     }
 
