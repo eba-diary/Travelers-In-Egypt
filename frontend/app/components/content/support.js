@@ -243,7 +243,7 @@ export default function TeamForm() {
                                     control={control}
                                     render={({ field: { onChange, value }, fieldState: { error } }) => (
                                         <FormControl isInvalid={!!error}>
-                                            <HStack paddingBottom='25px's>
+                                            <Stack paddingBottom='25px's>
                                                 <FormLabel>What role are you interested in? Please select from the following:</FormLabel>
                                                 <Select
                                                     height='35px'
@@ -261,7 +261,7 @@ export default function TeamForm() {
                                                     <option value='option3'>Option3</option>
                                                     <option value='option4'>Option4</option>
                                                 </Select>
-                                            </HStack>
+                                            </Stack>
                                             <FormErrorMessage>
                                                 <Text>{error ? error.message : ''}</Text>
                                             </FormErrorMessage>
@@ -291,6 +291,7 @@ export default function TeamForm() {
                                                 border={error ? '1px solid' : '3.5px solid'}
                                                 backgroundColor='#FFF'
                                                 placeholder='Enter your message'
+                                                width={{base:'100%', md:'50%', lg:'80%'}}
                                             />
                                             <HStack
                                                 display='flex'
