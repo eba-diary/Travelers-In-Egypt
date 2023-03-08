@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import { useForm, FormProvider, Controller } from 'react-hook-form';
 import { useToast, VStack, HStack, Stack, Text, Button, Textarea, Select, Input, FormLabel, FormControl, FormErrorMessage } from '@chakra-ui/react';
 import { useEffect } from 'react';
 
 
-export default function ContactForm() {
+export default function TeamForm() {
     const [displaySubmitShortcut, setDisplaySubmitShortcut] = useState(false)
 
     const methods = useForm({
@@ -43,11 +42,11 @@ export default function ContactForm() {
     const watchTextArea = watch('response')
 
     return (
-        <VStack gap='50px'>
+        <VStack gap='20px'>
             <Stack width='100%' alignItems='center'>
                 <Stack width='85%'>
                     <Text fontSize='45px' fontWeight={800}>
-                        Contact Us
+                        DONATIONS
                     </Text>
                 </Stack>
             </Stack>
@@ -64,7 +63,7 @@ export default function ContactForm() {
                             paddingRight='5px'
                             fontWeight='600'
                         >
-                            General Contact Information:
+                            Interested in donating? Fill out this form:
                         </Text>
                     </Stack>
                     <Stack width='100%' alignItems='center'>
@@ -74,23 +73,69 @@ export default function ContactForm() {
                             borderLeft='3px solid #D08800'
                             bg='#ffe2ae'
                         >
-                            <Text
-                                paddingTop='5px'
-                                paddingLeft='5px'
+                            <VStack
+                                alignItems='left'
+                                width={{ base: '100%', md: '60%' }}
+                                padding='20px 10px'
                             >
-                                <Text>
-                                    <em style={{ fontWeight: 600, fontStyle: 'initial' }}>Email: </em>
-                                    lorem@ipsum.com
-                                </Text>
-                            </Text>
-                            <Text
+                                <HStack alignItems='flex-end'>
+                                    <FormLabel>Name:</FormLabel>
+                                    <Input
+                                        borderRadius=''
+                                        height='35px'
+                                        border='3.5px solid' 
+                                        backgroundColor='#FFF'
+                                        borderColor='#FFC55B'
+                                    />
+                                </HStack>
+                                <HStack alignItems='flex-end'>
+                                    <FormLabel>Email:</FormLabel>
+                                    <Input
+                                        height='35px'
+                                        borderRadius=''
+                                        border='3.5px solid'
+                                        backgroundColor='#FFF'
+                                        borderColor='#FFC55B'
+                                    />
+                                </HStack>
+                                <Stack
                                 fontStyle='italic'
-                                paddingBottom='5px'
-                                paddingLeft='5px'>
-                                Send any applications, inquiries, or concerns to this email.
-                            </Text>
+                                height='fit-content'
+                                flex={5}
+                                fontWeight={500}
+                                >
+                                    <Text>
+                                        The information above will only be used to send a reciept to the recipient.
+                                    </Text>
+                                    <Text>
+                                        Please continue by clicking on the button below to be redirected to a secure, external site.
+                                    </Text>
+                                </Stack>
+                                <Button
+                                    h='80px' w='300px' 
+                                    boxShadow='5px 5px 0px 0px #ffc55b'
+                                    borderRadius=''
+                                    background='#de9816'//d08800//de9816
+                                > 
+                                    <VStack>
+                                        <Text fontWeight='bold' textColor='#FFF'>
+                                            CLICK HERE TO DONATE
+                                        </Text>
+                                        <Text fontWeight='light' textColor='#FFF'>
+                                            (External Application Link)
+                                        </Text>
+                                    </VStack>
+                                </Button>
+                            </VStack>
                         </Stack>
                     </Stack>
+                </Stack>
+            </Stack>
+            <Stack width='100%' alignItems='center'>
+                <Stack width='85%'>
+                    <Text fontSize='45px' fontWeight={800}>
+                        GET INVOLVED
+                    </Text>
                 </Stack>
             </Stack>
             <Stack width='100%' alignItems='center'>
@@ -102,7 +147,7 @@ export default function ContactForm() {
                         paddingRight='5px'
                         fontWeight='600'
                     >
-                        Contact Request Form:
+                        Interested in joining the team? Fill out this form:
                     </Text>
                 </Stack>
                 <Stack width='100%' alignItems='center'>
@@ -123,7 +168,7 @@ export default function ContactForm() {
                                     }
                                 }}
                             >
-                                <Stack gap='15px' padding='10px 0px'>
+                                <Stack padding='10px 0px'>
                                     <Controller
                                         name='name'
                                         control={control}
@@ -135,12 +180,13 @@ export default function ContactForm() {
                                         }}
                                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                                             <FormControl isInvalid={!!error}>
-                                                <Stack width={{ base: '100%', md: '60%' }} >
+                                                <Stack width={{ base: '100%', md: '60%' }}>
                                                     <HStack alignItems='flex-end'>
-                                                        <FormLabel>Name:</FormLabel>
+                                                        
+                                                        <FormLabel alignItems='flex-end'>Name:</FormLabel>
                                                         <Input
-                                                            borderRadius=''
                                                             height='35px'
+                                                            borderRadius=''
                                                             backgroundColor='#FFF'
                                                             borderColor='#FFC55B'
                                                             border={error ? '1px solid' : '3.5px solid'}
@@ -168,10 +214,11 @@ export default function ContactForm() {
                                         }}
                                         render={({ field: { onChange, value }, fieldState: { error } }) => (
                                             <FormControl isInvalid={!!error}>
-                                                <Stack width={{ base: '100%', md: '60%' }} height='75px'>
+                                                <Stack width={{ base: '100%', md: '60%' }}>
                                                     <HStack alignItems='flex-end'>
                                                         <FormLabel>Email:</FormLabel>
                                                         <Input
+                                                            height='35px'
                                                             borderRadius=''
                                                             backgroundColor='#FFF'
                                                             borderColor='#FFC55B'
@@ -196,10 +243,10 @@ export default function ContactForm() {
                                     control={control}
                                     render={({ field: { onChange, value }, fieldState: { error } }) => (
                                         <FormControl isInvalid={!!error}>
-                                            <HStack paddingBottom='25px'>
-                                                <FormLabel>What department are you contacting?</FormLabel>
+                                            <Stack paddingBottom='25px's>
+                                                <FormLabel>What role are you interested in? Please select from the following:</FormLabel>
                                                 <Select
-                                                    borderRadius=''
+                                                    height='35px'
                                                     placeholder='Select option'
                                                     bg='#FFFFFF'
                                                     borderColor='#FFC55B'
@@ -214,7 +261,7 @@ export default function ContactForm() {
                                                     <option value='option3'>Option3</option>
                                                     <option value='option4'>Option4</option>
                                                 </Select>
-                                            </HStack>
+                                            </Stack>
                                             <FormErrorMessage>
                                                 <Text>{error ? error.message : ''}</Text>
                                             </FormErrorMessage>
@@ -232,8 +279,9 @@ export default function ContactForm() {
                                     }}
                                     render={({ field: { onChange, value }, fieldState: { error } }) => (
                                         <FormControl isInvalid={!!error}>
-                                            <FormLabel>Questions, Comments, Concerns:</FormLabel>
+                                            <FormLabel>Tell us about yourself and your skills. What do you plan to bring to the team?</FormLabel>
                                             <Textarea
+                                                height='35px'
                                                 borderRadius=''
                                                 onChange={onChange}
                                                 value={value}
@@ -243,6 +291,7 @@ export default function ContactForm() {
                                                 border={error ? '1px solid' : '3.5px solid'}
                                                 backgroundColor='#FFF'
                                                 placeholder='Enter your message'
+                                                width={{base:'100%', md:'50%', lg:'80%'}}
                                             />
                                             <HStack
                                                 display='flex'
@@ -283,7 +332,7 @@ export default function ContactForm() {
                                         flex={5}
                                         fontWeight={500}
                                     >
-                                        The individual will be informed of your
+                                        Our project manager will be informed of your
                                         contact request once submitted. Your message
                                         will be forwarded to them, and you can expect
                                         a response within 2 - 3 business days.
