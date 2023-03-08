@@ -14,10 +14,3 @@ def getBoatPassengers():
     # cursor.close()
 
     return jsonify(version)
-    
-    # if len(version):
-    #     columns = [desc[0] for desc in cursor.description]
-    #     version = [dict(zip(columns, row)) for row in version]
-    #     return jsonify(version)
-    # else:
-    #     return "No related information"

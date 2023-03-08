@@ -9,7 +9,7 @@ db_blueprint.register_blueprint(boat_passengers_blueprint)
 
 @db_blueprint.route("/")
 def getStaticPathsForDatabase():
-    return jsonify(['emma-b-andrews', 'nile-travelogues', 'boat-passengers'])
+    return jsonify({'routes': ['emma-b-andrews', 'nile-travelogues', 'boat-passengers']})
 
 
 @db_blueprint.route("/version")

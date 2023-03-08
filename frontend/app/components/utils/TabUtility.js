@@ -1,8 +1,18 @@
-import { Tabs, TabList, Tab, Icon } from '@chakra-ui/react'
+import { Tabs, TabList, Tab, Icon, TabPanels, TabPanel, Text } from '@chakra-ui/react'
+import { useMemo } from 'react'
+import React from 'react'
 
-export default function TabUtility({ buttons, handleTabChange, view }) {
+export default function TabUtility({ buttons, handleTabChange, children }) {
+    const childrenArray = useMemo(() => {
+        return React.Children.toArray(children).map((entry, index) => (
+            <TabPanel key={index}>
+                {entry}
+            </TabPanel>
+        ))
+    })
+
     return (
-        <Tabs index={parseInt(localStorage.getItem('tab_index')) ?? view} onChange={handleTabChange}>
+        <Tabs onChange={handleTabChange}>
             <TabList>
                 {buttons.map((entry, index) => (
                     <Tab key={index}>
@@ -13,6 +23,9 @@ export default function TabUtility({ buttons, handleTabChange, view }) {
                     </Tab>
                 ))}
             </TabList>
+            <TabPanels>
+                {childrenArray}
+            </TabPanels>
         </Tabs>
     )
 }
