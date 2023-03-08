@@ -1,18 +1,14 @@
-import { Stack, Text } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import Layout from "../components/utils/Layout";
+import Layout from '../components/utils/Layout';
+import dynamic from 'next/dynamic';
 
-export default function Support() {
-    const router = useRouter()
-    // const 
 
+export default function Contact() {
+    const ContactForm = dynamic(() =>
+        import('../components/content/support')
+    )
     return (
         <Layout index={5}>
-            <Stack>
-                <Text>
-                    Support Page
-                </Text>
-            </Stack>
+            <ContactForm />
         </Layout>
     )
 }
