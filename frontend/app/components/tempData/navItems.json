@@ -4,11 +4,11 @@
         "url": "/"
     },
     {
-        "title": "Artifacts Exhibition",
+        "title": "Exhibition",
         "url": "/artifacts-exhibition"
     },
     {
-        "title": "Culture & Tradition",
+        "title": "Research",
         "url": "/culture-tradition"
     },
     {
@@ -16,11 +16,11 @@
         "url": "/history"
     },
     {
-        "title": "Contact",
+        "title": "Tools",
         "url": "/contact"
     },
     {
-        "title": "Support",
-        "url": "/support"
+        "title": "Contact",
+        "url": "/contact"
     }
 ]
