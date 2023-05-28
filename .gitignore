@@ -3,3 +3,4 @@ node_modules/
 .flasknote
 venv/
 .DS_Store
+backend/__pycache__/

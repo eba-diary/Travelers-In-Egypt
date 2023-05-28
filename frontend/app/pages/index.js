@@ -9,6 +9,7 @@ import StudentSection from '../components/content/student-section';
 import dynamic from 'next/dynamic';
 import CardSlider from '../components/content/content-slider';
 import { API_BASE_URI } from '../lib/globals';
+import { supabase } from '../lib/supabase/client';
 
 export default function Home(
 	{ articles, searchBar, banner, projectInfo, students }
@@ -20,13 +21,20 @@ export default function Home(
 	useEffect(() => {
 		const ROUTE = 'database-browser'
 		const testFn = async () => {
-			const data = await fetch(`/api/v1/database-browser`, {
-				method: 'GET'
-			}).then(res => res.json())
-			console.log('data: ', data)
+			// const data = await fetch(`/api/v1/database-browser`, {
+			// 	method: 'GET'
+			// }).then(res => res.json())
 		}
-		testFn()
-	})
+		testSupabase()
+	}, [])
+
+	const testSupabase = async () => {
+		let { data, error } = await supabase
+			.from('Ships')
+			.select('*')
+			.order('id', { ascending: true })
+		console.log("data: ", data)
+	}
 
 	const GeneralSearchBar = dynamic(() => import('../components/content/general-search-bar'))
 	const AccordionTable = dynamic(() => import('../components/content/accordion-table'))

@@ -1,5 +1,5 @@
 from dotenv import load_dotenv
-from flask import Flask, jsonify
+from flask import Flask, Response, jsonify
 from api.routes.v1 import db_blueprint
 from models import cursor
 from flask_cors import CORS
@@ -17,9 +17,9 @@ def hello_world():
 
 
 @app.route('/test')
-def db_test():
+def db_test() -> Response:
     cursor.execute("Select * From Ships")
-    result = cursor.fetchall()
+    result: str = cursor.fetchall()
 
     columns = [desc[0] for desc in cursor.description]
     results = [dict(zip(columns, row)) for row in result]
@@ -75,6 +75,66 @@ def getEmmaBAndrews():
     return {
         'data': 'Database is under construction! Coming soon~'
     }
+
+
+@app.route("/database-browser/nile-travelogues/publications")
+def getPublications():
+    cursor.execute("SELECT * FROM Publications")
+    data = cursor.fetchall()
+
+    result = []
+
+    for items in data:
+        row = {
+            "publications_id": items[0],
+            "title": items[1],
+            "summary": items[2],
+            "can_read": items[3]
+        }
+        result.append(row)
+    return jsonify(result)
+
+
+@app.route("/database-browser/nile-travelogues/travelers")
+def getTravelers():
+    cursor.execute("SELECT * FROM Publications")
+    data = cursor.fetchall()
+
+    result = []
+
+    for items in data:
+        row = {
+            "travelers_id": items[4],
+            "travelers_name": items[5],
+            "travelers_type": items[6]
+        }
+        result.append(row)
+    return jsonify(result)
+
+
+@app.route("/database-browser/nile-travelogues/together")
+def getTogether():
+    cursor.execute("SELECT * FROM Publications")
+    data = cursor.fetchall()
+
+    result = []
+
+    for items in data:
+        row = {
+            "travelers_id": items[4],
+            "publications_id": items[0],
+        }
+        result.append(row)
+    return jsonify(result)
+
+
+
+@app.route("/database-browser/nile-travelogues/full")
+def getPublicationsTravelers():
+    cursor.execute("SELECT * FROM Publications")
+    data = cursor.fetchall()
+
+    return jsonify(data)
 
 
 
