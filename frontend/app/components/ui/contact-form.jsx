@@ -199,12 +199,11 @@ export default function ContactForm() {
                                             <HStack paddingBottom='25px'>
                                                 <FormLabel>What department are you contacting?</FormLabel>
                                                 <Select
-                                                    borderRadius=''
+                                                    borderRadius='1px'
                                                     placeholder='Select option'
                                                     bg='#FFFFFF'
                                                     borderColor='#FFC55B'
                                                     border={error ? '1px solid' : '3.5px solid'}
-                                                    borderRadius='1px'
                                                     width='60%'
                                                     value={value}
                                                     onChange={onChange}
