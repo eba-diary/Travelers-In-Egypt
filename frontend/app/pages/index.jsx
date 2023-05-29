@@ -2,20 +2,20 @@ import { useState, useEffect } from 'react';
 import { Flex, Text, useColorModeValue, HStack, Stack, Accordion } from "@chakra-ui/react";
 import Layout from '../components/utils/Layout';
 import { getHomePage } from '../lib/getHomePage';
-import FullScreenBanner from '../components/content/full-screen-banner';
-import AboutUs from '../components/content/about-us';
+import FullScreenBanner from '../components/ui/full-screen-banner';
+import AboutUs from '../components/ui/about-us';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import StudentSection from '../components/content/student-section';
+import StudentSection from '../components/ui/student-section';
 import dynamic from 'next/dynamic';
-import CardSlider from '../components/content/content-slider';
+import CardSlider from '../components/ui/content-slider';
 import { API_BASE_URI } from '../lib/globals';
 import { supabase } from '../lib/supabase/client';
 import { get } from '../lib/getStaticPages/get';
+import StaticPageTemplate from '../components/StaticPageTemplate';
 
 export default function Home(
-	{ test }
+	{ components }
 ) {
-	console.log(test)
 	// const [featuredArticles, setFeaturedArticles] = useState({
 	// 	articles: []
 	// })
@@ -58,13 +58,10 @@ export default function Home(
 
 	return (
 		<Layout index={0}>
-			<pre>
-
-				{JSON.stringify(test)}
-			</pre>
+			<StaticPageTemplate components={components} />
 			{/* <CmsTester props={projectInfo} /> */}
-			{/* <FullScreenBanner bannerItems={banner} />
-			<GeneralSearchBar searchBar={searchBar} />
+			{/* <FullScreenBanner bannerItems={banner} /> */}
+			{/* <GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
 				{
 					featuredArticles.articles.map((entries, index) => {
@@ -153,30 +150,12 @@ export default function Home(
 }
 
 export async function getStaticProps() {
-	// const {
-	// 	getFullScreenBanner,
-	// 	getHomeSearchBar,
-	// 	getFeaturedArticles,
-	// 	getGeneralProjectInformation,
-	// 	getStudentContributors
-	// } = getHomePage()
 
-	// const articles = await getFeaturedArticles()
-	// const searchBar = await getHomeSearchBar()
-	// const banner = await getFullScreenBanner()
-	// const projectInfo = await getGeneralProjectInformation()
-	// const students = await getStudentContributors()
-
-	const test = await get('home')
+	const components = await get('home')
 
 	return {
 		props: {
-			test
-			// articles: articles,
-			// searchBar: searchBar,
-			// banner: banner,
-			// projectInfo: projectInfo,
-			// students: students
+			components
 		}
 	}
 }
