@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 
 export default function Contact() {
     const ContactForm = dynamic(() =>
-        import('../components/content/support')
+        import('../components/ui/support')
     )
     return (
         <Layout index={5}>

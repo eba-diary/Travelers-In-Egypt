@@ -10,40 +10,40 @@ import NileTraveloguesGrid from "../../components/tables/nile-travelogues-grid";
 import NileTraveloguesTable from "../../components/tables/nile-travelogues-table";
 
 export default function NileTravelogues({ data }) {
-    const router = useRouter()
+    // const router = useRouter()
 
-    const TabUtility = dynamic(() => import('../../components/utils/TabUtility'), {
-        loading: () => 'Loading...',
-    })
+    // const TabUtility = dynamic(() => import('../../components/utils/TabUtility'), {
+    //     loading: () => 'Loading...',
+    // })
 
-    const { page, display } = router.query
-    const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
+    // const { page, display } = router.query
+    // const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
 
-    const [dbData, setDbData] = useState(data)
-    console.log("dbData: ", dbData)
+    // const [dbData, setDbData] = useState(data)
+    // console.log("dbData: ", dbData)
 
-    const [view, setView] = useState(0);
+    // const [view, setView] = useState(0);
+
+    // // useEffect(() => {
+    // //     localStorage.setItem('tab_index', view)
+    // // }, [view])
 
     // useEffect(() => {
-    //     localStorage.setItem('tab_index', view)
-    // }, [view])
+    //     setResults({
+    //         page: page ? page : 1,
+    //         display: display ? display : 1,
+    //         pageStart: ((page ? page : 1) - 1) * (display ? display : 10)
+    //     })
+    // }, [page, display])
 
-    useEffect(() => {
-        setResults({
-            page: page ? page : 1,
-            display: display ? display : 1,
-            pageStart: ((page ? page : 1) - 1) * (display ? display : 10)
-        })
-    }, [page, display])
-
-    const handleTabChange = (index) => {
-        localStorage.setItem('tab_index', index)
-        setView(index)
-    }
+    // const handleTabChange = (index) => {
+    //     localStorage.setItem('tab_index', index)
+    //     setView(index)
+    // }
 
     return (
         <Layout index={-1}>
-            <MarginStack>
+            {/* <MarginStack>
                 <Stack pb='50px'>
                     <Text fontSize='32px' fontWeight={700} pb='15px'>
                         Nile Travelogues Database
@@ -74,15 +74,15 @@ export default function NileTravelogues({ data }) {
                         setResults={setResults}
                     />
                 )}
-            </MarginStack>
+            </MarginStack> */}
         </Layout>
     )
 }
 
-export async function getStaticProps() {
-    const res = await fetch(`${API_BASE_URI}/database-browser/nile-travelogues`)
-    const data = await res.json()
-    return {
-        props: { data: data }
-    }
-}
+// export async function getStaticProps() {
+    // const res = await fetch(`${API_BASE_URI}/database-browser/nile-travelogues`)
+    // const data = await res.json()
+    // return {
+    //     props: { data: data }
+    // }
+// }

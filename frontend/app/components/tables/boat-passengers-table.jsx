@@ -12,15 +12,15 @@ export default function BoatPassengersTable({ bpData }) {
      */
 
     const data = useMemo(() => {
-        return bpData.map(obj => {
+        return bpData.map((obj, index) => {
             return {
+                key: index,
                 name: obj.name,
                 shipdate: obj.shipdate,
                 list: obj.lists
             };
         });
-    }, []);
-
+    }, [bpData]);
     const columns = useMemo(
         () => [
             {
@@ -54,10 +54,10 @@ export default function BoatPassengersTable({ bpData }) {
     return (
         <table {...getTableProps()}>
             <thead>
-                {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroups.map((headerGroup, index) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={index}>
                         {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps()}>
+                            <th {...column.getHeaderProps()} key={JSON.stringify(column)}>
                                 {column.render('Header')}
                             </th>
                         ))}
@@ -65,13 +65,13 @@ export default function BoatPassengersTable({ bpData }) {
                 ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-                {rows.map((row) => {
+                {rows.map((row, index) => {
                     prepareRow(row)
                     return (
-                        <tr {...row.getRowProps()}>
+                        <tr {...row.getRowProps()} key={index}>
                             {row.cells.map(cell => {
                                 return (
-                                    <td {...cell.getCellProps()}>
+                                    <td {...cell.getCellProps()} key={JSON.stringify(cell)}>
                                         {cell.render('Cell')}
                                     </td>
                                 )

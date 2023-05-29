@@ -1,66 +1,32 @@
-import { useState, useEffect } from 'react';
-import { Flex, Text, useColorModeValue, HStack, Stack, Accordion } from "@chakra-ui/react";
 import Layout from '../components/utils/Layout';
-import { getHomePage } from '../lib/getHomePage';
-import AboutUs from '../components/ui/about-us';
-import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
-import StudentSection from '../components/ui/student-section';
-import dynamic from 'next/dynamic';
-import CardSlider from '../components/ui/content-slider';
-import { API_BASE_URI } from '../lib/globals';
-import { supabase } from '../lib/supabase/client';
 import { get } from '../lib/getStaticPages/get';
 import StaticPageTemplate from '../components/StaticPageTemplate';
 
 export default function Home(
 	{ components }
 ) {
-	// const [featuredArticles, setFeaturedArticles] = useState({
-	// 	articles: []
-	// })
-
-	// useEffect(() => {
-	// 	const ROUTE = 'database-browser'
-	// 	const testFn = async () => {
-	// 		// const data = await fetch(`/api/v1/database-browser`, {
-	// 		// 	method: 'GET'
-	// 		// }).then(res => res.json())
-	// 	}
-	// 	testSupabase()
-	// }, [])
-
-	// const testSupabase = async () => {
-	// 	let { data, error } = await supabase
-	// 		.from('Ships')
-	// 		.select('*')
-	// 		.order('id', { ascending: true })
-	// 	console.log("data: ", data)
-	// }
-
-	// const GeneralSearchBar = dynamic(() => import('../components/content/general-search-bar'))
-	// const AccordionTable = dynamic(() => import('../components/content/accordion-table'))
-
-	// useEffect(() => {
-	// 	setFeaturedArticles({ articles: articles?.items })
-	// }, [])
-
-	// const DEFAULT_INDEX = 0
-
-	// let boxBg = useColorModeValue("white", "white");
-	// const paddingBg = useColorModeValue("#C58A22", "white");
-	// const outerBoxStyles = {
-	// 	bgColor: '#F8C66C',
-	// 	borderTop: '40px solid white'
-	// }
-
-	// console.log(students)
-
 	return (
 		<Layout index={0}>
 			<StaticPageTemplate components={components} />
-			{/* <CmsTester props={projectInfo} /> */}
-			{/* <FullScreenBanner bannerItems={banner} /> */}
-			{/* <GeneralSearchBar searchBar={searchBar} />
+		</Layout>
+	)
+
+}
+
+export async function getStaticProps() {
+
+	const components = await get('home')
+
+	return {
+		props: {
+			components
+		}
+	}
+}
+
+{/* <CmsTester props={projectInfo} /> */ }
+{/* <FullScreenBanner bannerItems={banner} /> */ }
+{/* <GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
 				{
 					featuredArticles.articles.map((entries, index) => {
@@ -143,18 +109,3 @@ export default function Home(
 					})}
 				</Accordion>
 			</Stack> */}
-		</Layout>
-	)
-
-}
-
-export async function getStaticProps() {
-
-	const components = await get('home')
-
-	return {
-		props: {
-			components
-		}
-	}
-}

@@ -10,33 +10,33 @@ import BoatPassengersGrid from "../../components/tables/boat-passengers-grid";
 import TabUtility from "../../components/utils/TabUtility";
 
 export default function DatabaseBrowserID({ data }) {
-    const router = useRouter()
+    // const router = useRouter()
 
-    const { page, display } = router.query
-    const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
+    // const { page, display } = router.query
+    // const [results, setResults] = useState({ page: 1, display: 10, pageStart: 1 })
 
-    const dbData = useMemo(() => {
-        return data
-    })
+    // const dbData = useMemo(() => {
+    //     return data
+    // })
 
-    useEffect(() => {
-        setResults({
-            page: page ? page : 1,
-            display: display ? display : 1,
-            pageStart: ((page ? page : 1) - 1) * (display ? display : 10)
-        })
-        if (!router.asPath.includes('?')) {
-            router.push('?page=1&display=10')
-        }
-    }, [page, display])
+    // useEffect(() => {
+    //     setResults({
+    //         page: page ? page : 1,
+    //         display: display ? display : 1,
+    //         pageStart: ((page ? page : 1) - 1) * (display ? display : 10)
+    //     })
+    //     if (!router.asPath.includes('?')) {
+    //         router.push('?page=1&display=10')
+    //     }
+    // }, [page, display])
 
-    const handleTabChange = (index) => {
-        localStorage.setItem('tab_index', index)
-    }
+    // const handleTabChange = (index) => {
+    //     localStorage.setItem('tab_index', index)
+    // }
 
     return (
         <Layout index={-1}>
-            <MarginStack>
+            {/* <MarginStack>
                 <Stack pb='50px'>
                     <Text fontSize='32px' fontWeight={700} pb='15px'>
                         Boat Passengers Database
@@ -66,16 +66,16 @@ export default function DatabaseBrowserID({ data }) {
                 </Stack>
 
 
-            </MarginStack>
+            </MarginStack> */}
         </Layout>
     )
 }
 
-export async function getStaticProps() {
-    const res = await fetch(`${API_BASE_URI}/database-browser/boat-passengers`)
-    console.log(res)
-    const data = await res.json()
-    return {
-        props: { data: data }
-    }
-}
+// export async function getStaticProps() {
+    // const res = await fetch(`${API_BASE_URI}/database-browser/boat-passengers`)
+    // console.log(res)
+    // const data = await res.json()
+    // return {
+    //     props: { data: data }
+    // }
+// }

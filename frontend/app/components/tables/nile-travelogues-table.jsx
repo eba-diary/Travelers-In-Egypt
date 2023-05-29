@@ -15,14 +15,15 @@ export default function NileTraveloguesTable({ ntData }) {
     // all name, title (set length to 1) in alphabetical order
 
     const data = useMemo(() => {
-        return ntData.map(obj => {
+        return ntData.map(obj, index => {
             return {
+                key: index,
                 name: obj.travelers_name,
                 title: obj.title,
                 summary: obj.summary
             };
         });
-    }, []);
+    }, [ntData]);
 
     const columns = useMemo(
         () => [
@@ -57,10 +58,10 @@ export default function NileTraveloguesTable({ ntData }) {
     return (
         <table {...getTableProps()}>
             <thead>
-                {headerGroups.map((headerGroup) => (
-                    <tr {...headerGroup.getHeaderGroupProps()}>
+                {headerGroups.map((headerGroup, index) => (
+                    <tr {...headerGroup.getHeaderGroupProps()} key={index}>
                         {headerGroup.headers.map((column) => (
-                            <th {...column.getHeaderProps()}>
+                            <th {...column.getHeaderProps()} key={JSON.stringify(column)}>
                                 {column.render('Header')}
                             </th>
                         ))}
@@ -68,13 +69,13 @@ export default function NileTraveloguesTable({ ntData }) {
                 ))}
             </thead>
             <tbody {...getTableBodyProps()}>
-                {rows.map((row) => {
+                {rows.map((row, index) => {
                     prepareRow(row)
                     return (
-                        <tr {...row.getRowProps()}>
+                        <tr {...row.getRowProps()} key={index}>
                             {row.cells.map(cell => {
                                 return (
-                                    <td {...cell.getCellProps()}>
+                                    <td {...cell.getCellProps()} key={JSON.stringify(cell)}>
                                         {cell.render('Cell')}
                                     </td>
                                 )

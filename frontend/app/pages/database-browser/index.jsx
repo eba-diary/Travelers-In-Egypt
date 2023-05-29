@@ -7,13 +7,13 @@ import { API_BASE_URI } from "../../lib/globals";
 
 
 export default function DatabaseBrowser({ data }) {
-    const links = data.routes.map((entry) => {
-        return entry.split('-').map(word => { return word[0].toUpperCase() + word.substring(1,) + ' ' })
-    })
+    // const links = data.routes.map((entry) => {
+    //     return entry.split('-').map(word => { return word[0].toUpperCase() + word.substring(1,) + ' ' })
+    // })
 
     return (
         <Layout index={-1}>
-            <MarginStack>
+            {/* <MarginStack>
                 <Text fontSize='25px' fontWeight={700}>
                     Select a database to view
                 </Text>
@@ -42,17 +42,17 @@ export default function DatabaseBrowser({ data }) {
                         })}
                     </UnorderedList>
                 </Stack>
-            </MarginStack>
+            </MarginStack> */}
         </Layout>
     )
 }
 
 
-export async function getStaticProps() {
-    const data = await fetch(`${API_BASE_URI}/database-browser/`, {
-        method: 'GET',
-    }).then(res => res.json())
-    return {
-        props: { data: data }
-    }
-}
+// export async function getStaticProps() {
+    // const data = await fetch(`${API_BASE_URI}/database-browser/`, {
+    //     method: 'GET',
+    // }).then(res => res.json())
+    // return {
+    //     props: { data: data }
+    // }
+// }
