@@ -1,6 +1,5 @@
 import { HStack, Stack, Text, Hide, Show, Menu, MenuButton, IconButton, MenuList } from '@chakra-ui/react'
-import { FaHamburger } from 'react-icons/fa'
-import {GiHamburgerMenu} from 'react-icons/gi'
+import { GiHamburgerMenu } from 'react-icons/gi'
 import navItems from '../tempData/navItems.json'
 import logo from '../../public/WebLogo.png';
 import MarginStack from './MarginStack';

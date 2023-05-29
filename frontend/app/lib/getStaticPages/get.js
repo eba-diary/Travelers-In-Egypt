@@ -1,21 +1,29 @@
 import { client } from "../useContentful";
-import { getBannerCarousel } from "./getComponents/getBanner";
+import { getCarousel, getCardDeck, getLargeSearchBar, getGeneralInformation, getStudentContributors } from "./getComponents";
 
 
 export async function get(page) {
     const pageSlug = page.charAt(0).toUpperCase() + page.slice(1);
     try {
         const data = (await client.getEntries({
-            content_type: "staticPage",
+            content_type: "page",
             include: 10,
             select: 'fields',
-            'fields.type': `${pageSlug}`
-        })).items[0].fields
+            'fields.pageTitle': `${pageSlug}`
+        })).items[0].fields.pageComponents
 
-        const staticPageData = data.fields.map((field) => {
+        const staticPageData = data.map((field) => {
             switch (field.fields.type.fields.type.toLowerCase().replaceAll(" ", "-")) {
-                case 'banner-carousel':
-                    return getBannerCarousel(field)
+                case 'carousel':
+                    return getCarousel(field.fields)
+                case 'card-deck':
+                    return getCardDeck(field.fields)
+                case 'large-search-bar':
+                    return getLargeSearchBar(field.fields)
+                case 'general-information':
+                    return getGeneralInformation(field.fields)
+                case 'student-contributors':
+                    return getStudentContributors(field.fields)
                 default:
                     return { fields: field }
             }

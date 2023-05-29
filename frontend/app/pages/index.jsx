@@ -10,54 +10,60 @@ import dynamic from 'next/dynamic';
 import CardSlider from '../components/content/content-slider';
 import { API_BASE_URI } from '../lib/globals';
 import { supabase } from '../lib/supabase/client';
+import { get } from '../lib/getStaticPages/get';
 
 export default function Home(
-	{ articles, searchBar, banner, projectInfo, students }
+	{ test }
 ) {
-	const [featuredArticles, setFeaturedArticles] = useState({
-		articles: []
-	})
+	console.log(test)
+	// const [featuredArticles, setFeaturedArticles] = useState({
+	// 	articles: []
+	// })
 
-	useEffect(() => {
-		const ROUTE = 'database-browser'
-		const testFn = async () => {
-			// const data = await fetch(`/api/v1/database-browser`, {
-			// 	method: 'GET'
-			// }).then(res => res.json())
-		}
-		testSupabase()
-	}, [])
+	// useEffect(() => {
+	// 	const ROUTE = 'database-browser'
+	// 	const testFn = async () => {
+	// 		// const data = await fetch(`/api/v1/database-browser`, {
+	// 		// 	method: 'GET'
+	// 		// }).then(res => res.json())
+	// 	}
+	// 	testSupabase()
+	// }, [])
 
-	const testSupabase = async () => {
-		let { data, error } = await supabase
-			.from('Ships')
-			.select('*')
-			.order('id', { ascending: true })
-		console.log("data: ", data)
-	}
+	// const testSupabase = async () => {
+	// 	let { data, error } = await supabase
+	// 		.from('Ships')
+	// 		.select('*')
+	// 		.order('id', { ascending: true })
+	// 	console.log("data: ", data)
+	// }
 
-	const GeneralSearchBar = dynamic(() => import('../components/content/general-search-bar'))
-	const AccordionTable = dynamic(() => import('../components/content/accordion-table'))
+	// const GeneralSearchBar = dynamic(() => import('../components/content/general-search-bar'))
+	// const AccordionTable = dynamic(() => import('../components/content/accordion-table'))
 
-	useEffect(() => {
-		setFeaturedArticles({ articles: articles?.items })
-	}, [])
+	// useEffect(() => {
+	// 	setFeaturedArticles({ articles: articles?.items })
+	// }, [])
 
-	const DEFAULT_INDEX = 0
+	// const DEFAULT_INDEX = 0
 
-	let boxBg = useColorModeValue("white", "white");
-	const paddingBg = useColorModeValue("#C58A22", "white");
-	const outerBoxStyles = {
-		bgColor: '#F8C66C',
-		borderTop: '40px solid white'
-	}
+	// let boxBg = useColorModeValue("white", "white");
+	// const paddingBg = useColorModeValue("#C58A22", "white");
+	// const outerBoxStyles = {
+	// 	bgColor: '#F8C66C',
+	// 	borderTop: '40px solid white'
+	// }
 
-	console.log(students)
+	// console.log(students)
 
 	return (
 		<Layout index={0}>
+			<pre>
+
+				{JSON.stringify(test)}
+			</pre>
 			{/* <CmsTester props={projectInfo} /> */}
-			<FullScreenBanner bannerItems={banner} />
+			{/* <FullScreenBanner bannerItems={banner} />
 			<GeneralSearchBar searchBar={searchBar} />
 			<HStack justifyContent='center'>
 				{
@@ -140,34 +146,37 @@ export default function Home(
 						)
 					})}
 				</Accordion>
-			</Stack>
+			</Stack> */}
 		</Layout>
 	)
 
 }
 
 export async function getStaticProps() {
-	const {
-		getFullScreenBanner,
-		getHomeSearchBar,
-		getFeaturedArticles,
-		getGeneralProjectInformation,
-		getStudentContributors
-	} = getHomePage()
+	// const {
+	// 	getFullScreenBanner,
+	// 	getHomeSearchBar,
+	// 	getFeaturedArticles,
+	// 	getGeneralProjectInformation,
+	// 	getStudentContributors
+	// } = getHomePage()
 
-	const articles = await getFeaturedArticles()
-	const searchBar = await getHomeSearchBar()
-	const banner = await getFullScreenBanner()
-	const projectInfo = await getGeneralProjectInformation()
-	const students = await getStudentContributors()
+	// const articles = await getFeaturedArticles()
+	// const searchBar = await getHomeSearchBar()
+	// const banner = await getFullScreenBanner()
+	// const projectInfo = await getGeneralProjectInformation()
+	// const students = await getStudentContributors()
+
+	const test = await get('home')
 
 	return {
 		props: {
-			articles: articles,
-			searchBar: searchBar,
-			banner: banner,
-			projectInfo: projectInfo,
-			students: students
+			test
+			// articles: articles,
+			// searchBar: searchBar,
+			// banner: banner,
+			// projectInfo: projectInfo,
+			// students: students
 		}
 	}
 }
