@@ -1,4 +1,5 @@
 // Neil Morgan's (https://github.com/neil-morgan) Chakra Carousel
+
 import {
     Stack,
     Flex,
@@ -8,7 +9,7 @@ import {
     // useColorModeValue,
     IconButton
 } from "@chakra-ui/react";
-import { IoTriangleSharp } from "react-icons/io5"
+import { GrFormPrevious, GrFormNext } from "react-icons/gr"
 import {
     useCallback,
     useEffect,
@@ -45,7 +46,7 @@ export default function CardSlider({ children, gap }) {
 
     const positions = useMemo(
         () => Children.toArray(children).map((_, index) => -Math.abs((itemWidth + gap) * index)),
-        [children, 
+        [children,
             itemWidth, gap]
     );
     const [isBetweenBaseAndMd] = useMediaQuery(
@@ -179,70 +180,66 @@ const Slider = ({
 
     return (
         <>
-        <Flex direction="row" 
-            justifyContent="center" 
-            rowGap='20px'
-            columnGap='20px'
-            width='100%' 
-            marginTop='-85px'
-            marginBottom='-25px'
-            mx="auto"
-        >
-            <IconButton 
-                aria-label='test'
-                marginTop='95px' 
-                transform='rotate(270deg)'
-                icon={<IoTriangleSharp color="#C58A22"/>}
-                borderRadius='full'
-                border='5px solid' 
-                borderColor='#C58A22'
-                onClick={handleDecrementClick}
-                onFocus={handleFocus}
-            />
-            <Box
-                ref={ref}
-                w={{ base: "100%", md: `calc(100% + ${gap}px)` }}
-                ml={{ base: 0, md: `-${gap / 2}px` }}
-                px={`${gap / 2}px`}
-                position="relative"
-                overflow="hidden"
-                _before={{
-                    bgGradient: "linear(to-r, base.d400, transparent)",
-                    position: "absolute",
-                    w: `${gap / 2}px`,
-                    content: "''",
-                    zIndex: 1,
-                    h: "100%",
-                    left: 0,
-                    top: 0
-                }}
-                _after={{
-                    bgGradient: "linear(to-l, base.d400, transparent)",
-                    position: "absolute",
-                    w: `${gap / 2}px`,
-                    content: "''",
-                    zIndex: 1,
-                    h: "100%",
-                    right: 0,
-                    top: 0
-                }}
+            <Flex
+                direction="row"
+                justifyContent="center"
+                alignItems='center'
+                rowGap='20px'
+                columnGap='20px'
+                width='100%'
+                mx="auto"
             >
-               
-                {children}
-                
-            </Box>
-            <IconButton 
-                aria-label='test'
-                marginTop='95px' 
-                transform='rotate(90deg)'
-                icon={<IoTriangleSharp color="#C58A22"/>}
-                borderRadius='full'
-                border='5px solid' 
-                borderColor='#C58A22'
-                onClick={handleDecrementClick}
-                onFocus={handleFocus}
-            />
-        </Flex>
+                <IconButton
+                    aria-label='test'
+                    icon={<GrFormPrevious color="#C58A22" />}
+                    borderRadius='5px'
+                    border='2px solid #C58A22'
+                    onClick={handleDecrementClick}
+                    onFocus={handleFocus}
+                    backgroundColor='#f8c66c'
+                />
+                <Box
+                    ref={ref}
+                    w={{ base: "100%", md: `calc(100% + ${gap}px)` }}
+                    ml={{ base: 0, md: `-${gap / 2}px` }}
+                    px={`${gap / 2}px`}
+                    position="relative"
+                    overflow="hidden"
+                    _before={{
+                        bgGradient: "linear(to-r, base.d400, transparent)",
+                        position: "absolute",
+                        w: `${gap / 2}px`,
+                        content: "''",
+                        zIndex: 1,
+                        h: "100%",
+                        left: 0,
+                        top: 0
+                    }}
+                    _after={{
+                        bgGradient: "linear(to-l, base.d400, transparent)",
+                        position: "absolute",
+                        w: `${gap / 2}px`,
+                        content: "''",
+                        zIndex: 1,
+                        h: "100%",
+                        right: 0,
+                        top: 0
+                    }}
+                >
+
+                    {children}
+
+                </Box>
+                <IconButton
+                    aria-label='test'
+                    icon={<GrFormNext />}
+                    borderRadius='5px'
+                    onClick={handleDecrementClick}
+                    onFocus={handleFocus}
+                    backgroundColor='#f8c66c'
+                    border='2px solid #C58A22'
+                />
+            </Flex>
         </>
     );
 };

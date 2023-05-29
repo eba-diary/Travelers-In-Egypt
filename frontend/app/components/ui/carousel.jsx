@@ -2,7 +2,7 @@ import { Stack, HStack, Text, Image, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import useComponentHeight from "../../lib/hooks/useComponentHeight";
 import { motion } from "framer-motion";
-import { forwardRef, useEffect, useState } from "react";
+import { forwardRef, useState } from "react";
 
 export default function Carousel({ data }) {
     const router = useRouter()
@@ -20,9 +20,13 @@ export default function Carousel({ data }) {
     };
 
     const totalSlides = data.fields.carouselCards.length
-    const handleNextSlide = () => {
+    const handleNextSlide = (index) => {
         setDirection('right');
-        setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
+        if (isNaN(index)) {
+            setCurrentSlide((prevSlide) => (prevSlide + 1) % totalSlides);
+        } else {
+            setCurrentSlide(index)
+        }
     };
 
     const handlePrevSlide = () => {
@@ -34,19 +38,25 @@ export default function Carousel({ data }) {
         return (
             <CarouselCard
                 key={index}
+                ref={ref}
                 entry={entry}
                 slideVariants={slideVariants}
                 handleNextSlide={handleNextSlide}
                 handlePrevSlide={handlePrevSlide}
                 router={router}
-                ref={ref}
+                height={height}
             />
         )
     })
 
     return (
         <Stack width='100%' alignItems='center' position='relative'>
-            <HStack borderBottom='15px solid #C58A22' width='100%' alignItems='flex-start'>
+            <HStack
+                borderBottom='15px solid #C58A22'
+                width='100%'
+                alignItems='flex-start'
+                spacing='0px'
+            >
                 <MotionStack
                     initial="hidden"
                     animate="visible"
@@ -62,45 +72,65 @@ export default function Carousel({ data }) {
                 <Stack
                     flex={1}
                     height={height}
-                    border='1px solid'
+                    spacing='0px'
+                    zIndex={1}
                 >
-                    <Text>Selection Tab</Text>
-                    <Text>Selection Tab</Text>
-                    <Text>Selection Tab</Text>
-                    <Text>Selection Tab</Text>
+                    {data.fields.carouselCards.map((entry, index) => (
+                        <Stack
+                            key={index}
+                            height={height / totalSlides}
+                            padding='10px'
+                            tabIndex={4}
+                            borderBottom='1px'
+                            backgroundColor={currentSlide == index ? '#c58922' : '#f8c66c'}
+                            onClick={() => {
+                                handleNextSlide(index)
+                            }}
+                            _hover={{
+                                cursor: 'pointer',
+                                transition: '0.3s',
+                                backgroundColor: currentSlide !== index ? '#deab52' : ''
+                            }}
+                        >
+                            <Text
+                                fontSize={{ base: '14px' }}
+                                fontWeight={700}
+                            >
+                                {entry.title}
+                            </Text>
+                            <Text
+                                fontSize={{ base: '14px' }}
+                                fontWeight={400}
+                                noOfLines={2}
+                            >
+                                {entry.description}
+                            </Text>
+                        </Stack>
+                    ))}
                 </Stack>
             </HStack>
         </Stack>
     )
 }
 
-function CarouselCard({
-    entry,
-    slideVariants,
-    handleNextSlide,
-    handlePrevSlide,
-    router,
-}) {
-    const [ref, height] = useComponentHeight()
-
+const CarouselCard = forwardRef((
+    {
+        entry,
+        slideVariants,
+        handleNextSlide,
+        handlePrevSlide,
+        router,
+        height
+    },
+    ref
+) => {
     return (
         <motion.div variants={slideVariants}>
             <Stack
                 position='relative'
                 height={height}
+                border='1px solid #c58922'
             >
-                <HStack
-                    width='100%'
-                    position='absolute'
-                    border='1px solid'
-                    height={height}
-                    justifyContent='space-between'
-                    padding='10px'
-                    zIndex={3}
-                >
-                    <Button onClick={handlePrevSlide}>&lt;</Button>
-                    <Button onClick={handleNextSlide}>&gt;</Button>
-                </HStack>
                 <Stack>
                     <Image
                         ref={ref}
@@ -108,8 +138,9 @@ function CarouselCard({
                         alt={entry.image.alt}
                         width='100%'
                         height='400px'
-                        objectFit='cover'
+                        objectFit='fill'
                         position='absolute'
+                        top={0}
                     />
                     <Stack
                         position="absolute"
@@ -124,8 +155,20 @@ function CarouselCard({
                     color='#f2f2f2'
                     justifyContent='flex-end'
                     padding='10px'
+
                 >
-                    <HStack width='100%' justifyContent='space-between'>
+                    <HStack
+                        width={{ base: '96%', lg: '98%' }}
+                        position='absolute'
+                        height='fit-content'
+                        bottom='50%'
+                        justifyContent='space-between'
+                        color='#000'
+                    >
+                        <Button onClick={handlePrevSlide}>&lt;</Button>
+                        <Button onClick={handleNextSlide}>&gt;</Button>
+                    </HStack>
+                    <HStack width='100%' justifyContent='space-between' padding='10px'>
                         <Stack>
                             <Text>
                                 {entry.title}
@@ -149,4 +192,4 @@ function CarouselCard({
             </Stack>
         </motion.div>
     )
-}
+})

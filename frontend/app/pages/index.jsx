@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { Flex, Text, useColorModeValue, HStack, Stack, Accordion } from "@chakra-ui/react";
 import Layout from '../components/utils/Layout';
 import { getHomePage } from '../lib/getHomePage';
-import FullScreenBanner from '../components/ui/full-screen-banner';
 import AboutUs from '../components/ui/about-us';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import StudentSection from '../components/ui/student-section';

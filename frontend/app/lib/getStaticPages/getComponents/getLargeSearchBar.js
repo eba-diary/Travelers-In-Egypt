@@ -3,7 +3,7 @@ export function getLargeSearchBar(fields) {
         type: 'large-search-bar',
         fields: {
             title: fields.title,
-            descirption: fields.description,
+            description: fields.description,
             searchPlaceholder: fields.searchPlaceholder,
             databases: fields.databases.map((entry) => {
                 return { ...entry.fields }
