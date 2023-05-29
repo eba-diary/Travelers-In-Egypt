@@ -113,6 +113,8 @@ export default function Carousel({ data }) {
     )
 }
 
+Carousel.displayName = 'Carousel'
+
 const CarouselCard = forwardRef((
     {
         entry,
