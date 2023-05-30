@@ -44,9 +44,9 @@ export default function Collapse({ data, type }) {
                                     return (
                                         <AccordionPanel backgroundColor='#FFF' color='#000'>
                                             <HStack gap='50px'>
-                                                {entry.contributor.map((student, index) => {
+                                                {entry.contributor.map((student) => {
                                                     return (
-                                                        <Stack key={index}>
+                                                        <Stack key={JSON.stringify(student)}>
                                                             <Text>{student.name}</Text>
                                                             <HStack>
                                                                 {student.email && (
