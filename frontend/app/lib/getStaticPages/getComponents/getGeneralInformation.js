@@ -20,7 +20,11 @@ export function getGeneralInformation(fields) {
                     title: entry.fields.title,
                     items: { ...entry.fields.items.fields }
                 }
-            })
+            }),
+            sectionImage: {
+                src: 'https:' + fields.sectionImage.fields.image.fields.file.url,
+                alt: fields.sectionImage.fields.alt
+            }
         }
     }
 }

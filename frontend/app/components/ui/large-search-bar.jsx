@@ -34,7 +34,7 @@ export default function LargeSearchBar({ data }) {
     }
 
     return (
-        <HStack width='100%' height='400px' p='0px 25px' justifyContent='space-around' gap='25px'>
+        <HStack width='100%' height='400px' p='0px 25px' justifyContent='space-around'>
             <Stack
                 flex={1}
                 height={height}

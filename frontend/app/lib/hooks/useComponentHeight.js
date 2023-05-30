@@ -11,10 +11,7 @@ function useComponentHeight() {
             }
         };
 
-        // Initial height calculation
         updateHeight();
-
-        // Recalculate height whenever the window is resized
         window.addEventListener('resize', updateHeight);
 
         return () => {
