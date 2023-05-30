@@ -6,22 +6,22 @@ import MarginStack from './MarginStack';
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Navbar({ pageIndex }) {
+export default function Navbar({ ...pre }) {
 
-    const navContent = navItems.map((entry, index) => {
+    const navContent = pre.pre.navbar.navItems.map((entry, index) => {
         return (
-            <Link href={`${entry.url}`} key={index}>
+            <Link href={`${entry.tab}`} key={index}>
                 <Stack
                     padding={{ md: '0px 12px', lg: '0px 15px' }}
                     textAlign={{ base: 'left', md: 'center' }}
                     paddingLeft={{ base: '15px', md: '2px', lg: '10px', xl: '15px' }}
                     border={{
-                        base: index === pageIndex ? '2px solid #C58A22' : '',
+                        base: index === pre.index ? '2px solid #C58A22' : '',
                         md: '0px'
                     }}
                     borderBottom={{
                         base: '',
-                        md: index === pageIndex ? '3px solid #C58A22' : '0px'
+                        md: index === pre.index ? '3px solid #C58A22' : '0px'
                     }}
                 >
                     <Text
@@ -35,9 +35,9 @@ export default function Navbar({ pageIndex }) {
                         onMouseLeave={(event) => {
                             handleEvent(event, '2')
                         }}
-                        paddingBottom={index === pageIndex ? '5px' : '8px'}
+                        paddingBottom={index === pre.index ? '5px' : '8px'}
                     >
-                        {entry.title.toUpperCase()}
+                        {entry.tab.toUpperCase()}
                     </Text>
                 </Stack>
             </Link>

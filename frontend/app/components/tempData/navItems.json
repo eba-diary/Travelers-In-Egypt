@@ -1,26 +1,26 @@
 [
     {
-        "title": "Home",
+        "tab": "Home",
         "url": "/"
     },
     {
-        "title": "Exhibition",
+        "tab": "Exhibition",
         "url": "/artifacts-exhibition"
     },
     {
-        "title": "Research",
+        "tab": "Research",
         "url": "/culture-tradition"
     },
     {
-        "title": "History",
+        "tab": "History",
         "url": "/history"
     },
     {
-        "title": "Tools",
+        "tab": "Tools",
         "url": "/contact"
     },
     {
-        "title": "Contact",
+        "tab": "Contact",
         "url": "/contact"
     }
 ]
