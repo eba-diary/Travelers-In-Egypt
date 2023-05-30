@@ -6,7 +6,7 @@ export default function Collapse({ data, type }) {
         <Stack padding='10px'>
             <Accordion allowToggle>
                 {data.map((entry, index) => (
-                    <Stack padding='5px'>
+                    <Stack padding='5px' key={index}>
                         <AccordionItem
                             key={index}
                             border='1px solid #C58A22'
