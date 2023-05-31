@@ -1,6 +1,6 @@
 import Navbar from "./Navbar"
 import Footer from './Footer'
-import { Stack } from "@chakra-ui/react"
+import { Stack, Text } from "@chakra-ui/react"
 import { getNavbar } from "../../lib/getPageInfo/getNavbar"
 import { useDispatch, useSelector } from "react-redux"
 import { createNavbar } from "../../lib/redux/slice/preSlice"
