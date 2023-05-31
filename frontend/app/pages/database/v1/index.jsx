@@ -1,25 +1,21 @@
 import { Stack, Text } from "@chakra-ui/react";
 import { get } from "../../../lib/getStaticPages/get";
 import usePageNumber from "../../../lib/hooks/usePageNumber";
+import StaticPageTemplate from '../../../components/StaticPageTemplate';
 
-export default function V1({ databaseCards }) {
+export default function V1({ components }) {
     usePageNumber(1)
-    console.log(databaseCards)
     return (
-        <Stack>
-            <Text>
-                V1
-            </Text>
-        </Stack>
+        <StaticPageTemplate components={components} />
     )
 }
 
 export async function getServerSideProps() {
-    const databaseCards = await get('research')
+    const components = await get('research')
 
     return {
         props: {
-            databaseCards
+            components
         }
     }
 }

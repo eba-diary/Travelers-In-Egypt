@@ -3,6 +3,7 @@ import React from "react";
 import CardDeck from "./ui/card-deck";
 import Carousel from "./ui/carousel";
 import Contributors from "./ui/contributors";
+import DatabaseCards from "./ui/database/databaseCards";
 import GeneralInformation from "./ui/general-information";
 import LargeSearchBar from "./ui/large-search-bar";
 
@@ -22,6 +23,8 @@ export default function StaticPageTemplate({ components }) {
                             return <GeneralInformation key={index} data={component} />
                         case 'student-contributors':
                             return <Contributors key={index} data={component} />
+                        case 'database-container':
+                            return <DatabaseCards key={index} data={component} />
                     }
                 })}
             </Stack>
