@@ -1,34 +1,45 @@
 import Navbar from "./Navbar"
 import Footer from './Footer'
 import { Stack } from "@chakra-ui/react"
-import { useEffect } from "react"
 import { getNavbar } from "../../lib/getPageInfo/getNavbar"
 import { useDispatch, useSelector } from "react-redux"
 import { createNavbar } from "../../lib/redux/slice/preSlice"
+import { useQueryClient, useQuery, useHydrate } from '@tanstack/react-query'
 
-export default function Layout({ children, index }) {
+export default function Layout({ children }) {
     const dispatch = useDispatch()
-    const pre = useSelector((state) => state.pre)
+    const index = useSelector((state) => state.pre.index)
 
-    useEffect(() => {
-        const preLoad = async () => {
-            const navBar = await getNavbar()
+    const queryClient = useQueryClient()
+    const oneHour = 60 * 60 * 1000
+
+    useHydrate(queryClient)
+
+    const { isLoading, isError, data, error, refetch } = useQuery({
+        queryKey: ['navbar'],
+        queryFn: async () => {
+            const navBar = (await getNavbar())
             dispatch(createNavbar(navBar))
-        }
-
-        preLoad()
-
-    }, [])
+            return navBar
+        },
+        retry: 5,
+        staleTime: oneHour,
+        refetchInterval: oneHour + 5000
+    })
 
     const preLoadProps = {
         index,
-        pre
+        pre: data
     }
 
     return (
         <Stack minHeight='100vh'>
-            {/* <Navbar pageIndex={index} navbar={navbar}/> */}
-            <Navbar {...preLoadProps} />
+            {!isLoading && (
+                <Navbar {...preLoadProps} />
+            )}
+            {isError && (
+                <Text>{error}</Text>
+            )}
             <Stack paddingBottom='300px'>
                 {children}
             </Stack>

@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-    navbar: []
+    navbar: [],
+    index: 0
 }
 
 const preSlice = createSlice({
@@ -10,12 +11,20 @@ const preSlice = createSlice({
     reducers: {
         createNavbar: (state, action) => {
             state.navbar = action.payload
+        },
+        setIndex: (state, action) => {
+            state.index = action.payload
         }
     },
 })
 
+export const setIndexServerSide = (index) => {
+    setIndex(index)
+}
+
 export const {
-    createNavbar
+    createNavbar,
+    setIndex
 } = preSlice.actions
 
 export default preSlice.reducer

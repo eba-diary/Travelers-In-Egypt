@@ -1,5 +1,5 @@
 import { client } from "../useContentful";
-import { getCarousel, getCardDeck, getLargeSearchBar, getGeneralInformation, getStudentContributors } from "./getComponents";
+import { getCarousel, getCardDeck, getLargeSearchBar, getGeneralInformation, getStudentContributors, getDatabaseContainer } from "./getComponents";
 
 
 export async function get(page) {
@@ -24,6 +24,8 @@ export async function get(page) {
                     return getGeneralInformation(field.fields)
                 case 'student-contributors':
                     return getStudentContributors(field.fields)
+                case 'database-container':
+                    return getDatabaseContainer(field.fields)
                 default:
                     return { fields: field }
             }

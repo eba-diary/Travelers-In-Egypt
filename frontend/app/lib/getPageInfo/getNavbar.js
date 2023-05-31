@@ -10,7 +10,8 @@ export async function getNavbar() {
     return {
         navItems: data.map((entry) => {
             return {
-                tab: entry.fields.pageTitle
+                tab: entry.fields.pageTitle,
+                url: entry.fields.pageUrl
             }
         })
     }

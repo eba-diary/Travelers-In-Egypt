@@ -1,6 +1,5 @@
 import { HStack, Stack, Text, Hide, Show, Menu, MenuButton, IconButton, MenuList } from '@chakra-ui/react'
 import { GiHamburgerMenu } from 'react-icons/gi'
-import navItems from '../tempData/navItems.json'
 import logo from '../../public/WebLogo.png';
 import MarginStack from './MarginStack';
 import Image from 'next/image'
@@ -8,9 +7,9 @@ import Link from 'next/link'
 
 export default function Navbar({ ...pre }) {
 
-    const navContent = pre.pre.navbar.navItems.map((entry, index) => {
+    const navContent = pre.pre.navItems.map((entry, index) => {
         return (
-            <Link href={`${entry.tab}`} key={index}>
+            <Link href={`${entry.url}`} key={index}>
                 <Stack
                     padding={{ md: '0px 12px', lg: '0px 15px' }}
                     textAlign={{ base: 'left', md: 'center' }}
@@ -45,7 +44,7 @@ export default function Navbar({ ...pre }) {
     })
     return (
         <MarginStack>
-            <HStack backgroundColor='#FFF' alignItems='center' height='120px'>
+            <HStack backgroundColor='#FFF' alignItems='center' height='110px'>
                 <Link href='/'>
                     <Stack
                         width={{ base: '300px', md: '150px' }}
