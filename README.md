@@ -15,15 +15,18 @@
 Stack 
 
 - Next JS 
-- Python Flask, 
-- MySQL
+- Nest JS, 
+- PostgresQL
 
 Hosting services 
 
-- Python Anywhere 
 - Vercel
+- Supabase
 
-
+Changes:
+Removed Python Flask (05/29/2023)
+Introduced Nest JS (05/29/2023)
+Integrated MySQL db to PostgresQL (05/29/2023)
 
 ### Starting Frontend and Backend Dev Server
 
