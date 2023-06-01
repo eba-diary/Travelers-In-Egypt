@@ -5,9 +5,9 @@ import { config } from "dotenv";
 config()
 
 @Injectable()
-export class Supabase {
+export class SupabaseService {
     private sb: SupabaseClient
-    private readonly logger = new Logger(Supabase.name)
+    private readonly logger = new Logger(SupabaseService.name)
 
     constructor() { }
 
