@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { sb } from "lib/supabase.provider";
+import { sb } from "src/lib/supabase.provider";
 import { Ship } from "./ships.model";
 
 @Injectable()
