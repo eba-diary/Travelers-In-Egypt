@@ -1,4 +1,4 @@
-export interface Table {
+export interface TableProps {
     rows: ExtensibleTableField[]
 }
 
