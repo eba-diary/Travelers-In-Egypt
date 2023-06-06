@@ -2,7 +2,7 @@ export interface TableProps {
     rows: ExtensibleTableField[]
 }
 
-interface ExtensibleTableField {
+export interface ExtensibleTableField {
     [key: string]: any
 }
 

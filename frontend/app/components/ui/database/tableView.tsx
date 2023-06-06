@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
-import { useTable } from "react-table"
-import { TableColumns, TableProps } from "../../../lib/types"
-import { Text, Collapse, HStack, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalHeader, ModalBody, ModalCloseButton, ModalOverlay, ModalContent } from '@chakra-ui/react'
+import { Row, useTable } from "react-table"
+import { ExtensibleTableField, TableColumns, TableProps } from "../../../lib/types"
+import { Text, Collapse, HStack, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent } from '@chakra-ui/react'
 
 interface Props {
     data: TableProps
@@ -52,61 +52,86 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
                     ))}
                 </Thead>
                 <Tbody {...getTableBodyProps()}>
-                    {rows.map((row, index) => {
-                        (() => { })
-                        prepareRow(row)
-                        const { onToggle, onOpen, isOpen, onClose } = useDisclosure()
-                        const [isFocused, setIsFocused] = useState<boolean>(false)
-                        return (
-                            <>
-                                <Modal isOpen={isOpen} onClose={onClose} motionPreset='scale'>
-                                    <ModalOverlay />
-                                    <ModalContent>
-                                        <ModalTemplate rowProps={row} cellAdditionalInfo={cellAdditionalInfo[index]} />
-                                    </ModalContent>
-                                </Modal>
-                                <Tr
-                                    key={index}
-                                    {...row.getRowProps()}
-                                    onClick={onToggle}
-                                    tabIndex={1}
-                                    backgroundColor='#FFF'
-                                    transition='0.3s'
-                                    _hover={{
-                                        cursor: 'pointer',
-                                        backgroundColor: '#F3F6F9',
-                                        transition: '0.3s'
-                                    }}
-                                    onFocus={() => {
-                                        setIsFocused(true)
-                                    }}
-                                    onBlur={() => {
-                                        setIsFocused(false)
-                                    }}
-                                    onKeyDown={(event) => {
-                                        if ((event.key === ' ' || event.key === 'Space') && isFocused) {
-                                            onOpen()
-                                        }
-                                    }}
-                                >
-                                    {row.cells.map((cell, index) => {
-                                        return (
-                                            <>
-                                                <Td
-                                                    key={index}
-                                                    {...cell.getCellProps()}
-                                                >
-                                                    {cell.render('Cell')}
-                                                </Td>
-                                            </>
-                                        )
-                                    })}
-                                </Tr>
-                            </>
-                        )
-                    })}
+                    {rows.map((row, index) => (
+                        <TableAndModal
+                            key={index}
+                            prepareRow={prepareRow}
+                            row={row}
+                            cellAdditionalInfo={cellAdditionalInfo}
+                            index={index}
+                            ModalTemplate={ModalTemplate}
+                        />
+                    ))}
                 </Tbody>
             </Table>
         </TableContainer>
+    )
+}
+
+function TableAndModal({
+    prepareRow,
+    row,
+    cellAdditionalInfo,
+    index,
+    ModalTemplate
+}: {
+    prepareRow: (row: Row<ExtensibleTableField>) => void,
+    row: Row<ExtensibleTableField>,
+    cellAdditionalInfo: any[],
+    index: number,
+    ModalTemplate: ({ rowProps, cellAdditionalInfo }: {
+        rowProps: Record<string, any>;
+        cellAdditionalInfo: any[];
+    }) => JSX.Element
+}) {
+    prepareRow(row)
+    const { onToggle, onOpen, isOpen, onClose } = useDisclosure()
+    const [isFocused, setIsFocused] = useState<boolean>(false)
+    return (
+        <>
+            <Modal isOpen={isOpen} onClose={onClose} motionPreset='scale'>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalTemplate rowProps={row} cellAdditionalInfo={cellAdditionalInfo[index]} />
+                </ModalContent>
+            </Modal>
+            <Tr
+                key={index}
+                {...row.getRowProps()}
+                onClick={onToggle}
+                tabIndex={1}
+                backgroundColor='#FFF'
+                transition='0.3s'
+                _hover={{
+                    cursor: 'pointer',
+                    backgroundColor: '#F3F6F9',
+                    transition: '0.3s'
+                }}
+                onFocus={() => {
+                    setIsFocused(true)
+                }}
+                onBlur={() => {
+                    setIsFocused(false)
+                }}
+                onKeyDown={(event) => {
+                    if ((event.key === ' ' || event.key === 'Space') && isFocused) {
+                        onOpen()
+                    }
+                }}
+            >
+                {row.cells.map((cell, index) => {
+                    return (
+                        <>
+                            <Td
+                                key={index}
+                                {...cell.getCellProps()}
+                            >
+                                {cell.render('Cell')}
+                            </Td>
+                        </>
+                    )
+                })}
+            </Tr>
+        </>
     )
 }
