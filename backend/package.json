@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Travelers in Egypt backend with Koa and Redis",
   "main": "index.js",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "build": "tsc --build",
     "start": "ts-node-dev src/app.ts",
