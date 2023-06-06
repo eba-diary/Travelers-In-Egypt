@@ -19,6 +19,15 @@ app.use(
 )
 
 app.use(KoaLogger())
+
+const sb = new SupabaseService()
+app.context.sb = sb
+
+app.use(async (ctx, next) => {
+    ctx.sb = sb
+    await next()
+})
+
 app.use(healthCheckRouter.routes())
 app.use(apiRouter.routes())
 

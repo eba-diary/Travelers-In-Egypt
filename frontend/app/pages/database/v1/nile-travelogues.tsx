@@ -39,6 +39,6 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 }
 
 const getShips = async () => {
-    const data = await axios.get('http://localhost:8080/api/v1/db/ships').then(res => res.data)
+    const data = await axios.get('http://localhost:8080/api/v1/db/travelogues').then(res => res.data)
     return { rows: data } as ShipTable
 }

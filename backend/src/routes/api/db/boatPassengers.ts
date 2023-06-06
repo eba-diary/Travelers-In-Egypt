@@ -5,10 +5,9 @@ import { SupabaseService } from "../../../supabase/supabase.service";
 import { CustomProviderError, Ship } from "../../../types/interface";
 
 const router = new Router()
-const sb = new SupabaseService()
-const shipProvider = new ShipProvider(sb)
 
 router.get('/', async (ctx: Context) => {
+    const shipProvider = new ShipProvider(ctx.sb)
     try {
         const ships: Ship[] | CustomProviderError = await shipProvider.getAllShips()
         ctx.status = 200

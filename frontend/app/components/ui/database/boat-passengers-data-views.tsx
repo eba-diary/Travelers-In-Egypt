@@ -1,7 +1,9 @@
-import { Grid, GridItem, HStack, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
+import { Button, Grid, GridItem, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
 import React from "react";
 import { TableProps } from "../../../lib/types";
 import TableView from "./tableView";
+import { AiOutlineLeft } from 'react-icons/ai'
+import { useRouter } from "next/router";
 
 export interface ShipTable extends TableProps {
     rows: {
@@ -34,14 +36,27 @@ export default function BoatPassengersDataViews({ data }: Props) {
             Header: 'Date',
             accessor: 'ship_date'
         }
-        // {
-        //     Header: 'List',
-        //     accessor: 'passenger_list',
-        // }
     ]
 
+    const router = useRouter()
+
     return (
-        <Stack>
+        <Stack width='100%' alignItems='center' padding='15px' gap='20px'>
+            <Stack width='100%' padding='10px 0px' borderBottom='1px solid'>
+                <HStack>
+                    <IconButton
+                        aria-label="Go back to database selection"
+                        icon={<AiOutlineLeft />}
+                        onClick={() => router.back()}
+                    />
+                    <Text fontSize='28px' fontWeight={700}>
+                        Boat Passengers Database
+                    </Text>
+                </HStack>
+                <Text>
+                    A brief description about the database and its contents.
+                </Text>
+            </Stack>
             <TableView
                 data={{
                     rows: data.rows.map(row => ({

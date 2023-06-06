@@ -24,8 +24,6 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
         []
     )
 
-    console.log('memoData: ', memoData)
-
     const tableInstance = useTable({
         columns: memoColumns,
         data: memoData
@@ -40,7 +38,7 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
     } = tableInstance
 
     return (
-        <TableContainer>
+        <TableContainer width='100%'>
             <Table {...getTableProps()}>
                 <Thead>
                     {headerGroups.map((headerGroup, index) => (

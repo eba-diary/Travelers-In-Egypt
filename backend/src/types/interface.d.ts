@@ -27,3 +27,7 @@ export interface CustomProviderError {
     status: 'success' | 'failure'
     error: PostgrestError
 }
+
+export interface Travelogue {
+    [key: string]: any
+}
