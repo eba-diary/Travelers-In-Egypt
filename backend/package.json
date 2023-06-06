@@ -7,10 +7,17 @@
     "node": "18.x"
   },
   "scripts": {
-    "build": "tsc --build",
+    "build": "rimraf dist && tsc",
+    "ts.check": "tsc --project tsconfig.json",
+    "add-build": "git add dist",
     "start": "ts-node-dev src/app.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+    "pre-commit": [
+      "ts.check",
+      "build",
+      "add-build"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
@@ -23,7 +30,9 @@
     "koa-logger": "^3.2.1",
     "koa-router": "^12.0.0",
     "koa2-cors": "^2.0.6",
+    "pre-commit": "^1.2.2",
     "redis": "^4.6.7",
+    "rimraf": "^5.0.1",
     "ts-node": "^10.9.1",
     "typescript": "^5.1.3"
   },
