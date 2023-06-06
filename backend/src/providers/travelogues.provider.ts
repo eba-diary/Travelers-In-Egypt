@@ -1,10 +1,11 @@
 import { SupabaseService } from "../supabase/supabase.service";
-import { CustomProviderError, Travelogue } from "../types/interface";
+import { CustomProviderError, Publication, Travelogue } from "../types/interface";
+
 
 export class Travelogues {
     constructor(private readonly sb: SupabaseService) { }
 
-    public async getAllTravelogues(): Promise<Travelogue[] | CustomProviderError> {
+    public async getAllTravelogues(): Promise<Publication[] | CustomProviderError> {
         const { data, error } = await this.sb.getClient()
             .from('Publications')
             .select('*')
@@ -16,23 +17,32 @@ export class Travelogues {
             } as CustomProviderError
         }
 
-        const publications: Travelogue[] = data.map(row => {
+        const publications = data.map(row => {
             return {
                 ...row
             }
-        })
+        }) as Publication[]
 
         return publications
     }
 
-    public async getAllTraveloguesAndPublications(): Promise<any> {
+    public async getAllTraveloguesAndPublications() {
         const { data, error } = await this.sb.getClient()
             .from('PublicationsAuthor')
-            .select(`
+            .select(` 
                 id,
                 Publications (*),
                 Travelers (*)
             `)
-        return data
+
+        if (error) {
+            return {
+                status: 'failure',
+                error: error
+            } as CustomProviderError
+        }
+
+
+        return data as Travelogue[]
     }
 }

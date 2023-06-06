@@ -2,15 +2,14 @@ import { Spinner, Stack, Text } from "@chakra-ui/react";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import usePageNumber from "../../../lib/hooks/usePageNumber";
 import axios from 'axios'
-import BoatPassengersDataViews, { ShipTable } from "../../../components/ui/database/boat-passengers-data-views";
-import { GetServerSidePropsContext } from "next";
+import NileTraveloguesDataViews, { TraveloguesTable } from "../../../components/ui/database/nile-travelogues-data-views";
 
 export default function BoatPassengers({ prefetchShips }) {
     usePageNumber(1)
     const oneHour = 60 * 60 * 1000
     const { data } = useQuery({
-        queryKey: ['ships'],
-        queryFn: getShips,
+        queryKey: ['travelogues'],
+        queryFn: getTravelogues,
         retry: 5,
         retryDelay: 500,
         staleTime: oneHour,
@@ -21,25 +20,25 @@ export default function BoatPassengers({ prefetchShips }) {
         <Stack>
             <Text>
                 {data && (
-                    <BoatPassengersDataViews data={data} />
+                    <NileTraveloguesDataViews data={data} />
                 )}
             </Text>
         </Stack>
     )
 }
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
+export async function getServerSideProps() {
     const queryClient = new QueryClient()
-    const ships = await queryClient.prefetchQuery(['ships'], getShips)
+    const ships = await queryClient.prefetchQuery(['travelogues'], getTravelogues)
     return {
         props: {
-            prefetchShips: await getShips()
+            prefetchShips: await getTravelogues()
         }
     }
 }
 
-const getShips = async () => {
+const getTravelogues = async () => {
     const data = await axios.get(process.env.NODE_ENV === 'development' ? 'http://localhost:8080/api/v1/db/travelogues' : 'https://tie-backend.vercel.app/api/v1/db/travelogues'
     ).then(res => res.data)
-    return { rows: data } as ShipTable
+    return { rows: data } as TraveloguesTable
 }

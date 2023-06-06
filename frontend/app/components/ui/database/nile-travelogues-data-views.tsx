@@ -1,44 +1,65 @@
-import { Button, Grid, GridItem, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
-import React from "react";
-import { TableProps } from "../../../lib/types";
-import TableView from "./tableView";
+import { HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import React from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
-import { useRouter } from "next/router";
+import { TableProps } from '../../../lib/types'
+import TableView from './tableView'
 
-export interface ShipTable extends TableProps {
+export interface TraveloguesTable extends TableProps {
     rows: {
         id: number
-        ship_name: string
-        ship_date: Date,
-        passenger_list: Passenger
+        Publications: Publications,
+        Travelers: Travelers
     }[]
 }
 
-interface Passenger {
-    passengers: string[]
+export interface Publications {
+    title: string
+    summary: string
+    can_read: boolean
+    publications_id: number
+}
+
+export interface Travelers {
+    travelers_name: string
+    travelers_type: string
+    travelers_id: number
 }
 
 interface Props {
-    data: ShipTable
+    data: TraveloguesTable
 }
 
-export default function BoatPassengersDataViews({ data }: Props) {
+function truncateText(value: string) {
+    return value.slice(0, 45) + '...'
+}
+export default function NileTraveloguesDataViews({ data }: Props) {
+
+    const router = useRouter()
+
     const columns = [
         {
             Header: 'Id',
             accessor: 'id'
         },
         {
-            Header: 'Name',
-            accessor: 'ship_name'
+            Header: 'Publications',
+            accessor: 'Publications.title',
+            Cell: ({ value }: { value: string }) => truncateText(value)
         },
         {
-            Header: 'Date',
-            accessor: 'ship_date'
+            Header: 'Travelers',
+            accessor: 'Travelers.travelers_name'
+        },
+        {
+            Header: 'Type',
+            accessor: 'Travelers.travelers_type'
+        },
+        {
+            Header: 'can read',
+            accessor: 'Publications.can_read'
         }
     ]
-
-    const router = useRouter()
 
     return (
         <Stack width='100%' alignItems='center' padding='15px' gap='20px'>
@@ -50,7 +71,7 @@ export default function BoatPassengersDataViews({ data }: Props) {
                         onClick={() => router.back()}
                     />
                     <Text fontSize='28px' fontWeight={700}>
-                        Boat Passengers Database
+                        Nile Travelogues Database
                     </Text>
                 </HStack>
                 <Text>
@@ -61,12 +82,17 @@ export default function BoatPassengersDataViews({ data }: Props) {
                 data={{
                     rows: data.rows.map(row => ({
                         id: row.id,
-                        ship_name: row.ship_name,
-                        ship_date: (new Date(row.ship_date)).toISOString().split('T')[0],
-                        passenger_list: row.passenger_list.passengers
+                        Publications: row.Publications,
+                        Travelers: row.Travelers
                     }))
                 }}
-                cellAdditionalInfo={data.rows.map(row => row.passenger_list.passengers)}
+                cellAdditionalInfo={data.rows.map((row) => {
+                    return {
+                        publications_id: row.Publications.publications_id,
+                        travelers_id: row.Travelers.travelers_id,
+                        summary: row.Publications.summary
+                    }
+                })}
                 columns={columns}
                 ModalTemplate={ModalTemplate}
             />

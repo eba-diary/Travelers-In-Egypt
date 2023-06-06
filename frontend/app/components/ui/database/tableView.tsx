@@ -5,7 +5,7 @@ import { Text, Collapse, HStack, Stack, Table, TableContainer, Tbody, Td, Th, Th
 
 interface Props {
     data: TableProps
-    cellAdditionalInfo: any[][]
+    cellAdditionalInfo: any[]
     columns: TableColumns[]
     ModalTemplate: ({ rowProps, cellAdditionalInfo }: {
         rowProps: Record<string, any>;

@@ -29,5 +29,20 @@ export interface CustomProviderError {
 }
 
 export interface Travelogue {
-    [key: string]: any
+    id: number;
+    Publications: Publication
+    Travelers: Traveler[]
+}
+
+export interface Publication {
+    title: string;
+    summary: string;
+    can_read: boolean;
+    publications_id: number;
+}
+
+export interface Traveler {
+    travelers_name: string;
+    travelers_type: string;
+    travelers_id: number;
 }
