@@ -117,7 +117,7 @@ function ModalTemplate({ rowProps, cellAdditionalInfo }: { rowProps: Record<stri
             <ModalBody paddingBottom='20px'>
                 <Stack padding='15px 0px'>
                     {cellAdditionalInfo.Travelers.info.map((entry: { travelers_name: string, travelers_type: string, travelers_id: number }, index: number) => (
-                        <Text>
+                        <Text key={index}>
                             <span style={{ fontWeight: 600 }}>{entry.travelers_type}:</span> {entry.travelers_name}
                         </Text>
                     ))}

@@ -9,7 +9,6 @@ router.get('/', async (ctx: Context) => {
     const traveloguesProvider = new Travelogues(ctx.sb) as Travelogues
 
     try {
-        // const traveloguesAndAuthors: Travelogue[] | CustomProviderError = await traveloguesProvider.getAllTraveloguesAndPublications()
         const traveloguesAndAuthors: Travelogue[] | CustomProviderError = await traveloguesProvider.getAllTraveloguesAndPublications()
 
         if (traveloguesAndAuthors instanceof Array) {
