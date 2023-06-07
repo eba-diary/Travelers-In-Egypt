@@ -30,11 +30,11 @@ export interface CustomProviderError {
 
 export interface Travelogue {
     id: number;
-    Publications: Publication
-    Travelers: Traveler[]
+    Publications: Publications | any
+    Travelers: Traveler
 }
 
-export interface Publication {
+export interface Publications {
     title: string;
     summary: string;
     can_read: boolean;

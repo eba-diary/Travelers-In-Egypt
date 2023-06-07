@@ -1,11 +1,11 @@
 import { SupabaseService } from "../supabase/supabase.service";
-import { CustomProviderError, Publication, Travelogue } from "../types/interface";
+import { CustomProviderError, Publications, Traveler, Travelogue } from "../types/interface";
 
 
 export class Travelogues {
     constructor(private readonly sb: SupabaseService) { }
 
-    public async getAllTravelogues(): Promise<Publication[] | CustomProviderError> {
+    public async getAllTravelogues(): Promise<Publications[] | CustomProviderError> {
         const { data, error } = await this.sb.getClient()
             .from('Publications')
             .select('*')
@@ -21,7 +21,7 @@ export class Travelogues {
             return {
                 ...row
             }
-        }) as Publication[]
+        }) as Publications[]
 
         return publications
     }
@@ -42,7 +42,13 @@ export class Travelogues {
             } as CustomProviderError
         }
 
+        const reshaphedData = data.map((entry) => {
+            return {
+                ...entry,
+                Travelers: entry.Travelers instanceof Array ? entry.Travelers[0] : entry.Travelers
+            }
+        })
 
-        return data as Travelogue[]
+        return reshaphedData as Travelogue[]
     }
 }

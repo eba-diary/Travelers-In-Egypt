@@ -1,4 +1,5 @@
 import { HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from '@chakra-ui/react'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
@@ -31,9 +32,11 @@ interface Props {
 }
 
 function truncateText(value: string) {
-    return value.slice(0, 45) + '...'
+    return value.slice(0, 35) + '...'
 }
 export default function NileTraveloguesDataViews({ data }: Props) {
+
+    console.log(data)
 
     const router = useRouter()
 
@@ -49,11 +52,21 @@ export default function NileTraveloguesDataViews({ data }: Props) {
         },
         {
             Header: 'Travelers',
-            accessor: 'Travelers.travelers_name'
+            accessor: 'Travelers.travelers_name',
+            Cell: ({ value }: { value: string[] }) => <Stack>
+                {value.map((entry, index) => (
+                    <Text key={index}>{entry}</Text>
+                ))}
+            </Stack>
         },
         {
             Header: 'Type',
-            accessor: 'Travelers.travelers_type'
+            accessor: 'Travelers.info',
+            Cell: ({ value }: { value: Travelers[] }) => <Stack>
+                {value.map((entry, index) => (
+                    <Text key={index}>{entry.travelers_type}</Text>
+                ))}
+            </Stack>
         },
         {
             Header: 'can read',
@@ -86,13 +99,7 @@ export default function NileTraveloguesDataViews({ data }: Props) {
                         Travelers: row.Travelers
                     }))
                 }}
-                cellAdditionalInfo={data.rows.map((row) => {
-                    return {
-                        publications_id: row.Publications.publications_id,
-                        travelers_id: row.Travelers.travelers_id,
-                        summary: row.Publications.summary
-                    }
-                })}
+                cellAdditionalInfo={[...data.rows]}
                 columns={columns}
                 ModalTemplate={ModalTemplate}
             />
@@ -100,35 +107,50 @@ export default function NileTraveloguesDataViews({ data }: Props) {
     )
 }
 
-function ModalTemplate({ rowProps, cellAdditionalInfo }: { rowProps: Record<string, any>, cellAdditionalInfo: any[] }) {
+function ModalTemplate({ rowProps, cellAdditionalInfo }: { rowProps: Record<string, any>, cellAdditionalInfo: any }) {
     return (
         <React.Fragment>
             <ModalHeader>
-                {rowProps.values.ship_name}: {rowProps.values.ship_date}
+                &quot;{rowProps.values["Publications.title"]}&quot;
             </ModalHeader>
             <ModalCloseButton />
-            <ModalBody>
-                <Stack borderBottom='1px solid' margin='10px 0px' padding='5px 0px'>
-                    <Text fontSize='20px' fontWeight={700}>Passengers</Text>
+            <ModalBody paddingBottom='20px'>
+                <Stack padding='15px 0px'>
+                    {cellAdditionalInfo.Travelers.info.map((entry: { travelers_name: string, travelers_type: string, travelers_id: number }, index: number) => (
+                        <Text>
+                            <span style={{ fontWeight: 600 }}>{entry.travelers_type}:</span> {entry.travelers_name}
+                        </Text>
+                    ))}
+                    <Text>
+                        <span style={{ fontWeight: 600 }}>Can Read:</span> {cellAdditionalInfo.Publications.can_read}
+                    </Text>
+                    {cellAdditionalInfo.Publications.can_read ? (
+                        <Link href='/'>
+                            <Text
+                                border='1px solid'
+                                width='fit-content'
+                                padding='0px 15px'
+                                borderRadius='5px'
+                                fontWeight={600}
+                                _hover={{
+                                    backgroundColor: '#EEE',
+                                    transition: '0.3s',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                View
+                            </Text>
+                        </Link>
+                    ) : (
+                        ''
+                    )}
                 </Stack>
-                <Table>
-                    <Tbody>
-                        {
-                            Array.from(
-                                { length: Math.ceil(cellAdditionalInfo.length / 3) },
-                                (_, index) => cellAdditionalInfo.slice(index * 3, index * 3 + 3)
-                            ).map((entry, index) => {
-                                return (
-                                    <Tr key={index} backgroundColor={index % 2 === 0 ? '#FFF' : '#F3F6F9'}>
-                                        <HStack justifyContent='space-between' padding='20px' alignItems='flex-start'>
-                                            {entry.map((passenger, index) => <Text width='100px' key={index}>{passenger}</Text>)}
-                                        </HStack>
-                                    </Tr>
-                                )
-                            })
-                        }
-                    </Tbody>
-                </Table>
+                <Stack borderBottom='1px solid' margin='10px 0px' padding='5px 0px'>
+                    <Text fontSize='20px' fontWeight={700}>Summary</Text>
+                </Stack>
+                <Text>
+                    {cellAdditionalInfo.Publications.summary}
+                </Text>
             </ModalBody>
         </React.Fragment >
     )

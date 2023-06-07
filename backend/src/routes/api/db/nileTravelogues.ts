@@ -1,7 +1,7 @@
 import { Context } from "koa";
 import Router from "koa-router";
 import { Travelogues } from "../../../providers/travelogues.provider";
-import { CustomProviderError, Publication, Travelogue } from "../../../types/interface";
+import { CustomProviderError, Publications, Traveler, Travelogue } from "../../../types/interface";
 
 const router = new Router()
 
@@ -9,14 +9,36 @@ router.get('/', async (ctx: Context) => {
     const traveloguesProvider = new Travelogues(ctx.sb) as Travelogues
 
     try {
+        // const traveloguesAndAuthors: Travelogue[] | CustomProviderError = await traveloguesProvider.getAllTraveloguesAndPublications()
         const traveloguesAndAuthors: Travelogue[] | CustomProviderError = await traveloguesProvider.getAllTraveloguesAndPublications()
 
         if (traveloguesAndAuthors instanceof Array) {
-            const reshapedData = traveloguesAndAuthors.map((travelogue) => {
+            const publicationsMap = new Map<string, { id: number, Publications: Publications, Travelers: Traveler[] }>()
+            traveloguesAndAuthors.forEach((travelogue) => {
+                const publication: Publications = travelogue.Publications
+                const publicationTitle = publication.title
+
+                if (!publicationsMap.has(publicationTitle)) {
+                    publicationsMap.set(publicationTitle, {
+                        id: publication.publications_id,
+                        Publications: { ...publication },
+                        Travelers: [{ ...travelogue.Travelers }]
+                    })
+                } else {
+                    const existingPublication = publicationsMap.get(publicationTitle)
+                    existingPublication!.Travelers.push({ ...travelogue.Travelers })
+                }
+            })
+
+            const reshapedData = Array.from(publicationsMap.values()).map((travelogue) => {
                 const trimmedTitle = travelogue.Publications.title.trim()
                 const canReadSymbol = travelogue.Publications.can_read ? '✅' : '❌'
                 return {
                     ...travelogue,
+                    Travelers: {
+                        info: [...travelogue.Travelers],
+                        travelers_name: travelogue.Travelers.map((entry) => entry.travelers_name)
+                    },
                     Publications: {
                         ...travelogue.Publications,
                         title: trimmedTitle,
@@ -43,7 +65,7 @@ router.get('/', async (ctx: Context) => {
 router.get('/publications', async (ctx: Context) => {
     const traveloguesProvider = new Travelogues(ctx.sb) as Travelogues
     try {
-        const travelogues: Publication[] | CustomProviderError = await traveloguesProvider.getAllTravelogues()
+        const travelogues: Publications[] | CustomProviderError = await traveloguesProvider.getAllTravelogues()
         if (travelogues instanceof Array) {
             ctx.status = 200
             ctx.body = travelogues
