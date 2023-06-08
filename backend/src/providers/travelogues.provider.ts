@@ -1,5 +1,5 @@
 import { SupabaseService } from "../supabase/supabase.service";
-import { CustomProviderError, Publications, Traveler, Travelogue } from "../types/interface";
+import { CustomProviderError, Publications, Travelogue } from "../types/interface";
 
 
 export class Travelogues {
