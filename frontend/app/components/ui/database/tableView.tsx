@@ -1,12 +1,17 @@
 import { useMemo, useState } from "react"
-import { Row, useTable } from "react-table"
+import { ColumnDef, ColumnResizeMode, flexRender, getCoreRowModel, Row, Table, useReactTable } from "@tanstack/react-table"
 import { ExtensibleTableField, TableColumns, TableProps } from "../../../lib/types"
-import { Text, Collapse, HStack, Stack, Table, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent } from '@chakra-ui/react'
+import { Table as ChakraTable, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent } from '@chakra-ui/react'
 
 interface Props {
     data: TableProps
     cellAdditionalInfo: any[]
-    columns: TableColumns[]
+    columns: ColumnDef<ExtensibleTableField, any>[]
+    // defaultColumnProps: {
+    //     width: number;
+    //     minWidth: number;
+    //     maxWidth: number;
+    // }
     ModalTemplate: ({ rowProps, cellAdditionalInfo }: {
         rowProps: Record<string, any>;
         cellAdditionalInfo: any[];
@@ -24,38 +29,59 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
         []
     )
 
-    const tableInstance = useTable({
+    const [columnResizeMode, setColumnResizeMode] =
+        useState<ColumnResizeMode>('onChange')
+
+    const tableInstance = useReactTable({
+        data: memoData,
         columns: memoColumns,
-        data: memoData
+        getCoreRowModel: getCoreRowModel(),
+        columnResizeMode: 'onChange',
+        debugTable: true,
+        debugHeaders: true,
+        debugColumns: true,
     })
 
     const {
-        getTableProps,
-        getTableBodyProps,
-        headerGroups,
-        rows,
-        prepareRow
+        getHeaderGroups,
+        getRowModel,
+        getState
     } = tableInstance
 
     return (
         <TableContainer width='100%'>
-            <Table {...getTableProps()}>
+            <ChakraTable>
                 <Thead>
-                    {headerGroups.map((headerGroup, index) => (
-                        <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
+                    {getHeaderGroups().map((headerGroup, index) => (
+                        <Tr key={index}>
                             {headerGroup.headers.map((column) => (
-                                <Th {...column.getHeaderProps()} key={JSON.stringify(column)}>
-                                    {column.render('Header')}
+                                <Th key={JSON.stringify(column.id)}>
+                                    {flexRender(column.column.columnDef.header, column.getContext())}
+                                    <div
+                                        {...{
+                                            onMouseDown: column.getResizeHandler(),
+                                            onTouchStart: column.getResizeHandler(),
+                                            className: `resizer ${column.column.getIsResizing() ? 'isResizing' : ''
+                                                }`,
+                                            style: {
+                                                transform:
+                                                    columnResizeMode === 'onEnd' &&
+                                                        column.column.getIsResizing()
+                                                        ? `translateX(${getState().columnSizingInfo.deltaOffset
+                                                        }px)`
+                                                        : '',
+                                            },
+                                        }}
+                                    />
                                 </Th>
                             ))}
                         </Tr>
                     ))}
                 </Thead>
-                <Tbody {...getTableBodyProps()}>
-                    {rows.map((row, index) => (
+                <Tbody>
+                    {getRowModel().rows.map((row, index) => (
                         <TableAndModal
                             key={index}
-                            prepareRow={prepareRow}
                             row={row}
                             cellAdditionalInfo={cellAdditionalInfo}
                             index={index}
@@ -63,19 +89,17 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
                         />
                     ))}
                 </Tbody>
-            </Table>
+            </ChakraTable>
         </TableContainer>
     )
 }
 
 function TableAndModal({
-    prepareRow,
     row,
     cellAdditionalInfo,
     index,
     ModalTemplate
 }: {
-    prepareRow: (row: Row<ExtensibleTableField>) => void,
     row: Row<ExtensibleTableField>,
     cellAdditionalInfo: any[],
     index: number,
@@ -84,9 +108,9 @@ function TableAndModal({
         cellAdditionalInfo: any[];
     }) => JSX.Element
 }) {
-    prepareRow(row)
     const { onToggle, onOpen, isOpen, onClose } = useDisclosure()
     const [isFocused, setIsFocused] = useState<boolean>(false)
+
     return (
         <>
             <Modal isOpen={isOpen} onClose={onClose} motionPreset='scale'>
@@ -97,7 +121,6 @@ function TableAndModal({
             </Modal>
             <Tr
                 key={index}
-                {...row.getRowProps()}
                 onClick={onToggle}
                 tabIndex={1}
                 backgroundColor='#FFF'
@@ -119,14 +142,19 @@ function TableAndModal({
                     }
                 }}
             >
-                {row.cells.map((cell, index) => {
+                {row.getVisibleCells().map((cell, index) => {
                     return (
                         <>
                             <Td
                                 key={index}
-                                {...cell.getCellProps()}
+                                {...{
+                                    key: cell.id,
+                                    style: {
+                                        width: cell.column.getSize(),
+                                    },
+                                }}
                             >
-                                {cell.render('Cell')}
+                                {flexRender(cell.column.columnDef.cell, cell.getContext())}
                             </Td>
                         </>
                     )

@@ -1,9 +1,10 @@
 import { Button, Grid, GridItem, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
 import React from "react";
-import { TableProps } from "../../../lib/types";
+import { ExtensibleTableField, TableProps } from "../../../lib/types";
 import TableView from "./tableView";
 import { AiOutlineLeft } from 'react-icons/ai'
 import { useRouter } from "next/router";
+import { ColumnDef } from "@tanstack/react-table";
 
 export interface ShipTable extends TableProps {
     rows: {
@@ -23,22 +24,28 @@ interface Props {
 }
 
 export default function BoatPassengersDataViews({ data }: Props) {
-    const columns = [
+    const columns: ColumnDef<ExtensibleTableField, any>[] = [
         {
-            Header: 'Id',
-            accessor: 'id'
+            accessorKey: 'id',
+            header: 'Id',
         },
         {
-            Header: 'Name',
-            accessor: 'ship_name'
+            accessorKey: 'ship_name',
+            header: 'Name',
         },
         {
-            Header: 'Date',
-            accessor: 'ship_date'
+            accessorKey: 'ship_date',
+            header: 'Date',
         }
     ]
 
     const router = useRouter()
+
+    // const defaultColumnProps = {
+    //     width: 100,
+    //     minWidth: 50,
+    //     maxWidth: 100
+    // }
 
     return (
         <Stack width='100%' alignItems='center' padding='15px' gap='20px'>
@@ -68,6 +75,7 @@ export default function BoatPassengersDataViews({ data }: Props) {
                 }}
                 cellAdditionalInfo={data.rows.map(row => row.passenger_list.passengers)}
                 columns={columns}
+                // defaultColumnProps={defaultColumnSizing}
                 ModalTemplate={ModalTemplate}
             />
         </Stack>
@@ -78,7 +86,7 @@ function ModalTemplate({ rowProps, cellAdditionalInfo }: { rowProps: Record<stri
     return (
         <React.Fragment>
             <ModalHeader>
-                {rowProps.values.ship_name}: {rowProps.values.ship_date}
+                {rowProps.original.ship_name}: {rowProps.original.ship_date}
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody>

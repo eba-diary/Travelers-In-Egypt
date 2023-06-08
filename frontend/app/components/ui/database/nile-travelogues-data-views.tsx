@@ -1,9 +1,10 @@
 import { HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from '@chakra-ui/react'
+import { ColumnDef } from '@tanstack/react-table'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
-import { TableProps } from '../../../lib/types'
+import { ExtensibleTableField, TableProps } from '../../../lib/types'
 import TableView from './tableView'
 
 export interface TraveloguesTable extends TableProps {
@@ -31,46 +32,58 @@ interface Props {
     data: TraveloguesTable
 }
 
-function truncateText(value: string) {
+function truncateText(value: any) {
+    console.log(value)
     return value.slice(0, 35) + '...'
+    // return 1
 }
 export default function NileTraveloguesDataViews({ data }: Props) {
-
-    console.log(data)
-
     const router = useRouter()
 
-    const columns = [
+    const columns: ColumnDef<ExtensibleTableField>[] = [
         {
-            Header: 'Id',
-            accessor: 'id'
+            header: 'Id',
+            accessorKey: 'id'
         },
         {
-            Header: 'Publications',
-            accessor: 'Publications.title',
-            Cell: ({ value }: { value: string }) => truncateText(value)
+            header: 'Publications',
+            accessorKey: 'Publications.title',
+            cell(props) {
+                const value = props.getValue()
+                return <>{truncateText(value)}</>
+            },
         },
         {
-            Header: 'Travelers',
-            accessor: 'Travelers.travelers_name',
-            Cell: ({ value }: { value: string[] }) => <Stack>
-                {value.map((entry, index) => (
-                    <Text key={index}>{entry}</Text>
-                ))}
-            </Stack>
+            header: 'Travelers',
+            accessorKey: 'Travelers.travelers_name',
+            cell(props) {
+                const value = props.getValue() as unknown as string[]
+                return (
+                    <Stack>
+                        {value.map((entry, index) => (
+                            <Text key={index}>{entry}</Text>
+                        ))}
+                    </Stack>
+                )
+            }
         },
         {
-            Header: 'Type',
-            accessor: 'Travelers.info',
-            Cell: ({ value }: { value: Travelers[] }) => <Stack>
-                {value.map((entry, index) => (
-                    <Text key={index}>{entry.travelers_type}</Text>
-                ))}
-            </Stack>
+            header: 'Type',
+            accessorKey: 'Travelers.info',
+            cell(props) {
+                const value = props.getValue() as unknown as Travelers[]
+                return (
+                    <Stack>
+                        {value.map((entry, index) => (
+                            <Text key={index}>{entry.travelers_type}</Text>
+                        ))}
+                    </Stack>
+                )
+            }
         },
         {
-            Header: 'can read',
-            accessor: 'Publications.can_read'
+            header: 'can read',
+            accessorKey: 'Publications.can_read'
         }
     ]
 
@@ -111,7 +124,7 @@ function ModalTemplate({ rowProps, cellAdditionalInfo }: { rowProps: Record<stri
     return (
         <React.Fragment>
             <ModalHeader>
-                &quot;{rowProps.values["Publications.title"]}&quot;
+                &quot;{rowProps.original.Publications.title}&quot;
             </ModalHeader>
             <ModalCloseButton />
             <ModalBody paddingBottom='20px'>
