@@ -35,12 +35,21 @@ class Travelogues {
         return __awaiter(this, void 0, void 0, function* () {
             const { data, error } = yield this.sb.getClient()
                 .from('PublicationsAuthor')
-                .select(`
+                .select(` 
                 id,
                 Publications (*),
                 Travelers (*)
             `);
-            return data;
+            if (error) {
+                return {
+                    status: 'failure',
+                    error: error
+                };
+            }
+            const reshaphedData = data.map((entry) => {
+                return Object.assign(Object.assign({}, entry), { Travelers: entry.Travelers instanceof Array ? entry.Travelers[0] : entry.Travelers });
+            });
+            return reshaphedData;
         });
     }
 }

@@ -19,8 +19,43 @@ router.get('/', (ctx) => __awaiter(void 0, void 0, void 0, function* () {
     const traveloguesProvider = new travelogues_provider_1.Travelogues(ctx.sb);
     try {
         const traveloguesAndAuthors = yield traveloguesProvider.getAllTraveloguesAndPublications();
-        ctx.status = 200;
-        ctx.body = traveloguesAndAuthors;
+        if (traveloguesAndAuthors instanceof Array) {
+            const publicationsMap = new Map();
+            traveloguesAndAuthors.forEach((travelogue) => {
+                const publication = travelogue.Publications;
+                const publicationTitle = publication.title;
+                if (!publicationsMap.has(publicationTitle)) {
+                    publicationsMap.set(publicationTitle, {
+                        id: publication.publications_id,
+                        Publications: Object.assign({}, publication),
+                        Travelers: [Object.assign({}, travelogue.Travelers)]
+                    });
+                }
+                else {
+                    const existingPublication = publicationsMap.get(publicationTitle);
+                    existingPublication.Travelers.push(Object.assign({}, travelogue.Travelers));
+                }
+            });
+            const reshapedData = Array.from(publicationsMap.values()).map((travelogue) => {
+                const trimmedTitle = travelogue.Publications.title.trim();
+                const canReadSymbol = travelogue.Publications.can_read ? '✅' : '❌';
+                return Object.assign(Object.assign({}, travelogue), { Travelers: {
+                        info: [...travelogue.Travelers],
+                        travelers_name: travelogue.Travelers.map((entry) => entry.travelers_name)
+                    }, Publications: Object.assign(Object.assign({}, travelogue.Publications), { title: trimmedTitle, can_read: canReadSymbol }) });
+            });
+            ctx.status = 200;
+            ctx.body = reshapedData;
+        }
+        else {
+            ctx.status = 400;
+            ctx.body = {
+                status: 'failure',
+                error: {
+                    message: 'Bad Request. Try a different request.'
+                }
+            };
+        }
     }
     catch (error) {
         throw new Error(`${error}`);
@@ -30,6 +65,19 @@ router.get('/publications', (ctx) => __awaiter(void 0, void 0, void 0, function*
     const traveloguesProvider = new travelogues_provider_1.Travelogues(ctx.sb);
     try {
         const travelogues = yield traveloguesProvider.getAllTravelogues();
+        if (travelogues instanceof Array) {
+            ctx.status = 200;
+            ctx.body = travelogues;
+        }
+        else {
+            ctx.status = 400;
+            ctx.body = {
+                status: 'failure',
+                error: {
+                    message: 'Bad Request. Try a different request.'
+                }
+            };
+        }
         ctx.status = 200;
         ctx.body = travelogues;
     }
