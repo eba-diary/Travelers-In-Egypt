@@ -30,7 +30,7 @@ export default function Error() {
         <Stack width='100%' height={`${height}px`} alignItems='center' justifyContent='center'>
             <Stack width='80%' alignItems='center'>
                 <Text>
-                    404 Page not found. Going home in {seconds} seconds
+                    404 Page not found. Going back in {seconds} seconds
                 </Text>
                 <Button onClick={() => router.back()} width='fit-content'>Back</Button>
             </Stack>

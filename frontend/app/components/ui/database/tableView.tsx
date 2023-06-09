@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react"
-import { ColumnDef, ColumnResizeMode, flexRender, getCoreRowModel, getSortedRowModel, Row, sortingFns, SortingState, Table, useReactTable } from "@tanstack/react-table"
+import { ColumnDef, ColumnResizeMode, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, Row, sortingFns, SortingState, Table, useReactTable } from "@tanstack/react-table"
 import { ExtensibleTableField, TableColumns, TableProps } from "../../../lib/types"
 import { Table as ChakraTable, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent, Stack, Text, Button, Input, IconButton, HStack } from '@chakra-ui/react'
+import TableFilter from "./filters/table-filter"
 
 interface Props {
     data: TableProps
@@ -43,7 +44,8 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
         },
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
-
+        getFilteredRowModel: getFilteredRowModel(),
+        getPaginationRowModel: getPaginationRowModel(),
         columnResizeMode: 'onChange'
     })
 
@@ -53,53 +55,57 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
     } = tableInstance
 
     return (
-        <TableContainer width='100%'>
-            <ChakraTable>
-                <Thead>
-                    {getHeaderGroups().map((headerGroup, index) => (
-                        <Tr key={index}>
-                            {headerGroup.headers.map((column) => (
-                                <Th key={JSON.stringify(column.id)} position='relative'>
-                                    <Stack
-                                        onClick={column.column.getToggleSortingHandler()}
-                                        cursor={column.column.getCanSort() ? 'pointer' : 'auto'}
-                                        width='fit-content'
-                                    >
-                                        <Text
+        <>
+            <TableFilter tableInstance={tableInstance} />
+            <TableContainer width='100%'>
+                <ChakraTable>
+                    <Thead>
+                        {getHeaderGroups().map((headerGroup, index) => (
+                            <Tr key={index}>
+                                {headerGroup.headers.map((column) => (
+                                    <Th key={JSON.stringify(column.id)} position='relative'>
+                                        <Stack
+                                            onClick={column.column.getToggleSortingHandler()}
+                                            cursor={column.column.getCanSort() ? 'pointer' : 'auto'}
                                             width='fit-content'
-                                            p='5px'
-                                            borderRadius='5px'
-                                            transition='0.3s'
-                                            _hover={{
-                                                transition: '0.3s',
-                                                cursor: 'pointer',
-                                                backgroundColor: '#EEE'
-                                            }}
                                         >
-                                            {flexRender(column.column.columnDef.header, column.getContext())} {{
-                                                asc: ' 🔼',
-                                                desc: ' 🔽',
-                                            }[column.column.getIsSorted() as string] ?? null}
-                                        </Text>
-                                    </Stack>
-                                </Th>
-                            ))}
-                        </Tr>
-                    ))}
-                </Thead>
-                <Tbody>
-                    {getRowModel().rows.map((row, index) => (
-                        <TableAndModal
-                            key={index}
-                            row={row}
-                            cellAdditionalInfo={cellAdditionalInfo}
-                            index={index}
-                            ModalTemplate={ModalTemplate}
-                        />
-                    ))}
-                </Tbody>
-            </ChakraTable>
-        </TableContainer >
+                                            <Text
+                                                width='fit-content'
+                                                p='5px'
+                                                borderRadius='5px'
+                                                transition='0.3s'
+                                                _hover={{
+                                                    transition: '0.3s',
+                                                    cursor: 'pointer',
+                                                    backgroundColor: '#EEE'
+                                                }}
+                                            >
+                                                {flexRender(column.column.columnDef.header, column.getContext())} {{
+                                                    asc: ' 🔼',
+                                                    desc: ' 🔽',
+                                                }[column.column.getIsSorted() as string] ?? null}
+                                            </Text>
+                                        </Stack>
+                                    </Th>
+                                ))}
+                            </Tr>
+                        ))}
+                    </Thead>
+                    <Tbody>
+                        {getRowModel().rows.map((row, index) => (
+                            <TableAndModal
+                                key={index}
+                                row={row}
+                                cellAdditionalInfo={cellAdditionalInfo}
+                                index={index}
+                                ModalTemplate={ModalTemplate}
+                            />
+                        ))}
+                    </Tbody>
+                </ChakraTable>
+            </TableContainer >
+            <TableFilter tableInstance={tableInstance} />
+        </>
     )
 }
 
