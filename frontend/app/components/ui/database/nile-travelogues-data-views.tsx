@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
+import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2'
 import { ExtensibleTableField, TableProps } from '../../../lib/types'
 import TableView from './tableView'
 
@@ -42,7 +43,10 @@ export default function NileTraveloguesDataViews({ data }: Props) {
     const columns: ColumnDef<ExtensibleTableField>[] = [
         {
             header: 'Id',
-            accessorKey: 'id'
+            accessorKey: 'id',
+            sortingFn: (a, b, id) => {
+                return a.getValue(id) < b.getValue(id) ? 1 : a.getValue(id) > b.getValue(id) ? -1 : 0
+            }
         },
         {
             header: 'Publications',
@@ -56,6 +60,9 @@ export default function NileTraveloguesDataViews({ data }: Props) {
         {
             header: 'Travelers',
             accessorKey: 'Travelers.travelers_name',
+            sortingFn: (a, b, id) => {
+                return a.getValue(id) < b.getValue(id) ? 1 : a.getValue(id) > b.getValue(id) ? -1 : 0
+            },
             cell(props) {
                 const value = props.getValue() as unknown as string[]
                 return (
@@ -95,14 +102,26 @@ export default function NileTraveloguesDataViews({ data }: Props) {
                         aria-label="Go back to database selection"
                         icon={<AiOutlineLeft />}
                         onClick={() => router.back()}
+                        backgroundColor='#FFF'
+                        _hover={{
+                            backgroundColor: '#FFF',
+                            transition: '0.3s',
+                            transform: 'scale(1.3)'
+                        }}
                     />
                     <Text fontSize='28px' fontWeight={700}>
                         Nile Travelogues Database
                     </Text>
                 </HStack>
-                <Text>
-                    A brief description about the database and its contents.
-                </Text>
+                <HStack width='100%' justifyContent='space-between'>
+                    <Text>
+                        A brief description about the database and its contents.
+                    </Text>
+                    <HStack>
+                        <Text>Filters</Text>
+                        <IconButton aria-label="toggle filter" icon={<HiOutlineAdjustmentsHorizontal />} />
+                    </HStack>
+                </HStack>
             </Stack>
             <TableView
                 data={{

@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
-import { ColumnDef, ColumnResizeMode, flexRender, getCoreRowModel, getSortedRowModel, Row, SortingState, Table, useReactTable } from "@tanstack/react-table"
+import { ColumnDef, ColumnResizeMode, flexRender, getCoreRowModel, getSortedRowModel, Row, sortingFns, SortingState, Table, useReactTable } from "@tanstack/react-table"
 import { ExtensibleTableField, TableColumns, TableProps } from "../../../lib/types"
-import { Table as ChakraTable, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent, Stack, Text } from '@chakra-ui/react'
+import { Table as ChakraTable, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent, Stack, Text, Button, Input, IconButton, HStack } from '@chakra-ui/react'
 
 interface Props {
     data: TableProps
@@ -38,19 +38,18 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
         data: memoData,
         columns: memoColumns,
         onSortingChange: setSorting,
+        state: {
+            sorting
+        },
         getCoreRowModel: getCoreRowModel(),
         getSortedRowModel: getSortedRowModel(),
 
-        columnResizeMode: 'onChange',
-        debugTable: true,
-        debugHeaders: true,
-        debugColumns: true,
+        columnResizeMode: 'onChange'
     })
 
     const {
         getHeaderGroups,
         getRowModel,
-        getState
     } = tableInstance
 
     return (
@@ -60,22 +59,24 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
                     {getHeaderGroups().map((headerGroup, index) => (
                         <Tr key={index}>
                             {headerGroup.headers.map((column) => (
-                                <Th key={JSON.stringify(column.id)}>
-                                    {/* {flexRender(column.column.columnDef.header, column.getContext())} */}
+                                <Th key={JSON.stringify(column.id)} position='relative'>
                                     <Stack
-                                        {...{
-                                            className: column.column.getCanSort()
-                                                ? 'cursor-pointer select-none'
-                                                : '',
-                                            onClick: column.column.getToggleSortingHandler(),
-                                        }}
+                                        onClick={column.column.getToggleSortingHandler()}
+                                        cursor={column.column.getCanSort() ? 'pointer' : 'auto'}
+                                        width='fit-content'
                                     >
-                                        <Text>
-                                            {flexRender(
-                                                column.column.columnDef.header,
-                                                column.getContext()
-                                            )}
-                                            {{
+                                        <Text
+                                            width='fit-content'
+                                            p='5px'
+                                            borderRadius='5px'
+                                            transition='0.3s'
+                                            _hover={{
+                                                transition: '0.3s',
+                                                cursor: 'pointer',
+                                                backgroundColor: '#EEE'
+                                            }}
+                                        >
+                                            {flexRender(column.column.columnDef.header, column.getContext())} {{
                                                 asc: ' 🔼',
                                                 desc: ' 🔽',
                                             }[column.column.getIsSorted() as string] ?? null}
@@ -98,7 +99,7 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
                     ))}
                 </Tbody>
             </ChakraTable>
-        </TableContainer>
+        </TableContainer >
     )
 }
 

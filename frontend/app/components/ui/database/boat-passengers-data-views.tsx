@@ -5,6 +5,8 @@ import TableView from "./tableView";
 import { AiOutlineLeft } from 'react-icons/ai'
 import { useRouter } from "next/router";
 import { ColumnDef } from "@tanstack/react-table";
+import { GiGears } from "react-icons/gi";
+import { HiOutlineAdjustmentsHorizontal } from "react-icons/hi2";
 
 export interface ShipTable extends TableProps {
     rows: {
@@ -28,6 +30,9 @@ export default function BoatPassengersDataViews({ data }: Props) {
         {
             accessorKey: 'id',
             header: 'Id',
+            sortingFn: (a, b, id) => {
+                return a.getValue(id) < b.getValue(id) ? 1 : a.getValue(id) > b.getValue(id) ? -1 : 0
+            }
         },
         {
             accessorKey: 'ship_name',
@@ -41,11 +46,6 @@ export default function BoatPassengersDataViews({ data }: Props) {
 
     const router = useRouter()
 
-    // const defaultColumnProps = {
-    //     width: 100,
-    //     minWidth: 50,
-    //     maxWidth: 100
-    // }
 
     return (
         <Stack width='100%' alignItems='center' padding='15px' gap='20px'>
@@ -55,14 +55,26 @@ export default function BoatPassengersDataViews({ data }: Props) {
                         aria-label="Go back to database selection"
                         icon={<AiOutlineLeft />}
                         onClick={() => router.back()}
+                        backgroundColor='#FFF'
+                        _hover={{
+                            backgroundColor: '#FFF',
+                            transition: '0.3s',
+                            transform: 'scale(1.3)'
+                        }}
                     />
                     <Text fontSize='28px' fontWeight={700}>
                         Boat Passengers Database
                     </Text>
                 </HStack>
-                <Text>
-                    A brief description about the database and its contents.
-                </Text>
+                <HStack width='100%' justifyContent='space-between'>
+                    <Text>
+                        A brief description about the database and its contents.
+                    </Text>
+                    <HStack>
+                        <Text>Filters</Text>
+                        <IconButton aria-label="toggle filter" icon={<HiOutlineAdjustmentsHorizontal />} />
+                    </HStack>
+                </HStack>
             </Stack>
             <TableView
                 data={{
@@ -75,7 +87,6 @@ export default function BoatPassengersDataViews({ data }: Props) {
                 }}
                 cellAdditionalInfo={data.rows.map(row => row.passenger_list.passengers)}
                 columns={columns}
-                // defaultColumnProps={defaultColumnSizing}
                 ModalTemplate={ModalTemplate}
             />
         </Stack>
