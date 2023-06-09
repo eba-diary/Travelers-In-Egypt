@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react"
-import { ColumnDef, ColumnResizeMode, flexRender, getCoreRowModel, Row, Table, useReactTable } from "@tanstack/react-table"
+import { ColumnDef, ColumnResizeMode, flexRender, getCoreRowModel, getSortedRowModel, Row, SortingState, Table, useReactTable } from "@tanstack/react-table"
 import { ExtensibleTableField, TableColumns, TableProps } from "../../../lib/types"
-import { Table as ChakraTable, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent } from '@chakra-ui/react'
+import { Table as ChakraTable, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent, Stack, Text } from '@chakra-ui/react'
 
 interface Props {
     data: TableProps
@@ -32,10 +32,15 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
     const [columnResizeMode, setColumnResizeMode] =
         useState<ColumnResizeMode>('onChange')
 
+    const [sorting, setSorting] = useState<SortingState>([])
+
     const tableInstance = useReactTable({
         data: memoData,
         columns: memoColumns,
+        onSortingChange: setSorting,
         getCoreRowModel: getCoreRowModel(),
+        getSortedRowModel: getSortedRowModel(),
+
         columnResizeMode: 'onChange',
         debugTable: true,
         debugHeaders: true,
@@ -56,23 +61,26 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
                         <Tr key={index}>
                             {headerGroup.headers.map((column) => (
                                 <Th key={JSON.stringify(column.id)}>
-                                    {flexRender(column.column.columnDef.header, column.getContext())}
-                                    <div
+                                    {/* {flexRender(column.column.columnDef.header, column.getContext())} */}
+                                    <Stack
                                         {...{
-                                            onMouseDown: column.getResizeHandler(),
-                                            onTouchStart: column.getResizeHandler(),
-                                            className: `resizer ${column.column.getIsResizing() ? 'isResizing' : ''
-                                                }`,
-                                            style: {
-                                                transform:
-                                                    columnResizeMode === 'onEnd' &&
-                                                        column.column.getIsResizing()
-                                                        ? `translateX(${getState().columnSizingInfo.deltaOffset
-                                                        }px)`
-                                                        : '',
-                                            },
+                                            className: column.column.getCanSort()
+                                                ? 'cursor-pointer select-none'
+                                                : '',
+                                            onClick: column.column.getToggleSortingHandler(),
                                         }}
-                                    />
+                                    >
+                                        <Text>
+                                            {flexRender(
+                                                column.column.columnDef.header,
+                                                column.getContext()
+                                            )}
+                                            {{
+                                                asc: ' 🔼',
+                                                desc: ' 🔽',
+                                            }[column.column.getIsSorted() as string] ?? null}
+                                        </Text>
+                                    </Stack>
                                 </Th>
                             ))}
                         </Tr>

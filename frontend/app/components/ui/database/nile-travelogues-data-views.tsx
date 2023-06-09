@@ -1,5 +1,5 @@
 import { HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from '@chakra-ui/react'
-import { ColumnDef } from '@tanstack/react-table'
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -32,13 +32,12 @@ interface Props {
     data: TraveloguesTable
 }
 
-function truncateText(value: any) {
-    console.log(value)
-    return value.slice(0, 35) + '...'
-    // return 1
-}
 export default function NileTraveloguesDataViews({ data }: Props) {
     const router = useRouter()
+
+    const truncateText = (value: string) => {
+        return value.slice(0, 35) + '...'
+    }
 
     const columns: ColumnDef<ExtensibleTableField>[] = [
         {
@@ -49,9 +48,10 @@ export default function NileTraveloguesDataViews({ data }: Props) {
             header: 'Publications',
             accessorKey: 'Publications.title',
             cell(props) {
-                const value = props.getValue()
+                const value = props.getValue() as unknown as string
                 return <>{truncateText(value)}</>
             },
+
         },
         {
             header: 'Travelers',
