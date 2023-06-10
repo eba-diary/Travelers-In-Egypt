@@ -41,6 +41,10 @@ export default function BoatPassengersDataViews({ data }: Props) {
         {
             accessorKey: 'ship_date',
             header: 'Date',
+            cell(props) {
+                const value = props.getValue() as unknown as string
+                return (new Date(value).toLocaleDateString())
+            }
         }
     ]
 
@@ -49,7 +53,7 @@ export default function BoatPassengersDataViews({ data }: Props) {
 
     return (
         <Stack width='100%' alignItems='center' padding='15px' gap='20px'>
-            <Stack width='100%' padding='10px 0px' borderBottom='1px solid'>
+            <Stack width='100%' padding='10px 0px'>
                 <HStack>
                     <IconButton
                         aria-label="Go back to database selection"
@@ -66,15 +70,9 @@ export default function BoatPassengersDataViews({ data }: Props) {
                         Boat Passengers Database
                     </Text>
                 </HStack>
-                <HStack width='100%' justifyContent='space-between'>
-                    <Text>
-                        A brief description about the database and its contents.
-                    </Text>
-                    <HStack>
-                        <Text>Filters</Text>
-                        <IconButton aria-label="toggle filter" icon={<HiOutlineAdjustmentsHorizontal />} />
-                    </HStack>
-                </HStack>
+                <Text p='0px 15px'>
+                    A brief description about the database and its contents.
+                </Text>
             </Stack>
             <TableView
                 data={{

@@ -1,18 +1,43 @@
 import { useMemo, useState } from "react"
-import { ColumnDef, ColumnResizeMode, flexRender, getCoreRowModel, getFilteredRowModel, getPaginationRowModel, getSortedRowModel, Row, sortingFns, SortingState, Table, useReactTable } from "@tanstack/react-table"
-import { ExtensibleTableField, TableColumns, TableProps } from "../../../lib/types"
-import { Table as ChakraTable, TableContainer, Tbody, Td, Th, Thead, Tr, useDisclosure, Modal, ModalOverlay, ModalContent, Stack, Text, Button, Input, IconButton, HStack } from '@chakra-ui/react'
+import {
+    Column,
+    ColumnDef,
+    ColumnResizeMode,
+    flexRender,
+    getCoreRowModel,
+    getFilteredRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+    Row,
+    SortingState,
+    useReactTable
+} from "@tanstack/react-table"
+import { ExtensibleTableField, TableProps } from "../../../lib/types"
+import {
+    Table as ChakraTable,
+    TableContainer,
+    Tbody,
+    Td,
+    Th,
+    Thead,
+    Tr,
+    useDisclosure,
+    Modal,
+    ModalOverlay,
+    ModalContent,
+    Stack,
+    Text,
+    Button
+} from '@chakra-ui/react'
+
+import TablePaginator from "./filters/table-paginator"
 import TableFilter from "./filters/table-filter"
 
 interface Props {
     data: TableProps
     cellAdditionalInfo: any[]
     columns: ColumnDef<ExtensibleTableField, any>[]
-    // defaultColumnProps: {
-    //     width: number;
-    //     minWidth: number;
-    //     maxWidth: number;
-    // }
+
     ModalTemplate: ({ rowProps, cellAdditionalInfo }: {
         rowProps: Record<string, any>;
         cellAdditionalInfo: any[];
@@ -56,38 +81,61 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
 
     return (
         <>
-            <TableFilter tableInstance={tableInstance} />
+            <Stack width='100%'>
+                <Button
+                    width='fit-content'
+                    onClick={() => {
+                        getHeaderGroups().map(headerGroup => {
+                            headerGroup.headers.map(column => {
+                                column.column.setFilterValue('')
+                            })
+                        })
+                    }}
+                    m='0px 15px'
+                >
+                    Clear Filters
+                </Button>
+            </Stack>
+            <TablePaginator tableInstance={tableInstance} />
             <TableContainer width='100%'>
                 <ChakraTable>
                     <Thead>
                         {getHeaderGroups().map((headerGroup, index) => (
                             <Tr key={index}>
-                                {headerGroup.headers.map((column) => (
-                                    <Th key={JSON.stringify(column.id)} position='relative'>
-                                        <Stack
-                                            onClick={column.column.getToggleSortingHandler()}
-                                            cursor={column.column.getCanSort() ? 'pointer' : 'auto'}
-                                            width='fit-content'
-                                        >
-                                            <Text
+                                {headerGroup.headers.map((column) => {
+                                    // column.column.setFilterValue('')
+                                    return (
+                                        <Th key={JSON.stringify(column.id)} position='relative'>
+                                            <Stack
+                                                onClick={column.column.getToggleSortingHandler()}
+                                                cursor={column.column.getCanSort() ? 'pointer' : 'auto'}
                                                 width='fit-content'
-                                                p='5px'
-                                                borderRadius='5px'
-                                                transition='0.3s'
-                                                _hover={{
-                                                    transition: '0.3s',
-                                                    cursor: 'pointer',
-                                                    backgroundColor: '#EEE'
-                                                }}
                                             >
-                                                {flexRender(column.column.columnDef.header, column.getContext())} {{
-                                                    asc: ' 🔼',
-                                                    desc: ' 🔽',
-                                                }[column.column.getIsSorted() as string] ?? null}
-                                            </Text>
-                                        </Stack>
-                                    </Th>
-                                ))}
+                                                <Text
+                                                    width='fit-content'
+                                                    p='5px'
+                                                    borderRadius='5px'
+                                                    transition='0.3s'
+                                                    _hover={{
+                                                        transition: '0.3s',
+                                                        cursor: 'pointer',
+                                                        backgroundColor: '#EEE'
+                                                    }}
+                                                >
+                                                    {flexRender(column.column.columnDef.header, column.getContext())} {{
+                                                        asc: ' 🔼',
+                                                        desc: ' 🔽',
+                                                    }[column.column.getIsSorted() as string] ?? null}
+                                                </Text>
+                                            </Stack>
+                                            {column.column.getCanFilter() ? (
+                                                <TableFilter column={column.column} table={tableInstance} />
+                                            ) : (
+                                                null
+                                            )}
+                                        </Th>
+                                    )
+                                })}
                             </Tr>
                         ))}
                     </Thead>
@@ -103,11 +151,13 @@ export default function TableView({ data, cellAdditionalInfo, columns, ModalTemp
                         ))}
                     </Tbody>
                 </ChakraTable>
-            </TableContainer >
-            <TableFilter tableInstance={tableInstance} />
+            </TableContainer>
+            <TablePaginator tableInstance={tableInstance} />
         </>
+
     )
 }
+
 
 function TableAndModal({
     row,
@@ -122,7 +172,7 @@ function TableAndModal({
         rowProps: Record<string, any>;
         cellAdditionalInfo: any[];
     }) => JSX.Element
-}) {
+}): JSX.Element {
     const { onToggle, onOpen, isOpen, onClose } = useDisclosure()
     const [isFocused, setIsFocused] = useState<boolean>(false)
 

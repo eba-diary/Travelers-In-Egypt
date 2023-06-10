@@ -1,68 +1,97 @@
-import { Button, HStack, Select, Stack, Text } from "@chakra-ui/react";
-import { Table } from "@tanstack/table-core";
-import { ExtensibleTableField } from "../../../../lib/types";
+import { Checkbox, CheckboxGroup, HStack, IconButton, Input, Stack, VStack } from "@chakra-ui/react"
+import { Column, Table } from "@tanstack/react-table"
+import { ExtensibleTableField } from "../../../../lib/types"
+import 'flatpickr/dist/themes/light.css'
 
-export default function TableFilter({ tableInstance }: { tableInstance: Table<ExtensibleTableField> }) {
+export default function TableFilter({
+    column,
+    table,
+}: {
+    column: Column<ExtensibleTableField, any>
+    table: Table<ExtensibleTableField>
+}) {
+    const firstValue = table
+        .getPreFilteredRowModel()
+        .flatRows[0]?.getValue(column.id)
+
+
+    const columnFilterValue = column.getFilterValue()
+
     return (
-        <Stack width='100%' >
-            <HStack>
-                <Button
-                    className="border rounded p-1"
-                    onClick={() => tableInstance.setPageIndex(0)}
-                    disabled={!tableInstance.getCanPreviousPage()}
-                    fontSize='12px'
-                    height='20px'
-                    width='fit-content'
-                >
-                    {'<<'}
-                </Button>
-                <Button
-                    className="border rounded p-1"
-                    onClick={() => tableInstance.previousPage()}
-                    disabled={!tableInstance.getCanPreviousPage()}
-                    fontSize='12px'
-                    height='20px'
-                    width='fit-content'
-                >
-                    {'<'}
-                </Button>
-                <Text width='100px' textAlign='center'>
-                    {`${tableInstance.getState().pagination.pageIndex + 1} of ${tableInstance.getPageCount()}`}
-                </Text>
-                <Button
-                    className="border rounded p-1"
-                    onClick={() => tableInstance.nextPage()}
-                    disabled={!tableInstance.getCanNextPage()}
-                    fontSize='12px'
-                    height='20px'
-                    width='fit-content'
-                >
-                    {'>'}
-                </Button>
-                <Button
-                    className="border rounded p-1"
-                    onClick={() => tableInstance.setPageIndex(tableInstance.getPageCount() - 1)}
-                    disabled={!tableInstance.getCanNextPage()}
-                    fontSize='12px'
-                    height='20px'
-                    width='fit-content'
-                >
-                    {'>>'}
-                </Button>
-                <Select
-                    width='fit-content'
-                    value={tableInstance.getState().pagination.pageSize}
-                    onChange={e => {
-                        tableInstance.setPageSize(Number(e.target.value))
-                    }}
-                >
-                    {[10, 20, 30, 40, 50].map(pageSize => (
-                        <option key={pageSize} value={pageSize}>
-                            Show {pageSize}
-                        </option>
-                    ))}
-                </Select>
-            </HStack>
-        </Stack>
+        <>
+            {(() => {
+                switch (typeof firstValue) {
+                    case 'number':
+                        return <HStack>
+                            <Input
+                                type="number"
+                                value={(columnFilterValue as [number, number])?.[0] ?? ''}
+                                onChange={e =>
+                                    column.setFilterValue((old: [number, number]) => [
+                                        e.target.value,
+                                        old?.[1],
+                                    ])
+                                }
+                                placeholder={`Min`}
+                                width='75px'
+                            />
+                            <Input
+                                type="number"
+                                value={(columnFilterValue as [number, number])?.[1] ?? ''}
+                                onChange={e =>
+                                    column.setFilterValue((old: [number, number]) => [
+                                        old?.[0],
+                                        e.target.value,
+                                    ])
+                                }
+                                placeholder={`Max`}
+                                width='75px'
+                            />
+                        </HStack>
+                    case 'string':
+                        const isEmoji = Array.from(firstValue).some((char) => char.charCodeAt(0) > 127)
+                        if (isEmoji) {
+                            return (
+                                <CheckboxGroup>
+                                    <VStack alignItems='flex-start' p='5px'>
+                                        <Checkbox
+                                            isChecked={columnFilterValue === '❌'}
+                                            onChange={(event) => column.setFilterValue(event.target.checked ? '❌' : '')}
+                                        >
+                                            ❌
+                                        </Checkbox>
+                                        <Checkbox
+                                            isChecked={columnFilterValue == '✅'}
+                                            onChange={(event) => column.setFilterValue(event.target.checked ? '✅' : '')}
+                                        >
+                                            ✅
+                                        </Checkbox>
+                                    </VStack>
+                                </CheckboxGroup>
+                            );
+                        }
+                        else if (new Date(`${firstValue}`) instanceof Date && !isNaN(Date.parse(firstValue))) {
+                            return (
+                                <HStack>
+                                    <Stack height='50px' />
+                                </HStack>
+                            )
+                        }
+                        else {
+                            return (
+                                <Input
+                                    type="text"
+                                    value={(columnFilterValue ?? '') as string}
+                                    onChange={e => column.setFilterValue(e.target.value)}
+                                    placeholder={`Search...`}
+                                    className="w-36 border shadow rounded"
+                                />
+                            )
+                        }
+                    default:
+                        return null
+                }
+            })()}
+        </>
     )
 }

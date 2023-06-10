@@ -1,4 +1,4 @@
-import { HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from '@chakra-ui/react'
+import { Button, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from '@chakra-ui/react'
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -96,7 +96,7 @@ export default function NileTraveloguesDataViews({ data }: Props) {
 
     return (
         <Stack width='100%' alignItems='center' padding='15px' gap='20px'>
-            <Stack width='100%' padding='10px 0px' borderBottom='1px solid'>
+            <Stack width='100%' padding='10px 0px'>
                 <HStack>
                     <IconButton
                         aria-label="Go back to database selection"
@@ -109,11 +109,11 @@ export default function NileTraveloguesDataViews({ data }: Props) {
                             transform: 'scale(1.3)'
                         }}
                     />
-                    <Text fontSize='28px' fontWeight={700}>
+                    <Text fontSize='28px' fontWeight={700} p='0px 15px'>
                         Nile Travelogues Database
                     </Text>
                 </HStack>
-                <HStack width='100%' justifyContent='space-between'>
+                {/* <HStack width='100%' justifyContent='space-between'>
                     <Text>
                         A brief description about the database and its contents.
                     </Text>
@@ -121,7 +121,7 @@ export default function NileTraveloguesDataViews({ data }: Props) {
                         <Text>Filters</Text>
                         <IconButton aria-label="toggle filter" icon={<HiOutlineAdjustmentsHorizontal />} />
                     </HStack>
-                </HStack>
+                </HStack> */}
             </Stack>
             <TableView
                 data={{
