@@ -1,7 +1,6 @@
 import { Checkbox, CheckboxGroup, HStack, IconButton, Input, Stack, VStack } from "@chakra-ui/react"
 import { Column, Table } from "@tanstack/react-table"
 import { ExtensibleTableField } from "../../../../lib/types"
-import 'flatpickr/dist/themes/light.css'
 
 export default function TableFilter({
     column,
