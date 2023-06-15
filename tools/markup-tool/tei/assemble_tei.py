@@ -54,7 +54,7 @@ def create_header(title='', author='', editor='', publisher='', publisher_addres
         markup = ''
         for x in source_description:
             text = x['text']
-            entities = x['entities']
+            entities = x['ner']
             index = 0
             for e in entities:
                 if e['text'] not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:
@@ -68,6 +68,7 @@ def create_header(title='', author='', editor='', publisher='', publisher_addres
             markup += text[index:]
             markup += ' '
         markup = markup[0:-1]
+        print('markup: ', markup)
         soup.sourceDesc.p.string = markup
     if project_description != '':
         soup.fileDesc.append(soup.new_tag('encodingStmt'))
@@ -76,7 +77,7 @@ def create_header(title='', author='', editor='', publisher='', publisher_addres
         markup = ''
         for x in project_description:
             text = x['text']
-            entities = x['entities']
+            entities = x['ner']
             index = 0
             for e in entities:
                 if e['text'] not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:
@@ -103,7 +104,7 @@ def create_body(flair_output):
     markup = ''
     for x in flair_output:
         text = x['text']
-        entities = x['entities']
+        entities = x['ner']
         index = 0
         for e in entities:
             if e['text'] not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:

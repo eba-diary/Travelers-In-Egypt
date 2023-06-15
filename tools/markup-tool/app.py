@@ -1,14 +1,13 @@
 import re
 from flask import Flask, request, render_template
-
-import re
-from flask import Flask, request, render_template
 from gevent.pywsgi import WSGIServer
 from ner.flair_ner import tag_entities
 from tei.assemble_tei import create_header, create_xml, create_body
+from flask_cors import CORS
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/')
@@ -62,8 +61,7 @@ def submit_text():
 
     # Assemble document
     tei_document = create_xml(tei_header, tei_body).decode('unicode-escape')
-    return render_template('output.html',
-                           tei=tei_document)
+    return json.dumps(tei_document)
 
 
 if __name__ == '__main__':
