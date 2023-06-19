@@ -1,5 +1,13 @@
 import { client } from "../useContentful";
-import { getCarousel, getCardDeck, getLargeSearchBar, getGeneralInformation, getStudentContributors, getDatabaseContainer } from "./getComponents";
+import {
+    getCarousel,
+    getCardDeck,
+    getLargeSearchBar,
+    getGeneralInformation,
+    getStudentContributors,
+    getDatabaseContainer,
+    getToolContainer
+} from "./getComponents";
 
 
 export async function get(page) {
@@ -26,6 +34,8 @@ export async function get(page) {
                     return getStudentContributors(field.fields)
                 case 'database-container':
                     return getDatabaseContainer(field.fields)
+                case 'tool-container':
+                    return getToolContainer(field.fields)
                 default:
                     return { fields: field }
             }

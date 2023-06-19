@@ -57,7 +57,7 @@ def create_header(title='', author='', editor='', publisher='', publisher_addres
             entities = x['ner']
             index = 0
             for e in entities:
-                if e['text'] not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:
+                if 'text' in e and e['text'] not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:
                     markup += text[index:e['start_pos']]
                     if e['type'] == 'PER':
                         ref = create_name_ref(e['text'])
@@ -80,7 +80,7 @@ def create_header(title='', author='', editor='', publisher='', publisher_addres
             entities = x['ner']
             index = 0
             for e in entities:
-                if e['text'] not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:
+                if 'text' in e and e['text']not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:
                     markup += text[index:e['start_pos']]
                     if e['type'] == 'PER':
                         ref = create_name_ref(e['text'])
@@ -107,7 +107,7 @@ def create_body(flair_output):
         entities = x['ner']
         index = 0
         for e in entities:
-            if e['text'] not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:
+            if 'text' in e and e['text'] not in ["I’ve", "I’ll", "I", "I’m", "I've", "I'll", "I'm", "I,"]:
                 markup += text[index:e['start_pos']]
                 markup += '<{}>{}</{}>'.format(tag_dict[e['type']], e['text'], tag_dict[e['type']])
                 index = e['end_pos']

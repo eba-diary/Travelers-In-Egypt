@@ -1,0 +1,329 @@
+import { FormControl, FormErrorMessage, FormLabel, HStack, Input, Stack, Textarea, Text, useToast, Button, Select } from "@chakra-ui/react"
+import axios from "axios"
+import qs from 'querystring'
+import { Dispatch, SetStateAction, useEffect } from "react"
+import { Controller, FieldError, FormProvider, useForm } from "react-hook-form"
+import { HMTFormProps, LICENSE } from "../../../../lib/types"
+
+interface Props {
+    stateData: {
+        setShowEditor: Dispatch<SetStateAction<boolean>>,
+        setXmlData: Dispatch<SetStateAction<string>>,
+    }
+}
+
+export default function HmtForm({ stateData }: Props) {
+    const methods = useForm<HMTFormProps>({
+        mode: 'onBlur',
+        defaultValues: {
+            title: '',
+            author: '',
+            editor: '',
+            publisher: '',
+            publisher_address: '',
+            publication_date: '',
+            license: LICENSE.CC_Attr,
+            source_description: '',
+            project_description: '',
+            raw_text: ''
+        }
+    })
+
+    const { control, handleSubmit, reset, formState: { isSubmitSuccessful } } = methods
+
+    useEffect(() => {
+        reset({
+            title: '',
+            author: '',
+            editor: '',
+            publisher: '',
+            publisher_address: '',
+            publication_date: '',
+            license: LICENSE.CC_Attr,
+            source_description: '',
+            project_description: '',
+            raw_text: ''
+        })
+    }, [isSubmitSuccessful, reset])
+
+    const toast = useToast()
+
+    const onSubmit = async (data: HMTFormProps) => {
+        if (data) {
+
+            try {
+                const xmlData = await axios.post('http://127.0.0.1:5000', qs.stringify({
+                    teiHeaderTitle: data.title,
+                    teiHeaderAuthor: data.author,
+                    teiHeaderEditor: data.editor,
+                    teiHeaderPublisher: data.publisher,
+                    teiHeaderPublisherAddress: data.publisher_address,
+                    teiHeaderPublicationDate: data.publication_date,
+                    teiHeaderLicense: data.license,
+                    teiHeaderProjectDescription: data.project_description,
+                    teiHeaderSourceDescription: data.source_description,
+                    rawText: data.raw_text
+                }), {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                });
+
+                if (xmlData.status === 200) {
+                    console.log(xmlData)
+                    stateData.setXmlData(xmlData.data)
+                    stateData.setShowEditor(true)
+                } else {
+                    stateData.setXmlData('')
+                    stateData.setShowEditor(false)
+                }
+            } catch (error) {
+                toast({
+                    status: 'error',
+                    title: 'Please fix the form errors',
+                    isClosable: true,
+                    duration: 3000
+                })
+            }
+        } else {
+            toast({
+                status: 'error',
+                title: 'Please fix the form errors',
+                isClosable: true,
+                duration: 3000
+            })
+        }
+    }
+    return (
+        <FormProvider {...methods}>
+            <form
+                onSubmit={(event) => {
+                    handleSubmit(onSubmit)(event)
+                }}
+
+                onKeyDown={(event) => {
+                    if (event.shiftKey && event.key == 'Enter') {
+                        handleSubmit(onSubmit)(event)
+                    }
+                }}
+            >
+                <Stack>
+                    <Controller
+                        control={control}
+                        name='title'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Title
+                                    </FormLabel>
+                                    <Input
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='author'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Author
+                                    </FormLabel>
+                                    <Input
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='editor'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Editor
+                                    </FormLabel>
+                                    <Input
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='publisher'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Publisher
+                                    </FormLabel>
+                                    <Input
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='publisher_address'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Publisher Address
+                                    </FormLabel>
+                                    <Input
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='publication_date'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Publication Date
+                                    </FormLabel>
+                                    <Input
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='license'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        License
+                                    </FormLabel>
+                                    <Select
+                                        flex={6}
+                                        onChange={onChange}
+                                        value={value}
+                                    >
+                                        {Object.values(LICENSE).map((entry, index) => (
+                                            <option key={index} value={entry.toString()}>
+                                                {entry.toString()}
+                                            </option>
+                                        ))}
+                                    </Select>
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='source_description'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Source Description
+                                    </FormLabel>
+                                    <Textarea
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='project_description'
+                        render={({ field: { onChange, value } }) => (
+                            <FormControl display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Project Description
+                                    </FormLabel>
+                                    <Textarea
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                            </FormControl>
+                        )}
+                    />
+                    <Controller
+                        control={control}
+                        name='raw_text'
+                        rules={{
+                            validate: (data: string) => {
+                                if (data.length <= 0) return 'Text required'
+                                return true
+                            }
+                        }}
+                        render={({ field: { onChange, value }, fieldState: { error } }) => (
+                            <FormControl isInvalid={!!error} display='flex' flexDirection='column' alignItems='center'>
+                                <HStack width='75%'>
+                                    <FormLabel flex={1}>
+                                        Text (required)
+                                    </FormLabel>
+                                    <Textarea
+                                        flex={6}
+                                        borderRadius='5px'
+                                        onChange={onChange}
+                                        value={value}
+                                    />
+                                </HStack>
+                                <FormErrorMessage>
+                                    <Text>{(error as FieldError)?.message}</Text>
+                                </FormErrorMessage>
+                            </FormControl>
+                        )}
+                    />
+                </Stack>
+                <Stack width='100%' padding='25px 40px'>
+                    <HStack width='90%' justifyContent='flex-end'>
+                        <Button>
+                            Clear Form
+                        </Button>
+                        <Button type='submit'>
+                            Submit
+                        </Button>
+                    </HStack>
+                </Stack>
+            </form>
+        </FormProvider>
+    )
+}

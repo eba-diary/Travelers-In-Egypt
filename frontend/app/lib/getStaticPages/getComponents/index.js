@@ -4,6 +4,7 @@ import { getLargeSearchBar } from './getLargeSearchBar';
 import { getGeneralInformation } from './getGeneralInformation';
 import { getStudentContributors } from './getStudentContributors';
 import { getDatabaseContainer } from './getDatabaseContainer';
+import { getToolContainer } from './getToolContainer'
 
 export {
     getCarousel,
@@ -11,5 +12,6 @@ export {
     getLargeSearchBar,
     getGeneralInformation,
     getStudentContributors,
-    getDatabaseContainer
+    getDatabaseContainer,
+    getToolContainer
 };

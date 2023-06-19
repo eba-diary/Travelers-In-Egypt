@@ -1,5 +1,3 @@
-
-import Layout from '../components/utils/Layout';
 import dynamic from 'next/dynamic';
 import usePageNumber from '../lib/hooks/usePageNumber';
 

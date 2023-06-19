@@ -6,6 +6,7 @@ import Contributors from "./ui/contributors";
 import DatabaseCards from "./ui/database/databaseCards";
 import GeneralInformation from "./ui/general-information";
 import LargeSearchBar from "./ui/large-search-bar";
+import ToolHeaderCards from "./ui/tools/tool-header-cards";
 
 export default function StaticPageTemplate({ components }) {
     return (
@@ -25,6 +26,10 @@ export default function StaticPageTemplate({ components }) {
                             return <Contributors key={index} data={component} />
                         case 'database-container':
                             return <DatabaseCards key={index} data={component} />
+                        case 'tool-container':
+                            return <ToolHeaderCards key={index} data={component} />
+                        default:
+                            return <React.Fragment></React.Fragment>
                     }
                 })}
             </Stack>

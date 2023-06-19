@@ -7,7 +7,7 @@ from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, supports_credentials=True, methods=['GET', 'POST', 'OPTIONS'])
 
 
 @app.route('/')
@@ -61,6 +61,7 @@ def submit_text():
 
     # Assemble document
     tei_document = create_xml(tei_header, tei_body).decode('unicode-escape')
+
     return json.dumps(tei_document)
 
 
