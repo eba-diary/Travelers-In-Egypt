@@ -1,6 +1,6 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Editor } from '@monaco-editor/react';
-import { Button, HStack, IconButton, Stack, useToast } from '@chakra-ui/react';
+import { Button, HStack, IconButton, Stack, Text, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { LuClipboardCopy } from 'react-icons/lu'
 import { BiFullscreen } from 'react-icons/bi'
@@ -14,6 +14,10 @@ interface Props {
 
 export default function XmlIDE({ data }: Props) {
     const [xmlCode, setXmlCode] = useState<string>(data.code)
+
+    useEffect(() => {
+        setXmlCode(data.code)
+    }, [data])
 
     const toast = useToast()
 
@@ -41,11 +45,6 @@ export default function XmlIDE({ data }: Props) {
         <Stack width='100%' alignItems='center'>
             <Stack width='60%'>
                 <HStack width='100%' justifyContent='space-between'>
-                    <Stack>
-                        <Button onClick={() => data.setShowEditor(false)}>
-                            Back
-                        </Button>
-                    </Stack>
                     <IconButton
                         aria-label='Copy to clipboard.'
                         icon={<LuClipboardCopy />}
@@ -54,7 +53,7 @@ export default function XmlIDE({ data }: Props) {
                 </HStack>
                 <Stack borderRadius='5px' border='1px'>
                     <Editor
-                        height='525px'
+                        height='500px'
                         defaultLanguage='xml'
                         defaultValue={xmlCode}
                         theme='vs-dark'
