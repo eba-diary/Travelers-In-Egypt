@@ -14,25 +14,31 @@
 
 Stack 
 
-- Next JS 
-- Nest JS, 
+- Next JS (migrating to typescript)
+- Koa.ts
+- Python Flask
 - PostgresQL
 
 Hosting services 
 
 - Vercel
 - Supabase
+- Railway
 
 Changes:
+Readded Flask for web tools (07/12/2023)
+Switched from Nest JS to Koa TS (06/17/2023)
 Removed Python Flask (05/29/2023)
 Introduced Nest JS (05/29/2023)
-Integrated MySQL db to PostgresQL (05/29/2023)
+Migrated MySQL db to Postgres (05/29/2023)
 
 ### Starting Frontend and Backend Dev Server
 
 To start the frontend development server, `cd` into `frontend/app`. Then run `npm install` to install dependencies and then `npm run dev` to start the frontend.
 
-To start the backend development server, `cd` into `backend` and run `/venv/bin/activate` to active the virutal environment. Then run `pip3 install -r requirements.txt` to install dependencies and then `flask run` to start the backend development server. 
+To start the backend development server, `cd` into `backend`. Then run `npm install` to install dependencies and then `npm start` to start the backend.
+
+To start the historical markup tool, `cd` into `tools` and run `source /venv/bin/activate` for Mac or `/venv/Scripts/activate.bat` for windows to active the virutal environment. Then run `pip3 install -r requirements.txt` to install dependencies and then `flask run`
 
 
 
@@ -43,7 +49,9 @@ To start the backend development server, `cd` into `backend` and run `/venv/bin/
 If you do not have a file that begins with `.env`  in the `frontend/app` directory, you can request it from the frontend team. This file is necessary to access the CMS.
 
 #### Backend
+If you do not have a file that begins with `.env.local` in the `backend` directory, you can request it from the backend team. This file is necessary to access the Postgres database.
 
+#### Tools
 If you are on VSCode and the error `Import <package> could not be resolved`, use `Ctrl` (or `Cmd`) + `Shift` + `P` to open the Command Palette. Then type **Python: Select Interpreter** and select **Python 3.7.6** to resolve the errors.
 
 ## Frontend Structure
@@ -90,12 +98,35 @@ All images and documents need to be in the `public` directory. We most likely wi
 
 ## Backend Structure
 
-**[CURRENTLY IN THE WORKS]**
+### Providers
+
+`providers` contain all the files to connect to and interact with external services such as the Postgres database.
+
+### Routes
+
+`routes` contain all the files to handle endpoints consumed by the frontend
+
+### Supabase
+
+`supabase` contains general purpose files to interact with the Postgres database on Supabase
+
+### Types
+
+`types` includes all the types for the application
 
 
 
 ## Workflow
-
+- Assign yourself to an issue / request to be assigned to one
+- Create a branch off of 'development' with a standard number + issue title, for example "21-react-tabes"
+- Work on a new branch, then open a PR after testing
+- Assign Patrick/Dhreeti as reviewers
+- Issue will be approved and merged into the development branch
+  - If there are any issues, they will be left in the comments of that specific PR. Address and push changes
+- Dev branch will be merged into main biweekly
+- Regression testing weill happen during a meeting biweekly
+  - Members will test certain features of the website and report any issues on Github
+  - Self-assign issues at the end
 
 
 ### Frontend
@@ -209,4 +240,4 @@ Notes:
 
 #### Add Existing Content 
 
-Simply follow steps 8-10.
+Follow steps 8-10.
