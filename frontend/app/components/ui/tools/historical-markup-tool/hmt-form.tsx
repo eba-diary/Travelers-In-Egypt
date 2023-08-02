@@ -48,27 +48,28 @@ export default function HmtForm({ stateData }: Props) {
             project_description: '',
             raw_text: ''
         })
-    }, [isSubmitSuccessful, reset])
 
-    console.log(lastFormData)
+    }, [isSubmitSuccessful, reset])
 
     const toast = useToast()
 
     const onSubmit = async (data: HMTFormProps) => {
         if (data) {
             try {
-                const xmlData = await axios.post('http://127.0.0.1:5000', qs.stringify({
-                    teiHeaderTitle: data.title,
-                    teiHeaderAuthor: data.author,
-                    teiHeaderEditor: data.editor,
-                    teiHeaderPublisher: data.publisher,
-                    teiHeaderPublisherAddress: data.publisher_address,
-                    teiHeaderPublicationDate: data.publication_date,
-                    teiHeaderLicense: data.license,
-                    teiHeaderProjectDescription: data.project_description,
-                    teiHeaderSourceDescription: data.source_description,
-                    rawText: data.raw_text
-                }), {
+                const xmlData = await axios.post(
+                    process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:5000' : 'https://tie-hmt-production.up.railway.app',
+                    qs.stringify({
+                        teiHeaderTitle: data.title,
+                        teiHeaderAuthor: data.author,
+                        teiHeaderEditor: data.editor,
+                        teiHeaderPublisher: data.publisher,
+                        teiHeaderPublisherAddress: data.publisher_address,
+                        teiHeaderPublicationDate: data.publication_date,
+                        teiHeaderLicense: data.license,
+                        teiHeaderProjectDescription: data.project_description,
+                        teiHeaderSourceDescription: data.source_description,
+                        rawText: data.raw_text
+                    }), {
                     headers: {
                         'Content-Type': 'application/x-www-form-urlencoded'
                     }
@@ -85,7 +86,7 @@ export default function HmtForm({ stateData }: Props) {
             } catch (error) {
                 toast({
                     status: 'error',
-                    title: 'Please fix the form errors',
+                    title: `Please fix the form errors: ${error}`,
                     isClosable: true,
                     duration: 3000
                 })
@@ -298,7 +299,27 @@ export default function HmtForm({ stateData }: Props) {
                 </Stack>
                 <Stack width='100%' padding='25px 40px'>
                     <HStack width='85%' justifyContent='flex-end'>
-                        <Button>
+                        <Button onClick={() => {
+                            reset({
+                                title: '',
+                                author: '',
+                                editor: '',
+                                publisher: '',
+                                publisher_address: '',
+                                publication_date: '',
+                                license: LICENSE.CC_Attr,
+                                source_description: '',
+                                project_description: '',
+                                raw_text: ''
+                            })
+
+                            toast({
+                                title: 'Form Cleared',
+                                status: 'success',
+                                duration: 3000,
+                                position: 'top'
+                            })
+                        }}>
                             Clear Form
                         </Button>
                         <Button type='submit'>
