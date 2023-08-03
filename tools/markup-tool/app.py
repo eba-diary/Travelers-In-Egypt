@@ -7,15 +7,17 @@ from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-def allowed_origin(origin):
-    # Check if the origin is in the list of allowed origins
-    allowed_origins = ['http://localhost:3000', 'https://travelers-in-egypt.vercel.app', 'https://travelers-in-egypt-preview.vercel.app']
-    if origin in allowed_origins:
-        return origin
-    return None  # Return None if the origin is not allowed
 
-# Set up CORS with the dynamic allowed_origin function
-CORS(app, supports_credentials=True, methods=['GET', 'POST', 'OPTIONS'], origins=allowed_origin)
+@app.after_request
+def after_request(response):
+    allowed_origins = ['http://localhost:3000', 'https://travelers-in-egypt.vercel.app', 'https://travelers-in-egypt-preview.vercel.app']
+    if request.headers['Origin'] in allowed_origins:
+        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] 
+        response.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+    return response
+
+# CORS(app, supports_credentials=True, methods=['GET', 'POST', 'OPTIONS'], origins=allowed_origin)
 
 @app.route('/')
 def index():
