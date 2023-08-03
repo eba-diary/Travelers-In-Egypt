@@ -57,7 +57,7 @@ export default function HmtForm({ stateData }: Props) {
         if (data) {
             try {
                 const xmlData = await axios.post(
-                    process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:5000' : 'https://tie-hmt-production.up.railway.app',
+                    process.env.NODE_ENV === 'development' ? 'http://127.0.0.1:5000' : `${process.env.NEXT_PUBLIC_HMT_TOOL_BASE_URI}`,
                     qs.stringify({
                         teiHeaderTitle: data.title,
                         teiHeaderAuthor: data.author,
