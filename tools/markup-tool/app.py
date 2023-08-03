@@ -17,19 +17,6 @@ def allowed_origin(origin):
 # Set up CORS with the dynamic allowed_origin function
 CORS(app, supports_credentials=True, methods=['GET', 'POST', 'OPTIONS'], origins=allowed_origin)
 
-
-# CORS(
-#     app, 
-#     supports_credentials=True, 
-#     methods=['GET', 'POST', 'OPTIONS'], 
-#     origins=[
-#         'http://localhost:3000', 
-#         'https://travelers-in-egypt.vercel.app',
-#         'https://travelers-in-egypt-preview.vercel.app/'
-#     ]
-# )
-
-
 @app.route('/')
 def index():
     return json.dumps('Historical Markup Tool api')
