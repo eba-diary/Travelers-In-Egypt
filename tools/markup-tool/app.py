@@ -7,7 +7,12 @@ from flask_cors import CORS
 import json
 
 app = Flask(__name__)
-CORS(app, supports_credentials=True, methods=['GET', 'POST', 'OPTIONS'])
+CORS(
+    app, 
+    supports_credentials=True, 
+    methods=['GET', 'POST', 'OPTIONS'], 
+    origins=['http://localhost:3000', 'https://travelers-in-egypt.vercel.app']
+)
 
 
 @app.route('/')
@@ -66,4 +71,5 @@ def submit_text():
 
 
 if __name__ == '__main__':
-    WSGIServer(('0.0.0.0', 1107), app).serve_forever()
+    # app.run(host='0.0.0.0', port='1107', debug=True)
+    WSGIServer(('127.0.0.1', 5000), app).serve_forever()
