@@ -8,16 +8,16 @@ import json
 
 app = Flask(__name__)
 
-@app.after_request
-def after_request(response):
-    allowed_origins = ['http://localhost:3000', 'https://travelers-in-egypt.vercel.app', 'https://travelers-in-egypt-preview.vercel.app']
-    if request.headers['Origin'] in allowed_origins:
-        response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] 
-        response.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
-    return response
+# @app.after_request
+# def after_request(response):
+#     allowed_origins = ['http://localhost:3000', 'https://travelers-in-egypt.vercel.app', 'https://travelers-in-egypt-preview.vercel.app']
+#     if request.headers['Origin'] in allowed_origins:
+#         response.headers['Access-Control-Allow-Origin'] = request.headers['Origin'] 
+#         response.headers['Access-Control-Allow-Methods'] = 'PUT,GET,POST,DELETE'
+#         response.headers['Access-Control-Allow-Headers'] = 'Content-Type,Authorization'
+#     return response
 
-# CORS(app, supports_credentials=True, methods=['GET', 'POST', 'OPTIONS'], origins=allowed_origin)
+CORS(app, supports_credentials=True, methods=['GET', 'POST', 'OPTIONS'], resources={r"/*": {"origins": ["localhost:3000", "travelers-in-egypt-preview.vercel.app", "travelers-in-egypt.vercel.app"]}})
 
 @app.route('/')
 def index():
