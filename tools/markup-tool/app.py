@@ -11,7 +11,11 @@ CORS(
     app, 
     supports_credentials=True, 
     methods=['GET', 'POST', 'OPTIONS'], 
-    origins=['http://localhost:3000', 'https://travelers-in-egypt.vercel.app']
+    origins=[
+        'http://localhost:3000', 
+        'https://travelers-in-egypt.vercel.app',
+        'https://travelers-in-egypt-preview.vercel.app/'
+    ]
 )
 
 
