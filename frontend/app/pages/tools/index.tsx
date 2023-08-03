@@ -3,7 +3,6 @@ import { get } from '../../lib/getStaticPages/get'
 
 
 export default function Tools({ components }) {
-    console.log(components)
     return (
         <StaticPageTemplate components={components} />
     )
