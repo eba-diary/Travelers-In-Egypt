@@ -1,4 +1,17 @@
-export function getGeneralInformation(fields) {
+import { CMSImageResponse, GeneralInformationProps, Image, GIInput, GISectionProps, GITypes } from "../../types"
+
+interface Props {
+    title: string
+    directorName: string
+    directorDescription: string
+    directorImage: CMSImageResponse
+    image: CMSImageResponse
+    section: GISectionProps[]
+    sectionImage: CMSImageResponse
+}
+
+export function getGeneralInformation(fields: Props) {
+    console.log(fields)
     return {
         type: 'general-information',
         fields: {
@@ -15,7 +28,7 @@ export function getGeneralInformation(fields) {
                 src: 'https:' + fields.image.fields.image.fields.file.url,
                 alt: fields.image.fields.alt
             },
-            section: fields.section.map((entry) => {
+            section: fields.section.map((entry: GISectionProps) => {
                 return {
                     title: entry.fields.title,
                     items: { ...entry.fields.items.fields }
@@ -26,5 +39,5 @@ export function getGeneralInformation(fields) {
                 alt: fields.sectionImage.fields.alt
             }
         }
-    }
+    } as GeneralInformationProps
 }

@@ -4,6 +4,7 @@ import usePageNumber from '../lib/hooks/usePageNumber';
 
 export default function Home({ components }) {
 	usePageNumber(0)
+	console.log(components)
 	return (
 		<StaticPageTemplate components={components} />
 	)
