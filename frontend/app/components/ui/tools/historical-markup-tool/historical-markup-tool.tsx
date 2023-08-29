@@ -1,5 +1,5 @@
 import { Stack, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import usePageNumber from "../../../../lib/hooks/usePageNumber";
 import HmtForm from "./hmt-form";
 import XmlIDE from "./XMLIDE";
@@ -15,14 +15,18 @@ export default function HistoricalMarkupToolComponent() {
         setTabIndex(tabIndex === 0 ? 1 : 0)
     }
 
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        })
+    }, [showEditor])
+
     return (
         <Stack width='100%' alignItems='center'>
             <Stack width='90%'>
                 <Text fontSize='36px' fontWeight={700} textAlign='center'>
                     Historical Markup Tool
-                </Text>
-                <Text>
-                    Todo: Move submit and clear form to the side. Create a side control bar with the following: 1. Fill form with last form data 2. history of form submissions 3. Checkbox to lock fields that should not be reset, ex same author and title, different raw text 4. Checkbox to allow useres to always use previous form data and 5. hot keys to toggle the form fields.
                 </Text>
                 <Tabs index={tabIndex} isLazy>
                     <TabList>
