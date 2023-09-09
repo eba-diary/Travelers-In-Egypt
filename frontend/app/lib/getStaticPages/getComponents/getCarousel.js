@@ -2,6 +2,10 @@ export function getCarousel(fields) {
     return {
         type: 'carousel',
         fields: {
+            bottomBorderColor: fields.bottomBorderColor,
+            selectedCardColor: fields.selectedCardColor,
+            unselectedCardColor: fields.unselectedCardColor,
+            hoverCardColor: fields.hoverCardColor,
             title: fields.title,
             carouselCards: fields.carouselCards.map((entry) => {
                 return {
