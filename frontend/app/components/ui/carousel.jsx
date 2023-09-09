@@ -20,6 +20,11 @@ export default function Carousel({ data }) {
     };
 
     const totalSlides = data.fields.carouselCards.length
+    const bottomBorderColor = data.fields.bottomBorderColor;
+    const selectedCardColor = data.fields.selectedCardColor;
+    const unselectedCardColor = data.fields.unselectedCardColor;
+    const hoverCardColor = data.fields.hoverCardColor;
+
     const handleNextSlide = (index) => {
         setDirection('right');
         if (isNaN(index)) {
@@ -52,7 +57,7 @@ export default function Carousel({ data }) {
     return (
         <Stack width='100%' alignItems='center' position='relative'>
             <HStack
-                borderBottom='15px solid #C58A22'
+                borderBottom={`15px solid ${bottomBorderColor}`}
                 width='100%'
                 alignItems='flex-start'
                 spacing='0px'
@@ -82,14 +87,14 @@ export default function Carousel({ data }) {
                             padding='10px'
                             tabIndex={4}
                             borderBottom='1px'
-                            backgroundColor={currentSlide == index ? '#c58922' : '#f8c66c'}
+                            backgroundColor={currentSlide == index ? selectedCardColor : unselectedCardColor}
                             onClick={() => {
                                 handleNextSlide(index)
                             }}
                             _hover={{
                                 cursor: 'pointer',
                                 transition: '0.3s',
-                                backgroundColor: currentSlide !== index ? '#deab52' : ''
+                                backgroundColor: currentSlide !== index ? hoverCardColor : ''
                             }}
                         >
                             <Text

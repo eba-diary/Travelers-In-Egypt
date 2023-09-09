@@ -19,6 +19,10 @@ export default function LargeSearchBar({ data }) {
         return () => clearTimeout(timer)
     }
 
+    const titleFontColor = data.fields.titleFontColor;
+    const bgColor = data.fields.bgColor;
+    const boxShadowColor = data.fields.boxShadowColor; 
+
     const handleSearch = async (searchTerm) => {
         const { data, error } = await supabase
             .from('Ships')
@@ -40,7 +44,7 @@ export default function LargeSearchBar({ data }) {
                 height={height}
                 justifyContent='flex-start'
             >
-                <Text fontSize='48px' color='#C58A22' textShadow='3px 3px #E3CAA9' fontWeight={700}>
+                <Text fontSize='48px' color={titleFontColor} textShadow='3px 3px #E3CAA9' fontWeight={700}>
                     {data.fields.title.toUpperCase()}
                 </Text>
                 <Text>
@@ -49,11 +53,11 @@ export default function LargeSearchBar({ data }) {
             </Stack>
             <Stack
                 flex={1}
-                bgColor='#C58A22'
+                bgColor={bgColor}
                 width='100%'
                 height='75%'
                 borderRadius='5px'
-                boxShadow='10px 10px #E3CAA9'
+                boxShadow={`10px 10px ${boxShadowColor}`}
                 ref={ref}
             >
                 <Stack height='100%' p='20px'>

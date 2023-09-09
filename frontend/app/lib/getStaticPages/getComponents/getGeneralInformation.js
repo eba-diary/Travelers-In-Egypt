@@ -2,6 +2,11 @@ export function getGeneralInformation(fields) {
     return {
         type: 'general-information',
         fields: {
+            titleBorderColor: fields.titleBorderColor,
+            titleShadowColor: fields.titleShadowColor,
+            titleColor: fields.titleColor,
+            directorBottomBorderColor: fields.directorBottomBorderColor,
+            imageShadowColor: fields.imageShadowColor,
             title: fields.title,
             director: {
                 directorName: fields.directorName,

@@ -6,6 +6,11 @@ import Collapse from "./references/collapse"
 export default function GeneralInformation({ data }) {
     const [widthRef, width] = useComponentWidth()
     const [heightRef, height, test] = useComponentResizeHeight()
+    const titleBorderColor = data.fields.titleBorderColor;
+    const titleShadowColor = data.fields.titleShadowColor;
+    const titleColor = data.fields.titleColor;
+    const directorBottomBorderColor = data.fields.directorBottomBorderColor;
+    const imageShadowColor = data.fields.imageShadowColor;
 
     return (
         <Stack width='100%' alignItems='center' padding='50px 0px' gap='20px'>
@@ -13,15 +18,15 @@ export default function GeneralInformation({ data }) {
                 <Stack
                     width={`${width + 150}px`}
                     height='50px'
-                    border='4px solid #F8C66C'
+                    border={`4px solid ${titleBorderColor}`}
                     alignItems='flex-start'
                 >
                     <Text
                         ref={widthRef}
                         fontSize='64px'
                         fontWeight={800}
-                        color='#C58A22'
-                        textShadow='5px 5px #E3CAA9'
+                        color={titleColor}
+                        textShadow={`5px 5px ${titleShadowColor}`}
                         marginTop='-50px'
                         width='fit-content'
                     >
@@ -34,7 +39,7 @@ export default function GeneralInformation({ data }) {
                         fontWeight={500}
                         padding='10px'
                         width={`${width + 150}px`}
-                        borderBottom='3px solid #C58A22'
+                        borderBottom={`3px solid ${directorBottomBorderColor}`}
                     >
                         {data.fields.director.directorName} <span style={{ color: '#888' }}>&#40;Principle Investigator&#41;</span>
                     </Text>
@@ -65,7 +70,7 @@ export default function GeneralInformation({ data }) {
                             width='300px'
                             objectFit='cover'
                             borderRadius='5px'
-                            shadow='5px 5px 0px 1px #C58A22'
+                            shadow={`5px 5px 0px 1px ${imageShadowColor}`}
                         />
                     </Stack>
                 </HStack>

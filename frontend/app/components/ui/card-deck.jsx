@@ -3,10 +3,14 @@ import { useRouter } from "next/router";
 import CardSlider from "./content-slider"
 
 export default function CardDeck({ data }) {
-    let boxBg = useColorModeValue("white", "white");
-    const paddingBg = useColorModeValue("#C58A22", "white");
 
-    const router = useRouter()
+    const router = useRouter();
+    const cardBgColor = data.fields.cardBgColor;
+    const cardBorderColor = data.fields.cardBorderColor;
+    const cardBoxShadowColor = data.fields.cardBoxShadowColor;
+    const cardTitleFontColor = data.fields.cardTitleFontColor;
+    const bgGradientColor1 = data.fields.bgGradientColor1;
+    const bgGradientColor2 = data.fields.bgGradientColor2;
 
     return (
         <HStack justifyContent='center'>
@@ -15,7 +19,7 @@ export default function CardDeck({ data }) {
                 columnGap='20px'
                 direction='row'
                 width='100%'
-                background='linear-gradient(180deg, rgba(242,242,242,0) 34%, rgba(248,198,108,1) 35%)'
+                background={`linear-gradient(180deg, ${bgGradientColor1} 34%, ${bgGradientColor2} 35%)`}
                 justifyContent='center'
             >
                 <CardSlider gap={20}>
@@ -26,12 +30,12 @@ export default function CardDeck({ data }) {
                                 h='400px'
                                 w='300px'
                                 direction='column'
-                                bg={boxBg}
+                                bg={cardBgColor}
                                 alignItems='center'
                                 justifyContent='flex-start'
                                 border='6px solid'
-                                boxShadow='5px 10px 5px #9c6b19'
-                                borderColor={paddingBg}
+                                boxShadow={`5px 10px 5px ${cardBoxShadowColor}`}
+                                borderColor={cardBorderColor}
                                 borderRadius='5px'
                                 rowGap='20px'
                                 columnGap='20px'
@@ -49,7 +53,7 @@ export default function CardDeck({ data }) {
                                     </Stack>
                                     <Stack padding='5px' justifyContent='space-between' height='100%'>
                                         <Stack>
-                                            <Text fontSize='16px' fontWeight={700} color='#C58A22'>
+                                            <Text fontSize='16px' fontWeight={700} color={cardTitleFontColor}>
                                                 {entries.title}
                                             </Text>
                                             <Text fontSize='14px' noOfLines={3}>
