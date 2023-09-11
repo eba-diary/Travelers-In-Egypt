@@ -9,7 +9,7 @@ interface Props {
 }
 
 export default function GeneralInformation( {data} : Props) {
-    const [widthRef, width] = useComponentWidth()
+    const {ref, width} = useComponentWidth()
     const [heightRef, height, test] = useComponentResizeHeight()
 
     return (
@@ -22,7 +22,7 @@ export default function GeneralInformation( {data} : Props) {
                     alignItems='flex-start'
                 >
                     <Text
-                        ref={widthRef}
+                        ref={ref}
                         fontSize='64px'
                         fontWeight={800}
                         color='#C58A22'
@@ -44,7 +44,7 @@ export default function GeneralInformation( {data} : Props) {
                         {data.fields.director.directorName} <span style={{ color: '#888' }}>&#40;Principle Investigator&#41;</span>
                     </Text>
                     <HStack width='90%'>
-                        <Circle width='150px' height='150px' backgroundColor='#EEE' overflow='hidden'>
+                        <Circle size='150px' backgroundColor='#EEE' overflow='hidden'>
                             <Image
                                 src={data.fields.director.directorImage.src}
                                 alt={data.fields.director.directorImage.alt}
@@ -60,7 +60,8 @@ export default function GeneralInformation( {data} : Props) {
                 </Stack>
                 <HStack width='100%' justifyContent='space-between'>
                     <Stack width='60%'>
-                        <Collapse data={data.fields.section} type={data.type} />
+                        {/* Type is not within scope of GeneralInformationProps */}
+                        <Collapse data={data.fields.section} type={'general-information'} />
                     </Stack>
                     <Stack width='30%' justifyContent='center'>
                         <Image
