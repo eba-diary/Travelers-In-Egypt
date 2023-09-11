@@ -45,7 +45,11 @@ export default function NileTraveloguesDataViews({ data }: Props) {
             header: 'Id',
             accessorKey: 'id',
             sortingFn: (a, b, id) => {
-                return a.getValue(id) < b.getValue(id) ? 1 : a.getValue(id) > b.getValue(id) ? -1 : 0
+                return (
+                    a.getValue(id) as unknown as number <
+                        (b.getValue(id) as unknown as number) ?
+                        1 : a.getValue(id) as unknown as number > (b.getValue(id) as unknown as number) ? -1 : 0
+                )
             }
         },
         {
@@ -61,7 +65,11 @@ export default function NileTraveloguesDataViews({ data }: Props) {
             header: 'Travelers',
             accessorKey: 'Travelers.travelers_name',
             sortingFn: (a, b, id) => {
-                return a.getValue(id) < b.getValue(id) ? 1 : a.getValue(id) > b.getValue(id) ? -1 : 0
+                return (
+                    a.getValue(id) as unknown as number <
+                        (b.getValue(id) as unknown as number) ?
+                        1 : a.getValue(id) as unknown as number > (b.getValue(id) as unknown as number) ? -1 : 0
+                )
             },
             cell(props) {
                 const value = props.getValue() as unknown as string[]

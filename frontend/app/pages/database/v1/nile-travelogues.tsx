@@ -4,7 +4,12 @@ import usePageNumber from "../../../lib/hooks/usePageNumber";
 import axios from 'axios'
 import NileTraveloguesDataViews, { TraveloguesTable } from "../../../components/ui/database/nile-travelogues-data-views";
 
-export default function BoatPassengers({ prefetchShips }) {
+interface Props {
+    prefetchShips: TraveloguesTable
+}
+
+
+export default function BoatPassengers({ prefetchShips }: Props) {
     usePageNumber(1)
     const oneHour = 60 * 60 * 1000
     const { data } = useQuery({

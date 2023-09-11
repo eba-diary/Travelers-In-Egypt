@@ -64,7 +64,7 @@ export default function XmlIDE({ data }: Props) {
                                 top: 20
                             },
                         }}
-                        onChange={(value) => setXmlCode(value)}
+                        onChange={(value) => setXmlCode(value ?? "")}
                     />
                 </Stack>
             </Stack>

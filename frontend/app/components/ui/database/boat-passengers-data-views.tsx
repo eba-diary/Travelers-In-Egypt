@@ -31,7 +31,11 @@ export default function BoatPassengersDataViews({ data }: Props) {
             accessorKey: 'id',
             header: 'Id',
             sortingFn: (a, b, id) => {
-                return a.getValue(id) < b.getValue(id) ? 1 : a.getValue(id) > b.getValue(id) ? -1 : 0
+                return (
+                    a.getValue(id) as unknown as number <
+                        (b.getValue(id) as unknown as number) ?
+                        1 : a.getValue(id) as unknown as number > (b.getValue(id) as unknown as number) ? -1 : 0
+                )
             }
         },
         {
