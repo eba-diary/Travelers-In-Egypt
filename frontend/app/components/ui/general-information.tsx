@@ -1,9 +1,14 @@
 import { Stack, HStack, Text, Image, Circle } from "@chakra-ui/react"
 import useComponentResizeHeight from "../../lib/hooks/useComponentResizeHeight"
 import useComponentWidth from "../../lib/hooks/useComponentWidth"
+import { GeneralInformationProps } from "../../lib/types"
 import Collapse from "./references/collapse"
 
-export default function GeneralInformation({ data }) {
+interface Props {
+    data: GeneralInformationProps
+}
+
+export default function GeneralInformation( {data} : Props) {
     const [widthRef, width] = useComponentWidth()
     const [heightRef, height, test] = useComponentResizeHeight()
 

@@ -1,5 +1,6 @@
 import { HStack, Stack, Text } from "@chakra-ui/react";
 import Image from "next/image";
+import React from "react";
 
 export default function FeaturedMember() {
     const title = 'Principal Investigator'
