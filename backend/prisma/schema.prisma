@@ -1,0 +1,50 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ships {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  ship_date      DateTime
+  ship_name      String   @db.VarChar(100)
+  passenger_list Json
+
+  @@index([ship_name])
+}
+
+model travelers {
+  id                    String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  travelers_name        String                  @db.VarChar(100)
+  travelers_type        traveler_type           @default(AUTHOR)
+  publications_traveler publications_traveler[]
+
+  @@index([travelers_name])
+}
+
+model publications {
+  id                    String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                 String                  @db.VarChar(100)
+  summary               String                  @db.VarChar(1000)
+  can_read              Boolean
+  publications_traveler publications_traveler[]
+}
+
+model publications_traveler {
+  id             String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  publication    publications @relation(fields: [publication_id], references: [id])
+  publication_id String       @unique @db.Uuid()
+  traveler       travelers    @relation(fields: [traveler_id], references: [id])
+  traveler_id    String       @unique @db.Uuid
+}
+
+enum traveler_type {
+  AUTHOR
+  ILLUSTRATOR
+}
