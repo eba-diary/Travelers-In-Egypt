@@ -19,7 +19,7 @@ function useComponentHeight() {
         };
     }, []);
 
-    return [ref, height];
+    return {ref, height};
 }
 
 export default useComponentHeight;

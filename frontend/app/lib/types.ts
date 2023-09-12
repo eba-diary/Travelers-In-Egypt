@@ -59,3 +59,15 @@ export interface GeneralInformationProps {
         title: string
     }
 }
+
+export interface LargeSearchBarProps {
+    fields: {
+        databases: {
+            title: string
+            url: string
+        }[]
+        description: string
+        searchPlaceholder: string
+        title: string
+    }
+}

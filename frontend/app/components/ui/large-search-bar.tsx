@@ -3,15 +3,20 @@ import Link from "next/link"
 import { useState } from "react"
 import useComponentHeight from "../../lib/hooks/useComponentHeight"
 import { supabase } from "../../lib/supabase/client"
+import { LargeSearchBarProps } from "../../lib/types"
 
-export default function LargeSearchBar({ data }) {
-    const [ref, height] = useComponentHeight()
+interface Props {
+    data: LargeSearchBarProps
+}
+
+export default function LargeSearchBar({ data } : Props) {
+    const {ref, height} = useComponentHeight()
     const [value, setValue] = useState('')
     const [error, setError] = useState(false)
     const [showDescription, setShowDescription] = useState({ show: false, index: -1 })
-    const [predictiveSearch, setPredictiveSearch] = useState([])
+    const [predictiveSearch, setPredictiveSearch] = useState<{ship_name: string}[]>([])
 
-    const debounceHandleSearch = (searchTerm) => {
+    const debounceHandleSearch = (searchTerm: string) => {
         const timer = setTimeout(() => {
             handleSearch(searchTerm)
         }, 500)
@@ -19,7 +24,7 @@ export default function LargeSearchBar({ data }) {
         return () => clearTimeout(timer)
     }
 
-    const handleSearch = async (searchTerm) => {
+    const handleSearch = async (searchTerm: string) => {
         const { data, error } = await supabase
             .from('Ships')
             .select('ship_name')
