@@ -5,7 +5,11 @@ import axios from 'axios'
 import { TraveloguesTable } from "../../../components/ui/database/nile-travelogues-data-views";
 import EmmaBAndrewsDataViews from "../../../components/ui/database/emma-b-andrews-data-views";
 
-export default function EmmaBAndrews({ prefetchShips }) {
+interface Props {
+    prefetchShips: TraveloguesTable
+}
+
+export default function EmmaBAndrews({ prefetchShips }: Props) {
     usePageNumber(1)
     const oneHour = 60 * 60 * 1000
     const { data } = useQuery({

@@ -30,3 +30,44 @@ export interface HMTFormProps {
     project_description: string
     raw_text: string
 }
+
+export interface GeneralInformationProps {
+    fields: {
+        director: {
+            directorDescription: string
+            directorImage: {
+                alt: string
+                src: string
+            }
+            directorName: string
+        }
+        image: {
+            alt: string
+            src: string
+        }
+        section: {
+            items: {
+                description: string
+                title: string
+            }
+            title: string
+        }[]
+        sectionImage: {
+            alt: string
+            src: string
+        }
+        title: string
+    }
+}
+
+export interface LargeSearchBarProps {
+    fields: {
+        databases: {
+            title: string
+            url: string
+        }[]
+        description: string
+        searchPlaceholder: string
+        title: string
+    }
+}

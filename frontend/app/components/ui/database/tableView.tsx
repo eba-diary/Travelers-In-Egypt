@@ -211,7 +211,6 @@ function TableAndModal({
                     return (
                         <>
                             <Td
-                                key={index}
                                 {...{
                                     key: cell.id,
                                     style: {

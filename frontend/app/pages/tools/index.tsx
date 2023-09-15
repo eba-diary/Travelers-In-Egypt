@@ -2,7 +2,11 @@ import StaticPageTemplate from '../../components/StaticPageTemplate'
 import { get } from '../../lib/getStaticPages/get'
 
 
-export default function Tools({ components }) {
+interface Props {
+    components: object
+}
+
+export default function Tools({ components }: Props) {
     return (
         <StaticPageTemplate components={components} />
     )

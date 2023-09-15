@@ -22,7 +22,7 @@ function useComponentWidth() {
         };
     }, []);
 
-    return [ref, width];
+    return {ref, width};
 }
 
 export default useComponentWidth;

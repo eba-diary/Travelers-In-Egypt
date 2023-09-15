@@ -8,7 +8,7 @@ export default function Carousel({ data }) {
     const router = useRouter()
     const MotionStack = motion(Stack)
 
-    const [ref, height] = useComponentHeight()
+    const {ref, height} = useComponentHeight()
 
     const [currentSlide, setCurrentSlide] = useState(0)
     const [direction, setDirection] = useState('right')

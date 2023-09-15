@@ -1,10 +1,15 @@
 import { Stack, HStack, Text, Image, Circle } from "@chakra-ui/react"
 import useComponentResizeHeight from "../../lib/hooks/useComponentResizeHeight"
 import useComponentWidth from "../../lib/hooks/useComponentWidth"
+import { GeneralInformationProps } from "../../lib/types"
 import Collapse from "./references/collapse"
 
-export default function GeneralInformation({ data }) {
-    const [widthRef, width] = useComponentWidth()
+interface Props {
+    data: GeneralInformationProps
+}
+
+export default function GeneralInformation( {data} : Props) {
+    const {ref, width} = useComponentWidth()
     const [heightRef, height, test] = useComponentResizeHeight()
 
     return (
@@ -17,7 +22,7 @@ export default function GeneralInformation({ data }) {
                     alignItems='flex-start'
                 >
                     <Text
-                        ref={widthRef}
+                        ref={ref}
                         fontSize='64px'
                         fontWeight={800}
                         color='#C58A22'
@@ -39,7 +44,7 @@ export default function GeneralInformation({ data }) {
                         {data.fields.director.directorName} <span style={{ color: '#888' }}>&#40;Principle Investigator&#41;</span>
                     </Text>
                     <HStack width='90%'>
-                        <Circle width='150px' height='150px' backgroundColor='#EEE' overflow='hidden'>
+                        <Circle size='150px' backgroundColor='#EEE' overflow='hidden'>
                             <Image
                                 src={data.fields.director.directorImage.src}
                                 alt={data.fields.director.directorImage.alt}
@@ -55,7 +60,8 @@ export default function GeneralInformation({ data }) {
                 </Stack>
                 <HStack width='100%' justifyContent='space-between'>
                     <Stack width='60%'>
-                        <Collapse data={data.fields.section} type={data.type} />
+                        {/* Type is not within scope of GeneralInformationProps */}
+                        <Collapse data={data.fields.section} type={'general-information'} />
                     </Stack>
                     <Stack width='30%' justifyContent='center'>
                         <Image

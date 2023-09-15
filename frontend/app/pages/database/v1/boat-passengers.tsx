@@ -5,7 +5,12 @@ import axios from 'axios'
 import BoatPassengersDataViews, { ShipTable } from "../../../components/ui/database/boat-passengers-data-views";
 import { GetServerSidePropsContext } from "next";
 
-export default function BoatPassengers({ prefetchShips }) {
+
+interface Props {
+    prefetchShips: ShipTable
+}
+
+export default function BoatPassengers({ prefetchShips }: Props) {
     usePageNumber(1)
     const oneHour = 60 * 60 * 1000
     const { data } = useQuery({
