@@ -1,4 +1,5 @@
-import { SupabaseService } from "../supabase/supabase.service";
+import { prisma } from "../service/prisma.service";
+import { SupabaseService } from "../service/supabase.service";
 import { CustomProviderError, Publications, Travelogue } from "../types/interface";
 
 
@@ -27,8 +28,16 @@ export class Travelogues {
     }
 
     public async getAllTraveloguesAndPublications() {
+
+        // const data1 = await prisma.publications_traveler.findMany({
+        //     select: {
+        //         publication: true,
+        //         traveler: true
+        //     }
+        // })
+        // console.log(data1)
         const { data, error } = await this.sb.getClient()
-            .from('PublicationsTraveler')
+            .from('PublicationsAuthor')
             .select(` 
                 id,
                 Publications (*),

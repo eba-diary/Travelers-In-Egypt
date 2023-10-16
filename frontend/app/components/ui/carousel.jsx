@@ -51,11 +51,12 @@ export default function Carousel({ data }) {
 
     return (
         <Stack width='100%' alignItems='center' position='relative'>
-            <HStack
+            <Stack
                 borderBottom='15px solid #C58A22'
                 width='100%'
                 alignItems='flex-start'
                 spacing='0px'
+                direction={{ base: 'column', lg: 'row' }}
             >
                 <MotionStack
                     initial="hidden"
@@ -74,6 +75,7 @@ export default function Carousel({ data }) {
                     height={height}
                     spacing='0px'
                     zIndex={1}
+                    direction={{ base: 'row', lg: 'column' }}
                 >
                     {data.fields.carouselCards.map((entry, index) => (
                         <Stack
@@ -108,7 +110,7 @@ export default function Carousel({ data }) {
                         </Stack>
                     ))}
                 </Stack>
-            </HStack>
+            </Stack>
         </Stack>
     )
 }
@@ -195,3 +197,6 @@ const CarouselCard = forwardRef((
 })
 
 CarouselCard.displayName = 'CarouselCard'
+
+
+

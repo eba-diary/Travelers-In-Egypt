@@ -34,16 +34,22 @@ export default function LargeSearchBar({ data }) {
     }
 
     return (
-        <HStack width='100%' height='400px' p='0px 25px' justifyContent='space-around'>
+        <Stack
+            width='100%'
+            height='400px'
+            p='0px 25px'
+            justifyContent='space-around'
+            direction={{ base: 'column', md: 'row' }}
+        >
             <Stack
                 flex={1}
                 height={height}
                 justifyContent='flex-start'
             >
-                <Text fontSize='48px' color='#C58A22' textShadow='3px 3px #E3CAA9' fontWeight={700}>
+                <Text fontSize={{ base: '28px', md: '32px', lg: '48px' }} color='#C58A22' textShadow='3px 3px #E3CAA9' fontWeight={700}>
                     {data.fields.title.toUpperCase()}
                 </Text>
-                <Text>
+                <Text fontSize={{ base: '13px', md: '14px', lg: '16px' }}>
                     {data.fields.description}
                 </Text>
             </Stack>
@@ -168,6 +174,6 @@ export default function LargeSearchBar({ data }) {
                     </Stack>
                 </Stack>
             </Stack>
-        </HStack>
+        </Stack>
     )
 }

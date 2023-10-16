@@ -1,11 +1,11 @@
-import { Stack, HStack, Text, Image, Circle } from "@chakra-ui/react"
-import useComponentResizeHeight from "../../lib/hooks/useComponentResizeHeight"
+import { Stack, HStack, Text, Image, Circle, useMediaQuery } from "@chakra-ui/react"
 import useComponentWidth from "../../lib/hooks/useComponentWidth"
 import Collapse from "./references/collapse"
 
 export default function GeneralInformation({ data }) {
     const [widthRef, width] = useComponentWidth()
-    const [heightRef, height, test] = useComponentResizeHeight()
+
+    const isMediumOrLarger = useMediaQuery("(min-width: 768px)")[0];
 
     return (
         <Stack width='100%' alignItems='center' padding='50px 0px' gap='20px'>
@@ -18,37 +18,52 @@ export default function GeneralInformation({ data }) {
                 >
                     <Text
                         ref={widthRef}
-                        fontSize='64px'
+                        fontSize={{ base: '32px', sm: '48px', md: '54px', lg: '64px' }}
                         fontWeight={800}
                         color='#C58A22'
                         textShadow='5px 5px #E3CAA9'
-                        marginTop='-50px'
+                        marginTop={{ base: '-35px', sm: '-40px', md: '-45px', lg: '-50px' }}
                         width='fit-content'
                     >
                         {data.fields.title.toUpperCase()}
                     </Text>
                 </Stack>
                 <Stack gap='5px'>
-                    <Text
-                        fontSize='lg'
-                        fontWeight={500}
-                        padding='10px'
-                        width={`${width + 150}px`}
-                        borderBottom='3px solid #C58A22'
-                    >
-                        {data.fields.director.directorName} <span style={{ color: '#888' }}>&#40;Principle Investigator&#41;</span>
-                    </Text>
+                    <HStack>
+                        {!isMediumOrLarger && (
+                            <Circle width='150px' height='150px' backgroundColor='#EEE' overflow='hidden' float='left'>
+                                <Image
+                                    src={data.fields.director.directorImage.src}
+                                    alt={data.fields.director.directorImage.alt}
+                                    objectFit='contain'
+                                    width='100px'
+                                    height='100px'
+                                />
+                            </Circle>
+                        )}
+                        <Text
+                            fontSize={{ base: '16px', md: '18px', lg: '20px' }}
+                            fontWeight={500}
+                            padding='10px'
+                            width={`${width + 150}px`}
+                            borderBottom='3px solid #C58A22'
+                        >
+                            {data.fields.director.directorName} <span style={{ color: '#888' }}>&#40;Principle Investigator&#41;</span>
+                        </Text>
+                    </HStack>
                     <HStack width='90%'>
-                        <Circle width='150px' height='150px' backgroundColor='#EEE' overflow='hidden'>
-                            <Image
-                                src={data.fields.director.directorImage.src}
-                                alt={data.fields.director.directorImage.alt}
-                                objectFit='contain'
-                                width='100px'
-                                height='100px'
-                            />
-                        </Circle>
-                        <Text paddingLeft='25px'>
+                        {isMediumOrLarger && (
+                            <Circle width='150px' height='150px' backgroundColor='#EEE' overflow='hidden' float='left'>
+                                <Image
+                                    src={data.fields.director.directorImage.src}
+                                    alt={data.fields.director.directorImage.alt}
+                                    objectFit='contain'
+                                    width='100px'
+                                    height='100px'
+                                />
+                            </Circle>
+                        )}
+                        <Text paddingLeft='25px' fontSize={{ base: '14px', md: '16px' }}>
                             {data.fields.director.directorDescription}
                         </Text>
                     </HStack>
