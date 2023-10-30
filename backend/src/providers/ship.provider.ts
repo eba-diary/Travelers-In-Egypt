@@ -1,5 +1,5 @@
 import { promisify } from "util";
-import { SupabaseService } from "../supabase/supabase.service";
+import { SupabaseService } from "../service/supabase.service";
 import { CustomProviderError, Ship } from "../types/interface";
 
 export class ShipProvider {

@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-  ],
+, "components/ui/accordion-table.jsx"  ],
   "exclude": [
     "node_modules"
   ]

@@ -10,7 +10,14 @@ export default function DatabaseCards({ data }) {
                 <Text fontSize='48px' fontWeight={700}>
                     {data.fields.title}
                 </Text>
-                <Grid templateColumns='repeat(3, 1fr)' gap='50px'>
+                <Grid
+                    templateColumns={{
+                        base: '1fr',
+                        md: 'repeat(2, 1fr)',
+                        lg: 'repeat(3, 1fr)'
+                    }}
+                    gap='50px'
+                >
                     {data.fields.databaseCards.map((entry, index) => (
                         <GridItem key={index}>
                             <Stack

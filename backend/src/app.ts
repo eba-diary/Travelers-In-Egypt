@@ -5,7 +5,7 @@ import KoaLogger from 'koa-logger'
 import { config } from './config'
 import apiRouter from './routes/api'
 import healthCheckRouter from './routes/healthcheck'
-import { SupabaseService } from './supabase/supabase.service'
+import { SupabaseService } from './service/supabase.service'
 
 const app = new Koa()
 const PORT = config.meta.port
