@@ -11,6 +11,7 @@ router.get('/', async (ctx: Context) => {
     try {
         const ships: Ship[] | CustomProviderError = await shipProvider.getAllShips()
         const data = await prisma.ships.findMany()
+        console.log(await prisma.publication.findMany())
         ctx.status = 200
         ctx.body = data
     } catch (error) {

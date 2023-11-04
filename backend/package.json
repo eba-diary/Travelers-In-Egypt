@@ -10,9 +10,15 @@
     "build": "rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
+    "restart-db": "supabase db reset && npx prisma migrate dev && npm run generate-client && npm run seed",
     "seed": "ts-node prisma/seed.ts",
-    "start": "npm run seed && ts-node-dev src/app.ts",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "npm run start-db && ts-node-dev src/app.ts",
+    "start-db": "supabase start && npm run pull-migrations && npm run generate-client && npm run seed",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migrate": "npx prisma migrate dev --name $1",
+    "generate-client": "npx prisma generate --schema=./prisma/schema.prisma",
+    "pull-migrations": "npx prisma migrate dev",
+    "update-migrations": "npx prisma migrate dev"
   },
   "pre-commit": [
     "ts.check",
@@ -28,6 +34,7 @@
     "csv-parser": "^3.0.0",
     "dotenv": "^16.1.3",
     "fast-csv": "^4.3.6",
+    "fast-fuzzy": "^1.12.0",
     "fs": "^0.0.1-security",
     "koa": "^2.14.2",
     "koa-bodyparser": "^4.4.0",
