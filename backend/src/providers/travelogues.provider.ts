@@ -28,7 +28,7 @@ export class Travelogues {
 
     public async getAllTraveloguesAndPublications() {
         const { data, error } = await this.sb.getClient()
-            .from('PublicationsAuthor')
+            .from('PublicationsTraveler')
             .select(` 
                 id,
                 Publications (*),

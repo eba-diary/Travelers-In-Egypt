@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ships {
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  ship_date      DateTime
+  ship_name      String   @db.VarChar(100)
+  passenger_list Json
+
+  @@index([ship_name])
+}
+
+model traveler {
+  id                    String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  traveler_name         String                 @db.VarChar(1000)
+  traveler_type         traveler_type          @default(AUTHOR)
+  publications_traveler publication_traveler[]
+
+  @@index([traveler_name])
+}
+
+model publication {
+  id                    String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                 String                 @db.VarChar(2000)
+  summary               String                 @db.VarChar(2000)
+  can_read              Boolean
+  publications_traveler publication_traveler[]
+}
+
+model publication_traveler {
+  id             String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  publication    publication @relation(fields: [publication_id], references: [id])
+  publication_id String      @db.Uuid()
+  traveler       traveler    @relation(fields: [traveler_id], references: [id])
+  traveler_id    String      @db.Uuid
+}
+
+enum traveler_type {
+  AUTHOR
+  ILLUSTRATOR
+}
