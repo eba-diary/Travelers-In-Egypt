@@ -3,7 +3,7 @@ import React from "react";
 import CardDeck from "./ui/card-deck";
 import Carousel from "./ui/carousel";
 import Contributors from "./ui/contributors";
-import DatabaseCards from "./ui/database/databaseCards";
+import DatabaseCards from "./ui/database/database-cards";
 import GeneralInformation from "./ui/general-information";
 import LargeSearchBar from "./ui/large-search-bar";
 import ToolHeaderCards from "./ui/tools/tool-header-cards";
@@ -29,7 +29,7 @@ export default function StaticPageTemplate({ components }) {
                         case 'tool-container':
                             return <ToolHeaderCards key={index} data={component} />
                         default:
-                            return <React.Fragment></React.Fragment>
+                            return <React.Fragment key={index}></React.Fragment>
                     }
                 })}
             </Stack>

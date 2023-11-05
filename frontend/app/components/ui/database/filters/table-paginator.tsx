@@ -2,7 +2,7 @@ import { Button, HStack, Select, Stack, Text } from "@chakra-ui/react";
 import { Table } from "@tanstack/table-core";
 import { ExtensibleTableField } from "../../../../lib/types";
 
-export default function TablePaginator({ tableInstance }: { tableInstance: Table<ExtensibleTableField> }) {
+export default function TablePaginator<TData extends object>({ tableInstance }: { tableInstance: Table<TData> }) {
     return (
         <Stack width='100%' >
             <HStack>

@@ -4,10 +4,11 @@
     "prisma": "^5.2.0"
   },
   "scripts": {
-    "start-apps": "concurrently \"npm run start-frontend\" \"npm run start-backend\" \" npm run start-db \" \" npm run\"",
+    "start-apps": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
     "start-frontend": "cd frontend/app && npm run dev",
     "start-backend": "cd backend && npm start",
-    "start-db": "supabase stop && supabase start && npx prisma generate --schema=./backend/prisma/schema.prisma",
+    "seed-db": "npm run update-migrations && npm run seed",
+    "start-db": "cd backend && npm run start-db",
     "pm": "prisma migrate dev",
     "start-tools": "source tool-start.sh",
     "stop-db": "supabase stop",

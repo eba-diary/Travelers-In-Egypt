@@ -1,44 +1,32 @@
 import { Spinner, Stack, Text } from "@chakra-ui/react";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import usePageNumber from "../../../lib/hooks/usePageNumber";
-import axios from 'axios'
-import BoatPassengersDataViews, { ShipTable } from "../../../components/ui/database/boat-passengers-data-views";
-import { GetServerSidePropsContext } from "next";
+import { BoatPassengersDataViews, Ship } from "../../../components/ui/database/boat-passengers-data-views";
+import { API_BASE_URL, ONE_HOUR } from "./types/types";
 
-export default function BoatPassengers({ prefetchShips }) {
-    usePageNumber(1)
-    const oneHour = 60 * 60 * 1000
-    const { data } = useQuery({
-        queryKey: ['ships'],
-        queryFn: getShips,
-        retry: 5,
-        retryDelay: 500,
-        staleTime: oneHour,
-        refetchInterval: oneHour
-    })
+export default function BoatPassengers() {
+	usePageNumber(1)
+	const { data: boatPassengerData, isLoading, isError } = useQuery<Ship[]>(["ships"], async () => {
+		const data = await fetch(`${API_BASE_URL}/api/v1/db/ships`)
+		return await data.json()
+	}, {
+		retry: 3,
+		staleTime: ONE_HOUR
+	})
 
-    return (
-        <Stack>
-            <Text>
-                {data && (
-                    <BoatPassengersDataViews data={data} />
-                )}
-            </Text>
-        </Stack>
-    )
-}
+	if (isLoading || isError) {
+		return (
+			<Stack>
+				<Spinner />
+			</Stack>
+		)
+	}
 
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-    const queryClient = new QueryClient()
-    const ships = await queryClient.prefetchQuery(['ships'], getShips)
-    return {
-        props: {
-            prefetchShips: await getShips()
-        }
-    }
-}
-
-const getShips = async () => {
-    const data = await axios.get(process.env.NODE_ENV === 'development' ? 'http://localhost:8080/api/v1/db/ships' : 'https://tie-backend.vercel.app/api/v1/db/ships').then(res => res.data)
-    return { rows: data } as ShipTable
-}
+	return (
+		<Stack>
+			{boatPassengerData && (
+				<BoatPassengersDataViews data={boatPassengerData} />
+			)}
+		</Stack>
+	)
+}  

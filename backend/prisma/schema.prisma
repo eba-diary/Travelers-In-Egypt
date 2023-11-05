@@ -17,20 +17,20 @@ model ships {
 }
 
 model traveler {
-  id                    String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  traveler_name         String                 @db.VarChar(1000)
-  traveler_type         traveler_type          @default(AUTHOR)
-  publications_traveler publication_traveler[]
+  id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  traveler_name        String                 @db.VarChar(1000)
+  traveler_type        traveler_type          @default(AUTHOR)
+  publication_traveler publication_traveler[]
 
   @@index([traveler_name])
 }
 
 model publication {
-  id                    String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title                 String                 @db.VarChar(2000)
-  summary               String                 @db.VarChar(2000)
-  can_read              Boolean
-  publications_traveler publication_traveler[]
+  id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                String                 @db.VarChar(2000)
+  summary              String                 @db.VarChar(2000)
+  can_read             Boolean
+  publication_traveler publication_traveler[]
 }
 
 model publication_traveler {
