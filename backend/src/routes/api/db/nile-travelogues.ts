@@ -3,10 +3,10 @@ import Router from "koa-router";
 import { Travelogues } from "../../../providers/travelogues.provider";
 import { CustomProviderError, Publications, Traveler, Travelogue } from "../../../types/interface";
 
-const router = new Router()
+const traveloguesRouter = new Router()
 
-router.get('/', async (ctx: Context) => {
-    const traveloguesProvider = new Travelogues(ctx.sb) as Travelogues
+traveloguesRouter.get('/', async (ctx: Context) => {
+    const traveloguesProvider = new Travelogues(ctx.sb)
 
     try {
         const traveloguesAndAuthors: Travelogue[] | CustomProviderError = await traveloguesProvider.getAllTraveloguesAndPublications()
@@ -61,7 +61,7 @@ router.get('/', async (ctx: Context) => {
     }
 })
 
-router.get('/publications', async (ctx: Context) => {
+traveloguesRouter.get('/publications', async (ctx: Context) => {
     const traveloguesProvider = new Travelogues(ctx.sb) as Travelogues
     try {
         const travelogues: Publications[] | CustomProviderError = await traveloguesProvider.getAllTravelogues()
@@ -84,4 +84,4 @@ router.get('/publications', async (ctx: Context) => {
     }
 })
 
-export default router
+export { traveloguesRouter }

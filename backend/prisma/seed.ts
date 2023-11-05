@@ -1,4 +1,4 @@
-import { prisma, fs } from "../src/prisma-client"
+import { prisma, fs } from "../src/providers/prisma-client"
 import { parse } from "fast-csv"
 import { traveler_type } from "@prisma/client"
 
