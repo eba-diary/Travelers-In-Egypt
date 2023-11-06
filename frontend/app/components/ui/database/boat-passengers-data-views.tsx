@@ -1,10 +1,10 @@
 import { HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
 import React, { useMemo } from "react";
-import { TableProps } from "../../../lib/types";
 import TableView from "./tableView";
 import { AiOutlineLeft } from 'react-icons/ai'
 import { useRouter } from "next/router";
 import { createColumnHelper } from "@tanstack/react-table";
+import { join } from "lodash"
 
 interface Props {
 	data: Ship[]
@@ -24,10 +24,40 @@ export const BoatPassengersDataViews = ({ data }: Props) => {
 		columnHelper.accessor("ship_name", {
 			header: "Ship Name",
 		}),
-		columnHelper.accessor("ship_date", {
+		columnHelper.accessor(row => {
+			const dateISO = new Date(row.ship_date).toISOString()
+			const dateString = new Date(row.ship_date).toString()
+			return `${dateString.match(/.{3}/)}, ${dateISO.replace(/T.*/, "")}`
+		}, {
 			header: "Trip Date"
 		}),
-		columnHelper.accessor("passenger_list.passengers", {
+		columnHelper.accessor(row => {
+			return row.passenger_list.passengers
+		}, {
+			cell(props) {
+				const data = props.getValue()
+				let currentRunningLength = 0;
+				const MAX_NAMES_LENGTH = 75;
+				const result = []
+				console.log(data)
+				for (const name of data) {
+					console.log({
+						name
+					})
+					if (name.length + currentRunningLength > MAX_NAMES_LENGTH) {
+						break;
+					}
+					result.push(name)
+					currentRunningLength += name.length
+				}
+				return (
+					<div style={{ width: "300px", display: "flex", flexWrap: "wrap", gap: "8px" }}>
+						<p style={{ maxWidth: "300px" }}>{join(result, ", ")}</p>
+						<p style={{ color: "gray" }}>{` +${data.length - result.length} more`}</p>
+					</div>
+				);
+			},
+			id: "passenger_list.passengers",
 			header: "Passengers"
 		})
 	], [data])
@@ -80,7 +110,7 @@ function ModalTemplate({ rowProps, cellAdditionalInfo }: { rowProps: Record<stri
 					<Text fontSize='20px' fontWeight={700}>Passengers</Text>
 				</Stack>
 				<Table>
-					<Tbody>
+					<Tbody width="500px">
 						{
 							Array.from(
 								{ length: Math.ceil(cellAdditionalInfo.length / 3) },

@@ -102,11 +102,12 @@ export default function TableView<TData extends object>({ data, cellAdditionalIn
 							<Tr key={index}>
 								{headerGroup.headers.map((column) => {
 									return (
-										<Th key={JSON.stringify(column.id)} position='relative'>
+										<Th key={column.id}>
 											<Stack
 												onClick={column.column.getToggleSortingHandler()}
 												cursor={column.column.getCanSort() ? 'pointer' : 'auto'}
-												width='fit-content'
+												width='100%'
+												alignItems="flex-start"
 											>
 												<Text
 													width='fit-content'
@@ -216,6 +217,7 @@ function TableAndModal<TData extends object>({
 									key: cell.id,
 									style: {
 										width: cell.column.getSize(),
+										padding: "14px 24px" // could be used later to change sizing based on user preference 
 									},
 								}}
 							>

@@ -1,16 +1,23 @@
-import { Button, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr, VStack } from '@chakra-ui/react'
-import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
+import { HStack, Icon, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Text } from '@chakra-ui/react'
+import { createColumnHelper } from '@tanstack/react-table'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
-import { HiOutlineAdjustmentsHorizontal } from 'react-icons/hi2'
-import { ExtensibleTableField, TableProps } from '../../../lib/types'
 import TableView from './tableView'
+import { capitalize } from "lodash"
+import { FcCancel, FcApproval } from "react-icons/fc"
 
 export interface NileTravelogue extends Publication {
 	id: number
-	publication_traveler: Traveler[]
+	publication_traveler: PublicationTraveler[]
+}
+
+export interface PublicationTraveler {
+	id: string
+	publication_id: string
+	traveler_id: string
+	traveler: Traveler
 }
 
 export interface Publication {
@@ -22,7 +29,7 @@ export interface Publication {
 
 export interface Traveler {
 	traveler_name: string
-	traveler_type: string
+	traveler_type: "AUTHOR" | "ILLUSTRATOR"
 }
 
 interface Props {
@@ -32,8 +39,9 @@ interface Props {
 export const NileTraveloguesDataViews = ({ data }: Props) => {
 	const router = useRouter()
 
-	const truncateText = (value: string) => {
-		return value.slice(0, 35) + '...'
+	const truncateText = (value: string, maxChar = 35) => {
+		if (value.length <= maxChar) return value
+		return value.slice(0, maxChar) + '...'
 	}
 	const columnHelper = createColumnHelper<NileTravelogue>()
 	const columns = useMemo(() => [
@@ -50,40 +58,68 @@ export const NileTraveloguesDataViews = ({ data }: Props) => {
 			header: "Summary"
 		}),
 		columnHelper.accessor(row => {
-			const firstTwoTravelers = row.publication_traveler.slice(0, 2)
-			const remainingLength = row.publication_traveler.length - 2
-			return (
-				<div style={{ display: "flex", flexDirection: "column", padding: "6px", gap: "6px" }}>
-					{firstTwoTravelers.map(row => (
-						<div>
-							<Text>{row.traveler_name}</Text>
-						</div>
-					))}
-					...+{remainingLength} more
-				</div>
-			)
+			// if typing in the full title as a string, cannot guarentee type safety
+			return row
 		}, {
+			cell(props) {
+				const data = props.getValue()
+				const firstTwoTravelerName = data.publication_traveler.slice(0, 2)
+				const remainingLength = firstTwoTravelerName.length <= 2 ? 0 : data.publication_traveler.length - 2
+				return (
+					<div style={{ display: "flex", flexDirection: "column", padding: "2px", gap: "2px" }}>
+						{firstTwoTravelerName.map(row => (
+							<div>
+								<Text>{truncateText(row.traveler.traveler_name, 20)}</Text>
+							</div>
+						))}
+						<div>
+							{remainingLength > 0 && (
+								<p>...+{remainingLength} more</p>
+							)}
+						</div>
+					</div>
+				)
+			},
 			id: "publication_traveler.traveler_name",
 			header: "Traveler(s)"
 		}),
 		columnHelper.accessor(row => {
-			const firstTwoTravelerTypes = row.publication_traveler.slice(0, 2)
-			const remainingLength = row.publication_traveler.length - 2
-			return (
-				<div style={{ display: "flex", flexDirection: "column", padding: "6px", gap: "6px" }}>
-					{firstTwoTravelerTypes.map(row => (
-						<div>
-							<Text>{row.traveler_name}</Text>
-						</div>
-					))}
-					...+{remainingLength} more
-				</div>
-			)
+			return row
 		}, {
+			cell(props) {
+				const data = props.getValue()
+				const firstTwoTravelerTypes = data.publication_traveler.slice(0, 2)
+				const remainingLength = firstTwoTravelerTypes.length <= 2 ? 0 : data.publication_traveler.length - 2
+				return (
+					<div style={{ display: "flex", flexDirection: "column", padding: "2px", gap: "2px" }}>
+						{firstTwoTravelerTypes.map(row => (
+							<div style={{ padding: "0px 5px" }}>
+								<Text>{capitalize(row.traveler.traveler_type)}</Text>
+							</div>
+						))}
+						<div>
+							{remainingLength > 0 && (
+								<p>...+{remainingLength} more</p>
+							)}
+						</div>
+					</div>
+				)
+			},
 			id: "publication_traveler.traveler_type",
 			header: "Contributed As"
 		}),
-		columnHelper.accessor("can_read", {
+		columnHelper.accessor(row => {
+			return row.can_read
+		}, {
+			cell(props) {
+				const canRead = props.getValue()
+				return (
+					<div style={{ width: "100%", padding: "0px 5px" }}>
+						{canRead ? <Icon as={FcApproval} /> : <Icon as={FcCancel} />}
+					</div>
+				)
+			},
+			id: "can_read",
 			header: "Can Read"
 		})
 	], [data])
