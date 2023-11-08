@@ -1,11 +1,12 @@
-import { HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import TableView from "./tableView";
 import { AiOutlineLeft } from 'react-icons/ai'
 import { useRouter } from "next/router";
-import { createColumnHelper } from "@tanstack/react-table";
+import { createColumnHelper, Row } from "@tanstack/react-table";
 import { join } from "lodash"
 import useCollapsibleSidebar, { CollapsibleSidebarProvider } from "../../../lib/hooks/context/useCollapsibleSidebar";
+import { Sidebar } from "./sidebar/sidebar";
 
 interface Props {
 	data: Ship[]
@@ -88,7 +89,45 @@ export const BoatPassengersDataViews = ({ data }: Props) => {
 					<TableView
 						data={data}
 						columns={columns}
-					/>
+					>
+						{(props) => {
+							return (
+								<Sidebar
+									{...props}
+								>
+									{({ original: { ship_date, ship_name, passenger_list } }: Row<Ship>) => {
+										return (
+											<Stack width="100%" padding="8px">
+												<Text
+													fontSize={{ base: "28px" }}
+													fontWeight={700}
+												>
+													{ship_name}
+												</Text>
+												<Text height="100%" px="2px">
+													{`${new Date(ship_date).toString().match(/.{3}/)}, ${new Date(ship_date).toISOString().replace(/T.*/, "")}`}
+												</Text>
+												<Stack width="100%">
+													<Grid
+														templateColumns={{
+															base: "repeat(3, 1fr)"
+														}}
+														gap="12px"
+													>
+														{passenger_list.passengers.map(passenger => (
+															<GridItem>
+																<Text fontSize="14px">{passenger}</Text>
+															</GridItem>
+														))}
+													</Grid>
+												</Stack>
+											</Stack>
+										)
+									}}
+								</Sidebar>
+							)
+						}}
+					</TableView>
 				</CollapsibleSidebarProvider>
 			</Stack>
 		</>

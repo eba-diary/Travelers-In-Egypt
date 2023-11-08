@@ -1,5 +1,4 @@
-import { useDisclosure } from "@chakra-ui/react";
-import { createContext, FC, Children, ReactNode, useContext, useState } from "react"
+import { createContext, FC, useContext, useState } from "react"
 
 export interface CollapsibleSidebarContext {
   isOpen: boolean,

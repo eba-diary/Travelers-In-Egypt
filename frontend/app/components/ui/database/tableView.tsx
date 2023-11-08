@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import React, { useEffect, useMemo, useState } from "react"
 import {
 	ColumnDef,
 	ColumnResizeMode,
@@ -34,9 +34,12 @@ import useCollapsibleSidebar, { CollapsibleSidebarContext } from "../../../lib/h
 interface Props<TData extends RowData> {
 	data: TData[]
 	columns: ColumnDef<TData, any>[],
+	children?: (
+		props: CollapsibleSidebarContext
+	) => JSX.Element
 }
 
-export default function TableView<TData extends object>({ data, columns }: Props<TData>) {
+export default function TableView<TData extends object>({ data, columns, children }: Props<TData>) {
 
 	const memoData = useMemo(() => {
 		return [...data]
@@ -84,14 +87,22 @@ export default function TableView<TData extends object>({ data, columns }: Props
 
 	return (
 		<div style={{ width: "100%" }}>
-			<Sidebar
+			{/* <Sidebar
 				setCurrentRow={setCurrentRow}
 				currentRow={currentRow}
 				setIsOpen={setIsOpen}
 				isOpen={isOpen}
 				setRowData={setRowData}
 				rowData={rowData}
-			/>
+			/> */}
+			{children({
+				setCurrentRow,
+				setIsOpen,
+				setRowData,
+				currentRow,
+				isOpen,
+				rowData
+			})}
 			<Stack width='100%'>
 				<Button
 					width='fit-content'
@@ -164,7 +175,7 @@ export default function TableView<TData extends object>({ data, columns }: Props
 									} else {
 										setIsOpen(true)
 										setCurrentRow(row.id)
-										setRowData(row.original)
+										setRowData(row)
 									}
 								}}
 								key={index}

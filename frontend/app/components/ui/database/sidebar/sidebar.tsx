@@ -1,11 +1,17 @@
 import { IconButton, Stack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
+import React from "react";
 import { AiOutlineClose } from "react-icons/ai"
+import { Row } from "react-table";
 import { CollapsibleSidebarContext } from "../../../../lib/hooks/context/useCollapsibleSidebar";
 
-interface SideBarProps extends CollapsibleSidebarContext { }
+interface SideBarProps<TData extends object> extends CollapsibleSidebarContext {
+  children: (
+    data: TData
+  ) => JSX.Element
+}
 
-export const Sidebar = ({ ...props }: SideBarProps) => {
+export const Sidebar = <TData extends object>({ ...props }: SideBarProps<TData>) => {
 
   return (
     <Stack
@@ -17,7 +23,7 @@ export const Sidebar = ({ ...props }: SideBarProps) => {
     >
       <motion.div
         initial={false}
-        animate={{ width: props.isOpen ? 500 : 0 }}
+        animate={{ width: props.isOpen ? 650 : 0 }}
         style={{
           backgroundColor: "whitesmoke",
           borderLeft: "1px solid #BBB",
@@ -37,7 +43,9 @@ export const Sidebar = ({ ...props }: SideBarProps) => {
             props.setIsOpen(false)
           }}
         />
-        {JSON.stringify(props.rowData)}
+        <React.Fragment>
+          {props.rowData && props.children(props.rowData as TData)}
+        </React.Fragment>
       </motion.div>
     </Stack>
   )
