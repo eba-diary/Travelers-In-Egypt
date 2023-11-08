@@ -5,6 +5,7 @@ import { AiOutlineLeft } from 'react-icons/ai'
 import { useRouter } from "next/router";
 import { createColumnHelper } from "@tanstack/react-table";
 import { join } from "lodash"
+import useCollapsibleSidebar, { CollapsibleSidebarProvider } from "../../../lib/hooks/context/useCollapsibleSidebar";
 
 interface Props {
 	data: Ship[]
@@ -39,11 +40,7 @@ export const BoatPassengersDataViews = ({ data }: Props) => {
 				let currentRunningLength = 0;
 				const MAX_NAMES_LENGTH = 75;
 				const result = []
-				console.log(data)
 				for (const name of data) {
-					console.log({
-						name
-					})
 					if (name.length + currentRunningLength > MAX_NAMES_LENGTH) {
 						break;
 					}
@@ -87,12 +84,12 @@ export const BoatPassengersDataViews = ({ data }: Props) => {
 						A brief description about the database and its contents.
 					</Text>
 				</Stack>
-				<TableView
-					data={data}
-					cellAdditionalInfo={...data.map(row => row.passenger_list.passengers)}
-					columns={columns}
-					ModalTemplate={ModalTemplate}
-				/>
+				<CollapsibleSidebarProvider>
+					<TableView
+						data={data}
+						columns={columns}
+					/>
+				</CollapsibleSidebarProvider>
 			</Stack>
 		</>
 	)

@@ -1,13 +1,15 @@
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import {
 	ColumnDef,
 	ColumnResizeMode,
+	CoreRow,
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
 	Row,
+	RowData,
 	SortingState,
 	useReactTable
 } from "@tanstack/react-table"
@@ -19,10 +21,6 @@ import {
 	Th,
 	Thead,
 	Tr,
-	useDisclosure,
-	Modal,
-	ModalOverlay,
-	ModalContent,
 	Stack,
 	Text,
 	Button
@@ -30,19 +28,15 @@ import {
 
 import TablePaginator from "./filters/table-paginator"
 import TableFilter from "./filters/table-filter"
+import { Sidebar } from "./sidebar/sidebar"
+import useCollapsibleSidebar, { CollapsibleSidebarContext } from "../../../lib/hooks/context/useCollapsibleSidebar"
 
-interface Props<TData extends object> {
+interface Props<TData extends RowData> {
 	data: TData[]
-	cellAdditionalInfo: any[]
-	columns: ColumnDef<TData, any>[]
-
-	ModalTemplate: ({ rowProps, cellAdditionalInfo }: {
-		rowProps: Record<string, any>;
-		cellAdditionalInfo: any[];
-	}) => JSX.Element
+	columns: ColumnDef<TData, any>[],
 }
 
-export default function TableView<TData extends object>({ data, cellAdditionalInfo, columns, ModalTemplate }: Props<TData>) {
+export default function TableView<TData extends object>({ data, columns }: Props<TData>) {
 
 	const memoData = useMemo(() => {
 		return [...data]
@@ -56,9 +50,11 @@ export default function TableView<TData extends object>({ data, cellAdditionalIn
 	const [columnResizeMode, setColumnResizeMode] =
 		useState<ColumnResizeMode>('onChange')
 
+
+
 	const [sorting, setSorting] = useState<SortingState>([])
 
-	const tableInstance = useReactTable({
+	const tableInstance = useReactTable<TData>({
 		data: memoData,
 		columns: memoColumns,
 		onSortingChange: setSorting,
@@ -77,8 +73,25 @@ export default function TableView<TData extends object>({ data, cellAdditionalIn
 		getRowModel,
 	} = tableInstance
 
+	const {
+		setCurrentRow,
+		setIsOpen,
+		setRowData,
+		currentRow,
+		isOpen,
+		rowData
+	} = useCollapsibleSidebar()
+
 	return (
-		<>
+		<div style={{ width: "100%" }}>
+			<Sidebar
+				setCurrentRow={setCurrentRow}
+				currentRow={currentRow}
+				setIsOpen={setIsOpen}
+				isOpen={isOpen}
+				setRowData={setRowData}
+				rowData={rowData}
+			/>
 			<Stack width='100%'>
 				<Button
 					width='fit-content'
@@ -142,91 +155,64 @@ export default function TableView<TData extends object>({ data, cellAdditionalIn
 					</Thead>
 					<Tbody>
 						{getRowModel().rows.map((row, index) => (
-							<TableAndModal
+							<Tr
+								onClick={() => {
+									if (currentRow === row.id) {
+										setIsOpen(false)
+										setCurrentRow(null)
+										setRowData(null)
+									} else {
+										setIsOpen(true)
+										setCurrentRow(row.id)
+										setRowData(row.original)
+									}
+								}}
 								key={index}
-								row={row}
-								cellAdditionalInfo={cellAdditionalInfo}
-								index={index}
-								ModalTemplate={ModalTemplate}
-							/>
+								tabIndex={1}
+								backgroundColor='#FFF'
+								transition='0.3s'
+								_hover={{
+									cursor: 'pointer',
+									backgroundColor: '#F3F6F9',
+									transition: '0.3s'
+								}}
+							// onFocus={() => {
+							// 	setIsFocused(true)
+							// }}
+							// onBlur={() => {
+							// 	setIsFocused(false)
+							// }}
+							// onKeyDown={(event) => {
+							// 	if ((event.key === ' ' || event.key === 'Space') && isFocused) {
+							// 		onOpen()
+							// 	}
+							// }}
+							>
+								{row.getVisibleCells().map((cell, index) => {
+									return (
+										<>
+											<Td
+												key={index}
+												{...{
+													key: cell.id,
+													style: {
+														width: cell.column.getSize(),
+														padding: "14px 24px" // could be used later to change sizing based on user preference 
+													},
+												}}
+											>
+												{flexRender(cell.column.columnDef.cell, cell.getContext())}
+											</Td>
+										</>
+									)
+								})}
+							</Tr>
 						))}
 					</Tbody>
 				</ChakraTable>
 			</TableContainer>
 			<TablePaginator<TData> tableInstance={tableInstance} />
-		</>
+		</div>
 
-	)
-}
-
-
-function TableAndModal<TData extends object>({
-	row,
-	cellAdditionalInfo,
-	index,
-	ModalTemplate
-}: {
-	row: Row<TData>,
-	cellAdditionalInfo: any[],
-	index: number,
-	ModalTemplate: ({ rowProps, cellAdditionalInfo }: {
-		rowProps: Record<string, any>;
-		cellAdditionalInfo: any[];
-	}) => JSX.Element
-}): JSX.Element {
-	const { onToggle, onOpen, isOpen, onClose } = useDisclosure()
-	const [isFocused, setIsFocused] = useState<boolean>(false)
-
-	return (
-		<>
-			<Modal isOpen={isOpen} onClose={onClose} motionPreset='scale'>
-				<ModalOverlay />
-				<ModalContent>
-					<ModalTemplate rowProps={row} cellAdditionalInfo={cellAdditionalInfo[index]} />
-				</ModalContent>
-			</Modal>
-			<Tr
-				key={index}
-				onClick={onToggle}
-				tabIndex={1}
-				backgroundColor='#FFF'
-				transition='0.3s'
-				_hover={{
-					cursor: 'pointer',
-					backgroundColor: '#F3F6F9',
-					transition: '0.3s'
-				}}
-				onFocus={() => {
-					setIsFocused(true)
-				}}
-				onBlur={() => {
-					setIsFocused(false)
-				}}
-				onKeyDown={(event) => {
-					if ((event.key === ' ' || event.key === 'Space') && isFocused) {
-						onOpen()
-					}
-				}}
-			>
-				{row.getVisibleCells().map((cell, index) => {
-					return (
-						<>
-							<Td
-								key={index}
-								{...{
-									key: cell.id,
-									style: {
-										width: cell.column.getSize(),
-										padding: "14px 24px" // could be used later to change sizing based on user preference 
-									},
-								}}
-							>
-								{flexRender(cell.column.columnDef.cell, cell.getContext())}
-							</Td>
-						</>
-					)
-				})}
-			</Tr>
-		</>
 	)
 }

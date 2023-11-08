@@ -18,8 +18,6 @@ export default function BoatPassengers() {
 		staleTime: ONE_HOUR
 	})
 
-	console.log(boatPassengerData)
-
 	if (isLoading || isError) {
 		return (
 			<Stack>

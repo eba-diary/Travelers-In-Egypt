@@ -7,6 +7,8 @@ import { AiOutlineLeft } from 'react-icons/ai'
 import TableView from './tableView'
 import { capitalize } from "lodash"
 import { FcCancel, FcApproval } from "react-icons/fc"
+import { Row } from 'react-table'
+import useCollapsibleSidebar, { CollapsibleSidebarProvider } from '../../../lib/hooks/context/useCollapsibleSidebar'
 
 export interface NileTravelogue extends Publication {
 	id: number
@@ -125,82 +127,31 @@ export const NileTraveloguesDataViews = ({ data }: Props) => {
 	], [data])
 
 	return (
-		<>
-			<Stack width='100%' alignItems='center' padding='15px' gap='20px'>
-				<Stack width='100%' padding='10px 0px'>
-					<HStack>
-						<IconButton
-							aria-label="Go back to database selection"
-							icon={<AiOutlineLeft />}
-							onClick={() => router.back()}
-							backgroundColor='#FFF'
-							_hover={{
-								backgroundColor: '#FFF',
-								transition: '0.3s',
-								transform: 'scale(1.3)'
-							}}
-						/>
-						<Text fontSize='28px' fontWeight={700} p='0px 15px'>
-							Nile Travelogues Database
-						</Text>
-					</HStack>
-				</Stack>
+		<Stack width='100%' alignItems='center' padding='15px' gap='20px'>
+			<Stack width='100%' padding='10px 0px'>
+				<HStack>
+					<IconButton
+						aria-label="Go back to database selection"
+						icon={<AiOutlineLeft />}
+						onClick={() => router.back()}
+						backgroundColor='#FFF'
+						_hover={{
+							backgroundColor: '#FFF',
+							transition: '0.3s',
+							transform: 'scale(1.3)'
+						}}
+					/>
+					<Text fontSize='28px' fontWeight={700} p='0px 15px'>
+						Nile Travelogues Database
+					</Text>
+				</HStack>
+			</Stack>
+			<CollapsibleSidebarProvider>
 				<TableView
 					data={data}
-					cellAdditionalInfo={...data.map(row => row)}
 					columns={columns}
-					ModalTemplate={ModalTemplate}
 				/>
-			</Stack>
-		</>
-	)
-}
-
-function ModalTemplate({ rowProps, cellAdditionalInfo }: { rowProps: Record<string, any>, cellAdditionalInfo: any }) {
-	return (
-		<React.Fragment>
-			<ModalHeader>
-				&quot;{rowProps.original.Publications.title}&quot;
-			</ModalHeader>
-			<ModalCloseButton />
-			<ModalBody paddingBottom='20px'>
-				<Stack padding='15px 0px'>
-					{cellAdditionalInfo.Travelers.info.map((entry: { travelers_name: string, travelers_type: string, travelers_id: number }, index: number) => (
-						<Text key={index}>
-							<span style={{ fontWeight: 600 }}>{entry.travelers_type}:</span> {entry.travelers_name}
-						</Text>
-					))}
-					<Text>
-						<span style={{ fontWeight: 600 }}>Can Read:</span> {cellAdditionalInfo.Publications.can_read}
-					</Text>
-					{cellAdditionalInfo.Publications.can_read ? (
-						<Link href='/'>
-							<Text
-								border='1px solid'
-								width='fit-content'
-								padding='0px 15px'
-								borderRadius='5px'
-								fontWeight={600}
-								_hover={{
-									backgroundColor: '#EEE',
-									transition: '0.3s',
-									cursor: 'pointer'
-								}}
-							>
-								View
-							</Text>
-						</Link>
-					) : (
-						''
-					)}
-				</Stack>
-				<Stack borderBottom='1px solid' margin='10px 0px' padding='5px 0px'>
-					<Text fontSize='20px' fontWeight={700}>Summary</Text>
-				</Stack>
-				<Text>
-					{cellAdditionalInfo.Publications.summary}
-				</Text>
-			</ModalBody>
-		</React.Fragment >
+			</CollapsibleSidebarProvider>
+		</Stack>
 	)
 }
