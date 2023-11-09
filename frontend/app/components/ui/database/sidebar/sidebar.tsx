@@ -13,7 +13,7 @@ interface SideBarProps<TData extends object> extends CollapsibleSidebarContext {
 export const Sidebar = <TData extends object>({ ...props }: SideBarProps<TData>) => {
   return (
     <Stack
-      position="fixed"
+      position="absolute"
       top="0"
       bottom="0"
       right="0"
@@ -26,8 +26,8 @@ export const Sidebar = <TData extends object>({ ...props }: SideBarProps<TData>)
           backgroundColor: "whitesmoke",
           borderLeft: "1px solid #BBB",
           overflow: "hidden",
-          whiteSpace: "nowrap",
-          position: "absolute",
+          whiteSpace: "normal",
+          position: "fixed",
           right: "0",
           height: "100vh",
           top: "0"
