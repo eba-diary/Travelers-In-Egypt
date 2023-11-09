@@ -87,14 +87,6 @@ export default function TableView<TData extends object>({ data, columns, childre
 
 	return (
 		<div style={{ width: "100%" }}>
-			{/* <Sidebar
-				setCurrentRow={setCurrentRow}
-				currentRow={currentRow}
-				setIsOpen={setIsOpen}
-				isOpen={isOpen}
-				setRowData={setRowData}
-				rowData={rowData}
-			/> */}
 			{children({
 				setCurrentRow,
 				setIsOpen,

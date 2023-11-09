@@ -8,7 +8,8 @@ import TableView from './tableView'
 import { capitalize } from "lodash"
 import { FcCancel, FcApproval } from "react-icons/fc"
 import { Row } from 'react-table'
-import useCollapsibleSidebar, { CollapsibleSidebarProvider } from '../../../lib/hooks/context/useCollapsibleSidebar'
+import { CollapsibleSidebarProvider } from '../../../lib/hooks/context/useCollapsibleSidebar'
+import { Sidebar } from './sidebar/sidebar'
 
 export interface NileTravelogue extends Publication {
 	id: number
@@ -150,7 +151,58 @@ export const NileTraveloguesDataViews = ({ data }: Props) => {
 				<TableView
 					data={data}
 					columns={columns}
-				/>
+				>
+					{(props) => {
+						return (
+							<Sidebar
+								{...props}
+							>
+								{({ original: { title, summary, can_read, publication_traveler } }: Row<NileTravelogue>) => {
+									return (
+										<Stack width="100%" maxHeight="1000px" overflowY="scroll" padding="8px">
+											<Stack width="100%" borderBottom="1px solid #555">
+												<HStack width="100%" justifyContent="space-between">
+													<Text
+														fontSize={{ base: "20px" }}
+														fontWeight={700}
+													>
+														{title}
+													</Text>
+													<Text fontSize="sm" fontStyle="italic" color="red.600">
+														{!can_read && "Currently not available"}
+													</Text>
+												</HStack>
+												<Text color="#555" fontStyle="italic">
+													{publication_traveler.map((pt, index) => {
+														const traveler = pt.traveler
+														return (
+															<>
+																{traveler.traveler_type === "AUTHOR" && index === 0 ? `By ${traveler.traveler_name}` :
+																	traveler.traveler_type !== "ILLUSTRATOR" ? ` and ${traveler.traveler_name}`
+																		: index === 0 ? `Illustrated By ${traveler.traveler_name}` : `and ${traveler.traveler_name}`}
+															</>
+														)
+													})}
+												</Text>
+											</Stack>
+											<Stack>
+												<Text
+													fontSize={{ base: "18px" }}
+													fontWeight={500}
+												>
+													Summary
+												</Text>
+												<Text>
+													{summary}
+												</Text>
+											</Stack>
+										</Stack>
+									)
+								}}
+							</Sidebar>
+						)
+					}}
+				</TableView>
 			</CollapsibleSidebarProvider>
 		</Stack>
 	)
