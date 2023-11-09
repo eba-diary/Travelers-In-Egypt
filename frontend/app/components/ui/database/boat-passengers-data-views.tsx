@@ -1,12 +1,13 @@
-import { Grid, GridItem, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, TableContainer, Tbody, Td, Text, Tr } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 import TableView from "./tableView";
 import { AiOutlineLeft } from 'react-icons/ai'
 import { useRouter } from "next/router";
 import { createColumnHelper, Row } from "@tanstack/react-table";
 import { join } from "lodash"
-import useCollapsibleSidebar, { CollapsibleSidebarProvider } from "../../../lib/hooks/context/useCollapsibleSidebar";
+import { CollapsibleSidebarProvider } from "../../../lib/hooks/context/useCollapsibleSidebar";
 import { Sidebar } from "./sidebar/sidebar";
+import { chunk } from "lodash";
 
 interface Props {
 	data: Ship[]
@@ -104,22 +105,23 @@ export const BoatPassengersDataViews = ({ data }: Props) => {
 												>
 													{ship_name}
 												</Text>
-												<Text height="100%" px="2px">
+												<Text width="100%" px="2px" textDecoration="underline" textUnderlineOffset="2px">
 													{`${new Date(ship_date).toString().match(/.{3}/)}, ${new Date(ship_date).toISOString().replace(/T.*/, "")}`}
 												</Text>
 												<Stack width="100%">
-													<Grid
-														templateColumns={{
-															base: "repeat(3, 1fr)"
-														}}
-														gap="12px"
-													>
-														{passenger_list.passengers.map(passenger => (
-															<GridItem>
-																<Text fontSize="14px">{passenger}</Text>
-															</GridItem>
-														))}
-													</Grid>
+													<TableContainer maxHeight="600px" overflowY="scroll">
+														<Table size="md" variant="striped">
+															{chunk(passenger_list.passengers, 3).map((chunk, index) => {
+																return (
+																	<Tr backgroundColor={index % 2 === 0 ? "Background" : "chakra-placeholder-color._dark"}>
+																		{chunk.map(passenger => (
+																			<Td border="1px solid #000">{passenger}</Td>
+																		))}
+																	</Tr>
+																)
+															})}
+														</Table>
+													</TableContainer>
 												</Stack>
 											</Stack>
 										)
