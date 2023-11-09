@@ -2,13 +2,11 @@ import React, { useEffect, useMemo, useState } from "react"
 import {
 	ColumnDef,
 	ColumnResizeMode,
-	CoreRow,
 	flexRender,
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
 	getSortedRowModel,
-	Row,
 	RowData,
 	SortingState,
 	useReactTable
@@ -30,6 +28,7 @@ import TablePaginator from "./filters/table-paginator"
 import TableFilter from "./filters/table-filter"
 import { Sidebar } from "./sidebar/sidebar"
 import useCollapsibleSidebar, { CollapsibleSidebarContext } from "../../../lib/hooks/context/useCollapsibleSidebar"
+import { useBindKeyboardShortcut } from "../../../lib/hooks/useBindKeyboardShortcut"
 
 interface Props<TData extends RowData> {
 	data: TData[]
@@ -71,6 +70,7 @@ export default function TableView<TData extends object>({ data, columns, childre
 		columnResizeMode: 'onChange'
 	})
 
+
 	const {
 		getHeaderGroups,
 		getRowModel,
@@ -85,16 +85,19 @@ export default function TableView<TData extends object>({ data, columns, childre
 		rowData
 	} = useCollapsibleSidebar()
 
+	useBindKeyboardShortcut({
+		event: [
+			(event) => {
+				if (event.key === "Escape") {
+					setCurrentRow(null)
+					setIsOpen(false)
+				}
+			}
+		]
+	})
+
 	return (
 		<div style={{ width: "100%" }}>
-			{/* <Sidebar
-				setCurrentRow={setCurrentRow}
-				currentRow={currentRow}
-				setIsOpen={setIsOpen}
-				isOpen={isOpen}
-				setRowData={setRowData}
-				rowData={rowData}
-			/> */}
 			{children({
 				setCurrentRow,
 				setIsOpen,
