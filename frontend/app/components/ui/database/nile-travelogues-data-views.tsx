@@ -71,7 +71,7 @@ export const NileTraveloguesDataViews = ({ data }: Props) => {
 				return (
 					<div style={{ display: "flex", flexDirection: "column", padding: "2px", gap: "2px" }}>
 						{firstTwoTravelerName.map(row => (
-							<div>
+							<div key={row.id}>
 								<Text>{truncateText(row.traveler.traveler_name, 20)}</Text>
 							</div>
 						))}
@@ -96,7 +96,7 @@ export const NileTraveloguesDataViews = ({ data }: Props) => {
 				return (
 					<div style={{ display: "flex", flexDirection: "column", padding: "2px", gap: "2px" }}>
 						{firstTwoTravelerTypes.map(row => (
-							<div style={{ padding: "0px 5px" }}>
+							<div style={{ padding: "0px 5px" }} key={row.id}>
 								<Text>{capitalize(row.traveler.traveler_type)}</Text>
 							</div>
 						))}
@@ -176,11 +176,11 @@ export const NileTraveloguesDataViews = ({ data }: Props) => {
 													{publication_traveler.map((pt, index) => {
 														const traveler = pt.traveler
 														return (
-															<>
+															<React.Fragment key={index}>
 																{traveler.traveler_type === "AUTHOR" && index === 0 ? `By ${traveler.traveler_name}` :
 																	traveler.traveler_type !== "ILLUSTRATOR" ? ` and ${traveler.traveler_name}`
 																		: index === 0 ? `Illustrated By ${traveler.traveler_name}` : `and ${traveler.traveler_name}`}
-															</>
+															</React.Fragment>
 														)
 													})}
 												</Text>
