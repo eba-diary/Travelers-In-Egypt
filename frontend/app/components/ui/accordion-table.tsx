@@ -8,8 +8,15 @@ import {
     useDisclosure
 } from "@chakra-ui/react";
 
-export default function AccordionTable({ children, title, defaultIndex }) {
+interface AccordionTableProps {
+    children: React.ReactNode;
+    title: string;
+    defaultIndex?: number;
+}
+
+export default function AccordionTable({ children, title, defaultIndex}: AccordionTableProps) {
     const { isOpen, onToggle } = useDisclosure()
+    // cons
     const open = defaultIndex ? !isOpen : isOpen
     return (
         <>
