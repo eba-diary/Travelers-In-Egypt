@@ -114,8 +114,8 @@ export const BoatPassengersDataViews = ({ data }: Props) => {
 														}}
 														gap="12px"
 													>
-														{passenger_list.passengers.map(passenger => (
-															<GridItem>
+														{passenger_list.passengers.map((passenger, index) => (
+															<GridItem key={index}>
 																<Text fontSize="14px">{passenger}</Text>
 															</GridItem>
 														))}
