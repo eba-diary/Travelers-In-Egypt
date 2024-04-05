@@ -1,6 +1,6 @@
 import { Context } from "koa";
 import Router from "koa-router";
-import dbRouter from './api/db'
+import { dbRouter } from './api/db'
 
 const router = new Router()
 

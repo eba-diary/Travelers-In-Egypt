@@ -6,7 +6,7 @@ export class ShipProvider {
     constructor(private readonly sb: SupabaseService) { }
 
     public async getAllShips(): Promise<Ship[] | CustomProviderError> {
-        const { data, error } = await this.sb.getClient()
+        const { data, error } = await this.sb.getOrCreateClient()
             .from('Ships')
             .select('*')
 

@@ -1,5 +1,11 @@
+import { ColumnDef } from "@tanstack/react-table"
+
 export interface TableProps {
-    rows: ExtensibleTableField[]
+    [key: string]: any
+}
+
+export interface TablePropsNew<TData extends object> {
+    data: TData[]
 }
 
 export interface ExtensibleTableField {

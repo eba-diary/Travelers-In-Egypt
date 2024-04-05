@@ -6,7 +6,7 @@ export class Travelogues {
     constructor(private readonly sb: SupabaseService) { }
 
     public async getAllTravelogues(): Promise<Publications[] | CustomProviderError> {
-        const { data, error } = await this.sb.getClient()
+        const { data, error } = await this.sb.getOrCreateClient()
             .from('Publications')
             .select('*')
 
@@ -27,7 +27,7 @@ export class Travelogues {
     }
 
     public async getAllTraveloguesAndPublications() {
-        const { data, error } = await this.sb.getClient()
+        const { data, error } = await this.sb.getOrCreateClient()
             .from('PublicationsTraveler')
             .select(` 
                 id,

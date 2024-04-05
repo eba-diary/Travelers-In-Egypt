@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -19,29 +16,29 @@ model ships {
   @@index([ship_name])
 }
 
-model travelers {
-  id                    String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  travelers_name        String                  @db.VarChar(100)
-  travelers_type        traveler_type           @default(AUTHOR)
-  publications_traveler publications_traveler[]
+model traveler {
+  id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  traveler_name        String                 @db.VarChar(1000)
+  traveler_type        traveler_type          @default(AUTHOR)
+  publication_traveler publication_traveler[]
 
-  @@index([travelers_name])
+  @@index([traveler_name])
 }
 
-model publications {
-  id                    String                  @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  title                 String                  @db.VarChar(100)
-  summary               String                  @db.VarChar(1000)
-  can_read              Boolean
-  publications_traveler publications_traveler[]
+model publication {
+  id                   String                 @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  title                String                 @db.VarChar(2000)
+  summary              String                 @db.VarChar(2000)
+  can_read             Boolean
+  publication_traveler publication_traveler[]
 }
 
-model publications_traveler {
-  id             String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  publication    publications @relation(fields: [publication_id], references: [id])
-  publication_id String       @unique @db.Uuid()
-  traveler       travelers    @relation(fields: [traveler_id], references: [id])
-  traveler_id    String       @unique @db.Uuid
+model publication_traveler {
+  id             String      @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  publication    publication @relation(fields: [publication_id], references: [id])
+  publication_id String      @db.Uuid()
+  traveler       traveler    @relation(fields: [traveler_id], references: [id])
+  traveler_id    String      @db.Uuid
 }
 
 enum traveler_type {

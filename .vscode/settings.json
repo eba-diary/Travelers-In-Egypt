@@ -1,0 +1,31 @@
+{
+	"editor.defaultFormatter": "vscode.typescript-language-features",
+	"[python]": {
+		"editor.formatOnType": true
+	},
+	"workbench.colorTheme": "Default Dark+ Experimental",
+	"[json]": {
+		"editor.defaultFormatter": "vscode.json-language-features"
+	},
+	"[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma"
+	},
+	"editor.minimap.enabled": true,
+	"editor.indentSize": "tabSize",
+	"editor.insertSpaces": false,
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": true
+	},
+	"eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+		"koa"
+  ],
+  "eslint.workingDirectories": [
+    "./backend", 
+    "./frontend"
+	],
+}
