@@ -8,7 +8,7 @@ type ApiRoute<ReqBody, ResBody> = (
 			request: {
 				body: ReqBody
 			}
-		} | any,
+		},
 		ResBody
 	>
 ) => Promise<void>;

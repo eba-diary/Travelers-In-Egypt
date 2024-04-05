@@ -1,5 +1,6 @@
 import { DefaultContext, ParameterizedContext } from "koa";
 import Router from "koa-router";
+import { handleRoute } from "../../../lib/handleRoute";
 import { ApiRoute } from "../../../types/api";
 
 const authRouter = new Router();
@@ -22,7 +23,10 @@ const signIn: ApiRoute<SignInRequestBody, any> = async (ctx) => {
 };
 
 
-authRouter.post('/signin', signIn);
+authRouter.post('/signin', handleRoute<SignInRequestBody, any>(signIn));
 
+authRouter.post("/test", async () => {
+
+})
 
 export { authRouter };
