@@ -13,9 +13,9 @@ const PORT = config.meta.port
 app.use(bodyParser())
 
 app.use(
-    cors({
-        origin: '*'
-    })
+  cors({
+    origin: '*'
+  })
 )
 
 app.use(KoaLogger())
@@ -24,21 +24,19 @@ const sb = new SupabaseService()
 app.context.sb = sb
 
 app.use(async (ctx, next) => {
-    ctx.sb = sb
-    await next()
-})
+  ctx.sb = sb
+	await next()
+});
 
 app.use(healthCheckRouter.routes())
 app.use(apiRouter.routes())
 
-
 const server = app.listen(
-    PORT, async () => {
-        console.log(`Server listening on port ${PORT}`)
-    }
+  PORT, async () => {
+    console.log(`Server listening on port ${PORT}`)
+	}
 ).on('error', error => {
-    console.log(error)
-})
+  console.log(error)
+});
 
-
-export default server
+export default server;

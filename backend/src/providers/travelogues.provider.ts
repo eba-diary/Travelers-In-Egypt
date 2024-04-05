@@ -1,54 +1,53 @@
-import { SupabaseService } from "../supabase/supabase.service";
-import { CustomProviderError, Publications, Travelogue } from "../types/interface";
-
+import { type SupabaseService } from '../supabase/supabase.service'
+import { type CustomProviderError, type Publications, type Travelogue } from '../types/interface'
 
 export class Travelogues {
-    constructor(private readonly sb: SupabaseService) { }
+  constructor(private readonly sb: SupabaseService) { }
 
-    public async getAllTravelogues(): Promise<Publications[] | CustomProviderError> {
-        const { data, error } = await this.sb.getClient()
-            .from('Publications')
-            .select('*')
+  public async getAllTravelogues(): Promise<Publications[] | CustomProviderError> {
+    const { data, error } = await this.sb.getClient()
+      .from('Publications')
+      .select('*')
 
-        if (error) {
-            return {
-                status: 'failure',
-                error: error
-            } as CustomProviderError
-        }
+		if (error) {
+      return {
+        status: 'failure',
+        error: error
+      } as CustomProviderError
+		}
 
-        const publications = data.map(row => {
-            return {
-                ...row
-            }
-        }) as Publications[]
+    const publications = data.map(row => {
+      return {
+        ...row
+      };
+    }) as Publications[]
 
-        return publications
-    }
+		return publications
+	}
 
-    public async getAllTraveloguesAndPublications() {
-        const { data, error } = await this.sb.getClient()
-            .from('PublicationsTraveler')
-            .select(` 
+  public async getAllTraveloguesAndPublications() {
+    const { data, error } = await this.sb.getClient()
+      .from('PublicationsTraveler')
+      .select(` 
                 id,
                 Publications (*),
                 Travelers (*)
             `)
 
-        if (error) {
-            return {
-                status: 'failure',
-                error: error
-            } as CustomProviderError
-        }
+		if (error) {
+      return {
+        status: 'failure',
+        error: error
+      } as CustomProviderError
+		}
 
-        const reshaphedData = data.map((entry) => {
-            return {
-                ...entry,
-                Travelers: entry.Travelers instanceof Array ? entry.Travelers[0] : entry.Travelers
-            }
-        })
+    const reshaphedData = data.map(entry => {
+      return {
+        ...entry,
+        Travelers: entry.Travelers instanceof Array ? entry.Travelers[0] : entry.Travelers
+      };
+    })
 
-        return reshaphedData as Travelogue[]
-    }
+		return reshaphedData as Travelogue[]
+	}
 }

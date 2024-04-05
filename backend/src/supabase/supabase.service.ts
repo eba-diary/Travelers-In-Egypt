@@ -1,20 +1,20 @@
-import { SupabaseClient, createClient } from '@supabase/supabase-js'
+import { type SupabaseClient, createClient } from '@supabase/supabase-js'
 import dotenv from 'dotenv'
 
 dotenv.config()
 
 export class SupabaseService {
-    private sb?: SupabaseClient;
+  private sb?: SupabaseClient;
 
-    constructor() { }
+	constructor () { }
 
-    public getClient(): SupabaseClient {
-        if (this.sb) {
-            return this.sb
-        }
+  public getClient(): SupabaseClient {
+    if (this.sb) {
+      return this.sb
+		}
 
-        this.sb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_KEY!)
+    this.sb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_KEY!)
 
-        return this.sb
-    }
+		return this.sb
+	}
 }
