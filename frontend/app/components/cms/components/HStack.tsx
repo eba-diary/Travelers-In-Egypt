@@ -1,5 +1,6 @@
 import { HStack } from "@chakra-ui/react"
-import { CmsComponentBase, CmsStackProps } from "./types"
+import { CmsStackProps } from "../types"
+
 
 
 

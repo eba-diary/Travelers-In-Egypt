@@ -24,7 +24,7 @@ export const CollapsibleSidebarContext = createContext<CollapsibleSidebarContext
   }
 });
 
-interface PropsWithChildren {
+export interface PropsWithChildren {
   children: React.ReactNode
 }
 
