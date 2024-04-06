@@ -53,8 +53,6 @@ export default function NavigationTabs() {
 						_hover={{
 							cursor: "pointer"
 						}}
-						variant="outline"
-						colorScheme="teal"
 						backgroundColor={PRIMARY_BG_COLOR}
 					/>
 					<IconButton

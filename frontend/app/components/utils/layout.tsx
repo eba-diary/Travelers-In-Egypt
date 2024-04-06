@@ -1,15 +1,14 @@
 import NavigationTabs from "./navigation-tabs"
 import Footer from './Footer'
 import { Heading, Stack, Text } from "@chakra-ui/react"
-import { useQueryClient, useQuery, useHydrate } from '@tanstack/react-query'
+import { useQueryClient } from '@tanstack/react-query'
+import { useViewportDimensions } from "../../lib/hooks/use-viewport-dimensions"
 
 export default function Layout({ children }) {
-	const queryClient = useQueryClient()
-	const oneHour = 60 * 60 * 1000
+	const { viewportDimensions: { y } } = useViewportDimensions();
 
-	useHydrate(queryClient)
 	return (
-		<Stack minHeight='100vh' spacing={0}>
+		<Stack height={y} spacing={0}>
 			<Stack
 				height={{ base: "175px", md: "200px" }}
 				backgroundImage="url('/eba_bg.png')"
@@ -21,7 +20,7 @@ export default function Layout({ children }) {
 				</Heading>
 			</Stack>
 			<NavigationTabs />
-			<Stack paddingBottom='300px'>
+			<Stack spacing={0}>
 				{children}
 			</Stack>
 			<Footer />
