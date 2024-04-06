@@ -1,4 +1,4 @@
-import { BaseContext, DefaultContext, DefaultState, ParameterizedContext, Request } from 'koa';
+import { DefaultContext, DefaultState, ParameterizedContext, Request } from 'koa';
 
 type ApiRoute<ReqBody, ResBody> = (
 	ctx: ParameterizedContext<

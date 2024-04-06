@@ -5,7 +5,7 @@ import fastcsv from "fast-csv";
 const prisma = new PrismaClient()
 
 export {
-    prisma,
-    fs,
-    fastcsv
+	prisma,
+	fs,
+	fastcsv
 }
