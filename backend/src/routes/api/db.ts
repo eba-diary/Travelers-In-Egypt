@@ -1,4 +1,3 @@
-import { Context } from "koa";
 import Router from "koa-router";
 import { handleRoute } from "../../lib/handleRoute";
 import { ApiRoute } from "../../types/api";
@@ -22,4 +21,4 @@ dbRouter.get('/', handleRoute(db))
 
 dbRouter.use('/ships', boatPassengersRouter.routes())
 dbRouter.use('/travelogues', traveloguesRouter.routes())
-export { dbRouter }
+export { dbRouter };

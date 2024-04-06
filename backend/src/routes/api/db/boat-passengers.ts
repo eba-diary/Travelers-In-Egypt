@@ -22,4 +22,4 @@ const boatPassengers: ApiRoute<void, ships[]> = async (ctx) => {
 
 boatPassengersRouter.get('/', handleRoute(boatPassengers))
 
-export { boatPassengersRouter }
+export { boatPassengersRouter };

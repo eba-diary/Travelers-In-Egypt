@@ -1,6 +1,5 @@
-import { SupabaseService } from "../supabase/supabase.service";
-import { CustomProviderError, Publications, Travelogue } from "../types/interface";
-
+import { type SupabaseService } from '../supabase/supabase.service'
+import { type CustomProviderError, type Publications, type Travelogue } from '../types/interface'
 
 export class Travelogues {
 	constructor(private readonly sb: SupabaseService) { }
@@ -30,10 +29,10 @@ export class Travelogues {
 		const { data, error } = await this.sb.getOrCreateClient()
 			.from('PublicationsTraveler')
 			.select(` 
-                id,
-                Publications (*),
-                Travelers (*)
-            `)
+				id,
+				Publications (*),
+				Travelers (*)
+			`)
 
 		if (error) {
 			return {

@@ -1,6 +1,6 @@
-import { promisify } from "util";
-import { SupabaseService } from "../supabase/supabase.service";
-import { CustomProviderError, Ship } from "../types/interface";
+import { promisify } from 'util'
+import { type SupabaseService } from '../supabase/supabase.service'
+import { type CustomProviderError, type Ship } from '../types/interface'
 
 export class ShipProvider {
 	constructor(private readonly sb: SupabaseService) { }

@@ -1,4 +1,3 @@
-import { Context } from "koa";
 import Router from "koa-router";
 import { handleRoute } from "../lib/handleRoute";
 import { ApiRoute } from "../types/api";
