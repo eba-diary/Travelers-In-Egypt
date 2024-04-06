@@ -1,10 +1,13 @@
-import { As, ChakraComponent, ChakraProps, StackProps } from "@chakra-ui/react";
+import { ChakraProps, StyleProps } from "@chakra-ui/react";
 
-export interface CmsComponentBase<
-  ComponentProps extends ChakraProps
-> extends ChakraComponent<As, ComponentProps> {
-  children: React.ReactNode,
-  props: ComponentProps
+export interface CmsComponentBase<ComponentProps extends StyleProps> extends ChakraProps {
+  children?: React.ReactNode;
 }
 
-export type CmsStackProps = CmsComponentBase<StackProps>
+// import { ChakraProps, StyleProps } from "@chakra-ui/react";
+
+// export type CmsComponentBase<ComponentProps extends StyleProps> = {
+//   [key in keyof ComponentProps]: ComponentProps;
+// } & {
+//   children?: React.ReactNode;
+// };

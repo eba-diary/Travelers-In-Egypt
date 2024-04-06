@@ -1,20 +1,10 @@
 import { get } from '../lib/getStaticPages/get';
 import StaticPageTemplate from '../components/StaticPageTemplate';
 import usePageNumber from '../lib/hooks/usePageNumber';
+import { Banner } from '../views/home/banner';
 
 export default function Home({ components }) {
-	usePageNumber(0)
 	return (
-		<StaticPageTemplate components={components} />
+		<Banner />
 	)
-
-}
-
-export async function getServerSideProps() {
-	const components = await get('home')
-	return {
-		props: {
-			components,
-		}
-	}
 }

@@ -1,0 +1,1 @@
+export const PRIMARY_BG_COLOR = "#EADDCB"
