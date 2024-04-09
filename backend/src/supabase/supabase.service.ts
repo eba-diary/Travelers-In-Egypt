@@ -18,7 +18,7 @@ export class SupabaseService {
 		if (this.sb) {
 			return this.sb
 		}
-		this.sb = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY!)
+		this.sb = createClient(process.env.SUPABASE_URL!, process.env.SUPABASE_KEY!)
 		return this.sb
 	}
 

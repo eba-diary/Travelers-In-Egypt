@@ -4,7 +4,7 @@ import store from '../lib/redux/store'
 import { Provider } from 'react-redux'
 import { QueryClient, QueryClientProvider, useHydrate } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-import Layout from '../components/utils/Layout'
+import Layout from '../components/utils/layout'
 
 function MyApp({ Component, pageProps }) {
   const queryClient = new QueryClient()

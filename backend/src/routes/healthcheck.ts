@@ -1,22 +1,25 @@
 import { Context } from "koa";
 import Router from "koa-router";
+import { handleRoute } from "../lib/handleRoute";
+import { ApiRoute } from "../types/api";
 
 const router = new Router()
 
-router.get('/ping', async (ctx: Context) => {
-    try {
-        ctx.status = 200
+interface HealthCheck {
+	data: "pong"
+}
 
-        ctx.body = {
-            status: 'success',
-            data: 'pong'
-        }
-    } catch (error) {
-        ctx.body = {
-            status: 'error',
-            error: error
-        }
-    }
-})
+const healthCheck: ApiRoute<void, HealthCheck> = async ({ status, body, throw: throwError }) => {
+	try {
+		status = 200
+		body = {
+			data: "pong"
+		}
+	} catch (error) {
+		throwError(500, "Systems are unhealthy")
+	}
+}
+
+router.get("/ping", handleRoute(healthCheck))
 
 export default router

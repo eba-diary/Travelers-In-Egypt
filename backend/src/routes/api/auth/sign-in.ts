@@ -10,23 +10,21 @@ export interface SignInRequestBody {
 	password: string;
 }
 
-const signIn: ApiRoute<SignInRequestBody, any> = async (ctx) => {
+const signIn: ApiRoute<SignInRequestBody, void> = async (ctx) => {
 	const { email, password } = ctx.request.body;
 	try {
 		const data = await ctx.sb.signInWithPassword({ email, password });
 		ctx.status = 200;
-		ctx.body = { message: "Sign-in successful", data };
+
 	} catch (error) {
 		ctx.status = 400;
-		ctx.body = { error: `Failed to sign in: ${error}` };
+		ctx.throw({
+			status: 500,
+			error: `Failed to sign in: ${error}`
+		})
 	}
 };
 
 
-authRouter.post('/signin', handleRoute<SignInRequestBody, any>(signIn));
-
-authRouter.post("/test", async () => {
-
-})
-
+authRouter.post('/signin', handleRoute(signIn));
 export { authRouter };

@@ -1,11 +1,11 @@
-import Koa, { DefaultState, DefaultContext, ParameterizedContext } from 'koa';
+import { DefaultState, DefaultContext, ParameterizedContext, BaseContext } from 'koa';
 
 export const handleRoute = <ReqBody, ResBody>(
 	handler: (
 		ctx: ParameterizedContext<
 			DefaultState,
 			DefaultContext & { request: { body: ReqBody } },
-			ResBody
+			ResBody & { error: Error }
 		>
 	) => Promise<void>
 ) => {
@@ -13,7 +13,7 @@ export const handleRoute = <ReqBody, ResBody>(
 		ctx: ParameterizedContext<
 			DefaultState,
 			DefaultContext & { request: { body?: ReqBody | unknown } },
-			ResBody
+			ResBody & { error: Error }
 		>
 	) => {
 		/** TODO implement logging here. Shared api function */
@@ -21,6 +21,10 @@ export const handleRoute = <ReqBody, ResBody>(
 			ctx.status = 400
 			ctx.throw(400);
 		}
-		await handler(ctx as any)
+		await handler(ctx as ParameterizedContext<
+			DefaultState,
+			DefaultContext & { request: { body: ReqBody } },
+			ResBody & { error: Error }
+		>)
 	};
 }

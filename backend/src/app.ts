@@ -16,7 +16,7 @@ app.use(
 	cors({
 		origin: '*'
 	})
-)
+);
 
 app.use(KoaLogger())
 
@@ -26,11 +26,10 @@ app.context.sb = sb
 app.use(async (ctx, next) => {
 	ctx.sb = sb
 	await next()
-})
+});
 
 app.use(healthCheckRouter.routes())
 app.use(apiRouter.routes())
-
 
 const server = app.listen(
 	PORT, async () => {
@@ -40,5 +39,4 @@ const server = app.listen(
 	console.log(error)
 })
 
-
-export default server
+export default server;
