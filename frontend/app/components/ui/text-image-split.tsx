@@ -1,6 +1,7 @@
-import { Heading, HStack, Stack, Text } from "@chakra-ui/react"
+import { Box, Heading, HStack, Stack, Text } from "@chakra-ui/react"
 import Image from "next/image"
-import { DEFAULT_PADDING, SECONDARY_BG_COLOR } from "../../components/styles.config"
+import { useMemo } from "react"
+import { DEFAULT_PADDING, PRIMARY_BG_COLOR, SECONDARY_BG_COLOR, WHITE } from "../../components/styles.config"
 
 interface TextImageProps {
 	text: string
@@ -9,23 +10,32 @@ interface TextImageProps {
 	alt?: string,
 	split: `${number}/${number}`
 	imagePlacement?: "start" | "end"
+	backgroundColor: "primary" | "secondary"
 }
 
-export const TextImageSplit = ({ text, heading, imageUrl, alt, split, imagePlacement = "end" }: TextImageProps) => {
+export const TextImageSplit = ({ text, heading, imageUrl, alt, split, imagePlacement = "end", backgroundColor }: TextImageProps) => {
 	const [flexText, flexImage] = split.split('/').map(Number)
+
+	const _backgroundColor = useMemo(() => (
+		backgroundColor === "primary" ? SECONDARY_BG_COLOR : WHITE
+	), [backgroundColor])
 
 	return (
 		<Stack
 			width="100%"
-			backgroundColor={SECONDARY_BG_COLOR}
+			backgroundColor={_backgroundColor}
 			padding={DEFAULT_PADDING}
 			alignItems="center"
 		>
-			<HStack
+			<Box
+				display="flex"
+				flexDir={{
+					base: imagePlacement === "start" ? "column-reverse" : "column",
+					md: imagePlacement === "start" ? "row-reverse" : "row"
+				}}
 				alignItems="center"
 				padding="8px"
-				width="7xl"
-				flexDirection={imagePlacement === "start" ? "row-reverse" : "row"}
+				width={{ base: "full", md: "3xl", lg: "4xl", xl: "7xl" }}
 			>
 				<Stack flex={flexText}>
 					<Heading as="h2" size="lg">
@@ -44,7 +54,7 @@ export const TextImageSplit = ({ text, heading, imageUrl, alt, split, imagePlace
 				>
 					{imageUrl ? <img src={imageUrl} alt={alt} /> : <p>Image here</p>}
 				</Stack>
-			</HStack>
-		</Stack>
+			</Box>
+		</Stack >
 	)
 }
