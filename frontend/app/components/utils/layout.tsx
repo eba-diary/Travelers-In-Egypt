@@ -8,7 +8,7 @@ export default function Layout({ children }) {
 	const { viewportDimensions: { y } } = useViewportDimensions();
 
 	return (
-		<Stack height={y} spacing={0}>
+		<Stack minHeight={y} spacing={0}>
 			<Stack
 				height={{ base: "175px", md: "200px" }}
 				backgroundImage="url('/eba_bg.png')"
@@ -23,7 +23,9 @@ export default function Layout({ children }) {
 			<Stack spacing={0}>
 				{children}
 			</Stack>
-			<Footer />
+			<Stack pt="20px">
+				<Footer />
+			</Stack>
 		</Stack>
 	)
 }
