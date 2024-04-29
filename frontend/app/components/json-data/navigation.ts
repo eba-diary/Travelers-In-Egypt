@@ -16,6 +16,10 @@ export const NAVIGATION_TABS = [
 		url: "/tools",
 	},
 	{
+		name: 'Sources',
+		url: '/sources',
+	},
+	{
 		name: "Help",
 		url: "/help",
 	},
