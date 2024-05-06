@@ -10,14 +10,12 @@ export default function EBA() {
 
 	const readeriFrameHtml = `
 		<iframe
-			src="https://trveg01.s.uw.edu/exist/apps/emmabandrews/volumes/volume${volume}.xml"
+			src="http://ec2-54-188-209-13.us-west-2.compute.amazonaws.com/exist/apps/eba/volumes/volume${volume}.xml"
 			width="100%"
 			height="550px"
 		/>
 	`;
 
-	const contentContainer = typeof document !== 'undefined' && document.getElementById('contentContainer');
-	console.log('contentContainer', contentContainer);
 	return (
 		<div
 			className="content"
@@ -40,6 +38,7 @@ export default function EBA() {
 						outline: '2px solid #1a202c',
 						outlineOffset: '-1px',
 						backgroundColor: '#f0f0f0',
+						fontFamily: '"Source Sans 3", sans-serif',
 					}}
 				>
 					{_.range(1, NUM_VOLUMES + 1).map(volumeNumber => <option value={volumeNumber}>Volume {volumeNumber}</option>)}
