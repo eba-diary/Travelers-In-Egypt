@@ -9,9 +9,9 @@ export default function BoatPassengers() {
 	const { data: boatPassengerData, isLoading, isError } = useQuery<Ship[]>(["ships"], async () => {
 		const data = await fetch(`${API_BASE_URL}/api/v1/db/ships`)
 		const res = await data.json()
-		res.forEach((row: Ship) => {
+		/* res.forEach((row: Ship) => {
 			row.passenger_list = JSON.parse(row.passenger_list)
-		})
+		}) */
 		return res
 	}, {
 		retry: 3,
