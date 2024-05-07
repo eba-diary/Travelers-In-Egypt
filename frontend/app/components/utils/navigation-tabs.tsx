@@ -21,7 +21,7 @@ export default function NavigationTabs() {
 				}}>
 					{NAVIGATION_TABS.map(tab => {
 						return (
-							<ul>
+							<ul key={tab.url}>
 								<Box
 									paddingX="4px"
 									paddingTop="1px"

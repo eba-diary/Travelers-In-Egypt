@@ -41,7 +41,7 @@ export default function EBA() {
 						fontFamily: '"Source Sans 3", sans-serif',
 					}}
 				>
-					{_.range(1, NUM_VOLUMES + 1).map(volumeNumber => <option value={volumeNumber}>Volume {volumeNumber}</option>)}
+					{_.range(1, NUM_VOLUMES + 1).map(volumeNumber => <option key={volumeNumber} value={volumeNumber}>Volume {volumeNumber}</option>)}
 				</Select>
 			</div>
 			{parse(readeriFrameHtml)}
