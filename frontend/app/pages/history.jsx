@@ -1,5 +1,5 @@
 import { Stack, Text } from "@chakra-ui/react";
-import Layout from "../components/utils/Layout";
+import Layout from "../components/utils/layout";
 
 export default function History() {
     return (
