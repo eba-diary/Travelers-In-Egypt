@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useComponentHeight = () => {
+const useComponentHeight = () => {
 	const ref = useRef(null);
 	const [height, setHeight] = useState(0);
 
@@ -21,3 +21,5 @@ export const useComponentHeight = () => {
 
 	return [ref, height];
 }
+
+export default useComponentHeight;
