@@ -2,7 +2,7 @@ import { Spinner, Stack, Text } from "@chakra-ui/react";
 import { QueryClient, useQuery } from "@tanstack/react-query";
 import usePageNumber from "../../../lib/hooks/usePageNumber";
 import { BoatPassengersDataViews, Ship } from "../../../components/ui/database/boat-passengers-data-views";
-import { API_BASE_URL, ONE_HOUR } from "./types/types";
+import { API_BASE_URL, ONE_HOUR } from "../../../lib/constants";
 
 export default function BoatPassengers() {
 	usePageNumber(1)
