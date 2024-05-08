@@ -9,13 +9,11 @@ export default function EBA() {
 	const [volume, setVolume] = useState<number>(1);
 
 	const readeriFrameHtml = `
-		<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-			<iframe
-				src="https://ec2-54-188-209-13.us-west-2.compute.amazonaws.com/exist/apps/eba/volumes/volume${volume}.xml"
-				width="100%"
-				height="550px"
-			/>
-		</meta>
+		<iframe
+			src="https://ec2-54-188-209-13.us-west-2.compute.amazonaws.com/exist/apps/eba/volumes/volume${volume}.xml"
+			width="100%"
+			height="550px"
+		/>
 	`;
 
 	return (
