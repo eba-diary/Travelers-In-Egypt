@@ -38,13 +38,15 @@
     "react-redux": "^8.0.5",
     "react-syntax-highlighter": "^15.5.0",
     "react-table": "^7.8.0",
-    "react-tables": "^1.0.2"
+    "react-tables": "^1.0.2",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@tanstack/eslint-plugin-query": "^4.29.9",
     "@types/react": "^18.0.21",
     "@types/react-syntax-highlighter": "^15.5.7",
     "@types/react-table": "^7.7.14",
+    "@types/uuid": "^9.0.8",
     "eslint": "8.25.0",
     "eslint-config-next": "12.3.1",
     "typescript": "5.4.5"

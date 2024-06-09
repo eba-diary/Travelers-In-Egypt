@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 import { AiOutlineLeft } from 'react-icons/ai'
-import TableView from './tableView'
+import TableView from './table-view'
 import { capitalize } from "lodash"
 import { FcCancel, FcApproval } from "react-icons/fc"
 import { Row } from 'react-table'
-import { CollapsibleSidebarProvider } from '../../../lib/hooks/context/useCollapsibleSidebar'
+import { CollapsibleSidebarProvider } from '../../../lib/hooks/context/use-collapsible-sidebar'
 import { Sidebar } from './sidebar/sidebar'
 
 export interface NileTravelogue extends Publication {

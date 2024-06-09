@@ -1,4 +1,4 @@
-import { UseQueryArgs } from "./use-about-page";
+import { UseQueryArgs } from "../../views/home/hooks/use-about-page";
 
 interface isLoadingOrError {
 	isLoading: boolean,
