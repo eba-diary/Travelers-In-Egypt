@@ -8,3 +8,4 @@ export const COMPONENT_PADDING = "25px 30px"
 export const DEFAULT_PADDING = "8px"
 
 export const BORDER_RADIUS = "20px"
+export const BORDER_RADIUS_SM = "10px"
