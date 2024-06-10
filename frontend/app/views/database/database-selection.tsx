@@ -66,6 +66,12 @@ const DatabaseCard: FC<Database> = ({
 				color={WHITE}
 				width="fit-content"
 				borderRadius={BORDER_RADIUS}
+				onClick={() => {
+					router.push(url)
+				}}
+				_hover={{
+					cursor: "pointer"
+				}}
 			>
 				<Text
 					fontSize="x-large"
@@ -83,9 +89,6 @@ const DatabaseCard: FC<Database> = ({
 					px={6}
 					_hover={{
 						backgroundColor: "transparent"
-					}}
-					onClick={() => {
-						router.push(url)
 					}}
 				/>
 			</HStack>

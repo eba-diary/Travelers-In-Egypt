@@ -1,5 +1,5 @@
-import { TextImageSplit } from "../components/ui/text-image-split";
-import { DatabaseSelect } from "../views/database/database-selection";
+import { TextImageSplit } from "../../components/ui/text-image-split";
+import { DatabaseSelect } from "../../views/database/database-selection";
 
 export default function Database() {
 	return (
