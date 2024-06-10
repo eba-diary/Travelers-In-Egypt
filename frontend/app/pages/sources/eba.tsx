@@ -46,6 +46,7 @@ export default function EBA() {
 						outlineOffset: '-1px',
 						backgroundColor: '#f0f0f0',
 						fontFamily: '"Source Sans 3", sans-serif',
+						zIndex: 1,
 					}}
 				>
 					{_.range(1, NUM_VOLUMES + 1).map(volumeNumber => <option key={volumeNumber} value={volumeNumber}>Volume {volumeNumber}</option>)}
