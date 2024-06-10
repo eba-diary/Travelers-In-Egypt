@@ -19,8 +19,12 @@ export default function Team() {
 				backgroundColor="secondary"
 				imagePlacement="start"
 			/>
-			<StudentContributors />
-			<FundingSupport />
+			<StudentContributors
+				backgroundColor="primary"
+			/>
+			<FundingSupport
+				backgroundColor="secondary"
+			/>
 		</Stack>
 	)
 }
