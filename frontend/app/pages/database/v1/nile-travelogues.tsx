@@ -2,7 +2,7 @@ import { Spinner, Stack, Text } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import usePageNumber from "../../../lib/hooks/usePageNumber";
 import { NileTraveloguesDataViews, NileTravelogue } from "../../../components/ui/database/nile-travelogues-data-views";
-import { API_BASE_URL } from "./types/types";
+import { API_BASE_URL } from "../../../lib/constants";
 
 export default function NileTravelogues() {
 	usePageNumber(1)

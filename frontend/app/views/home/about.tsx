@@ -4,7 +4,7 @@ import { DEFAULT_PADDING, SECONDARY_BG_COLOR } from "../../components/styles.con
 import { FlashCard } from "../../components/ui/flashcard"
 import { TextImageSplit } from "../../components/ui/text-image-split"
 import { SectionWithTitle } from "../../components/ui/wrappers/section-with-title"
-import { useAboutPage } from "../../lib/hooks/use-about-page"
+import { useAboutPage } from "./hooks/use-about-page"
 import { isLoadingOrError } from "../../lib/hooks/utils"
 
 export const About = () => {
@@ -51,7 +51,7 @@ export const About = () => {
 				</Box>
 			</SectionWithTitle>
 			<TextImageSplit
-				heading="Scope"
+				heading="History & Scope"
 				text="The scope of our archival material has expanded beyond the Andrews Diaries to include diaries and letters written by some of the lesser-known figures in Egyptology, including the unpublished writings of some of the 'hidden' women of early Egyptology - the wives of archaeologists. These women had prominent roles in archaeological circles, yet they are mostly forgotten since their records were personal letters and diaries, now dispersed in little-known family or institutional archives. The life writings of these women add important and unique historiographical context to the social and archaeological history of the time, and provide a unique and detailed overview of discipline formation, gendered labor, and social and intellectual networks in Egypt during this period."
 				split="3/2"
 				backgroundColor="secondary"

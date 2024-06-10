@@ -1,0 +1,1 @@
+export type FourDigitYear = `${number}${number}${number}${number}`;

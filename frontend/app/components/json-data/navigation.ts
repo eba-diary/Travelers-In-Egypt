@@ -1,11 +1,11 @@
 export const NAVIGATION_TABS = [
 	{
 		name: "About",
-		url: "/about",
+		url: "/team",
 	},
 	{
 		name: "Databases",
-		url: "/databases",
+		url: "/database",
 	},
 	{
 		name: "Connecting Info",

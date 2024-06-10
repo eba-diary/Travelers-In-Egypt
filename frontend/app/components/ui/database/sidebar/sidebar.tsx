@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai"
 import { Row } from "react-table";
-import { CollapsibleSidebarContext } from "../../../../lib/hooks/context/useCollapsibleSidebar";
+import { CollapsibleSidebarContext } from "../../../../lib/hooks/context/use-collapsible-sidebar";
 
 interface SideBarProps<TData extends object> extends CollapsibleSidebarContext {
   children: (

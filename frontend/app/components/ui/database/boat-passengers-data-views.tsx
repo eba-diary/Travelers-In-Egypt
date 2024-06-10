@@ -1,11 +1,11 @@
 import { Grid, GridItem, HStack, IconButton, ModalBody, ModalCloseButton, ModalHeader, Stack, Table, Tbody, Text, Tr } from "@chakra-ui/react";
 import React, { useMemo } from "react";
-import TableView from "./tableView";
+import TableView from "./table-view";
 import { AiOutlineLeft } from 'react-icons/ai'
 import { useRouter } from "next/router";
 import { createColumnHelper, Row } from "@tanstack/react-table";
 import { join } from "lodash"
-import useCollapsibleSidebar, { CollapsibleSidebarProvider } from "../../../lib/hooks/context/useCollapsibleSidebar";
+import useCollapsibleSidebar, { CollapsibleSidebarProvider } from "../../../lib/hooks/context/use-collapsible-sidebar";
 import { Sidebar } from "./sidebar/sidebar";
 
 interface Props {

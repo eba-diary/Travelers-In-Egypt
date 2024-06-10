@@ -21,15 +21,18 @@ export const useViewportDimensions = (): ViewportDimensionHook => {
 	}, 50);
 
 	useEffect(() => {
-		const { x, y } = { x: window?.innerWidth, y: window?.innerHeight }
-		updateViewport(x, y)
+		if (typeof window !== 'undefined') {
+			const { x, y } = { x: window.innerWidth, y: window.innerHeight }
+			updateViewport(x, y)
 
 		window?.addEventListener("resize", () => updateViewport(x, y))
 
-		return () => {
-			window?.removeEventListener("resize", () => updateViewport(x, y))
+			return () => {
+				window.removeEventListener("resize", () => updateViewport(x, y))
+			}
 		}
 	}, []);
+
 
 	return {
 		viewportDimensions,
