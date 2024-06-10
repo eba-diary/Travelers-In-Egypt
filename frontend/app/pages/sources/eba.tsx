@@ -15,7 +15,7 @@ export default function EBA() {
 			</head>
 			<body>
 				<iframe
-					src="https://ec2-54-188-209-13.us-west-2.compute.amazonaws.com/exist/apps/eba/volumes/volume${volume}.xml"
+					src="https://da4utio5xhbxf.cloudfront.net/exist/apps/eba/volumes/volume${volume}.xml"
 					width="100%"
 					height="550px"
 				/>
