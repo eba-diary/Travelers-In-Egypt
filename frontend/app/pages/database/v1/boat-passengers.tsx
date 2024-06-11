@@ -3,6 +3,7 @@ import { QueryClient, useQuery } from "@tanstack/react-query";
 import usePageNumber from "../../../lib/hooks/usePageNumber";
 import { BoatPassengersDataViews, Ship } from "../../../components/ui/database/boat-passengers-data-views";
 import { API_BASE_URL, ONE_HOUR } from "../../../lib/constants";
+import { TextImageSplit } from "../../../components/ui/text-image-split";
 
 export default function BoatPassengers() {
 	usePageNumber(1)
