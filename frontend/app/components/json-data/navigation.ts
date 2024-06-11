@@ -4,23 +4,19 @@ export const NAVIGATION_TABS = [
 		url: "/team",
 	},
 	{
-		name: "Databases",
+		name: "Explore Databases",
 		url: "/database",
 	},
 	{
-		name: "Connecting Info",
-		url: "/connect",
+		name: "Related Research",
+		url: "/related-research",
 	},
 	{
 		name: "Tools",
 		url: "/tools",
 	},
 	{
-		name: 'Sources',
-		url: '/sources',
-	},
-	{
-		name: "Help",
-		url: "/help",
-	},
+		name: 'Contact',
+		url: '/contact',
+	}
 ];
