@@ -25,7 +25,7 @@ export const useViewportDimensions = (): ViewportDimensionHook => {
 			const { x, y } = { x: window.innerWidth, y: window.innerHeight }
 			updateViewport(x, y)
 
-			window.addEventListener("resize", () => updateViewport(x, y))
+		window?.addEventListener("resize", () => updateViewport(x, y))
 
 			return () => {
 				window.removeEventListener("resize", () => updateViewport(x, y))
