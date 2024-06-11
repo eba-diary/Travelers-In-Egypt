@@ -77,7 +77,7 @@ export const ContactForm = ({
 				>
 					<Stack
 						bg={PRIMARY_BG_COLOR}
-						p={4}
+						p={COMPONENT_PADDING}
 					>
 						<HStack>
 							<FormFieldWrapper
