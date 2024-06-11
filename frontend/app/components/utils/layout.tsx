@@ -1,8 +1,9 @@
 import NavigationTabs from "./navigation-tabs"
-import Footer from './Footer'
+import { Footer } from './footer'
 import { Heading, Stack, Text } from "@chakra-ui/react"
 import { useQueryClient } from '@tanstack/react-query'
 import { useViewportDimensions } from "../../lib/hooks/use-viewport-dimensions"
+import { WHITE } from "../styles.config"
 
 export default function Layout({ children }) {
 	const { viewportDimensions: { y } } = useViewportDimensions();
@@ -11,11 +12,14 @@ export default function Layout({ children }) {
 		<Stack minHeight={y} spacing={0}>
 			<Stack
 				height={{ base: "175px", md: "200px" }}
-				backgroundImage="url('/eba_bg.png')"
+				background="url('/eba_bg.png')"
+				backgroundSize="cover"
+				backgroundPosition="right"
 				alignItems="center"
+				zIndex={1}
 				justifyContent="center"
 			>
-				<Heading>
+				<Heading color={WHITE} fontSize="42px" letterSpacing="10px">
 					Travelers In Egypt
 				</Heading>
 			</Stack>
@@ -23,9 +27,9 @@ export default function Layout({ children }) {
 			<Stack spacing={0}>
 				{children}
 			</Stack>
-			<Stack pt="20px">
+			<Stack>
 				<Footer />
 			</Stack>
-		</Stack>
+		</Stack >
 	)
 }

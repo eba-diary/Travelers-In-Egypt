@@ -5,10 +5,12 @@ import KoaLogger from 'koa-logger'
 import { config } from './config'
 import apiRouter from './routes/api'
 import healthCheckRouter from './routes/healthcheck'
+import bunyan from 'bunyan'
 import { SupabaseService } from './supabase/supabase.service'
 
 const app = new Koa()
 const PORT = config.meta.port
+const APP_NAME = "Travelers In Egypt Backend"
 
 app.use(bodyParser())
 
@@ -19,6 +21,8 @@ app.use(
 );
 
 app.use(KoaLogger())
+
+const log = bunyan.createLogger({ name: APP_NAME })
 
 const sb = new SupabaseService()
 app.context.sb = sb

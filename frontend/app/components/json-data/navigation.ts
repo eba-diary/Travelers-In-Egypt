@@ -20,3 +20,22 @@ export const NAVIGATION_TABS = [
 		url: '/contact',
 	}
 ];
+
+export const FOOTER_LINKS = [
+	{
+		name: "Credits",
+		url: "/credits",
+	},
+	{
+		name: "Donate",
+		url: "/donate",
+	},
+	{
+		name: "License",
+		url: "/license",
+	},
+	{
+		name: "Sitemap",
+		url: "/sitemap",
+	},
+];
