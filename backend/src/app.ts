@@ -23,12 +23,13 @@ app.use(
 app.use(KoaLogger())
 
 const log = bunyan.createLogger({ name: APP_NAME })
-
+log.info("Travelers in Egypt back-end entry point")
 const sb = new SupabaseService()
 app.context.sb = sb
 
 app.use(async (ctx, next) => {
 	ctx.sb = sb
+	log.info("Supabase service established")
 	await next()
 });
 
