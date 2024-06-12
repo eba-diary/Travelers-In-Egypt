@@ -34,7 +34,9 @@ app.use(async (ctx, next) => {
 });
 
 app.use(healthCheckRouter.routes())
+log.info("Health Check Router")
 app.use(apiRouter.routes())
+log.info("API Router")
 
 const server = app.listen(
 	PORT, async () => {
