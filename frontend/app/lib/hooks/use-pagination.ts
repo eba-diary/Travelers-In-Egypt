@@ -12,11 +12,11 @@ export const usePagination = <T extends object>(data: T[], itemsPerPage: number)
 	}, [data, currentPage, itemsPerPage]);
 
 	const next = () => {
-		setCurrentPage((prevPage) => Math.min(prevPage + 1, maxPage));
+		setCurrentPage((prevPage) => Math.min(prevPage + itemsPerPage, maxPage));
 	};
 
 	const prev = () => {
-		setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
+		setCurrentPage((prevPage) => Math.max(prevPage - itemsPerPage, 1));
 	};
 
 	const jump = (page: number) => {

@@ -11,3 +11,5 @@ export const DEFAULT_PADDING = "8px"
 
 export const BORDER_RADIUS = "20px"
 export const BORDER_RADIUS_SM = "10px"
+
+export const PRIMARY_ICON_COLOR = "#CC9F61"

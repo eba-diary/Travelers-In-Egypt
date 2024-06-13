@@ -1,9 +1,10 @@
-import { Button, Heading, HStack, Input, Stack } from "@chakra-ui/react"
+import { Button, Heading, HStack, Icon, Input, Stack, Text } from "@chakra-ui/react"
 import { FC, useEffect } from "react"
 import { useForm } from "react-hook-form"
+import { FaBookOpen } from "react-icons/fa"
 import FormFieldWrapper from "../../../components/form"
-import { BLACK, COMPONENT_PADDING, PRIMARY_BG_COLOR, SECONDARY_BG_COLOR, SELECTED_BG_COLOR, WHITE } from "../../../components/styles.config"
-import { NileTravelogue, NileTraveloguesDataViews } from "../../../components/ui/database/nile-travelogues-data-views"
+import { BLACK, COMPONENT_PADDING, PRIMARY_BG_COLOR, PRIMARY_ICON_COLOR, SECONDARY_BG_COLOR, SELECTED_BG_COLOR, WHITE } from "../../../components/styles.config"
+import { NileTravelogue } from "../../../components/ui/database/nile-travelogues-data-views"
 import { Category, FormDataByCategory } from "./browse-by-category"
 import { useTraveloguesFilter } from "./hooks/use-travelogues-filter"
 import { TraveloguesTableCell } from "./travelogues-table-cell"
@@ -17,10 +18,27 @@ export const TraveloguesTable = ({
 	data,
 	categories
 }: TraveloguesTableProps) => {
+	const { filter } = useTraveloguesFilter();
 	return (
 		<div>
 			<TraveloguesSearch categories={categories} />
-			<TraveloguesTableCell data={data} />
+			<Stack
+				width="100%"
+				backgroundColor={WHITE}
+				padding={COMPONENT_PADDING}
+				alignItems="center"
+			>
+				<Stack
+					width={{ base: "full", md: "3xl", lg: "4xl", xl: "7xl" }}
+				>
+					<Heading size="md"> Browsing Publications {filter?.category && `By ${filter.category}`} </Heading>
+					<HStack>
+						<Icon as={FaBookOpen} color={PRIMARY_ICON_COLOR} />
+						<Text>indicates publication can be read on this site</Text>
+					</HStack>
+					<TraveloguesTableCell data={data} />
+				</Stack>
+			</Stack>
 		</div>
 	)
 }
@@ -67,10 +85,6 @@ const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 			}))
 		}
 	}, [control, watch, watchCategory])
-
-	console.log({
-		filter
-	})
 
 	return (
 		<Stack
