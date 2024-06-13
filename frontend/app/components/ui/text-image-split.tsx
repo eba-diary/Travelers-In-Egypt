@@ -10,10 +10,11 @@ interface TextImageProps {
 	alt?: string,
 	split: `${number}/${number}`
 	imagePlacement?: "start" | "end"
-	backgroundColor: "primary" | "secondary"
+	backgroundColor: "primary" | "secondary",
+	children?: React.ReactNode
 }
 
-export const TextImageSplit = ({ text, heading, imageUrl, alt, split, imagePlacement = "end", backgroundColor }: TextImageProps) => {
+export const TextImageSplit = ({ text, heading, imageUrl, alt, split, imagePlacement = "end", backgroundColor, children }: TextImageProps) => {
 	const [flexText, flexImage] = split.split('/').map(Number)
 
 	const _backgroundColor = useMemo(() => (
@@ -55,6 +56,7 @@ export const TextImageSplit = ({ text, heading, imageUrl, alt, split, imagePlace
 					{imageUrl ? <img src={imageUrl} alt={alt} /> : <p>Image here</p>}
 				</Stack>
 			</Box>
+			{children}
 		</Stack >
 	)
 }

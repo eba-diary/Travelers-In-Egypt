@@ -3,12 +3,26 @@ import { Box, Button, Heading, Stack, Text } from '@chakra-ui/react';
 import { useTraveloguesFilter } from './hooks/use-travelogues-filter';
 import { BLACK, COMPONENT_PADDING, PRIMARY_BG_COLOR, SECONDARY_BG_COLOR, WHITE } from '../../../components/styles.config';
 import { useTravelogueData } from '../../../lib/database/global-hooks/use-travelogue-data';
+import { useForm } from 'react-hook-form';
+import FormFieldWrapper from '../../../components/form';
 
+export type Category = "Title" | "Traveler" | "Decade";
 interface BrowsePublicationsByCategoryProps {
-	backgroundColor: "primary" | "secondary"
+	backgroundColor: "primary" | "secondary",
+	categories: Category[],
+	afterSubmit?: () => void
 }
 
-export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategoryProps> = ({ backgroundColor }) => {
+export interface FormDataByCategory {
+	category: Category,
+	term: string
+}
+
+export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategoryProps> = ({
+	backgroundColor,
+	categories,
+	afterSubmit
+}) => {
 	const { travelogeusData: originalTravelogues, isError, isLoading } = useTravelogueData();
 	const { travelogues: filteredTravelogues, setTravelogues } = useTraveloguesFilter();
 
@@ -19,7 +33,32 @@ export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategory
 		fetchData();
 	}, []);
 
-	const categories = ['Title', 'Traveler', 'Decade'];
+	const defaultValues = {
+		category: null
+	}
+
+	const methods = useForm<FormDataByCategory>({
+		mode: "onBlur",
+		defaultValues
+	})
+
+	const {
+		control,
+		watch,
+		setValue
+	} = methods
+
+	const watchCategory = watch("category")
+	const { setFilter } = useTraveloguesFilter();
+
+	useEffect(() => {
+		if (watchCategory) {
+			setFilter((prev) => ({
+				...prev,
+				category: watchCategory
+			}))
+		}
+	}, [control, watch, watchCategory])
 
 	const _backgroundColor = useMemo(() => (
 		backgroundColor === "primary" ? SECONDARY_BG_COLOR : WHITE
@@ -47,9 +86,37 @@ export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategory
 						<Text><strong>Traveler:</strong> Browse the collection organized by the authors or travelers themselves.</Text>
 						<Text><strong>Decade:</strong> Browse the travelogues chronologically.</Text>
 					</Stack>
-					<Stack direction="row" spacing={4}>
+					<Stack direction="row" spacing={4} alignItems="start">
 						{categories.map((category) => (
-							<Button key={category} backgroundColor={PRIMARY_BG_COLOR} color={BLACK}>{category}</Button>
+							<FormFieldWrapper
+								control={control}
+								name="category"
+								label="category"
+								hiddenLabel={true}
+								style={{
+									width: "fit-content"
+								}}
+							>
+								{(() => {
+									return (
+										<Button
+											key={category}
+											backgroundColor={PRIMARY_BG_COLOR}
+											color={BLACK}
+											value={category}
+											onClick={() => {
+												console.log("clicked")
+												setValue("category", category)
+												if (afterSubmit) {
+													afterSubmit();
+												}
+											}}
+										>
+											{category}
+										</Button>
+									)
+								})}
+							</FormFieldWrapper>
 						))}
 					</Stack>
 

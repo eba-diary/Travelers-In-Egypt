@@ -9,9 +9,18 @@ interface FormFieldWrapperProps<
 > extends UseControllerProps<FV> {
 	children: React.FC<ControllerRenderProps<FV>>,
 	label: string,
+	hiddenLabel?: boolean,
+	style?: React.CSSProperties
 }
 
-const FormFieldWrapper = <FV extends FieldValues>({ name, control, rules, label, children }: FormFieldWrapperProps<FV>) => {
+const FormFieldWrapper = <FV extends FieldValues>({
+	name,
+	control,
+	rules,
+	label,
+	children,
+	style,
+	hiddenLabel = false }: FormFieldWrapperProps<FV>) => {
 	return (
 		<Controller
 			control={control}
@@ -23,10 +32,12 @@ const FormFieldWrapper = <FV extends FieldValues>({ name, control, rules, label,
 					<FormControl
 						isInvalid={isInvalid}
 						style={{
-							paddingBottom: isInvalid ? "0px" : "1.5rem"
+							paddingBottom: isInvalid ? "0px" : "1.5rem",
+							...style
 						}}
 					>
-						<FormLabel fontWeight={700}>{label} {rules ? <span style={{ color: "red" }}>*</span> : ""}</FormLabel>
+						<FormLabel fontWeight={700}>{hiddenLabel ? "" : label} {rules ? <span style={{ color: "red" }}>*</span> : ""}
+						</FormLabel>
 						{children({
 							...field
 						})}
