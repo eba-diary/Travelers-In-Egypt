@@ -4,7 +4,9 @@ import { useState, useMemo } from 'react';
 export const usePagination = <T extends object>(data: T[], itemsPerPage: number) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const maxPage = Math.ceil(data.length / itemsPerPage);
-
+	console.log({
+		data
+	})
 	const paginatedData = useMemo(() => {
 		const begin = (currentPage - 1) * itemsPerPage;
 		const end = begin + itemsPerPage;
