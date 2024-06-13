@@ -6,6 +6,7 @@ import { BLACK, COMPONENT_PADDING, PRIMARY_BG_COLOR, SECONDARY_BG_COLOR, SELECTE
 import { NileTravelogue, NileTraveloguesDataViews } from "../../../components/ui/database/nile-travelogues-data-views"
 import { Category, FormDataByCategory } from "./browse-by-category"
 import { useTraveloguesFilter } from "./hooks/use-travelogues-filter"
+import { TraveloguesTableCell } from "./travelogues-table-cell"
 
 interface TraveloguesTableProps {
 	data: NileTravelogue[],
@@ -19,7 +20,7 @@ export const TraveloguesTable = ({
 	return (
 		<div>
 			<TraveloguesSearch categories={categories} />
-			<NileTraveloguesDataViews data={data} />
+			<TraveloguesTableCell data={data} />
 		</div>
 	)
 }
