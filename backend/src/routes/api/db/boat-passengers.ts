@@ -8,6 +8,7 @@ import { Ship } from "../../../types/interface";
 const boatPassengersRouter = new Router()
 
 const boatPassengers: ApiRoute<void, ships[]> = async (ctx) => {
+	ctx.log.info("Boat passengers route called")
 	try {
 		const data = await prisma.ships.findMany({})
 		if (!data) {
@@ -16,6 +17,7 @@ const boatPassengers: ApiRoute<void, ships[]> = async (ctx) => {
 		ctx.status = 200
 		ctx.body = data
 	} catch (error) {
+		ctx.log.error(error, "Error encountered when fetching boat passengers.")
 		ctx.throw(error as Error)
 	}
 }

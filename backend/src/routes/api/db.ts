@@ -12,6 +12,7 @@ interface DatabaseVersion {
 
 const db: ApiRoute<void, DatabaseVersion> = async (ctx) => {
 	ctx.status = 200
+
 	ctx.body = {
 		db_version: 'v1'
 	}
