@@ -1,12 +1,9 @@
-// hooks/usePagination.ts
 import { useState, useMemo } from 'react';
 
 export const usePagination = <T extends object>(data: T[], itemsPerPage: number) => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const maxPage = Math.ceil(data.length / itemsPerPage);
-	console.log({
-		data
-	})
+
 	const paginatedData = useMemo(() => {
 		const begin = (currentPage - 1) * itemsPerPage;
 		const end = begin + itemsPerPage;
@@ -14,11 +11,11 @@ export const usePagination = <T extends object>(data: T[], itemsPerPage: number)
 	}, [data, currentPage, itemsPerPage]);
 
 	const next = () => {
-		setCurrentPage((prevPage) => Math.min(prevPage + itemsPerPage, maxPage));
+		setCurrentPage((prevPage) => Math.min(prevPage + 1, maxPage));
 	};
 
 	const prev = () => {
-		setCurrentPage((prevPage) => Math.max(prevPage - itemsPerPage, 1));
+		setCurrentPage((prevPage) => Math.max(prevPage - 1, 1));
 	};
 
 	const jump = (page: number) => {
