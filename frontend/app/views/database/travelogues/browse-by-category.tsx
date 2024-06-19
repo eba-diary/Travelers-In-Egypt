@@ -7,14 +7,18 @@ import { useForm } from 'react-hook-form';
 import FormFieldWrapper from '../../../components/form';
 
 export type Category = "Title" | "Traveler" | "Decade";
+export interface CategoryFilter {
+	name: Category,
+	method: "asc" | "desc" | "none"
+}
 interface BrowsePublicationsByCategoryProps {
 	backgroundColor: "primary" | "secondary",
-	categories: Category[],
+	categories: CategoryFilter[],
 	afterSubmit?: () => void
 }
 
 export interface FormDataByCategory {
-	category: Category,
+	category: CategoryFilter,
 	term: string
 }
 
@@ -24,7 +28,7 @@ export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategory
 	afterSubmit
 }) => {
 	const { travelogeusData: originalTravelogues, isError, isLoading } = useTravelogueData();
-	const { travelogues: filteredTravelogues, setTravelogues } = useTraveloguesFilter();
+	const { setTravelogues } = useTraveloguesFilter();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -34,7 +38,10 @@ export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategory
 	}, []);
 
 	const defaultValues = {
-		category: null
+		category: {
+			name: null,
+			method: "none" as const
+		}
 	}
 
 	const methods = useForm<FormDataByCategory>({
@@ -100,19 +107,18 @@ export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategory
 								{(() => {
 									return (
 										<Button
-											key={category}
+											key={category.name}
 											backgroundColor={PRIMARY_BG_COLOR}
 											color={BLACK}
-											value={category}
+											value={category.name}
 											onClick={() => {
-												console.log("clicked")
 												setValue("category", category)
 												if (afterSubmit) {
 													afterSubmit();
 												}
 											}}
 										>
-											{category}
+											{category.name}
 										</Button>
 									)
 								})}
