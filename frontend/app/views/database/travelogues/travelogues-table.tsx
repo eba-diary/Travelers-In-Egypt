@@ -6,14 +6,15 @@ import { useForm } from "react-hook-form"
 import { FaArrowDown, FaArrowUp, FaBookOpen } from "react-icons/fa"
 import FormFieldWrapper from "../../../components/form"
 import { BLACK, COMPONENT_PADDING, PRIMARY_BG_COLOR, PRIMARY_ICON_COLOR, SECONDARY_BG_COLOR, SELECTED_BG_COLOR, WHITE } from "../../../components/styles.config"
-import { NileTravelogue } from "../../../components/ui/database/nile-travelogues-data-views"
-import { Category, FormDataByCategory } from "./browse-by-category"
+import { NileTravelogue, PublicationTraveler } from "../../../components/ui/database/nile-travelogues-data-views"
+import { CategoryFilter, FormDataByCategory } from "./browse-by-category"
 import { useTraveloguesFilter } from "./hooks/use-travelogues-filter"
 import { TraveloguesTableCell } from "./travelogues-table-cell"
+import { findNextSortingStep, sortData } from "./utils/sort"
 
 interface TraveloguesTableProps {
 	data: NileTravelogue[],
-	categories: Category[]
+	categories: CategoryFilter[]
 }
 
 export const TraveloguesTable = ({
@@ -36,8 +37,11 @@ export const TraveloguesTable = ({
 		const result = fuse.search(filter.term);
 		const filteredResult = result.map(res => res.item);
 		const sortedResult = sortData(filteredResult, name, method);
+		console.log({
+			sortedResult
+		})
 		return sortedResult
-	}, [filter.term, unfilteredData]);
+	}, [filter, unfilteredData, categories]);
 	return (
 		<div>
 			<TraveloguesSearch categories={categories} />
@@ -50,7 +54,7 @@ export const TraveloguesTable = ({
 				<Stack
 					width={{ base: "full", md: "3xl", lg: "4xl", xl: "7xl" }}
 				>
-					<Heading size="md"> Browsing Publications {filter?.category && `By ${filter.category}`} </Heading>
+					<Heading size="md"> Browsing Publications {filter?.category?.name && filter?.category?.method !== "none" && `By ${filter.category.name}`} </Heading>
 					<HStack>
 						<Icon as={FaBookOpen} color={PRIMARY_ICON_COLOR} />
 						<Text>indicates publication can be read on this site</Text>
@@ -63,7 +67,7 @@ export const TraveloguesTable = ({
 }
 
 interface TraveloguesSearchProps {
-	categories: Category[]
+	categories: CategoryFilter[]
 }
 const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 	categories
@@ -105,10 +109,6 @@ const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 		}
 	}, [control, watch, watchCategory])
 
-	console.log({
-		filter
-	})
-
 	return (
 		<Stack
 			width="100%"
@@ -125,6 +125,7 @@ const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 					<HStack flex={2} gap={COMPONENT_PADDING}>
 						{categories.map((category) => (
 							<FormFieldWrapper
+								key={category.name}
 								control={control}
 								name="category"
 								label="category"
@@ -134,7 +135,7 @@ const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 								}}
 							>
 								{(() => {
-									const isCurrentlyFiltered = filter.category?.name?.includes(category)
+									const isCurrentlyFiltered = filter.category?.name?.includes(category.name)
 									const isNotInactiveFilter = filter.category?.method !== "none"
 									return (
 										<HStack
@@ -149,7 +150,8 @@ const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 											gap="2px"
 										>
 											<Button
-												key={category}
+												isDisabled={category.name === "Decade"}
+												key={category.name}
 												backgroundColor={
 													isCurrentlyFiltered && isNotInactiveFilter ? SELECTED_BG_COLOR : PRIMARY_BG_COLOR
 												}
@@ -160,27 +162,27 @@ const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 													backgroundColor: isCurrentlyFiltered && isNotInactiveFilter ? SELECTED_BG_COLOR : PRIMARY_BG_COLOR,
 													color: isCurrentlyFiltered && isNotInactiveFilter ? WHITE : BLACK
 												}}
-												value={category}
+												value={category.name}
 												onClick={() => {
-													if (filter?.category && filter.category?.name === category) {
+													if (filter?.category && filter.category?.name === category.name) {
 														setFilter((prev) => ({
 															...prev,
 															category: {
-																name: category,
+																name: category.name,
 																method: findNextSortingStep({ method: watchCategory.method })
 															}
 														}))
-														setValue("category", { name: category, method: findNextSortingStep({ method: watchCategory.method }) })
+														setValue("category", { name: category.name, method: findNextSortingStep({ method: watchCategory.method }) })
 														return;
 													}
 													setValue("category", {
-														name: category,
+														name: category.name,
 														method: "asc"
 													})
 
 												}}
 											>
-												{category}
+												{category.name}
 											</Button>
 											{isCurrentlyFiltered && filter.category?.method === "asc" && (
 												<Icon as={FaArrowUp} mx="2px" />
@@ -225,46 +227,3 @@ const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 		</Stack>
 	)
 }
-
-const findNextSortingStep = ({
-	method
-}: {
-	method: "asc" | "desc" | "none"
-}): "asc" | "desc" | "none" => {
-	switch (method) {
-		case "asc":
-			return "desc"
-		case "desc":
-			return "none"
-		case "none":
-			return "asc"
-		default:
-			return "none"
-	}
-}
-
-const sortData = (data: NileTravelogue[], attribute: Category, method: "asc" | "desc" | "none") => {
-	if (method === "none" || !attribute) return data;
-
-	const key: keyof NileTravelogue = (() => {
-		switch (attribute) {
-			case "Title":
-				return "title"
-			case "Traveler":
-				return "publication_traveler"
-		}
-	})()
-
-	return data.sort((a, b) => {
-		const aValue = a[attribute as keyof NileTravelogue];
-		const bValue = b[attribute as keyof NileTravelogue];
-
-		if (aValue < bValue) {
-			return method === "asc" ? -1 : 1;
-		}
-		if (aValue > bValue) {
-			return method === "asc" ? 1 : -1;
-		}
-		return 0;
-	});
-};

@@ -3,11 +3,11 @@ import { useRouter } from "next/router"
 import { FaArrowRight } from "react-icons/fa"
 import { PRIMARY_BG_COLOR } from "../../../components/styles.config"
 import { TextImageSplit } from "../../../components/ui/text-image-split"
-import { BrowsePublicationsByCategory, Category } from "./browse-by-category"
+import { BrowsePublicationsByCategory, CategoryFilter } from "./browse-by-category"
 import { BrowsePublicationsBySearch } from "./browse-by-search"
 
 interface TraveloguesHomeProps {
-	categories: Category[]
+	categories: CategoryFilter[]
 }
 
 export const TraveloguesHome: React.FC<TraveloguesHomeProps> = ({

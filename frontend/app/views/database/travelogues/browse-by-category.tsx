@@ -96,6 +96,7 @@ export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategory
 					<Stack direction="row" spacing={4} alignItems="start">
 						{categories.map((category) => (
 							<FormFieldWrapper
+								key={category.name}
 								control={control}
 								name="category"
 								label="category"
@@ -117,6 +118,7 @@ export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategory
 													afterSubmit();
 												}
 											}}
+											isDisabled={category.name === "Decade"}
 										>
 											{category.name}
 										</Button>

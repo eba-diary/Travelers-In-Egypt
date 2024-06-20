@@ -12,6 +12,9 @@ interface BrowsePublicationsByCategoryProps {
 	afterSubmit?: () => void
 }
 
+interface SearchTerm {
+	term: string
+}
 
 export const BrowsePublicationsBySearch: React.FC<BrowsePublicationsByCategoryProps> = ({
 	backgroundColor,
@@ -24,11 +27,10 @@ export const BrowsePublicationsBySearch: React.FC<BrowsePublicationsByCategoryPr
 	const router = useRouter();
 
 	const defaultValues = {
-		category: null,
 		term: ""
 	}
 
-	const methods = useForm<FormDataByCategory>({
+	const methods = useForm<SearchTerm>({
 		mode: "onBlur",
 		defaultValues
 	})

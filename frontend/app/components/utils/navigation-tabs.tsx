@@ -64,7 +64,7 @@ export default function NavigationTabs() {
 				>
 					<IconButton
 						aria-label="search"
-						as={FaSearch}
+						icon={<FaSearch />}
 						padding="8px"
 						_hover={{
 							cursor: "pointer"
@@ -72,8 +72,8 @@ export default function NavigationTabs() {
 						backgroundColor={PRIMARY_BG_COLOR}
 					/>
 					<IconButton
-						aria-label="search"
-						as={FaGear}
+						aria-label="settings"
+						icon={<FaGear />}
 						padding="8px"
 						_hover={{
 							cursor: "pointer"
