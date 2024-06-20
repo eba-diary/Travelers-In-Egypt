@@ -29,6 +29,8 @@ const sb = new SupabaseService()
 /** add sb to context */
 app.context.sb = sb
 app.context.log = log
+app.context.healthCheckRouter = healthCheckRouter
+app.context.apiRouter = apiRouter
 
 app.use(async (ctx, next) => {
 	/** apply and use the context */
@@ -43,10 +45,19 @@ app.use(async (ctx, next) => {
 	await next()
 })
 
-app.use(healthCheckRouter.routes())
-log.info("Health Check Router")
-app.use(apiRouter.routes())
-log.info("API Router")
+//app.use(healthCheckRouter.routes())
+app.use(async (ctx, next) => {
+	ctx.healthCheckRouter = healthCheckRouter
+	log.info("Health Check Router")
+	await next()
+})
+
+//app.use(apiRouter.routes())
+app.use(async (ctx, next) => {
+	ctx.apiRouter = apiRouter
+	log.info("API Router")
+	await next()
+})
 
 const server = app.listen(
 	PORT, async () => {
