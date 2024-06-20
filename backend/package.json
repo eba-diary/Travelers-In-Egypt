@@ -7,7 +7,7 @@
     "node": "18.x"
   },
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "prisma generate && rimraf dist && tsc",
     "ts.check": "tsc --project tsconfig.json",
     "add-build": "git add dist",
     "restart-db": "supabase db reset && npx prisma migrate dev && npm run generate-client && npm run seed",
@@ -18,7 +18,8 @@
     "migrate": "npx prisma migrate dev --name $1",
     "generate-client": "npx prisma generate --schema=./prisma/schema.prisma",
     "pull-migrations": "npx prisma migrate dev",
-    "update-migrations": "npx prisma migrate dev"
+    "update-migrations": "npx prisma migrate dev",
+    "postinstall": "prisma generate"
   },
   "pre-commit": [
     "ts.check",
