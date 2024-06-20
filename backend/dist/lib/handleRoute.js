@@ -12,12 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.handleRoute = void 0;
 const handleRoute = (handler) => {
     return (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+        ctx.log.info("handling route");
         /** TODO implement logging here. Shared api function */
         if (ctx.request.body && !(ctx.request.body)) {
             ctx.status = 400;
             ctx.throw(400);
         }
         yield handler(ctx);
+        ctx.log.info("finished handling route");
     });
 };
 exports.handleRoute = handleRoute;

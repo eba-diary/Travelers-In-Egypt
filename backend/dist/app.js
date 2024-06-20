@@ -48,13 +48,13 @@ app.use((ctx, next) => __awaiter(void 0, void 0, void 0, function* () {
     log.info("Added log to context");
     yield next();
 }));
-//app.use(healthCheckRouter.routes())
+app.use(healthcheck_1.default.routes());
 app.use((ctx, next) => __awaiter(void 0, void 0, void 0, function* () {
     ctx.healthCheckRouter = healthcheck_1.default;
     log.info("Health Check Router");
     yield next();
 }));
-//app.use(apiRouter.routes())
+app.use(api_1.default.routes());
 app.use((ctx, next) => __awaiter(void 0, void 0, void 0, function* () {
     ctx.apiRouter = api_1.default;
     log.info("API Router");

@@ -45,14 +45,14 @@ app.use(async (ctx, next) => {
 	await next()
 })
 
-//app.use(healthCheckRouter.routes())
+app.use(healthCheckRouter.routes())
 app.use(async (ctx, next) => {
 	ctx.healthCheckRouter = healthCheckRouter
 	log.info("Health Check Router")
 	await next()
 })
 
-//app.use(apiRouter.routes())
+app.use(apiRouter.routes())
 app.use(async (ctx, next) => {
 	ctx.apiRouter = apiRouter
 	log.info("API Router")

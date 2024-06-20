@@ -16,6 +16,7 @@ export const handleRoute = <ReqBody, ResBody>(
 			ResBody & { error: Error }
 		>
 	) => {
+		ctx.log.info("handling route")
 		/** TODO implement logging here. Shared api function */
 		if (ctx.request.body && !((ctx.request.body as any) satisfies ReqBody)) {
 			ctx.status = 400
@@ -26,5 +27,6 @@ export const handleRoute = <ReqBody, ResBody>(
 			DefaultContext & { request: { body: ReqBody } },
 			ResBody & { error: Error }
 		>)
+		ctx.log.info("finished handling route")
 	};
 }
