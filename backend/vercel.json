@@ -1,11 +1,14 @@
-
 {
   "version": 2,
   "builds": [
     {
       "src": "dist/app.js",
       "use": "@now/node",
-      "config": {"includeFiles": ["dist/**"]}
+      "config": {
+        "includeFiles": [
+          "dist/**"
+        ]
+      }
     }
   ],
   "routes": [
@@ -13,5 +16,6 @@
       "src": "/(.*)",
       "dest": "dist/app.js"
     }
-  ]
+  ],
+  "buildCommand": "npm run build && npx prisma generate"
 }
