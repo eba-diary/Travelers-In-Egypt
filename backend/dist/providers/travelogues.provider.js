@@ -16,7 +16,7 @@ class Travelogues {
     }
     getAllTravelogues() {
         return __awaiter(this, void 0, void 0, function* () {
-            const { data, error } = yield this.sb.getClient()
+            const { data, error } = yield this.sb.getOrCreateClient()
                 .from('Publications')
                 .select('*');
             if (error) {
@@ -33,13 +33,13 @@ class Travelogues {
     }
     getAllTraveloguesAndPublications() {
         return __awaiter(this, void 0, void 0, function* () {
-            const { data, error } = yield this.sb.getClient()
-                .from('PublicationsAuthor')
+            const { data, error } = yield this.sb.getOrCreateClient()
+                .from('PublicationsTraveler')
                 .select(` 
-                id,
-                Publications (*),
-                Travelers (*)
-            `);
+				id,
+				Publications (*),
+				Travelers (*)
+			`);
             if (error) {
                 return {
                     status: 'failure',

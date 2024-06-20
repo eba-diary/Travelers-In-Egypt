@@ -3,7 +3,6 @@ import Router from "koa-router";
 import { handleRoute } from "../../../lib/handleRoute";
 import { prisma } from "../../../providers/prisma-client";
 import { ApiRoute } from "../../../types/api";
-import { Ship } from "../../../types/interface";
 
 const boatPassengersRouter = new Router()
 

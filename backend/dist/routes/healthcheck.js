@@ -13,20 +13,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const koa_router_1 = __importDefault(require("koa-router"));
+const handleRoute_1 = require("../lib/handleRoute");
 const router = new koa_router_1.default();
-router.get('/ping', (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+const healthCheck = (_a) => __awaiter(void 0, [_a], void 0, function* ({ status, body, throw: throwError }) {
     try {
-        ctx.status = 200;
-        ctx.body = {
-            status: 'success',
-            data: 'pong'
+        status = 200;
+        body = {
+            data: "pong"
         };
     }
     catch (error) {
-        ctx.body = {
-            status: 'error',
-            error: error
-        };
+        throwError(500, "Systems are unhealthy");
     }
-}));
+});
+router.get("/ping", (0, handleRoute_1.handleRoute)(healthCheck));
 exports.default = router;

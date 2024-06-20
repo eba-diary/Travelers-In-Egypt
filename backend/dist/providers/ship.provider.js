@@ -16,7 +16,7 @@ class ShipProvider {
     }
     getAllShips() {
         return __awaiter(this, void 0, void 0, function* () {
-            const { data, error } = yield this.sb.getClient()
+            const { data, error } = yield this.sb.getOrCreateClient()
                 .from('Ships')
                 .select('*');
             if (error) {

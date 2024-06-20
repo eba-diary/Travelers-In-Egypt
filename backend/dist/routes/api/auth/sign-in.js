@@ -12,21 +12,23 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.authRouter = void 0;
 const koa_router_1 = __importDefault(require("koa-router"));
-const handleRoute_1 = require("../lib/handleRoute");
-const db_1 = require("./api/db");
-const router = new koa_router_1.default();
-const handleApi = (_a) => __awaiter(void 0, [_a], void 0, function* ({ status, body, throw: throwError }) {
+const handleRoute_1 = require("../../../lib/handleRoute");
+const authRouter = new koa_router_1.default();
+exports.authRouter = authRouter;
+const signIn = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    const { email, password } = ctx.request.body;
     try {
-        status = 200;
-        body = {
-            "api_version": 1
-        };
+        const data = yield ctx.sb.signInWithPassword({ email, password });
+        ctx.status = 200;
     }
     catch (error) {
-        throwError(500, "Error getting api version", {});
+        ctx.status = 400;
+        ctx.throw({
+            status: 500,
+            error: `Failed to sign in: ${error}`
+        });
     }
 });
-router.get('/', (0, handleRoute_1.handleRoute)(handleApi));
-router.use('/api/v1/db', db_1.dbRouter.routes());
-exports.default = router;
+authRouter.post('/signin', (0, handleRoute_1.handleRoute)(signIn));

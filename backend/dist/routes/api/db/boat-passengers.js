@@ -12,18 +12,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.boatPassengersRouter = void 0;
 const koa_router_1 = __importDefault(require("koa-router"));
-const ship_provider_1 = require("../../../providers/ship.provider");
-const router = new koa_router_1.default();
-router.get('/', (ctx) => __awaiter(void 0, void 0, void 0, function* () {
-    const shipProvider = new ship_provider_1.ShipProvider(ctx.sb);
+const handleRoute_1 = require("../../../lib/handleRoute");
+const prisma_client_1 = require("../../../providers/prisma-client");
+const boatPassengersRouter = new koa_router_1.default();
+exports.boatPassengersRouter = boatPassengersRouter;
+const boatPassengers = (ctx) => __awaiter(void 0, void 0, void 0, function* () {
+    ctx.log.info("Boat passengers route called");
     try {
-        const ships = yield shipProvider.getAllShips();
+        const data = yield prisma_client_1.prisma.ships.findMany({});
+        if (!data) {
+            ctx.throw(400, "Failed to fetch ships");
+        }
         ctx.status = 200;
-        ctx.body = ships;
+        ctx.body = data;
     }
     catch (error) {
-        throw new Error(`${error}`);
+        ctx.log.error(error, "Error encountered when fetching boat passengers.");
+        ctx.throw(error);
     }
-}));
-exports.default = router;
+});
+boatPassengersRouter.get('/', (0, handleRoute_1.handleRoute)(boatPassengers));
