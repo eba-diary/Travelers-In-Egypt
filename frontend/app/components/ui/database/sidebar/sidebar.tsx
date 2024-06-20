@@ -2,7 +2,6 @@ import { IconButton, Stack } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import React from "react";
 import { AiOutlineClose } from "react-icons/ai"
-import { Row } from "react-table";
 import { CollapsibleSidebarContext } from "../../../../lib/hooks/context/useCollapsibleSidebar";
 
 interface SideBarProps<TData extends object> extends CollapsibleSidebarContext {
@@ -12,7 +11,6 @@ interface SideBarProps<TData extends object> extends CollapsibleSidebarContext {
 }
 
 export const Sidebar = <TData extends object>({ ...props }: SideBarProps<TData>) => {
-
   return (
     <Stack
       position="absolute"
@@ -35,14 +33,20 @@ export const Sidebar = <TData extends object>({ ...props }: SideBarProps<TData>)
           top: "0"
         }}
       >
-        <IconButton
-          aria-label="close"
-          icon={<AiOutlineClose />}
-          onClick={() => {
-            props.setCurrentRow(null)
-            props.setIsOpen(false)
-          }}
-        />
+        <Stack
+          width="fit-content"
+          padding="8px"
+        >
+          <IconButton
+            aria-label="close"
+            backgroundColor="ButtonFace"
+            icon={<AiOutlineClose />}
+            onClick={() => {
+              props.setCurrentRow(null)
+              props.setIsOpen(false)
+            }}
+          />
+        </Stack>
         <React.Fragment>
           {props.rowData && props.children(props.rowData as TData)}
         </React.Fragment>
