@@ -3,6 +3,12 @@ export function getCardDeck(fields) {
         type: 'card-deck',
         fields: {
             title: fields.title,
+            cardBgColor: fields.cardBgColor,
+            cardBorderColor: fields.cardBorderColor,
+            cardBoxShadowColor: fields.cardBoxShadowColor,
+            cardTitleFontColor: fields.cardTitleFontColor,
+            bgGradientColor1: fields.bgGradientColor1,
+            bgGradientColor2: fields.bgGradientColor2,
             sliderCards: fields.sliderCards.map((entry) => {
                 return {
                     title: entry.fields.title,
