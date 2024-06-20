@@ -1,25 +1,15 @@
-/*
-  Warnings:
+-- CreateEnum
+CREATE TYPE "traveler_type" AS ENUM ('AUTHOR', 'ILLUSTRATOR');
 
-  - You are about to drop the `publications` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `publications_traveler` table. If the table is not empty, all the data it contains will be lost.
-  - You are about to drop the `travelers` table. If the table is not empty, all the data it contains will be lost.
+-- CreateTable
+CREATE TABLE "ships" (
+    "id" UUID NOT NULL DEFAULT gen_random_uuid(),
+    "ship_date" TIMESTAMP(3) NOT NULL,
+    "ship_name" VARCHAR(100) NOT NULL,
+    "passenger_list" JSONB NOT NULL,
 
-*/
--- DropForeignKey
-ALTER TABLE "publications_traveler" DROP CONSTRAINT "publications_traveler_publication_id_fkey";
-
--- DropForeignKey
-ALTER TABLE "publications_traveler" DROP CONSTRAINT "publications_traveler_traveler_id_fkey";
-
--- DropTable
-DROP TABLE "publications";
-
--- DropTable
-DROP TABLE "publications_traveler";
-
--- DropTable
-DROP TABLE "travelers";
+    CONSTRAINT "ships_pkey" PRIMARY KEY ("id")
+);
 
 -- CreateTable
 CREATE TABLE "traveler" (
@@ -50,6 +40,9 @@ CREATE TABLE "publication_traveler" (
 );
 
 -- CreateIndex
+CREATE INDEX "ships_ship_name_idx" ON "ships"("ship_name");
+
+-- CreateIndex
 CREATE INDEX "traveler_traveler_name_idx" ON "traveler"("traveler_name");
 
 -- AddForeignKey
@@ -57,3 +50,4 @@ ALTER TABLE "publication_traveler" ADD CONSTRAINT "publication_traveler_publicat
 
 -- AddForeignKey
 ALTER TABLE "publication_traveler" ADD CONSTRAINT "publication_traveler_traveler_id_fkey" FOREIGN KEY ("traveler_id") REFERENCES "traveler"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
