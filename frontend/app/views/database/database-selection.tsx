@@ -35,7 +35,7 @@ export const DatabaseSelect = ({
 				<Text fontSize="2xl" fontWeight="bold">Our Databases</Text>
 				<Grid templateColumns="repeat(1fr)" gap={6}>
 					{data.map(database => (
-						<DatabaseCard {...database} />
+						<DatabaseCard {...database} key={database.id} />
 					))}
 				</Grid>
 			</Stack>

@@ -23,7 +23,7 @@ const getTravelogues: ApiRoute<void, Travelogue[]> = async (ctx) => {
 		include: {
 			publication_traveler: {
 				include: {
-					traveler: true,
+					traveler: true
 				}
 			}
 		}

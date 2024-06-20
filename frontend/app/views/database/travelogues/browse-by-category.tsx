@@ -118,7 +118,7 @@ export const BrowsePublicationsByCategory: React.FC<BrowsePublicationsByCategory
 													afterSubmit();
 												}
 											}}
-											isDisabled={category.name === "Decade"}
+											isDisabled={category.name === "Decade" || category.name === "Traveler"}
 										>
 											{category.name}
 										</Button>

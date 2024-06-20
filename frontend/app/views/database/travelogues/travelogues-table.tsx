@@ -150,7 +150,7 @@ const TraveloguesSearch: FC<TraveloguesSearchProps> = ({
 											gap="2px"
 										>
 											<Button
-												isDisabled={category.name === "Decade"}
+												isDisabled={category.name === "Decade" || category.name === "Traveler"}
 												key={category.name}
 												backgroundColor={
 													isCurrentlyFiltered && isNotInactiveFilter ? SELECTED_BG_COLOR : PRIMARY_BG_COLOR
