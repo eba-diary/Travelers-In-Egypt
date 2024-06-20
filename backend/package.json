@@ -47,7 +47,7 @@
     "pre-commit": "^1.2.2",
     "redis": "^4.6.7",
     "rimraf": "^5.0.1",
-    "supabase": "^1.163.6",
+    "supabase": "^1.178.2",
     "ts-node": "^10.9.1"
   },
   "devDependencies": {
